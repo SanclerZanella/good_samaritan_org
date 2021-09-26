@@ -104,7 +104,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'email',
         ],
         'AUTH_PARAMS': {
-            'access_type': 'offline',
+            'access_type': 'online',
         }
     }
 }
