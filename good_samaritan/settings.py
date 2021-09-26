@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home',
 
     # The following apps are required for Allauth:
     'django.contrib.sites',
@@ -36,7 +37,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
-    # Social provider social media auth
+    # Social provider (social media auth)
     'allauth.socialaccount.providers.google',
 ]
 
