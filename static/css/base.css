@@ -8,8 +8,16 @@ html {
     height: 100%;
 }
 
+header {
+    padding: 0 !important;
+}
+
 .nav-top {
     background-color: #fff;
+}
+
+.list-inline-item:hover {
+    font-size: 1.04em;
 }
 
 .nav-bottom {
@@ -20,6 +28,10 @@ body {
     font-family: 'Hind', sans-serif;
     background-color: #f4f5f7;
     height: 100%;
+}
+
+.content-wrapper {
+    height: 60vh;
 }
 
 h1, h2, h3 {
@@ -55,6 +67,46 @@ h1, h2, h3 {
 
 footer {
     background-color: #e72b37;
+}
+
+footer .col-lg-2 {
+    padding-left: 2rem !important;
+}
+
+footer .col-lg-2 h3 {
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-top: 1.5rem;
+    color: #fff;
+}
+
+footer .col-lg-2 a {
+    text-decoration: none;
+    color: #fff;
+}
+
+footer .col-lg-2 a:hover {
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+.social-link {
+    font-size: 5em;
+    margin-top: 1rem;
+}
+
+.social-link i {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 2rem;
+}
+
+.social-link i:hover {
+    font-size: 1.1em;
+}
+
+.copyright {
+    color: #fff;
 }
 
 /* -------------------------------- Media Queries */
@@ -98,6 +150,40 @@ footer {
     .mobile-nav, .mobile-nav > * {
         display: none;
     }
+
+    footer .col-md-6 {
+        padding-left: 4rem;
+    }
+    
+    footer .col-md-6 h3 {
+        font-weight: 700;
+        font-size: 1.5em;
+        margin-top: 1.5rem;
+        color: #fff;
+    }
+    
+    footer .col-md-6 a {
+        text-decoration: none;
+        color: #fff;
+    }
+    
+    footer .col-md-6 a:hover {
+        font-weight: 800;
+        text-decoration: underline;
+    }
+    
+    .social-link {
+        font-size: 5em;
+        margin-top: 1rem;
+    }
+    
+    .social-link i {
+        margin: 0 2rem;
+    }
+    
+    .social-link i:hover {
+        font-size: 1.1em;
+    }
 }
 
 @media (min-width: 320px) and (max-width: 767px) {
@@ -133,7 +219,7 @@ footer {
 
     .mobile-nav > .menu h1,
     .mobile-nav > .menu .mobile-cart-menu {
-        color: #000 !important;
+        color: #fff !important;
         font-weight: 600;
     }
 
@@ -143,5 +229,25 @@ footer {
 
     .mobile-nav, .mobile-nav > * {
         display: none;
+    }
+
+    .social-link {
+        font-size: 3em;
+    }
+
+    footer .col-12 {
+        padding-left: 4rem;
+    }
+    
+    footer .col-12 h3 {
+        font-weight: 700;
+        font-size: 1.5em;
+        margin-top: 1.5rem;
+        color: #fff;
+    }
+    
+    footer .col-12 a {
+        text-decoration: none;
+        color: #fff;
     }
 }

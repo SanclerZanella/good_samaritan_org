@@ -8,3 +8,5 @@ $('.close-menu').click(() => {
     $('.mobile-nav').children().hide(300);
 });
 
+var currentYear= new Date().getFullYear(); 
+$('#copyright-year').text(currentYear)
