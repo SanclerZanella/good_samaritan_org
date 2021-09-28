@@ -1,27 +1,189 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<!-- {% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col-12">
-                <h5>Hello World!</h5>
-            </div>
-        </div>
-    </div>
-{% endblock %} -->
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+{% endblock %}
+
 
 {% block content %}
-    <div class="container h-100">
-        <div class="row no-gutters h-100">
-            <div class="col-7 col-md-6 my-auto">
-                <h1 class="display-4 logo-font">
-                </h1>
-                <div class="my-5">
-                    <h4>
-                    </h4>
+    <!-- Cover Picture and Introduction -->
+    <section>
+
+        <!-- Cover Picture -->
+        <div class="row no-gutters hero-image">
+            <div class="col-12 hero-text">
+                <a href="#" class="btn btn-lg"> <span>Donate</span> </a>
+            </div>
+        </div>
+
+        <!-- Introduction -->
+        <div class="row no-gutters org-land-presentation content-alignment my-5">
+            <div class="col-10 col-lg-6 text-center">
+                <p>
+                    The Good Samaritan is a non profit organization for humanitarian support.
+                    Our target is support orphan children, widows and disabled elderly.
+                </p>
+                <p>
+                    Please donate to The Good Samaritan Organization
+                    to support people in Mozambique to have a more dignified life.
+                </p> 
+            </div>
+        </div>
+
+    </section>
+
+    <hr>
+
+    <!-- Support Options -->
+    <section>
+        <div class="row no-gutters support-options content-alignment">
+
+            <!-- Section Title -->
+            <div class="col-12 text-center mb-5">
+                <h2>Ways You Can Support</h2>
+            </div>
+
+            <!-- Family Parcel Option -->
+            <div class="col-12 col-md-4 col-lg-3 mx-5">
+                <div class="row no-gutters content-alignment">
+                    <a href="">
+                        <div id="family-parcel-card" class="col-12"></div>
+                    </a>
+                </div>
+                <div class="row no-gutters text-center my-3">
+                    <div class="col-12">
+                        <h3 class="font-weight-bold">Family Parcel</h3>
+                    </div>
+                </div>
+                <div class="row no-gutters text-center my-3">
+                    <div class="col-12">
+                        <a href="" class="btn btn-outline-danger">Donate</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Products Option -->
+            <div class="col-12 col-md-4 col-lg-3 mx-5">
+                <div class="row no-gutters content-alignment">
+                    <a href="">
+                        <div id="all-products-card" class="col-12"></div>
+                    </a>
+                </div>
+                <div class="row no-gutters text-center my-3">
+                    <div class="col-12">
+                        <h3 class="font-weight-bold">All Products</h3>
+                    </div>
+                </div>
+                <div class="row no-gutters text-center my-3">
+                    <div class="col-12">
+                        <a href="" class="btn btn-outline-danger">Donate</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <hr>
+
+    <section class="timeline">
+        <div class="row no-gutters">
+            <div class="col-12 text-center">
+                <h2>Facts About Mozambique</h2>
+            </div>
+            <div class="col-12">
+                <ul>
+                    <li>
+                    <div>
+                        <img src="/media/fact1.jpg" alt="">
+                        <q>Nearly a million people are hungry in Mozambique, UN warns.</q>
+                        <p>
+                            <a class="timeline-links" href="https://www.publico.pt/2021/04/13/mundo/noticia/quase-milhao-pessoas-passam-fome-mocambique-alerta-onu-1958424" target="_blank" rel="external">
+                                - Publico
+                            </a>
+                        </p>
+                    </div>
+                    </li>
+                    <li>
+                    <div>
+                        <img src="/media/fact2.jpg" alt="">
+                        <q>
+                            Orphans are also among the most vulnerable in Mozambique, 
+                            where the number of orphans who have lost one or both parents is estimated to 
+                            be 2 million. Another 700,000 children are at risk of being abandoned because 
+                            their caregivers are elderly, HIV in the family and/or deteriorating 
+                            socio-economic circumstances.
+                        </q>
+                        <p>
+                            <a class="timeline-links" href="https://www.unicef.org/mozambique/protec%C3%A7%C3%A3o-da-crian%C3%A7a" target="_blank" rel="external">
+                                - Unicef
+                            </a>
+                        </p>
+                    </div>
+                    </li>
+                    <li>
+                    <div>
+                        <img src="/media/fact3.jpg" alt="">
+                        <q>The widowhood leaves women even more vulnerable, 
+                            leading them to instability that has various implications, such as their social 
+                            exclusion and that of their children, the breakdown and disintegration of the 
+                            family fabric, social discrimination, among other factors.
+                        </q>
+                        <p>
+                            <a class="timeline-links" href="https://www.wlsa.org.mz/artigo/estrategias-de-sobrevivencia-de-um-grupo-de-viuvas-organizadas-em-associacao-cidade-de-maputo-2008/" target="_blank" rel="external">
+                                - wlsa.org
+                            </a>
+                        </p>
+                    </div>
+                    </li>
+                    <li>
+                    <div>
+                        <img src="/media/fact4.jpg" alt="">
+                        <q>
+                            Rejected by their own family, some elderly people are forced to live on the 
+                            streets or in shelters. A situation that has been getting worse. In 2016 
+                            alone, the police registered hundreds of cases of abandoned elderly people.
+                        </q>
+                        <p>
+                            <a class="timeline-links" href="https://www.dw.com/pt-002/ser-idoso-em-mo%C3%A7ambique-%C3%A9-um-pesadelo/a-38665038" target="_blank" rel="external">
+                                - Deutsche Welle
+                            </a>
+                        </p>
+                    </div>
+                    </li>
+                    <li>
+                    <div>
+                        <img src="/media/fact5.jpg" alt="">
+                        <p>
+                            Since 2016, The Good Samaritan has been feeding orphan children, providing a home and education to 
+                            change their reality and give a good future for these children. 
+                        </p>
+                    </div>
+                    </li>
+                    <li>
+                    <div>
+                        <img src="/media/fact6.jpg" alt="">
+                        <p>
+                            Welcoming widows in the project, giving them a profession, food and a 
+                            dignified way to live in a society that generally despises them.
+                        </p>
+                    </div>
+                    </li>
+                    <li>
+                    <div>
+                        <img src="/media/fact7.jpg" alt="">
+                        <p>
+                            And taking care of elderly, giving them medical care, food and home.
+                        </p>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+      {% block postloadjs %}
+        <script src="{% static 'home/js/script.js' %}"></script>
+      {% endblock %}
 {% endblock %}
