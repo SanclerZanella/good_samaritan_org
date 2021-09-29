@@ -7,9 +7,8 @@
           "sku":"pp5001340155",
           "name":"Baby Wipes",
           "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-          "has_size":None,
-          "f_parcel":None,
-          "m_needed":None,
+          "f_parcel":"",
+          "m_needed":"",
           "price":1.90,
           "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/baby_wipes_720x_xz0htt.jpg",
           "image":"baby_wipes_720x.jpg"
@@ -23,8 +22,8 @@
            "sku":"pp5001340156",
            "name":"Crawler Nappies",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":True,
+           "f_parcel":"",
+           "m_needed":"",
            "price":4.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917438/good_samaritan/products/nappies_size3_bqyhal.jpg",
            "image":"nappies_size3.jpg"
@@ -38,8 +37,8 @@
            "sku":"pp5001340157",
            "name":"Infant Nappies",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":4.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917438/good_samaritan/products/nappies_size2_uk5bta.jpg",
            "image":"nappies_size2.jpg"
@@ -53,8 +52,8 @@
            "sku":"pp5001340158",
            "name":"Newborn Nappies",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":11.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/nappies_newborn_720x_phinup.jpg",
            "image":"nappies_newborn.jpg"
@@ -68,8 +67,8 @@
            "sku":"pp5001340159",
            "name":"Toddler Nappies",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":4.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917438/good_samaritan/products/nappies_size4_etgejf.jpg",
            "image":"nappies_size4.jpg"
@@ -83,8 +82,8 @@
            "sku":"pp5001340160",
            "name":"Walker Nappies",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":4.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917438/good_samaritan/products/nappies_size5_x6x74s.jpg",
            "image":"nappies_size5.jpg"
@@ -99,7 +98,7 @@
            "name":"Baking Powder",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":3.99,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/baking_powder_720x_ph9eoi.jpg",
            "image":"baking_powder_720x.jpg"
@@ -114,7 +113,7 @@
            "name":"Dates",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.40,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/dates_720x_ib1juj.jpg",
            "image":"dates_720x.jpg"
@@ -128,8 +127,8 @@
            "sku":"pp5001340163",
            "name":"Eggs",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":4.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/Caged-Eggs-Dozen-Mixed_720x_lqssdk.jpg",
            "image":"Caged-Eggs-Dozen-Mixed_720x.jpg"
@@ -144,7 +143,7 @@
            "name":"Plain Flour",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":True,
+           "m_needed":"",
            "price":2.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/plain_flour_720x_ltihyl.jpg",
            "image":"plain_flour_720x.jpg"
@@ -159,7 +158,7 @@
            "name":"Raisins",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":3.60,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/Raisins_720x_sukhss.jpg",
            "image":"Raisins_720x.jpg"
@@ -174,7 +173,7 @@
            "name":"Sugar",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":True,
+           "m_needed":"",
            "price":2.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/sugar_720x_euqhv7.jpg",
            "image":"sugar_720x.jpg"
@@ -188,8 +187,8 @@
            "sku":"pp5001340167",
            "name":"Chocolate Chip Biscuit",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/choc_chip_720x_v8ynpv.jpg",
            "image":"choc_chip_720x.jpg"
@@ -204,7 +203,7 @@
            "name":"Chocolate Fingers",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.20,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/choccy_fingers_720x_nzhs45.jpg",
            "image":"choccy_fingers_720x.jpg"
@@ -219,7 +218,7 @@
            "name":"Corn Chips",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917438/good_samaritan/products/cheese-cornchips_720x_evmjlr.jpg",
            "image":"cheese-cornchips_720x.jpg"
@@ -234,7 +233,7 @@
            "name":"Fruit Cereal Bars",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":None,
+           "m_needed":"",
            "price":3.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/cereal_bars_720x_jirtxp.jpg",
            "image":"cereal_bars_720x.jpg"
@@ -248,8 +247,8 @@
            "sku":"pp5001340171",
            "name":"Microwave Popcorn",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":1.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/microwave_popcorn_720x_mw9g4m.jpg",
            "image":"microwave_popcorn_720x.jpg"
@@ -264,7 +263,7 @@
            "name":"Muesli Bars",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.10,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/Select-Muesli-Bars-Choc-Honeybcomb-100g_720x_tgsdwy.jpg",
            "image":"Select-Muesli-Bars-Choc-Honeybcomb-100g_720x.jpg"
@@ -279,7 +278,7 @@
            "name":"Plain Rice Crackers",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1, 2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.20,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/Countdown-Rice-Crackers-Plain-Thin_720x_y8bcia.jpg",
            "image":"Countdown-Rice-Crackers-Plain-Thin_720x.jpg"
@@ -293,8 +292,8 @@
            "sku":"pp5001340174",
            "name":"Pretzels Twists",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917438/good_samaritan/products/Capture_02aebb7f-5083-42c0-9dbe-f27b9e056d00_720x_l8gccg.jpg",
            "image":"Capture_02aebb7f-5083-42c0-9dbe-f27b9e056d00_720x.jpg"
@@ -308,8 +307,8 @@
            "sku":"pp5001340175",
            "name":"Salted Peanuts",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/peanuts_200g_720x_bsvdl2.jpg",
            "image":"peanuts_200g_720x.jpg"
@@ -323,8 +322,8 @@
            "sku":"pp5001340176",
            "name":"Scotch Fingers",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":1.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/scotch_finger_720x_ezp3b0.jpg",
            "image":"scotch_finger_720x.jpg"
@@ -339,7 +338,7 @@
            "name":"Vege Crisps",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917430/good_samaritan/products/vege_chips_720x_konrhj.jpg",
            "image":"vege_chips_720x.jpg"
@@ -354,7 +353,7 @@
            "name":"Cornflakes",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/cornflakes_720x_vmme85.jpg",
            "image":"cornflakes_720x.jpg"
@@ -368,8 +367,8 @@
            "sku":"pp5001340179",
            "name":"Muesli",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.80,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/Muesli_720x_flumlb.jpg",
            "image":"Muesli_720x.jpg"
@@ -384,7 +383,7 @@
            "name":"Rolled Oats",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.10,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/rolled_oats_720x_ujrjmo.jpg",
            "image":"rolled_oats_720x.jpg"
@@ -399,7 +398,7 @@
            "name":"Wheat Biscuits",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":True,
+           "m_needed":"",
            "price":5.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917430/good_samaritan/products/wheat_biscuits_720x_iyxgeq.jpg",
            "image":"wheat_biscuits_720x.jpg"
@@ -414,7 +413,7 @@
            "name":"Wheatmeal Bread",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1, 2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917438/good_samaritan/products/bread_wheatmeal_720x_kxpypf.jpg",
            "image":"bread_wheatmeal_720x.jpg"
@@ -429,7 +428,7 @@
            "name":"White Wraps",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":3.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917430/good_samaritan/products/wraps_720x_wnvagr.jpg",
            "image":"wraps_720x.jpg"
@@ -444,7 +443,7 @@
            "name":"Longlife Milk",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1, 2, 3],
-           "m_needed":True,
+           "m_needed":"",
            "price":1.90,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/uht_milk_720x_b2wiue.jpg",
            "image":"uht_milk_720x.jpg"
@@ -459,7 +458,7 @@
            "name":"Tea Bags",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.20,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/tea_bags_25_720x_gucyv6.jpg",
            "image":"tea_bags_25_720x.jpg"
@@ -473,8 +472,8 @@
            "sku":"pp5001340186",
            "name":"Milk Powder",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":9.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/milk_powder_720x_oxqjtz.jpg",
            "image":"milk_powder_720x.jpg"
@@ -489,7 +488,7 @@
            "name":"Milo",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":3.99,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/milo_720x_prafcg.jpg",
            "image":"milo_720x.jpg"
@@ -504,7 +503,7 @@
            "name":"Coffee",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.10,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/instant_coffee_720x_uxq1ce.jpg",
            "image":"instant_coffee_720x.jpg"
@@ -518,8 +517,8 @@
            "sku":"pp5001340189",
            "name":"Butter",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":5.40,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/butter_720x_ik2se0.jpg",
            "image":"butter_720x.jpg"
@@ -533,8 +532,8 @@
            "sku":"pp5001340190",
            "name":"Cheddar Cheese",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":6.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/Essentials-Cheese-Block-Cheddar_720x_gmx424.jpg",
            "image":"Essentials-Cheese-Block-Cheddar_720x.jpg"
@@ -548,8 +547,8 @@
            "sku":"pp5001340191",
            "name":"Cheese Slices",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.80,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/Homebrand-Cheese-Slices_720x_n4ibkp.jpg",
            "image":"Homebrand-Cheese-Slices_720x.jpg"
@@ -563,8 +562,8 @@
            "sku":"pp5001340192",
            "name":"Mixed Berry Yoghurt",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":4.90,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/yogurt_720x_liet3j.jpg",
            "image":"yogurt_720x.jpg"
@@ -578,8 +577,8 @@
            "sku":"pp5001340193",
            "name":"Shaved Ham",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.99,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/shaved_ham_720x_osyhm5.jpg",
            "image":"shaved_ham_720x.jpg"
@@ -593,8 +592,8 @@
            "sku":"pp5001340194",
            "name":"Sour Cream",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.20,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/sour_cream_720x_ez6s1p.jpg",
            "image":"sour_cream_720x.jpg"
@@ -609,7 +608,7 @@
            "name":"Table Spread",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1, 2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/table_spread_720x_qldbrl.jpg",
            "image":"table_spread_720x.jpg"
@@ -623,8 +622,8 @@
            "sku":"pp5001340196",
            "name":"Apples 1kg",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917438/good_samaritan/products/apples_720x_wqi8nu.jpg",
            "image":"apples_720x.jpg"
@@ -638,8 +637,8 @@
            "sku":"pp5001340197",
            "name":"Bananas 1kg",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/bananas_720x_sbrlbq.jpg",
            "image":"bananas_720x.jpg"
@@ -653,8 +652,8 @@
            "sku":"pp5001340198",
            "name":"Broccoli Head",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/Fresh-Produce-Broccoli-Head_720x_mhcstt.jpg",
            "image":"Fresh-Produce-Broccoli-Head_720x.jpeg"
@@ -668,8 +667,8 @@
            "sku":"pp5001340199",
            "name":"Brown Onions 1Kg",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/onions_720x_tylarr.jpg",
            "image":"onions_720x.jpg"
@@ -683,8 +682,8 @@
            "sku":"pp5001340200",
            "name":"Carrots 1Kg",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/Carrots_720x_t013ei.jpg",
            "image":"Carrots_720x.jpg"
@@ -698,8 +697,8 @@
            "sku":"pp5001340201",
            "name":"Cucumber",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":1.60,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/cucumber_720x_wf8u70.jpg",
            "image":"cucumber_720x.jpg"
@@ -713,8 +712,8 @@
            "sku":"pp5001340202",
            "name":"Frozen Mixed Vegetables",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":True,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/mixed_vege_720x_ytmwpe.jpg",
            "image":"mixed_vege_720x.jpg"
@@ -728,8 +727,8 @@
            "sku":"pp5001340203",
            "name":"Kumara 1Kg",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":7.99,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/Kumara_720x_jg0h5c.jpg",
            "image":"Kumara_720x.jpg"
@@ -743,8 +742,8 @@
            "sku":"pp5001340204",
            "name":"Oranges 1Kg",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":5.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/oranges_720x_tdmtlg.jpg",
            "image":"oranges_720x.jpg"
@@ -758,8 +757,8 @@
            "sku":"pp5001340205",
            "name":"Potatoes 1Kg",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.99,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/potato_720x_fwtu0d.jpg",
            "image":"potato_720x.jpg"
@@ -774,7 +773,7 @@
            "name":"Toothbrush",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":0.85,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/toothbrush_720x_m5r8gf.jpg",
            "image":"toothbrush_720x.jpg"
@@ -789,7 +788,7 @@
            "name":"Hand Wash",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/hand_wash_720x_pmkib2.jpg",
            "image":"hand_wash_720x.jpg"
@@ -803,8 +802,8 @@
            "sku":"pp5001340208",
            "name":"Regular Toothpaste",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/toothpaste_regular_720x_qhikym.jpg",
            "image":"toothpaste_regular_720x.jpg"
@@ -818,8 +817,8 @@
            "sku":"pp5001340209",
            "name":"Shampoo",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/shampoo_720x_nrj96z.jpg",
            "image":"shampoo_720x.jpg"
@@ -833,10 +832,10 @@
            "sku":"pp5001340210",
            "name":"Shampoo and Conditioner 2 in 1",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.50,
-           "image_url":None,
+           "image_url":"",
            "image":"no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg"
         }
      },
@@ -848,8 +847,8 @@
            "sku":"pp5001340211",
            "name":"Conditioner",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":4.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/conditioner_720x_quo8bz.jpg",
            "image":"conditioner_720x.jpg"
@@ -863,8 +862,8 @@
            "sku":"pp5001340212",
            "name":"Bar Soap",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":True,
+           "f_parcel":"",
+           "m_needed":"",
            "price":5.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/bar_soap_720x_hqegcb.jpg",
            "image":"bar_soap_720x.jpg"
@@ -878,8 +877,8 @@
            "sku":"pp5001340213",
            "name":"Body Wash",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":5.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/body_wash_58a6e4ab-5c47-4484-875c-24383c9c5258_720x_lp7zkn.jpg",
            "image":"body_wash_58a6e4ab-5c47-4484-875c-24383c9c5258_720x.jpg"
@@ -893,8 +892,8 @@
            "sku":"pp5001340214",
            "name":"Blanket",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":12.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917430/good_samaritan/products/blanket_720x_npahkp.jpg",
            "image":"blanket_720x.jpg"
@@ -908,8 +907,8 @@
            "sku":"pp5001340215",
            "name":"Reusable Bag",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":1.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/Reusable-Shopping-Bag-Black_720x_e4fuqq.jpg",
            "image":"Reusable-Shopping-Bag-Black_720x.jpg"
@@ -924,7 +923,7 @@
            "name":"Dishwashing Liquid",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/dishwash_liquid_720x_dvjaxh.jpg",
            "image":"dishwash_liquid_720x.jpg"
@@ -938,8 +937,8 @@
            "sku":"pp5001340217",
            "name":"Drink Bottle",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":4.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/drink_bottle_720x_l6wxna.jpg",
            "image":"drink_bottle_720x.jpg"
@@ -954,7 +953,7 @@
            "name":"Laundry Powder",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":4.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/laundry_powder_720x_ti6squ.jpg",
            "image":"laundry_powder_720x.jpg"
@@ -968,8 +967,8 @@
            "sku":"pp5001340219",
            "name":"Multi Purpose Spray",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":4.49,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/spray_and_wipe_720x_ahagew.jpg",
            "image":"spray_and_wipe_720x.jpg"
@@ -984,7 +983,7 @@
            "name":"Tissues",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/tissues_axxlry.jpg",
            "image":"tissues.jpg"
@@ -998,8 +997,8 @@
            "sku":"pp5001340221",
            "name":"Toilet Cleaner",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/toilet_cleaner_720x_ujed8d.jpg",
            "image":"toilet_cleaner_720x.jpg"
@@ -1014,7 +1013,7 @@
            "name":"Toilet Paper",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":True,
+           "m_needed":"",
            "price":3.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/toilet_paper_720x_of87ne.jpg",
            "image":"toilet_paper_720x.jpg"
@@ -1028,8 +1027,8 @@
            "sku":"pp5001340223",
            "name":"Diced Chicken 500g",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":10.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/diced_chicken_720x_qwa8nb.jpg",
            "image":"diced_chicken_720x.jpg"
@@ -1043,8 +1042,8 @@
            "sku":"pp5001340224",
            "name":"Mince 500g",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":10.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/mince_720x_koyw3o.jpg",
            "image":"mince_720x.jpg"
@@ -1058,8 +1057,8 @@
            "sku":"pp5001340225",
            "name":"Sausages 1Kg",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":8.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/PrecookedSausages_720x_sryqiz.jpg",
            "image":"PrecookedSausages_720x.jpg"
@@ -1073,8 +1072,8 @@
            "sku":"pp5001340226",
            "name":"Whole Chicken",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":6.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917430/good_samaritan/products/frozen_whole_chicken_720x_mvxaxv.jpg",
            "image":"frozen_whole_chicken_720x.jpg"
@@ -1089,7 +1088,7 @@
            "name":"Carbonara Pasta Dish",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.60,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/carbonara_720x_amfwfd.jpg",
            "image":"carbonara_720x.jpg"
@@ -1104,7 +1103,7 @@
            "name":"Chicken Noodles",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.60,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/chicken_noodle_3e0f30e7-eb93-4f09-a911-aeba8a92b749_720x_olz03l.jpg",
            "image":"chicken_noodle_3e0f30e7-eb93-4f09-a911-aeba8a92b749_720x.jpg"
@@ -1119,7 +1118,7 @@
            "name":"Long Grain Rice",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1, 3],
-           "m_needed":True,
+           "m_needed":"",
            "price":1.80,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/rice_720x_qrhz0h.jpg",
            "image":"rice_720x.jpg"
@@ -1134,7 +1133,7 @@
            "name":"Macaroni Pasta",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/macaroni_720x_wezqo4.jpg",
            "image":"macaroni_720x.jpg"
@@ -1149,7 +1148,7 @@
            "name":"Oriental Noodles",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.60,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/noodle_oriental_720x_djoskz.jpg",
            "image":"noodle_oriental_720x.jpg"
@@ -1164,7 +1163,7 @@
            "name":"Penne Pasta",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1, 3],
-           "m_needed":True,
+           "m_needed":"",
            "price":1.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/penne_720x_cvl1ps.jpg",
            "image":"penne_720x.jpg"
@@ -1178,8 +1177,8 @@
            "sku":"pp5001340233",
            "name":"Spaghetti Pasta",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":1.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/spaghetti_720x_ujg7wf.jpg",
            "image":"spaghetti_720x.jpg"
@@ -1194,7 +1193,7 @@
            "name":"Regular Pads",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":3.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/pads_regular_720x_mmqneq.jpg",
            "image":"pads_regular_720x.jpg"
@@ -1208,8 +1207,8 @@
            "sku":"pp5001340235",
            "name":"Regular Tampons",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/tampons_regular_720x_pdtqri.jpg",
            "image":"tampons_regular_720x.jpg"
@@ -1223,8 +1222,8 @@
            "sku":"pp5001340236",
            "name":"Super Tampons",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/tampons_super_720x_l97zya.jpg",
            "image":"tampons_super_720x.jpg"
@@ -1238,8 +1237,8 @@
            "sku":"pp5001340237",
            "name":"Super Pads",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/pads_super_720x_rc7fm5.jpg",
            "image":"pads_super_720x.jpg"
@@ -1253,8 +1252,8 @@
            "sku":"pp5001340238",
            "name":"Overnight Pads",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":3.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/pads_overnight_720x_ljnwbg.jpg",
            "image":"pads_overnight_720x.jpg"
@@ -1268,8 +1267,8 @@
            "sku":"pp5001340239",
            "name":"Panty Liners",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/panty_liners_720x_yze0p2.jpg",
            "image":"panty_liners_720x.jpg"
@@ -1284,7 +1283,7 @@
            "name":"Canola Oil",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/canola_oil_720x_uhfpqv.jpg",
            "image":"canola_oil_720x.jpg"
@@ -1299,7 +1298,7 @@
            "name":"Crunchy Peanut Butter",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.10,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/CrunchyPeanutButter_720x_ltyolv.jpg",
            "image":"CrunchyPeanutButter_720x.jpg"
@@ -1314,7 +1313,7 @@
            "name":"Devilled Sausages Recipe Base",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/devilled_sausages_720x_rm50mh.jpg",
            "image":"devilled_sausages_720x.jpg"
@@ -1328,8 +1327,8 @@
            "sku":"pp5001340243",
            "name":"French Dressing",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/french_dressing_720x_okaaxl.jpg",
            "image":"french_dressing_720x.jpg"
@@ -1343,8 +1342,8 @@
            "sku":"pp5001340244",
            "name":"Gravy",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":0.90,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/Continental-Jug-A-Gravy-Instant-Gravy-Mix-Roast-Chicken_720x_clkjjf.jpg",
            "image":"Continental-Jug-A-Gravy-Instant-Gravy-Mix-Roast-Chicken_720x.jpg"
@@ -1358,8 +1357,8 @@
            "sku":"pp5001340245",
            "name":"Honey",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":6.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/honey_720x_wmbbhx.jpg",
            "image":"honey_720x.jpg"
@@ -1374,7 +1373,7 @@
            "name":"Marmite Spread",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":3.99,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/Sanitarium-Marmite-Yeast-Spread_720x_sga5ih.jpg",
            "image":"Sanitarium-Marmite-Yeast-Spread_720x.jpg"
@@ -1389,7 +1388,7 @@
            "name":"Mayonnaise",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":3.70,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917424/good_samaritan/products/mayo_720x_wlpngj.jpg",
            "image":"mayo_720x.jpg"
@@ -1404,7 +1403,7 @@
            "name":"Pasta Sauce",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":True,
+           "m_needed":"",
            "price":3.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/Essentials-Pasta-Sauce-Traditional_720x_hg1m7s.jpg",
            "image":"Essentials-Pasta-Sauce-Traditional_720x.jpg"
@@ -1419,7 +1418,7 @@
            "name":"Raspberry Jam",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":True,
+           "m_needed":"",
            "price":2.60,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/jam_720x_c41pkb.jpg",
            "image":"jam_720x.jpg"
@@ -1434,7 +1433,7 @@
            "name":"Savoury Mince Meal Base",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.99,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917427/good_samaritan/products/mince_meal_base_720x_ycb8gc.jpg",
            "image":"mince_meal_base_720x.jpg"
@@ -1449,7 +1448,7 @@
            "name":"Smooth Peanut Butter",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1, 3],
-           "m_needed":True,
+           "m_needed":"",
            "price":2.10,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/Essentials-Peanut-Butter-Smooth_720x_bwaleu.jpg",
            "image":"Essentials-Peanut-Butter-Smooth_720x.jpg"
@@ -1464,7 +1463,7 @@
            "name":"Tomato Sauce",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":None,
+           "m_needed":"",
            "price":2.30,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/tomato_sauce_720x_pjl5tn.jpg",
            "image":"tomato_sauce_720x.jpg"
@@ -1478,8 +1477,8 @@
            "sku":"pp5001340253",
            "name":"Vegemite Spread",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":5.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917430/good_samaritan/products/vegemite_720x_jpaocw.jpg",
            "image":"vegemite_720x.jpg"
@@ -1494,7 +1493,7 @@
            "name":"Baked Beans",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":0.80,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917421/good_samaritan/products/baked_beans_720x_dktsex.jpg",
            "image":"baked_beans_720x.jpg"
@@ -1508,8 +1507,8 @@
            "sku":"pp5001340255",
            "name":"Canned Asparagus",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":5.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/asparagus_720x_ovjk00.jpg",
            "image":"asparagus_720x.jpg"
@@ -1524,7 +1523,7 @@
            "name":"Canned Beetroot",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.30,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/Canned_beetroot_720x_spyfvy.jpg",
            "image":"Canned_beetroot_720x.jpg"
@@ -1539,7 +1538,7 @@
            "name":"Canned Chicken",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":True,
+           "m_needed":"",
            "price":1.40,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/canned_chicken_720x_fqbtkc.jpg",
            "image":"canned_chicken_720x.jpg"
@@ -1554,7 +1553,7 @@
            "name":"Canned Chickpeas",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.10,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/tinned_chickpeas_tyebfr.jpg",
            "image":"tinned_chickpeas.jpg"
@@ -1569,7 +1568,7 @@
            "name":"Canned Corn",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.20,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/corn_kernels_720x_ts1smo.jpg",
            "image":"corn_kernels_720x.jpg"
@@ -1584,7 +1583,7 @@
            "name":"Canned Spaghetti",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":True,
+           "m_needed":"",
            "price":0.80,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/canned_spaghetti_720x_jwagh8.jpg",
            "image":"canned_spaghetti_720x.jpg"
@@ -1598,8 +1597,8 @@
            "sku":"pp5001340261",
            "name":"Canned Tomato Soup",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":1.30,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/tomato_soup_720x_srsgri.jpg",
            "image":"tomato_soup_720x.jpg"
@@ -1614,7 +1613,7 @@
            "name":"Chicken and Corn Soup",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":3.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917425/good_samaritan/products/chicken_and_corn_soup_720x_bcva7z.jpg",
            "image":"chicken_and_corn_soup_720x.jpg"
@@ -1629,7 +1628,7 @@
            "name":"Coconut Cream",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2],
-           "m_needed":True,
+           "m_needed":"",
            "price":1.20,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917428/good_samaritan/products/Essentials-Coconut-Cream_720x_xbedtc.jpg",
            "image":"Essentials-Coconut-Cream_720x.jpg"
@@ -1643,8 +1642,8 @@
            "sku":"pp5001340264",
            "name":"Cream of Mushroom Soup",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.49,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917426/good_samaritan/products/mushroom_soup_720x_qyibzn.jpg",
            "image":"mushroom_soup_720x.jpg"
@@ -1659,7 +1658,7 @@
            "name":"Four Bean Mix",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[1],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.90,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917422/good_samaritan/products/four_bean_mix_720x_af6xqk.jpg",
            "image":"four_bean_mix_720x.jpg"
@@ -1673,8 +1672,8 @@
            "sku":"pp5001340266",
            "name":"Hearty Beef Soup",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/hearty_beef_720x_zs5nqm.jpg",
            "image":"hearty_beef_720x.jpg"
@@ -1688,8 +1687,8 @@
            "sku":"pp5001340267",
            "name":"Instant Mashed Potatoes",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":2.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917423/good_samaritan/products/mashed_potatoes_720x_y5bjba.jpg",
            "image":"mashed_potatoes_720x.jpg"
@@ -1704,7 +1703,7 @@
            "name":"Tinned Fruit Salad",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.30,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/fruit_salad_720x_qwyu46.jpg",
            "image":"fruit_salad_720x.jpg"
@@ -1719,7 +1718,7 @@
            "name":"Tinned Peach Slices",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":None,
+           "m_needed":"",
            "price":1.30,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/peaches_720x_z5mkhb.jpg",
            "image":"peaches_720x.jpg"
@@ -1733,8 +1732,8 @@
            "sku":"pp5001340270",
            "name":"Tinned Pineapple",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
-           "f_parcel":None,
-           "m_needed":None,
+           "f_parcel":"",
+           "m_needed":"",
            "price":1.50,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/tinned_pineapple_720x_v8gwe6.jpg",
            "image":"tinned_pineapple_720x.jpg"
@@ -1749,7 +1748,7 @@
            "name":"Tinned Tomatoes",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[3],
-           "m_needed":None,
+           "m_needed":"",
            "price":0.80,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/Essentials-Tomatoes-Diced_720x_j88gia.jpg",
            "image":"Essentials-Tomatoes-Diced_720x.jpg"
@@ -1764,7 +1763,7 @@
            "name":"Tinned Tuna",
            "description":"Donate this item to The Good Samaritan Organization to help stock their shelves and support Orphans children, Widows and Elders.",
            "f_parcel":[2, 3],
-           "m_needed":True,
+           "m_needed":"",
            "price":2.00,
            "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632917429/good_samaritan/products/tinned_tuna_720x_jelgoq.jpg",
            "image":"tinned_tuna_720x.jpg"
