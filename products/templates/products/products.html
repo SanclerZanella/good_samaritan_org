@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section>
+        
+        <!-- Cover Picture -->
+        <div class="row no-gutters hero-image">
+            <div class="col-12 hero-text">
+                {% if current_category %}
+                    <h1>{{ current_category }}</h1>
+                {% else %}
+                    <h1>Products</h1>
+                {% endif %}
+            </div>
+        </div>
+
+    </section>
+
+    <section>
+        <div class="row no-gutters mt-5">
+            
+            <div id="sidebar" class="col-2 categories-col">
+                <div class="row no-gutters mr-1">
+
+                    <div class="col-12 categories-title text-right">
+                        <h2 class="font-weight-bold">Categories</h2>
+                    </div>
+
+                    <div class="col-12 categories-list text-right">
+                        <ul>
+                            {% for category in categories %}
+                                <li>
+                                    <a href="{% url 'products' %}?category={{ category.name }}">
+                                        <p class="mr-2 my-3">{{ category.friendly_name }}</p>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-10 products-col">
+
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        {% if current_category %}
+                            <h2 class="text-center font-weight-bold">{{ current_category }}</h2>
+                        {% else %}
+                            <h2 class="text-center font-weight-bold">Products</h2>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row no-gutters my-5">
+                    <div class="col-2 text-center">
+                        <a class="btn btn-danger" href="">Most-Needed Items</a>
+                    </div>
+        
+                    <div class="col-2 text-center">
+                        <a class="btn btn-danger" href="">Family Parcels</a>
+                    </div>
+
+                    <div class="col-8 text-right">
+                        <a class="btn btn-danger mr-2" href="">Donate All Items ($0.00)</a>
+                    </div>
+                </div>
+
+                <div class="row no-gutters">
+
+                    <div class="col-6">
+                        <select name="sort" id="sort" class="ml-3">
+                            <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                            <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                            <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                            <option value="rating_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating (low to high)</option>
+                            <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
+                            <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                            <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                            <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
+                            <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
+                      </select>
+                    </div>
+
+                    <div class="col-6">
+                        <p class="text-right mr-3">
+
+                            {% if search_term or current_category or current_sorting != 'None_None' %}
+                                <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
+                            {% endif %}
+
+                            {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+
+                        </p>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row no-gutters products-list">
+
+                    {% for product in products %}
+                        <div class="col-3">
+                            <div class="row no-gutters product-picture">
+                                <div class="col-12">
+                                    <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}">
+                                </div>
+                            </div>
+
+                            <div class="row no-gutters product-name">
+                                <div class="col-12 text-center">
+                                    <h3>{{ product.name }}</h3>
+                                </div>
+                            </div>
+
+                            <div class="row no-gutters product-price">
+                                <div class="col-12 text-center">
+                                    <p>{{ product.price }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row no-gutters donate-button">
+                                <div class="col-12 text-center">
+                                    <a class="btn btn-danger" href="">Donate</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    {% block postloadjs %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{% static 'products/js/script.js' %}"></script>
+    {% endblock %}
+{% endblock %}
