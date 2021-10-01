@@ -14,7 +14,7 @@
         <!-- Cover Picture -->
         <div class="row no-gutters hero-image">
             <div class="col-12 hero-text">
-                <a href="#" class="btn btn-lg"> <span>Donate</span> </a>
+                <a href="{% url 'products' %}" class="btn btn-lg"> <span>Donate</span> </a>
             </div>
         </div>
 
@@ -64,10 +64,29 @@
                 </div>
             </div>
 
-            <!-- All Products Option -->
+            <!-- Most-Needed Option -->
             <div class="col-12 col-md-4 col-lg-3 mx-5">
                 <div class="row no-gutters content-alignment">
                     <a href="">
+                        <div id="most-needed-card" class="col-12"></div>
+                    </a>
+                </div>
+                <div class="row no-gutters text-center my-3">
+                    <div class="col-12">
+                        <h3 class="font-weight-bold">Most-Needed Items</h3>
+                    </div>
+                </div>
+                <div class="row no-gutters text-center my-3">
+                    <div class="col-12">
+                        <a href="" class="btn btn-outline-danger">Donate</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Products Option -->
+            <div class="col-12 col-md-4 col-lg-3 mx-5">
+                <div class="row no-gutters content-alignment">
+                    <a href="{% url 'products' %}">
                         <div id="all-products-card" class="col-12"></div>
                     </a>
                 </div>
@@ -78,10 +97,11 @@
                 </div>
                 <div class="row no-gutters text-center my-3">
                     <div class="col-12">
-                        <a href="" class="btn btn-outline-danger">Donate</a>
+                        <a href="{% url 'products' %}" class="btn btn-outline-danger">Donate</a>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 

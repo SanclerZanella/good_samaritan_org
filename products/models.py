@@ -2,6 +2,22 @@ from django.db import models
 
 
 class Category(models.Model):
+    """
+    Category Model
+
+    Attributes:
+        *name: A string indicating the category name;
+        *friendly_name: A string indicating category friendly name.
+
+    Sub-classes:
+        *Display the object's plural name.
+
+    Methods:
+        *__str__: Display the object's headline in the admin interface,
+                        it returns a nice, human-readable representation of
+                        the model;
+        *get_friendly_name: Display the object's friendly name.
+    """
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -17,6 +33,29 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    """
+    Product Model
+
+    Attributes:
+        *sku: Stock Keeping Unit alphanumeric code;
+        *name: A string indicating product name;
+        *description: A text indicating product description;
+        *f_parcel: A sequence of numbers in text formating
+                   indicating in which family parcels the product
+                   is included;
+        *m_needed: A boolean field indicating if the product is
+                   urgent;
+        *price: A decimal number indicating product price;
+        *image_url: A url pointing to image resource hosted in
+                    another cloud platform;
+        *image: Image file name and extension in root directory.
+
+    Methods:
+        *__str__: Display the object's headline in the admin interface,
+                        it returns a nice, human-readable representation of
+                        the model.
+    """
+
     category = models.ForeignKey('Category', null=True, blank=True,
                                  on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
@@ -33,6 +72,24 @@ class Product(models.Model):
 
 
 class Parcel(models.Model):
+    """
+    Parcel Model
+
+    Attributes:
+        *sku: Stock Keeping Unit alphanumeric code;
+        *name: A string indicating parcel name;
+        *description: A text indicating parcel description;
+        *price: A decimal number indicating parcel price;
+        *image_url: A url pointing to image resource hosted in
+                    another cloud platform;
+        *image: Image file name and extension in root directory.
+
+    Methods:
+        *__str__: Display the object's headline in the admin interface,
+                        it returns a nice, human-readable representation of
+                        the model.
+    """
+
     sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
     description = models.TextField()

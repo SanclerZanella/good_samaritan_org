@@ -4,6 +4,10 @@ from .models import (Product, Category,
 
 
 class ProductAdmin(admin.ModelAdmin):
+    """
+    Sort and Displays product table in Admin interface.
+    """
+
     list_display = ('sku',
                     'name',
                     'category',
@@ -14,10 +18,18 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    """
+    Sort and Displays Category table in Admin interface.
+    """
+
     list_display = ('friendly_name', 'name')
 
 
 class ParcelAdmin(admin.ModelAdmin):
+    """
+    Sort and Displays parcel table in Admin interface.
+    """
+
     list_display = ('sku',
                     'name',
                     'price',
@@ -26,6 +38,7 @@ class ParcelAdmin(admin.ModelAdmin):
     ordering = ('sku',)
 
 
+# Register models to construct a default form representation.
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Parcel, ParcelAdmin)

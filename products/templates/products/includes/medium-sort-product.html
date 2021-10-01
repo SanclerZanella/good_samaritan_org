@@ -1,0 +1,54 @@
+<!-- Sort Options and Quantity of Products -->
+<div class="row no-gutters d-none d-md-flex d-lg-none">
+    
+    <!-- Sort Options -->
+    <div class="col-6">
+        <select name="sort" id="sort" class="ml-3">
+            <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+            <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+            <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+            <option value="rating_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating (low to high)</option>
+            <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
+            <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+            <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+            <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
+            <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
+        </select>
+    </div>
+
+    <!-- Categories Options -->
+    <div class="categories-dropdown col-6 text-right">
+
+        <div class="dropdown dropleft mr-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+            </button>
+            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                {% for category in categories %}
+                    <a href="{% url 'products' %}?category={{ category.name }}">
+                        <p class="category-item my-3 font-weight-bold">{{ category.friendly_name }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-12">
+        <hr>
+    </div>
+
+    <!-- Quantity of Products -->
+    <div class="col-12 mb-5">
+        <p class="text-center mr-3">
+
+            {% if search_term or current_category or current_sorting != 'None_None' %}
+                <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
+            {% endif %}
+
+            {{ all_products_len }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+
+        </p>
+    </div>
+
+</div>

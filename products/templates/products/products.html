@@ -7,9 +7,10 @@
 {% endblock %}
 
 {% block content %}
+    
+    <!-- Cover Picture and Title -->
     <section>
         
-        <!-- Cover Picture -->
         <div class="row no-gutters hero-image">
             <div class="col-12 hero-text">
                 {% if current_category %}
@@ -21,19 +22,28 @@
         </div>
 
     </section>
-
+    
+    <!-- Categories List and Products List -->
     <section>
         <div class="row no-gutters mt-5">
             
-            <div id="sidebar" class="col-2 categories-col">
+            <!-- Categories List Sidebar -->
+            <div id="sidebar" class="col-2 d-none d-lg-block categories-col">
                 <div class="row no-gutters mr-1">
-
+                    
+                    <!-- Sidebar Title -->
                     <div class="col-12 categories-title text-right">
                         <h2 class="font-weight-bold">Categories</h2>
                     </div>
-
+                    
+                    <!-- Sidebar List -->
                     <div class="col-12 categories-list text-right">
                         <ul>
+                                <li>
+                                    <a href="{% url 'products' %}">
+                                        <p class="mr-2 my-3">Browse All</p>
+                                    </a>
+                                </li>
                             {% for category in categories %}
                                 <li>
                                     <a href="{% url 'products' %}?category={{ category.name }}">
@@ -46,10 +56,12 @@
 
                 </div>
             </div>
-
-            <div class="col-10 products-col">
-
-                <div class="row no-gutters">
+            
+            <!-- Products List -->
+            <div class="col-12 col-lg-10 products-col">
+                
+                <!-- Section Title -->
+                <div class="row no-gutters d-none d-lg-flex">
                     <div class="col-12">
                         {% if current_category %}
                             <h2 class="text-center font-weight-bold">{{ current_category }}</h2>
@@ -58,23 +70,34 @@
                         {% endif %}
                     </div>
                 </div>
+                
+                <!-- Urgent Buttons -->
+                <div class="row no-gutters my-5 d-none d-md-flex">
 
-                <div class="row no-gutters my-5">
+                    <!-- Most-Needed Items Button -->
                     <div class="col-2 text-center">
-                        <a class="btn btn-danger" href="">Most-Needed Items</a>
+                        <a class="btn btn-danger" href="">Most-Needed</a>
                     </div>
-        
+                    
+                    <!-- Family Parcels Button -->
                     <div class="col-2 text-center">
                         <a class="btn btn-danger" href="">Family Parcels</a>
                     </div>
-
+                    
+                    <!-- Donate All Items Button -->
                     <div class="col-8 text-right">
                         <a class="btn btn-danger mr-2" href="">Donate All Items ($0.00)</a>
                     </div>
+
                 </div>
 
-                <div class="row no-gutters">
-
+                <!-- Urgent Buttons SMALL SCREEN-->
+                {% include 'products/includes/mobile-urgent-btn.html' %}
+                
+                <!-- Sort Options and Quantity of Products -->
+                <div class="row no-gutters d-none d-lg-flex">
+                    
+                    <!-- Sort Options -->
                     <div class="col-6">
                         <select name="sort" id="sort" class="ml-3">
                             <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
@@ -88,7 +111,8 @@
                             <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
                       </select>
                     </div>
-
+                    
+                    <!-- Quantity of Products -->
                     <div class="col-6">
                         <p class="text-right mr-3">
 
@@ -96,38 +120,53 @@
                                 <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
                             {% endif %}
 
-                            {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                            {{ all_products_len }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
 
                         </p>
                     </div>
 
+                    <div class="col-12">
+                        <hr>
+                    </div>
+
                 </div>
 
-                <hr>
+                <!-- Sort Options and Quantity of Products MEDIUM SCREEN -->
+                {% include 'products/includes/medium-sort-product.html' %}
 
-                <div class="row no-gutters products-list">
+                <!-- Sort Options and Quantity of Products SMALL SCREEN -->
+                {% include 'products/includes/mobile-sort-product.html' %}
+                
+                <!-- Infinite Loading from https://simpleisbetterthancomplex.com/tutorial/2017/03/13/how-to-create-infinite-scroll-with-django.html -->
+                <!-- Product Card -->
+                <div class="row no-gutters products-list infinite-container content-alignment">
 
                     {% for product in products %}
-                        <div class="col-3">
-                            <div class="row no-gutters product-picture">
-                                <div class="col-12">
-                                    <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}">
+                        <div class="col-4 col-md-3 my-3 product-wrapper infinite-item">
+
+                            <!-- Product Picture -->
+                            <div class="row no-gutters product-picture mt-3">
+                                <div class="col-12 content-alignment">
+                                    <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}" loading="lazy">
                                 </div>
                             </div>
-
-                            <div class="row no-gutters product-name">
+                            
+                            <!-- Product Name -->
+                            <div class="row no-gutters product-name mt-1">
                                 <div class="col-12 text-center">
-                                    <h3>{{ product.name }}</h3>
+                                    <h3 class="font-weight-bold">{{ product.name }}</h3>
                                 </div>
                             </div>
-
+                            
+                            <!-- Product Price -->
                             <div class="row no-gutters product-price">
                                 <div class="col-12 text-center">
                                     <p>{{ product.price }}</p>
                                 </div>
                             </div>
-
-                            <div class="row no-gutters donate-button">
+                            
+                            <!-- Donate Button -->
+                            <div class="row no-gutters donate-button mb-3">
                                 <div class="col-12 text-center">
                                     <a class="btn btn-danger" href="">Donate</a>
                                 </div>
@@ -138,13 +177,28 @@
 
                 </div>
 
+                <!-- Infinite Loading Trigger -->
+                {% if products.has_next %}
+                    <a class="infinite-more-link" href="{% url 'products' %}?page={{ products.next_page_number }}">More</a>
+                {% endif %}
+
+                <div class="loading row no-gutters">
+                    <div class="col-12 text-center">
+                        <p>Loading...</p>
+                    </div>
+                </div>
+
             </div>
 
         </div>
     </section>
-
+    
+    <!-- Custom Js -->
     {% block postloadjs %}
+        {{ block.super }}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{% static 'products/js/jquery.waypoints.min.js' %}"></script>
+        <script src="{% static 'products/js/infinite.min.js' %}"></script>
         <script src="{% static 'products/js/script.js' %}"></script>
     {% endblock %}
 {% endblock %}

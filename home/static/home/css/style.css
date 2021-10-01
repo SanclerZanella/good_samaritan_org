@@ -42,12 +42,17 @@
     background: url("/media/home/family_parcel.jpg") no-repeat center center;
 }
 
+#most-needed-card {
+    background: url("/media/home/most-needed.jpg") no-repeat center center;
+}
+
 #all-products-card {
     background: url("/media/home/all-products.jpg") no-repeat center center;
 }
 
 #family-parcel-card,
-#all-products-card {
+#all-products-card,
+#most-needed-card {
     width: 50vh;
     height: 30vh;
     background-size: cover;
