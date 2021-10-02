@@ -52,8 +52,8 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                                <a href="" class="dropdown-item">Family Parcels</a>
-                                <a href="" class="dropdown-item">Most-Needed items</a>
+                                <a href="{% url 'parcels' %}" class="dropdown-item">Family Parcels</a>
+                                <a href="{% url 'products' %}?urgent=most_needed" class="dropdown-item">Most-Needed items</a>
                                 <a href="{% url 'products' %}" class="dropdown-item">Browse All</a>
                             </div>
                         </li>
@@ -154,7 +154,9 @@
                             </div>
                         </a>
                         <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                            <a href="" class="dropdown-item">Family Parcels</a>
+                            <a href="{% url 'parcels' %}" class="dropdown-item">Family Parcels</a>
+                            <a href="{% url 'products' %}?urgent=most_needed" class="dropdown-item">Most-Needed items
+                            </a>
                             <a href="{% url 'products' %}" class="dropdown-item">Browse All</a>
                         </div>
                     </li>
@@ -237,12 +239,12 @@
                         <h3>Donate</h3>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{% url 'parcels' %}">
                             <p>Family Parcels</p>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{% url 'products' %}?urgent=most_needed">
                             <p>Most-Needed items</p>
                         </a>
                     </li>

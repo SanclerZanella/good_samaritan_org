@@ -57,9 +57,11 @@
                         <h3 class="font-weight-bold">Family Parcel</h3>
                     </div>
                 </div>
-                <div class="row no-gutters text-center my-3">
+                <div class="row donate-btn no-gutters text-center my-3">
                     <div class="col-12">
-                        <a href="" class="btn btn-outline-danger">Donate</a>
+                        <a href="{% url 'parcels' %}" class="btn btn-outline-danger">
+                        Donate <span class="first-heart"><i class="far fa-heart"></span></i><span class="second-heart"><i class="fas fa-heart"></i></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -76,9 +78,11 @@
                         <h3 class="font-weight-bold">Most-Needed Items</h3>
                     </div>
                 </div>
-                <div class="row no-gutters text-center my-3">
+                <div class="row donate-btn no-gutters text-center my-3">
                     <div class="col-12">
-                        <a href="" class="btn btn-outline-danger">Donate</a>
+                        <a href="{% url 'products' %}?urgent=most_needed" class="btn btn-outline-danger">
+                        Donate <span class="first-heart"><i class="far fa-heart"></span></i><span class="second-heart"><i class="fas fa-heart"></i></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -95,9 +99,11 @@
                         <h3 class="font-weight-bold">All Products</h3>
                     </div>
                 </div>
-                <div class="row no-gutters text-center my-3">
+                <div class="row donate-btn no-gutters text-center my-3">
                     <div class="col-12">
-                        <a href="{% url 'products' %}" class="btn btn-outline-danger">Donate</a>
+                        <a href="{% url 'products' %}" class="btn btn-outline-danger">
+                        Donate <span class="first-heart"><i class="far fa-heart"></span></i><span class="second-heart"><i class="fas fa-heart"></i></span>
+                        </a>
                     </div>
                 </div>
             </div>

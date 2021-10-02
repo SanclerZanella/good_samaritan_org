@@ -15,6 +15,8 @@
             <div class="col-12 hero-text">
                 {% if current_category %}
                     <h1>{{ current_category }}</h1>
+                {% elif most_n %}
+                    <h1>Most-Needed Items</h1>
                 {% else %}
                     <h1>Products</h1>
                 {% endif %}
@@ -60,33 +62,24 @@
             <!-- Products List -->
             <div class="col-12 col-lg-10 products-col">
                 
-                <!-- Section Title -->
-                <div class="row no-gutters d-none d-lg-flex">
-                    <div class="col-12">
-                        {% if current_category %}
-                            <h2 class="text-center font-weight-bold">{{ current_category }}</h2>
-                        {% else %}
-                            <h2 class="text-center font-weight-bold">Products</h2>
-                        {% endif %}
-                    </div>
-                </div>
-                
                 <!-- Urgent Buttons -->
                 <div class="row no-gutters my-5 d-none d-md-flex">
 
                     <!-- Most-Needed Items Button -->
                     <div class="col-2 text-center">
-                        <a class="btn btn-danger" href="">Most-Needed</a>
+                        <a class="btn btn-danger btn-shadow" href="{% url 'products' %}?urgent=most_needed">
+                            Most-Needed
+                        </a>
                     </div>
                     
                     <!-- Family Parcels Button -->
                     <div class="col-2 text-center">
-                        <a class="btn btn-danger" href="">Family Parcels</a>
+                        <a class="btn btn-danger btn-shadow" href="{% url 'parcels' %}">Family Parcels</a>
                     </div>
                     
                     <!-- Donate All Items Button -->
                     <div class="col-8 text-right">
-                        <a class="btn btn-danger mr-2" href="">Donate All Items ($0.00)</a>
+                        <a class="btn btn-danger mr-2 btn-shadow" href="">Donate All Items {% if total_price %}(${{total_price}}){% else %}($0.00){% endif %}</a>
                     </div>
 
                 </div>
@@ -99,12 +92,10 @@
                     
                     <!-- Sort Options -->
                     <div class="col-6">
-                        <select name="sort" id="sort" class="ml-3">
+                        <select name="sort" id="sort" class="ml-5">
                             <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                             <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                             <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
-                            <option value="rating_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating (low to high)</option>
-                            <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
                             <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
                             <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
                             <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
@@ -117,7 +108,7 @@
                         <p class="text-right mr-3">
 
                             {% if search_term or current_category or current_sorting != 'None_None' %}
-                                <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
+                                <span class="small"><a href="{% url 'products' %}">Browse All</a> | </span>
                             {% endif %}
 
                             {{ all_products_len }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
@@ -152,23 +143,23 @@
                             </div>
                             
                             <!-- Product Name -->
-                            <div class="row no-gutters product-name mt-1">
+                            <div class="row no-gutters product-name mt-2">
                                 <div class="col-12 text-center">
                                     <h3 class="font-weight-bold">{{ product.name }}</h3>
                                 </div>
                             </div>
                             
                             <!-- Product Price -->
-                            <div class="row no-gutters product-price">
+                            <div class="row no-gutters product-price my-1">
                                 <div class="col-12 text-center">
-                                    <p>{{ product.price }}</p>
+                                    <p>$ {{ product.price }}</p>
                                 </div>
                             </div>
                             
                             <!-- Donate Button -->
                             <div class="row no-gutters donate-button mb-3">
                                 <div class="col-12 text-center">
-                                    <a class="btn btn-danger" href="">Donate</a>
+                                    <a class="btn btn-outline-danger" href="">Donate <span class="first-heart"><i class="far fa-heart"></span></i><span class="second-heart"><i class="fas fa-heart"></i></span></a>
                                 </div>
                             </div>
 

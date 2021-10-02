@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Cover Picture and Title -->
+    <section>
+        
+        <div class="row no-gutters parcel-cover">
+            <div class="col-12">
+                <h1>Family Parcels</h1>
+            </div>
+        </div>
+
+    </section>
+
+    <section>
+        
+        <div class="row no-gutters parcels-title">
+            <div class="col-12">
+                <h2 class="text-center font-weight-bold my-5">
+                    Donate a Parcel
+                </h2>
+            </div>
+        </div>
+
+        <div class="row no-gutters parcels-options content-alignment">
+            
+            {% for p in parcels %}
+                {% if forloop.counter|divisibleby:2 %}
+                    <div id="parcel_{{ p.id }}" class="col-5 col-md-3 mt-5 bg-white parcel-card">
+                        <div class="row no-gutters">
+                            <div id="check_{{ p.id }}" class="col-12 text-right check-icon">
+                                <i class="fas fa-check fa-lg my-1 mx-1"></i>
+                            </div>
+
+                            <div class="col-12">
+                                <img src="{{MEDIA_URL}}parcels/{{ p.image }}" alt="{{ p.name }}" loading="lazy">
+                            </div>
+
+                            <div class="col-12">
+                                <h3 class="text-center font-weight-bold">{{ p.name }}</h3>
+                            </div>
+
+                            <div class="col-12 my-2">
+                                <h3 class="text-center">$ {{ p.price }}</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                {% else %}
+                    <div id="parcel_{{ p.id }}" class="col-5 col-md-3 mx-5 mt-5 bg-white parcel-card">
+                        <div class="row no-gutters">
+                            <div id="check_{{ p.id }}" class="col-12 text-right check-icon">
+                                <i class="fas fa-check fa-lg my-1 mx-1"></i>
+                            </div>
+
+                            <div class="col-12">
+                                <img src="{{MEDIA_URL}}parcels/{{ p.image }}" alt="{{ p.name }}" loading="lazy">
+                            </div>
+
+                            <div class="col-12">
+                                <h3 class="text-center font-weight-bold">{{ p.name }}</h3>
+                            </div>
+
+                            <div class="col-12 my-2">
+                                <h3 class="text-center">$ {{ p.price }}</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            
+        </div>
+
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="row no-gutters text-center content-alignment">
+            <div class="col-12 col-md-6 px-5 mt-3">
+                <p>
+                    {{ parcel.description }}
+                </p>
+            </div>
+            <div class="col-10 col-md-6 mt-3">
+                <a class="btn btn-danger btn-lg mr-2 btn-shadow" href="">Donate The {{ parcel.name }} (${{ parcel.price }})</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row no-gutters mt-5 content-alignment">
+
+            {% for item in items_in_parcel %}
+                <div class="col-4 col-md-2 mx-3 my-3 bg-white">
+                    <div class="row no-gutters">
+
+                        <div class="col-12 product-picture content-alignment mt-1">
+                            <img src="{{MEDIA_URL}}products/items/{{ item.image }}" alt="{{ item.name }}">
+                        </div>
+
+                        <div class="col-12 text-center my-2">
+                            <h3 class="font-weight-bold">{{ item.name }}</h3>
+                        </div>
+
+                        <div class="col-12 text-center mb-1">
+                            <p>$ {{ item.price }}</p>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </section>
+    
+    <!-- Custom Js -->
+    {% block postloadjs %}
+        {{ block.super }}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{% static 'products/js/jquery.waypoints.min.js' %}"></script>
+        <script src="{% static 'products/js/infinite.min.js' %}"></script>
+        <script src="{% static 'products/js/script.js' %}"></script>
+    {% endblock %}
+{% endblock %}

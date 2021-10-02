@@ -1,23 +1,33 @@
 /* Page's Cover Picture */
 .hero-image {
     background: url("/media/products/products-cover.jpg") no-repeat center center;
+}
+
+.parcel-cover {
+    background: url("/media/parcels/parcels_cover.jpg") no-repeat center center;
+}
+
+.hero-image,
+.parcel-cover {
     height: 200px;
     background-size: cover;
     position: relative;
     opacity: 0.7;
 }
 
-.hero-text h1 {
+.hero-text h1,
+.parcel-cover h1{
     font-size: 3em;
     text-align: center;
     position: absolute;
     top: 50%;
-    left: 10%;
+    left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     color: #e72b37;
     font-weight: 700;
 }
+
 
 /* Categories Sidebar */
 .categories-col {
@@ -25,6 +35,7 @@
     position: fixed;
     overflow-y: scroll;
     overflow-x: hidden;
+    z-index: 1;
 }
 
 .categories-col h2 {
@@ -63,6 +74,18 @@
     height: 20vh;
 }
 
+.second-heart {
+    display: none;
+}
+
+.donate-button a:hover .second-heart {
+    display: inline;
+}
+
+.donate-button a:hover .first-heart {
+    display: none;
+}
+
 .loading {
     display: none;
 }
@@ -75,6 +98,28 @@
     text-decoration: none;
     color: #000;
 }
+
+
+/* ------------------------Family Parcels-------------------------------------------------- */
+
+.parcels-title h2 {
+    font-size: 2em;
+}
+
+.parcels-options .col-3 {
+    background-color: #fff;
+}
+
+.parcel-card {
+    cursor: pointer;
+}
+
+.check-icon {
+    color: #e72b37;
+    display: none;
+}
+
+/* Media Queries */
 
 @media (min-width: 1440px) {
     .products-col {
@@ -108,5 +153,12 @@
     }
     .product-wrapper {
         margin: 0 0.5rem;
+    }
+    .parcels-options {
+        overflow-y: hidden;
+        overflow-x: scroll;
+    }
+    .parcel-cover h1{
+        font-size: 1.4em;
     }
 }
