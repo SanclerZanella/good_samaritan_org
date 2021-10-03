@@ -3,7 +3,7 @@
 
 <!-- Custom css -->
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'products/css/parcels.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -125,8 +125,6 @@
     {% block postloadjs %}
         {{ block.super }}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="{% static 'products/js/jquery.waypoints.min.js' %}"></script>
-        <script src="{% static 'products/js/infinite.min.js' %}"></script>
-        <script src="{% static 'products/js/script.js' %}"></script>
+        <script src="{% static 'products/js/parcels.js' %}"></script>
     {% endblock %}
 {% endblock %}

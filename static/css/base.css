@@ -60,8 +60,24 @@ h1, h2, h3 {
     box-shadow: 5px 5px #000;
 }
 
+.sm-btn-shadow-r {
+    box-shadow: 2px 2px #000;
+}
+
+.sm-btn-shadow-l {
+    box-shadow: -2px 2px #000;
+}
+
 .btn-shadow:hover {
     box-shadow: 2px 2px #000;
+}
+
+.sm-btn-shadow-r:hover {
+    box-shadow: 1px 1px #000;
+}
+
+.sm-btn-shadow-l:hover {
+    box-shadow: -1px 1px #000;
 }
 
 /* from Bulma */

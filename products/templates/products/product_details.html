@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'products/css/details.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="row no-gutters">
+
+        <div class="col-6 mt-5 product-img content-alignment bg-white">
+            <img class="" src="{{ MEDIA_URL }}/products/items/{{ product.image }}" alt="{{ product.name }}">
+        </div>
+
+        <div class="col-6 mt-5 product-details">
+            <div class="row no-gutters content-alignment">
+
+                <div class="col-12">
+                    <h1 class="text-center font-weight-bold">{{ product.name }}</h1>
+                </div>
+
+                <div class="col-12 my-3 text-center">
+                    <h2 class="font-weight-bold">$ {{ product.price }}</h2>
+                    <small class="text-muted">Tax included</small>
+                    <hr>
+                </div>
+
+                <div class="col-12 ml-3">
+
+                    <div class="row no-gutters">
+                        <div class="col-12">
+                            <p class="font-weight-bold">Donation amount</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row no-gutters">
+                        <div class="col-12">
+
+                            <div class="input-count">
+                                <span><input type="button" value="-" id="button-minus" class="add-qty sm-btn-shadow-l" data-field="quantity"></span>
+                                <input type="number" step="1" max="" value="1" name="quantity" id="quantity-field">
+                                <span><input type="button" value="+" id="button-plus" class="add-qty sm-btn-shadow-r" data-field="quantity"></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-12 text-center donate-detail">
+                    <a class="btn btn-danger mr-2 btn-shadow btn-lg" href="">Donate </a>
+                </div>
+
+                <div class="col-6 my-5 text-center">
+                    <p>{{ product.description }}</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12 ml-5 my-5 back-to-all">
+            <a class="font-weight-bold" href="{% url 'products' %}">&#8592 Back To All Products</a>
+        </div>
+
+    </div>
+    
+    <!-- Custom Js -->
+    {% block postloadjs %}
+        {{ block.super }}
+        <script src="{% static 'products/js/details.js' %}"></script>
+    {% endblock %}
+{% endblock %}

@@ -3,7 +3,7 @@
 
 <!-- Custom css -->
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -159,7 +159,7 @@
                             <!-- Donate Button -->
                             <div class="row no-gutters donate-button mb-3">
                                 <div class="col-12 text-center">
-                                    <a class="btn btn-outline-danger" href="">Donate <span class="first-heart"><i class="far fa-heart"></span></i><span class="second-heart"><i class="fas fa-heart"></i></span></a>
+                                    <a class="btn btn-outline-danger" href="{% url 'product_details' product.id %}">Donate <span class="first-heart"><i class="far fa-heart"></span></i><span class="second-heart"><i class="fas fa-heart"></i></span></a>
                                 </div>
                             </div>
 
@@ -190,6 +190,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="{% static 'products/js/jquery.waypoints.min.js' %}"></script>
         <script src="{% static 'products/js/infinite.min.js' %}"></script>
-        <script src="{% static 'products/js/script.js' %}"></script>
+        <script src="{% static 'products/js/products.js' %}"></script>
     {% endblock %}
 {% endblock %}

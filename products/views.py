@@ -141,3 +141,17 @@ def parcels(request):
     }
 
     return render(request, template, context)
+
+
+def product_details(request, product_id):
+    """ A view to show product details """
+
+    product = get_object_or_404(Product,pk=product_id)
+
+    template = 'products/product_details.html'
+    context = {
+        'MEDIA_URL': settings.MEDIA_URL,
+        'product': product,
+    }
+
+    return render(request, template, context)
