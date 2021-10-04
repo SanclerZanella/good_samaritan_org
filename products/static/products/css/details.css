@@ -1,3 +1,7 @@
+.details-wrapper{
+  margin: 5rem 0;
+}
+
 .product-img {
     border-right: 2px solid #e72b37;
 }
@@ -83,4 +87,30 @@
     text-decoration: none;
     color: #e72b37;
     font-size: 1.3em;
+}
+
+@media (min-width: 1440px) {
+  .product-img img {
+    height: 70vh;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .product-img img {
+    height: 60vh;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .product-img img {
+    height: 50vh;
+  }
+  .product-img {
+    border-right: 0;
+    border-top: 2px solid #e72b37;
+    border-bottom: 2px solid #e72b37;
+  }
+  .donation-amount {
+    text-align: center;
+  }
 }

@@ -3,12 +3,10 @@
     
     <!-- Sort Options -->
     <div class="col-6">
-        <select name="sort" id="sort" class="ml-3">
+        <select name="sort-md" id="sort-md" class="ml-3 sort">
             <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
             <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
             <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
-            <option value="rating_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating (low to high)</option>
-            <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
             <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
             <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
             <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
@@ -24,6 +22,9 @@
                 Categories
             </button>
             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                    <a href="{% url 'products' %}">
+                        <p class="category-item my-3 font-weight-bold">Browse All</p>
+                    </a>
                 {% for category in categories %}
                     <a href="{% url 'products' %}?category={{ category.name }}">
                         <p class="category-item my-3 font-weight-bold">{{ category.friendly_name }}</p>
