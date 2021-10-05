@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tools %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'cart/css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row no-gutters">
+
+        <div class="col-9 products-col">
+            {% if cart_items %}
+                <div class="row no-gutters mt-5 mb-3 content-alignment">
+                    <div class="col-5 cart-products-headers">
+                        <h1 class="mx-5 font-weight-bold">Products</h1>
+                    </div>
+                    <div class="col-5 text-right cart-products-headers">
+                        <h1 class="font-weight-bold">Subtotal</h1>
+                    </div>
+                </div>
+                
+                <div class="row no-gutters products-cart-list">
+                    <div class="col-12">
+                        {% for item in cart_items %}
+                            {% with product=item.product quantity=item.quantity %}
+                                
+                                        <div class="row no-gutters mt-3 content-alignment">
+                                            <div class="col-10 product-cart-wrapper">
+
+                                                <div class="row no-gutters">
+                                                    <div class="col-3 product-cart-img content-alignment">
+                                                        <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}">
+                                                    </div>
+
+                                                    <div class="col-9">
+                                                        <div class="row no-gutters">
+
+                                                            <div class="col-12 my-1">
+                                                                <h2 class="text-center font-weight-bold">{{ product.name }}</h2>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="row no-gutters">
+
+                                                                    <div class="col-6 text-center">
+                                                                        <small>Current Quantity</small>
+                                                                        <div class="input-count">
+                                                                            <span><input type="button" value="-" id="button-minus" class="add-qty sm-btn-shadow-l" data-field="quantity"></span>
+                                                                            <input type="number" step="1" max="" value="{{ quantity }}" name="quantity" id="quantity-field">
+                                                                            <span><input type="button" value="+" id="button-plus" class="add-qty sm-btn-shadow-r" data-field="quantity"></span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-6 text-right subtotal">
+                                                                        <p class="mr-3">${{ product.price | calc_subtotal:quantity }}</p>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-4">
+                                                                <small class="ml-1">
+                                                                    <a class="cart-anchor" href="">Update</a>
+                                                                </small>
+                                                            </div>
+
+                                                            <div class="col-4">
+                                                                <small>
+                                                                    <a class="text-danger" href="">Remove</a>
+                                                                </small>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    
+                            {% endwith %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            {% else %}
+                <p>Your cart is empty.</p>
+                <a href="{% url 'products' %}">
+                    &#8592 Back To All Products
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="col-3 checkout-cart-wrapper">
+            <div class="row no-gutters content-alignment">
+
+                <div class="col-10">
+                    <div class="row no-gutters text-center">
+
+                        <div class="col-12">
+                            <h2 class="font-weight-bold">Total</h2>
+                        </div>
+
+                        <div class="col-12 my-3">
+                            <h3>$ {{ grand_total }}</h3>
+                        </div>
+
+                        <div class="col-12">
+                            <a class="btn btn-lg btn-danger btn-shadow" href="">Check Out</a>
+                        </div>
+
+                        <div class="col-12 my-3">
+                            <a class="cart-anchor" href="{% url 'products' %}">&#8592 Donate More</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    
+    <!-- Custom Js -->
+    {% block postloadjs %}
+        {{ block.super }}
+        <script src="{% static 'cart/js/cart.js' %}"></script>
+    {% endblock %}
+{% endblock %}

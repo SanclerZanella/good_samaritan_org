@@ -90,7 +90,12 @@
                 </p>
             </div>
             <div class="col-10 col-md-6 mt-3">
-                <a class="btn btn-danger btn-lg mr-2 btn-shadow" href="">Donate The {{ parcel.name }} (${{ parcel.price }})</a>
+                <form action="{% url 'add_to_cart' parcel.id parcel.sku %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    <input type="submit" class="btn btn-danger btn-lg mr-2 btn-shadow" value="Donate The {{ parcel.name }} (${{ parcel.price }})">
+                </form>
             </div>
         </div>
     </section>

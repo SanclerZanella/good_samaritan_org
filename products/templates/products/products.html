@@ -79,7 +79,11 @@
                     
                     <!-- Donate All Items Button -->
                     <div class="col-8 text-right">
-                        <a class="btn btn-danger mr-2 btn-shadow" href="">Donate All Items {% if total_price %}(${{total_price}}){% else %}($0.00){% endif %}</a>
+                        <form action="{% url 'add_all_cart' donate_all %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            <input type="submit" class="btn btn-danger mr-2 btn-shadow" value="Donate All Items {% if total_price %}(${{total_price}}){% else %}($0.00){% endif %}">
+                        </form>
                     </div>
 
                 </div>

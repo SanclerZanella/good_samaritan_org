@@ -1,17 +1,24 @@
-.details-wrapper{
-  margin: 5rem 0;
+.products-cart-list {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 70vh;
 }
 
-.product-img {
-    border-right: 2px solid #e72b37;
+.cart-products-headers {
+  border-bottom: 3px solid #e72b37;
 }
 
-.product-img img {
-    height: 70vh;
+.product-cart-wrapper {
+  border: 1px solid #e72b37;
 }
 
-.product-details h1 {
-    font-size: 2.5em;
+.product-cart-img {
+  border-right: 1px solid #e72b37;
+  background-color: #fff;
+}
+
+.product-cart-img img {
+  height: 20vh;
 }
 
 .input-count input,
@@ -35,7 +42,6 @@
 
 .input-count {
   clear: both;
-  margin: 15px 0;
   position: relative;
 }
 
@@ -78,47 +84,23 @@
   -webkit-appearance: none;
 }
 
-.donate-detail input {
-    font-size: 2em;
-    width: 50%;
+.subtotal {
+  margin: auto 0;
 }
 
-.back-to-all a {
-    text-decoration: none;
-    color: #e72b37;
-    font-size: 1.3em;
+.checkout-cart-wrapper {
+  margin: auto 0;
 }
 
-.detail-description {
-  padding: 0;
+.checkout-cart-wrapper h2 {
+  font-size: 2em;
 }
 
-.detail-description p {
-  text-align: center;
+.checkout-cart-wrapper h3 {
+  font-size: 1.5em;
 }
 
-@media (min-width: 1440px) {
-  .product-img img {
-    height: 70vh;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1199px) {
-  .product-img img {
-    height: 60vh;
-  }
-}
-
-@media (min-width: 320px) and (max-width: 767px) {
-  .product-img img {
-    height: 50vh;
-  }
-  .product-img {
-    border-right: 0;
-    border-top: 2px solid #e72b37;
-    border-bottom: 2px solid #e72b37;
-  }
-  .donation-amount {
-    text-align: center;
-  }
+.cart-anchor {
+  text-decoration: none;
+  color: #000;
 }
