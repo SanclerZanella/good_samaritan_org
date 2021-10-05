@@ -16,7 +16,6 @@ def all_products(request):
     all_products_len = len(all_products)
     sum_price = all_products.aggregate(Sum('price'))
     total_price = round(sum_price['price__sum'], 2)
-    donate_all = Product.objects.all()
     categories = Category.objects.all()
     query = None
     current_category = None
@@ -34,7 +33,6 @@ def all_products(request):
                 all_products_len = len(all_products)
                 sum_price = all_products.aggregate(Sum('price'))
                 total_price = round(sum_price['price__sum'], 2)
-                donate_all = all_products.annotate(lower_name=Lower('name'))
             if sortkey == 'category':
                 sortkey = 'category__name'
             if 'direction' in request.GET:
@@ -45,7 +43,6 @@ def all_products(request):
             all_products_len = len(all_products)
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
-            donate_all = all_products.order_by(sortkey)
 
         if 'category' in request.GET:
             category = request.GET['category'].split(',')
@@ -53,7 +50,6 @@ def all_products(request):
             all_products_len = len(all_products)
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
-            donate_all = all_products.filter(category__name__in=category)
             ctg = get_object_or_404(Category, name=request.GET['category'])
             current_category = ctg.friendly_name
 
@@ -102,7 +98,6 @@ def all_products(request):
         'current_sorting': current_sorting,
         'all_products_len': all_products_len,
         'total_price': total_price,
-        'donate_all': donate_all,
         'most_n': most_n,
     }
 
