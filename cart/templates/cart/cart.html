@@ -8,9 +8,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row no-gutters">
+    <div class="row no-gutters mt-5">
+        <div class="col-12 text-center cart-title">
+            <h1>Shopping Cart</h1>
+        </div>
+        
+        <div class="col-12">
+            <hr>
+        </div>
 
-        <div class="col-9 products-col">
+        <div class="col-12 col-md-9 products-col">
             {% if cart_items %}
                 <div class="row no-gutters mt-5 mb-3 content-alignment">
                     <div class="col-5 cart-products-headers">
@@ -40,36 +47,49 @@
                                                             <div class="col-12 my-1">
                                                                 <h2 class="text-center font-weight-bold">{{ product.name }}</h2>
                                                             </div>
-
+                                                            
                                                             <div class="col-12">
-                                                                <div class="row no-gutters">
+                                                                <form action="{% url 'update_cart' product.id product.sku %}" method="POST">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                                                    <div class="row">
+                                                                        <div class="col-12 col-md-8">
+                                                                            <div class="row no-gutters">
 
-                                                                    <div class="col-6 text-center">
-                                                                        <small>Current Quantity</small>
-                                                                        <div class="input-count">
-                                                                            <span><input type="button" value="-" id="button-minus" class="add-qty sm-btn-shadow-l" data-field="quantity"></span>
-                                                                            <input type="number" step="1" max="" value="{{ quantity }}" name="quantity" id="quantity-field">
-                                                                            <span><input type="button" value="+" id="button-plus" class="add-qty sm-btn-shadow-r" data-field="quantity"></span>
+                                                                                <div class="col-12 col-md-12">
+                                                                                    <small class="input-count-title">Current Quantity</small>
+                                                                                    <div class="input-count">
+                                                                                        <span><input type="button" value="-" id="button-minus" class="add-qty sm-btn-shadow-l" data-field="quantity"></span>
+                                                                                        <input type="number" step="1" max="" value="{{ quantity }}" name="quantity" id="quantity-field">
+                                                                                        <span><input type="button" value="+" id="button-plus" class="add-qty sm-btn-shadow-r" data-field="quantity"></span>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-4 text-right subtotal d-none d-md-block">
+                                                                            <p class="mr-1">${{ product.price | calc_subtotal:quantity }}</p>
+                                                                        </div>
+
+                                                                        <div class="col-4 col-md-2 update-item">
+                                                                            <small class="ml-1">
+                                                                                <input type="submit" class="cart-anchor" value="Update">
+                                                                            </small>
+                                                                        </div>
+
+                                                                        <div class="col-4 col-md-2 remove-item">
+                                                                            <small>
+                                                                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                                                                <a class="text-danger" href="{% url 'remove_from_cart' product.id product.sku %}">Remove</a>
+                                                                            </small>
+                                                                        </div>
+
+                                                                        <div class="col-4 text-right subtotal d-sm-flex d-md-none">
+                                                                            <p class="mr-1">${{ product.price | calc_subtotal:quantity }}</p>
                                                                         </div>
                                                                     </div>
-
-                                                                    <div class="col-6 text-right subtotal">
-                                                                        <p class="mr-3">${{ product.price | calc_subtotal:quantity }}</p>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-4">
-                                                                <small class="ml-1">
-                                                                    <a class="cart-anchor" href="">Update</a>
-                                                                </small>
-                                                            </div>
-
-                                                            <div class="col-4">
-                                                                <small>
-                                                                    <a class="text-danger" href="">Remove</a>
-                                                                </small>
+                                                                </form>
                                                             </div>
 
                                                         </div>
@@ -86,14 +106,22 @@
                 </div>
 
             {% else %}
-                <p>Your cart is empty.</p>
-                <a href="{% url 'products' %}">
-                    &#8592 Back To All Products
-                </a>
+                <div class="row no-gutters cart-empty">
+                    <div class="col-12 text-center">
+                        <p>Your cart is empty.</p>
+                        <a href="{% url 'products' %}">
+                            &#8592 Back To All Products
+                        </a>
+                    </div>
+                </div>
             {% endif %}
         </div>
+        
+        <div class="col-12 d-md-none">
+            <hr>
+        </div>
 
-        <div class="col-3 checkout-cart-wrapper">
+        <div class="col-12 col-md-3 checkout-cart-wrapper">
             <div class="row no-gutters content-alignment">
 
                 <div class="col-10">
@@ -116,7 +144,7 @@
                         </div>
 
                         <div class="col-12">
-                            <a class="cart-anchor" href="{% url 'clear_cart' %}">Remove All Items From The Bag</a>
+                            <a class="cart-anchor" data-toggle="modal" data-target="#delete_all">Remove All Items From The Bag</a>
                         </div>
 
                     </div>
@@ -125,6 +153,29 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- Remove All Modal -->
+    <div class="modal fade" id="delete_all" tabindex="-1" role="dialog" aria-labelledby="delete_allLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
+            <div class="modal-body text-center">
+                <p>You are going to remove all products from the shopping cart.</p>
+                <p>Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <a type="button" class="btn btn-danger" href="{% url 'clear_cart' %}">Remove All</a>
+            </div>
+        </div>
+        </div>
     </div>
     
     <!-- Custom Js -->

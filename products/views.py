@@ -7,6 +7,7 @@ from .models import (Product, Category,
                      Parcel)
 from django.core.paginator import (Paginator, EmptyPage,
                                    PageNotAnInteger)
+from .utils import get_id_data
 
 
 def all_products(request):
@@ -16,6 +17,7 @@ def all_products(request):
     all_products_len = len(all_products)
     sum_price = all_products.aggregate(Sum('price'))
     total_price = round(sum_price['price__sum'], 2)
+    all_items = get_id_data(all_products)
     categories = Category.objects.all()
     query = None
     current_category = None
@@ -33,6 +35,7 @@ def all_products(request):
                 all_products_len = len(all_products)
                 sum_price = all_products.aggregate(Sum('price'))
                 total_price = round(sum_price['price__sum'], 2)
+                all_items = get_id_data(all_products)
             if sortkey == 'category':
                 sortkey = 'category__name'
             if 'direction' in request.GET:
@@ -43,6 +46,7 @@ def all_products(request):
             all_products_len = len(all_products)
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
+            all_items = get_id_data(all_products)
 
         if 'category' in request.GET:
             category = request.GET['category'].split(',')
@@ -50,6 +54,7 @@ def all_products(request):
             all_products_len = len(all_products)
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
+            all_items = get_id_data(all_products)
             ctg = get_object_or_404(Category, name=request.GET['category'])
             current_category = ctg.friendly_name
 
@@ -67,6 +72,7 @@ def all_products(request):
             all_products_len = len(all_products)
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
+            all_items = get_id_data(all_products)
             current_category = all_products.filter(queries)
 
         if 'urgent' in request.GET:
@@ -74,13 +80,13 @@ def all_products(request):
             all_products_len = len(all_products)
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
+            all_items = get_id_data(all_products)
             current_category = all_products.filter(m_needed=True)
             most_n = True
 
+    current_sorting = f'{sort}_{direction}'
     page = request.GET.get('page', 1)
     paginator = Paginator(all_products, 20)
-
-    current_sorting = f'{sort}_{direction}'
 
     try:
         products = paginator.page(page)
@@ -98,6 +104,7 @@ def all_products(request):
         'current_sorting': current_sorting,
         'all_products_len': all_products_len,
         'total_price': total_price,
+        'all_items': all_items,
         'most_n': most_n,
     }
 

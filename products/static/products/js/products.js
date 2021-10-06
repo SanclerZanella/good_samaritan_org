@@ -74,6 +74,7 @@ $('.sort').each((key, value) => {
         slt_id = $(value).attr('id');
 
         if (slt_id == 'sort-lg'){
+            slt_element = $(value);
             slt(slt_element);
         } else if(slt_id == 'sort-md') {
             slt_element = $(value);
