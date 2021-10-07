@@ -25,3 +25,38 @@ $('#quantity-field').change(() => {
         $('#quantity-field').val(default_val);
     }
 });
+
+function open_modal(trigger, modal, closeBtn) {
+    trigger.click(() => {
+        modal.show(500);
+    });
+
+    closeBtn.click(() => {
+        modal.hide(500);
+    });
+};
+
+$('.remove-item-btn').each((key, value) => {
+    $(value).click(() => {
+        let openButton = $(value);
+        let openButton_id = $(value).attr('id');
+        let item_id = openButton_id.split('_')[1];
+        let modal_id = `#modal_${item_id}`;
+        let modal = $(modal_id);
+        let closeBtn = $('.closeBtn');
+        
+        open_modal(openButton, modal, closeBtn);
+
+    });
+});
+
+$('.remove_all_trigger').each((key, value) => {
+    $(value).click(() => {
+        let openButton = $(value);
+        let modal = $('#modal_clear');
+        let closeBtn = $('.closeBtn');
+        
+        open_modal(openButton, modal, closeBtn);
+
+    });
+});

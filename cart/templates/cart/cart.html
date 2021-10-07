@@ -81,7 +81,7 @@
                                                                         <div class="col-4 col-md-2 remove-item">
                                                                             <small>
                                                                                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                                                                                <a class="text-danger" href="{% url 'remove_from_cart' product.id product.sku %}">Remove</a>
+                                                                                <a class="text-danger remove-item-btn" id="remove-item_{{ product.id }}">Remove</a>
                                                                             </small>
                                                                         </div>
 
@@ -99,7 +99,37 @@
 
                                             </div>
                                         </div>
-                                    
+
+                                        <!-- Remove Item Modal -->
+                                        <div id="modal_{{ product.id }}" class="modal">
+
+                                            <!-- Modal content -->
+                                            <div class="modal-content">
+                                                <div class="row no-gutters">
+                                                    <div class="col-12">
+                                                        <span class="closeBtn close-modal text-right">&times;</span>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row no-gutters">
+                                                    <div class="col-12">
+                                                        <p class="text-center">Yor are going to remove <span class="font-weight-bold">{{ product.name }}</span> from your shopping cart</p>
+                                                        <p class="text-center">Are you sure?</p>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row no-gutters">
+                                                    <div class="col-6">
+                                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
+                                                    </div>
+                                                    <div class="col-6 text-right">
+                                                        <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'remove_from_cart' product.id product.sku %}">Remove</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+
                             {% endwith %}
                         {% endfor %}
                     </div>
@@ -109,7 +139,7 @@
                 <div class="row no-gutters cart-empty">
                     <div class="col-12 text-center">
                         <p>Your cart is empty.</p>
-                        <a href="{% url 'products' %}">
+                        <a class="cart-anchor" href="{% url 'products' %}">
                             &#8592 Back To All Products
                         </a>
                     </div>
@@ -144,7 +174,7 @@
                         </div>
 
                         <div class="col-12">
-                            <a class="cart-anchor" data-toggle="modal" data-target="#delete_all">Remove All Items From The Bag</a>
+                            <a class="cart-anchor remove_all_trigger">Remove All Items From The Bag</a>
                         </div>
 
                     </div>
@@ -156,7 +186,7 @@
     </div>
 
     <!-- Remove All Modal -->
-    <div class="modal fade" id="delete_all" tabindex="-1" role="dialog" aria-labelledby="delete_allLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="delete_all" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -176,8 +206,38 @@
             </div>
         </div>
         </div>
-    </div>
+    </div> -->
     
+    <!-- Remove All Items Modal -->
+    <div id="modal_clear" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <span class="closeBtn close-modal text-right">&times;</span>
+                </div>
+            </div>
+            <hr>
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <p class="text-center">Yor are going to remove all products from your shopping cart</p>
+                    <p class="text-center">Are you sure?</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row no-gutters">
+                <div class="col-6">
+                    <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
+                </div>
+                <div class="col-6 text-right">
+                    <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'clear_cart' %}">Remove</a>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+
     <!-- Custom Js -->
     {% block postloadjs %}
         {{ block.super }}

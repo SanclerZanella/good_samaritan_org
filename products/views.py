@@ -36,6 +36,7 @@ def all_products(request):
                 sum_price = all_products.aggregate(Sum('price'))
                 total_price = round(sum_price['price__sum'], 2)
                 all_items = get_id_data(all_products)
+                most_n = None
             if sortkey == 'category':
                 sortkey = 'category__name'
             if 'direction' in request.GET:
@@ -47,6 +48,7 @@ def all_products(request):
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
             all_items = get_id_data(all_products)
+            most_n = None
 
         if 'category' in request.GET:
             category = request.GET['category'].split(',')
@@ -57,6 +59,7 @@ def all_products(request):
             all_items = get_id_data(all_products)
             ctg = get_object_or_404(Category, name=request.GET['category'])
             current_category = ctg.friendly_name
+            most_n = None
 
         if 'q' in request.GET:
             query = request.GET['q']
@@ -74,6 +77,7 @@ def all_products(request):
             total_price = round(sum_price['price__sum'], 2)
             all_items = get_id_data(all_products)
             current_category = all_products.filter(queries)
+            most_n = None
 
         if 'urgent' in request.GET:
             all_products = all_products.filter(m_needed=True)
@@ -81,7 +85,7 @@ def all_products(request):
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
             all_items = get_id_data(all_products)
-            current_category = all_products.filter(m_needed=True)
+            current_category = None
             most_n = True
 
     current_sorting = f'{sort}_{direction}'

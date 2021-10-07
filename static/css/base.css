@@ -80,6 +80,10 @@ h1, h2, h3 {
     box-shadow: -1px 1px #000;
 }
 
+.search-btn {
+    z-index: 0;
+}
+
 /* from Bulma */
 .icon {
     align-items: center;

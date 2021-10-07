@@ -111,7 +111,7 @@ def remove_from_cart(request, item_id, sku):
         cart_products.pop(item_id)
 
     request.session['cart'] = cart
-    return render(request, 'cart/cart.html')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def clear_cart(request):
