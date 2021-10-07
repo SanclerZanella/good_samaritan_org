@@ -3,10 +3,6 @@ from products.models import Product, Parcel
 
 
 def cart_contents(request):
-    """
-    Products info in the cart available to all pages
-    """
-
     cart_items = []
     total = 0
     product_count = 0
