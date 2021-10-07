@@ -11,7 +11,9 @@ from .utils import get_id_data
 
 
 def all_products(request):
-    """ A view to show all products, including sorting and search queries """
+    """
+    A view to show all products, including sorting and search queries
+    """
 
     all_products = Product.objects.all()
     all_products_len = len(all_products)
@@ -116,7 +118,9 @@ def all_products(request):
 
 
 def parcels(request):
-    """ A view to show all parcel """
+    """
+    A view to show all parcel
+    """
 
     parcels = Parcel.objects.all()
     parcel = get_object_or_404(Parcel, pk=1)
@@ -154,7 +158,9 @@ def parcels(request):
 
 
 def product_details(request, product_id):
-    """ A view to show product details """
+    """
+    A view to show product details
+    """
 
     product = get_object_or_404(Product, pk=product_id)
 

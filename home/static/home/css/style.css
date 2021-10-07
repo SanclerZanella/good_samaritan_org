@@ -1,4 +1,4 @@
-/* The hero image */
+/*-------------------------------- Hero image */
 .hero-image {
     background: url("/media/home/cover-land.jpg") no-repeat center center fixed;
     height: 400px;
@@ -29,11 +29,14 @@
     color: #e72b37;
 }
 
+/*-------------------------------- Introduction */
 .org-land-presentation {
     font-size: 1.6em;
     background-color: #f4f5f7;
 }
 
+
+/*-------------------------------- Support Options */
 .support-options h2 {
     font-size: 2em;
 }
@@ -188,7 +191,7 @@ https://webdesign.tutsplus.com/tutorials/building-a-vertical-timeline-with-css-a
 }
 
 
-/* GENERAL MEDIA QUERIES
+/* TIMELINE MEDIA QUERIES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 @media screen and (max-width: 900px) {
@@ -279,7 +282,7 @@ https://webdesign.tutsplus.com/tutorials/building-a-vertical-timeline-with-css-a
 }
 /* End Of Timeline Style  */
 
-/* Media Queries */
+/*-------------------------------- Media Queries */
 @media screen and (min-width: 1440px) {
     #family-parcel-card,
     #all-products-card {
