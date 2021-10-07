@@ -8,5 +8,8 @@ $('.close-menu').click(() => {
     $('.mobile-nav').children().hide(300);
 });
 
+// Bootstrap Message (from Boutique Ado)
+$('.toast').toast('show');
+
 var currentYear= new Date().getFullYear(); 
 $('#copyright-year').text(currentYear)

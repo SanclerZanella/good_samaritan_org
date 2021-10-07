@@ -111,6 +111,29 @@ h1, h2, h3 {
     color: #e72b37 !important;
 }
 
+/* ------------------------------- bootstrap toasts (from Boutique ADO project) */
+
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 99999999999;
+}
+
+.custom-toast {
+    overflow: visible;
+}
+
+.toast-capper {
+    height: 2px;
+}
+
+.products_toast {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 20vh;
+}
+
 footer {
     background-color: #e72b37;
 }
