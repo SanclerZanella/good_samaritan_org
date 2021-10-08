@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'checkout',
+    'crispy_forms',
 
     # The following apps are required for Allauth:
     'django.contrib.sites',
@@ -56,6 +57,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'good_samaritan.urls'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -72,6 +75,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'cart.contexts.cart_contents',
+            ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
             ],
         },
     },

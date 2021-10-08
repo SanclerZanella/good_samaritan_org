@@ -26,7 +26,7 @@
             <!-- Checkout Items Heading -->
             <div class="row no-gutters mt-5 mb-3 content-alignment">
                 <div class="col-10 products-checkout-title">
-                    <h2 class="text-center">Products</h2>
+                    <h2 class="text-center">Order Summary</h2>
                 </div>
             </div>
             
@@ -91,11 +91,73 @@
 
         <!-- Check Out form -->
         <div class="col-12 col-md-8 checkout-form-wrapper">
-            <div class="row no-gutters mt-5 mb-3 content-alignment">
+            <div class="row no-gutters mt-5 mb-1 content-alignment">
                 <div class="col-10 form-title">
                     <h2 class="text-center">Check Out Informations</h2>
                 </div>
             </div>
+
+            <div class="row no-gutters content-alignment">
+                <div class="col-10">
+                    <p class="text-center text-muted mb-5">Please fill out the form bellow to complete your donation</p>
+
+                    <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                        {% csrf_token %}
+
+                        <fieldset class="mb-5">
+                            {{ order_form.full_name | as_crispy_field }}
+                            {{ order_form.email | as_crispy_field }}
+                            {{ order_form.street_address1 | as_crispy_field }}
+                            {{ order_form.street_address2 | as_crispy_field }}
+                            {{ order_form.town_or_city | as_crispy_field }}
+                            {{ order_form.country | as_crispy_field }}
+                            <div class="form-check form-check-inline float-right mr-0">
+                                {% if user.is_authenticated %}
+                                    <label class="form-check-label" for="id-save-info">Save this information to my profile</label>
+                                    <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                                {% else %}
+                                    <label class="form-check-label" for="id-save-info">
+                                        <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                                        <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                                    </label>
+                                {% endif %}
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <!-- Stripe Card Element -->
+                            <div class="mb-3" id="card-element"></div>
+
+                            <!-- Display Form Errors -->
+                            <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                        </fieldset>
+
+                        <div class="submit-button text-right mt-5 mb-2">                    
+                            <a href="{% url 'view_cart' %}" class="btn btn-outline-black rounded-0">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="font-weight-bold">Adjust Cart</span>
+                            </a>
+                            <button id="submit-button" class="btn btn-danger btn-shadow rounded-0">
+                                <span class="font-weight-bold">Complete Donation</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </button>
+                            <p class="small text-danger mt-3">
+                                <span class="icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </span>
+                                <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                            </p>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
         </div>
 
     </div>
