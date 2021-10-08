@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tools %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row no-gutters mt-5">
+        
+        <!-- Page Title -->
+        <div class="col-12 text-center checkout-title">
+            <h1 class="font-weight-bold">Checkout</h1>
+        </div>
+        
+        <!-- Horizontal rule -->
+        <div class="col-12">
+            <hr>
+        </div>
+        
+         <!-- Products Column -->
+        <div class="col-12 col-md-4 products-col">
+
+            <!-- Checkout Items Heading -->
+            <div class="row no-gutters mt-5 mb-3 content-alignment">
+                <div class="col-10 products-checkout-title">
+                    <h2 class="text-center">Products</h2>
+                </div>
+            </div>
+            
+            <!-- Checkout Items -->
+            <div class="row no-gutters products-cart-list">
+
+                <div class="col-12">
+                    {% for item in cart_items %}
+                        {% with product=item.product quantity=item.quantity %}
+                                    
+                                    <!-- Product Card -->
+                                    <div class="row no-gutters mt-3 content-alignment">
+                                        <div class="col-10 product-cart-wrapper">
+                                            
+                                            <!-- Product Image and Info -->
+                                            <div class="row no-gutters">
+
+                                                <!-- Product image -->
+                                                <div class="col-3 product-cart-img content-alignment">
+                                                    <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}">
+                                                </div>
+
+                                                <!-- Products Info -->
+                                                <div class="col-9">
+                                                    <div class="row no-gutters">
+                                                        
+                                                        <!-- Product Name -->
+                                                        <div class="col-12 my-1">
+                                                            <h2 class="ml-1 font-weight-bold">{{ product.name }}</h2>
+                                                        </div>
+
+                                                        <!-- Product Quantity -->
+                                                        <div class="col-12">
+                                                            <p class="ml-1">Qty: <strong>{{ quantity }}</strong></p>
+                                                        </div>
+
+                                                        <!-- Subtotal -->
+                                                        <div class="col-12">
+                                                            <p class="ml-1">Subtotal: <strong>${{ product.price | calc_subtotal:quantity }}</strong></p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+        
+        <!-- Horizontal Rule -->
+        <div class="col-12 d-md-none">
+            <hr>
+        </div>
+
+        <!-- Check Out form -->
+        <div class="col-12 col-md-8 checkout-form-wrapper">
+            <div class="row no-gutters mt-5 mb-3 content-alignment">
+                <div class="col-10 form-title">
+                    <h2 class="text-center">Check Out Informations</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Custom Js -->
+    {% block postloadjs %}
+        {{ block.super }}
+        <script src="{% static 'cart/js/cart.js' %}"></script>
+    {% endblock %}
+{% endblock %}

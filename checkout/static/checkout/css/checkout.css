@@ -1,0 +1,41 @@
+.checkout-title {
+    font-size: 2em;
+}
+
+/*-------------------------------- Products Column  */
+.products-col {
+    border-right: 2px solid #e72b37;
+}
+
+.products-cart-list {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 70vh;
+}
+
+.product-cart-wrapper {
+    border: 1px solid #e72b37;
+    height: 13vh;
+}
+
+.products-checkout-title,
+.form-title {
+    border-bottom: 2px solid #e72b37;
+}
+
+.products-checkout-title h2,
+.form-title h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.product-cart-img {
+    border-right: 1px solid #e72b37;
+    background-color: #fff;
+}
+
+.product-cart-img img {
+    height: 12.5vh;
+}
+
+/*----------------------------------- Form Column */

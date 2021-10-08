@@ -77,9 +77,9 @@
                                                                                 <div class="col-12 col-md-12">
                                                                                     <small class="input-count-title">Current Quantity</small>
                                                                                     <div class="input-count">
-                                                                                        <span><input type="button" value="-" id="button-minus_{{ product.id }}" class="add-qty button-minus btn btn-danger sm-btn-shadow-l" data-field="quantity"></span>
+                                                                                        <span><input type="button" value="-" id="button-minus_{{ product.id }}" class="add-qty button-minus btn-danger sm-btn-shadow-l" data-field="quantity"></span>
                                                                                         <input type="number" step="1" max="" value="{{ quantity }}" name="quantity" id="quantity-field_{{ product.id }}" class="quantity-field">
-                                                                                        <span><input type="button" value="+" id="button-plus_{{ product.id }}" class="add-qty button-plus btn btn-danger sm-btn-shadow-r" data-field="quantity"></span>
+                                                                                        <span><input type="button" value="+" id="button-plus_{{ product.id }}" class="add-qty button-plus btn-danger sm-btn-shadow-r" data-field="quantity"></span>
                                                                                     </div>
                                                                                 </div>
 
@@ -196,9 +196,15 @@
                         </div>
 
                         <!-- Check Out Button -->
-                        <div class="col-12">
-                            <a class="btn btn-lg btn-danger btn-shadow" href="">Check Out</a>
-                        </div>
+                        {% if cart_items %}
+                            <div class="col-12">
+                                <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'view_checkout' %}">Check Out</a>
+                            </div>
+                        {% else %}
+                            <div class="col-12">
+                                <a class="btn btn-lg btn-danger btn-shadow disabled" href="">Check Out</a>
+                            </div>
+                        {% endif %}
 
                         <!-- Donate More Button -->
                         <div class="col-12 my-3">
@@ -206,9 +212,15 @@
                         </div>
 
                         <!-- Remove All Products Button -->
-                        <div class="col-12">
-                            <a class="cart-anchor remove_all_trigger">Remove All Items From The Bag</a>
-                        </div>
+                        {% if cart_items %}
+                            <div class="col-12">
+                                <a class="cart-anchor remove_all_trigger">Remove All Items From The Bag</a>
+                            </div>
+                        {% else %}
+                            <div class="col-12">
+                                <a class="cart-anchor" disabled>No Products to Remove</a>
+                            </div>
+                        {% endif %}
 
                     </div>
                 </div>
