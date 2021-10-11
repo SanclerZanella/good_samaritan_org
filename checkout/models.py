@@ -27,8 +27,8 @@ class Order(models.Model):
         Update grand total each time a line item is added.
         """
 
-        self.grand_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem\
-            _total__sum']
+        self.grand_total = self.lineitems.aggregate(
+            Sum('lineitem_total'))['lineitem_total__sum'] or 0
         self.save()
 
     def save(self, *args, **kwargs):
@@ -62,8 +62,16 @@ class OrderLineItem(models.Model):
         Override the original save method to set the lineitem total
         and update the order total.
         """
-        self.lineitem_total = self.product.price * self.quantity
+
+        if self.product is not None:
+            self.lineitem_total = self.product.price * self.quantity
+        else:
+            self.lineitem_total = self.parcel.price * self.quantity
+
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'SKU {self.product.sku} on order {self.order.order_number}'
+        if self.product is not None:
+            return f'SKU {self.product.sku} on order {self.order.order_number}'
+        else:
+            return f'SKU {self.parcel.sku} on order {self.order.order_number}'
