@@ -1,12 +1,16 @@
 from django.shortcuts import (render, redirect,
-                              reverse, get_object_or_404)
+                              reverse, get_object_or_404,
+                              HttpResponse)
 from django.contrib import messages
 from django.conf import settings
+from io import BytesIO
+import stripe
+from xhtml2pdf import pisa
+from django.template.loader import render_to_string
+from products.models import Product, Parcel
+from cart.contexts import cart_contents
 from .forms import OrderForm
 from .models import Order, OrderLineItem
-from cart.contexts import cart_contents
-from products.models import Product, Parcel
-import stripe
 
 
 def checkout(request):
@@ -192,3 +196,21 @@ def checkout_success(request, order_number):
     }
 
     return render(request, template, context)
+
+
+def render_pdf(request, order_number):
+    order = get_object_or_404(Order, order_number=order_number)
+    path = 'checkout/document/checkout_success_print.html'
+    context = {
+        'order': order,
+    }
+
+    html = render_to_string(path, context)
+    io_bytes = BytesIO()
+
+    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), io_bytes)
+
+    if not pdf.err:
+        return HttpResponse(io_bytes.getvalue(), content_type='application/pdf')
+    else:
+        return HttpResponse("Error while rendering PDF", status=400)

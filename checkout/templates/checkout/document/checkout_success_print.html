@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Details PDF</title>
+
+    <style>
+        h1, h2 {
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 2em;
+        }
+        .info, .info-title {
+            font-size: 1.5em;
+        }
+        .info-title {
+            font-weight: 700;
+        }
+        .info-wrapper {
+            margin-bottom: 1rem;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th, td{
+            padding: 5px 15px;
+        }
+        th{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        td{
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row ">
+            <hr>
+            <h1>Thank You For Your Donation!</h1>
+            <hr>
+            <p class="text-black">Your donation information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
+        </div>
+
+        <div>
+            <h2>Donation Info</h2>
+        </div>
+
+        <div>
+            <div class="info-wrapper">
+                <span class="info info-title">Donation Number:</span> <span class="info"> {{ order.order_number }} </span>
+            </div>
+
+            <div class="info-wrapper">
+                <span class="info info-title">Donation Date:</span> <span class="info"> {{ order.date }} </span>
+            </div>
+        </div>
+
+        <div>
+            <h2>Donation Details</h2>
+        </div>
+
+        <table border="1" >
+            <thead>
+                <tr>
+                    <td><strong>Product Name</strong></td>
+                    <td><strong>Quantity</strong></td>
+                    <td><strong>Price (each)</strong></td>
+                </tr>
+            </thead>
+    
+            <tbody>
+                {% for item in order.lineitems.all %}
+                    {% if item.product %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.product.price }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ item.parcel.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.parcel.price }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div>
+            <h2>Contact Info</h2>
+        </div>
+
+        <div>
+            <div class="info-wrapper">
+                <span class="info info-title">Full Name:</span> <span class="info"> {{ order.full_name }} </span>
+            </div>
+
+            <div class="info-wrapper">
+                <span class="info info-title">Address 1:</span> <span class="info"> {{ order.street_address1 }} </span>
+            </div>
+
+            {% if order.street_address2 %}
+                <div class="info-wrapper">
+                    <span class="info info-title">Address 2:</span> <span class="info"> {{ order.street_address2 }} </span>
+                </div>
+            {% endif %}
+
+            <div class="info-wrapper">
+                <span class="info info-title">Town or City:</span> <span class="info"> {{ order.town_or_city }} </span>
+            </div>
+
+            <div class="info-wrapper">
+                <span class="info info-title">Country:</span> <span class="info"> {{ order.country }} </span>
+            </div>
+        </div>
+
+        <div>
+            <h2>Billing Info</h2>
+        </div>
+
+        <div>
+            <div class="info-wrapper">
+                <span class="info info-title">Grand Total:</span> <span class="info"> {{ order.grand_total }} </span>
+            </div>
+        </div>
+</body>
+</html>

@@ -44,6 +44,7 @@ hr {
 .content-wrapper {
     min-height: calc(100vh - 150px);
     overflow: hidden;
+    background-color: #fff;
 }
 
 .content-alignment {
@@ -284,6 +285,10 @@ footer .col-lg-2 a:hover {
         z-index: 1000;
     }
 
+    .display-mobile-nav {
+        display: none !important;
+    }
+
     .mobile-nav > .menu {
         margin: 10rem 0;
         text-align: center;
@@ -294,14 +299,11 @@ footer .col-lg-2 a:hover {
     .mobile-nav > .menu .mobile-cart-menu {
         color: #fff !important;
         font-weight: 600;
+        font-size: 1em;
     }
 
     .mobile-nav > .close p {
         margin: .5rem;
-    }
-
-    .mobile-nav, .mobile-nav > * {
-        display: none;
     }
 
     .social-link {

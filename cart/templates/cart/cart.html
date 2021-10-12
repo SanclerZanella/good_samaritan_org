@@ -64,7 +64,7 @@
                                                             
                                                             <!-- Quantity, Subtotal, Update button and Remove button -->
                                                             <div class="col-12">
-                                                                <form action="{% url 'update_cart' product.id product.sku %}" method="POST">
+                                                                <form class="submit-form" action="{% url 'update_cart' product.id product.sku %}" method="POST">
                                                                     {% csrf_token %}
                                                                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
 
@@ -94,7 +94,7 @@
                                                                         <!-- Update product Button -->
                                                                         <div class="col-4 col-md-2 update-item">
                                                                             <small class="ml-1">
-                                                                                <input type="submit" class="cart-anchor" value="Update">
+                                                                                <input type="submit" class="cart-anchor submit-trigger" value="Update">
                                                                             </small>
                                                                         </div>
 
@@ -214,7 +214,7 @@
                         <!-- Remove All Products Button -->
                         {% if cart_items %}
                             <div class="col-12">
-                                <a class="cart-anchor remove_all_trigger">Remove All Items From The Bag</a>
+                                <a class="cart-anchor remove_all_trigger">Remove All Items From The Cart</a>
                             </div>
                         {% else %}
                             <div class="col-12">
@@ -253,7 +253,7 @@
                     <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
                 </div>
                 <div class="col-6 text-right">
-                    <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'clear_cart' %}">Remove</a>
+                    <a id="remove-all-modal-btn" class="btn btn-lg btn-danger btn-shadow" href="{% url 'clear_cart' %}">Remove</a>
                 </div>
             </div>
         </div>

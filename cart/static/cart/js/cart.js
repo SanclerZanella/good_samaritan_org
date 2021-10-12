@@ -45,9 +45,10 @@ function open_modal(trigger, modal, closeBtn) {
     });
 };
 
-// Remove a product from cart modal
+// Remove a product from cart modal and prevent double submission
 $('.remove-item-btn').each((key, value) => {
     $(value).click(() => {
+        $(value).prop("disabled", true);
         let openButton = $(value);
         let openButton_id = $(value).attr('id');
         let item_id = openButton_id.split('_')[1];
@@ -60,9 +61,10 @@ $('.remove-item-btn').each((key, value) => {
     });
 });
 
-// Remove all products from cart modal
+// Remove all products from cart modal and prevent double submission
 $('.remove_all_trigger').each((key, value) => {
     $(value).click(() => {
+        $('#remove-all-modal-btn').prop("disabled", true);
         let openButton = $(value);
         let modal = $('#modal_clear');
         let closeBtn = $('.closeBtn');
@@ -70,4 +72,9 @@ $('.remove_all_trigger').each((key, value) => {
         open_modal(openButton, modal, closeBtn);
 
     });
+});
+
+// Disable button on form submission to prevent double submission 
+$('.submit-form').submit(() => {
+    $('.submit-trigger').prop("disabled", true);
 });
