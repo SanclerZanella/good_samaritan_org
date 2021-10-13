@@ -35,6 +35,10 @@
     display: none;
 }
 
+.product-picture img {
+    height: 20vh;
+}
+
 /* Media queries */
 
 @media (min-width: 320px) and (max-width: 767px) {

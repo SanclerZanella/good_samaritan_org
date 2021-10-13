@@ -65,10 +65,39 @@
     color: #aab7c4;
 }
 
+.order-confirmation-wrapper {
+    overflow: hidden;
+}
+
+#loading-overlay {
+	display: none;
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(231, 43, 55, .85);
+    z-index: 9999;
+}
+
+.loading-spinner {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+}
+
 /*-------------------------------- Form Column  */
 
 .form-control {
     border-radius: 0;
+}
+
+.donation-details {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 50vh;
 }
 
 /*-------------------------------- Media Queries  */

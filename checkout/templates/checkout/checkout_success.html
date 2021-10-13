@@ -56,32 +56,36 @@
                         <small class="text-muted">Donation Details:</small>
                     </div>
                 </div>
-
-                {% for item in order.lineitems.all %}
-                    {% if item.product %}
-                        <div class="row no-gutters">
-                            <div class="col-12 col-md-4">
-                                <p class="small mb-0 text-black font-weight-bold">
-                                    {{ item.product.name }}
-                                </p>
-                            </div>
-                            <div class="col-12 col-md-8 text-md-right">
-                                <p class="small mb-0">{{ item.quantity }} @ ${{ item.product.price }} each</p>
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="row no-gutters">
-                            <div class="col-12 col-md-4">
-                                <p class="small mb-0 text-black font-weight-bold">
-                                    {{ item.parcel.name }}
-                                </p>
-                            </div>
-                            <div class="col-12 col-md-8 text-md-right">
-                                <p class="small mb-0">{{ item.quantity }} @ ${{ item.parcel.price }} each</p>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                
+                <div class="row no-gutters">
+                    <div class="col-12 donation-details">
+                        {% for item in order.lineitems.all %}
+                            {% if item.product %}
+                                <div class="row no-gutters">
+                                    <div class="col-12 col-md-4 text-left">
+                                        <p class="small mb-0 text-black font-weight-bold">
+                                            {{ item.product.name }}
+                                        </p>
+                                    </div>
+                                    <div class="col-12 col-md-8 text-md-right">
+                                        <p class="small mb-0">{{ item.quantity }} @ ${{ item.product.price }} each</p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="row no-gutters">
+                                    <div class="col-12 col-md-4 text-left">
+                                        <p class="small mb-0 text-black font-weight-bold">
+                                            {{ item.parcel.name }}
+                                        </p>
+                                    </div>
+                                    <div class="col-12 col-md-8 text-md-right">
+                                        <p class="small mb-0">{{ item.quantity }} @ ${{ item.parcel.price }} each</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
 
                 <div class="row no-gutters">
                     <div class="col">
