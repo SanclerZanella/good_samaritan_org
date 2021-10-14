@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cart_tools %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <!-- <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}"> -->
+{% endblock %}
+
+{% block content %}
+    <h1>HELLOOO WORLD!</h1>
+
+    <!-- Custom Js -->
+    {% block postloadjs %}
+        {{ block.super }}
+        <!-- <script src="{% static 'checkout/js/checkout.js' %}"></script> -->
+    {% endblock %}
+{% endblock %}

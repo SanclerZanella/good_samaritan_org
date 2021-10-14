@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'cart',
     'checkout',
     'crispy_forms',
+    'profiles',
 
     # The following apps are required for Allauth:
     'django.contrib.sites',
