@@ -184,6 +184,26 @@ footer .col-lg-2 a:hover {
     color: #fff;
 }
 
+/* -------------------------------- Alauth templates */
+
+.auth-title {
+    font-size: 2em;
+}
+
+.auth-link {
+    text-decoration: none;
+    color: #e72b37;
+    font-weight: 700;
+}
+
+.socialaccount_provider img {
+    transition: transform .2s;
+}
+
+.socialaccount_provider img:hover {
+    transform: scale(1.1);
+}
+
 /* -------------------------------- Media Queries */
 
 @media (min-width: 1440px) {
