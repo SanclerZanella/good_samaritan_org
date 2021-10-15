@@ -37,6 +37,12 @@ def checkout(request):
      Render checkout template
     """
 
+    cart = request.session.get('cart', {})
+    if not cart:
+        messages.error(request,
+                        "There's nothing in your cart at the moment")
+        return redirect(reverse('products'))
+
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -167,24 +173,23 @@ def checkout(request):
                 Please double check your information.')
 
     else:
-        cart = request.session.get('cart', {})
 
-        if not cart:
+        try:
+            order_form = OrderForm()
+
+            current_cart = cart_contents(request)
+            total = current_cart['grand_total']
+            stripe_total = round(total * 100)
+            stripe.api_key = stripe_secret_key
+
+            intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=settings.STRIPE_CURRENCY,
+            )
+        except Exception as e:
             messages.error(request,
-                           "There's nothing in your cart at the moment")
+                        f"Is there any product in your cart?!")
             return redirect(reverse('products'))
-
-        order_form = OrderForm()
-
-        current_cart = cart_contents(request)
-        total = current_cart['grand_total']
-        stripe_total = round(total * 100)
-        stripe.api_key = stripe_secret_key
-
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
@@ -204,7 +209,6 @@ def checkout_success(request, order_number):
     """
     Handle successful checkouts
     """
-    save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
     messages.success(request, f'Donation successfully processed! \
         Your Donation number is {order_number}. A confirmation \

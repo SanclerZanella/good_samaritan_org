@@ -1,18 +1,84 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load cart_tools %}
 
 <!-- Custom css -->
 {% block extra_css %}
-    <!-- <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1>HELLOOO WORLD!</h1>
+    <div class="row no-gutters mt-5">
+        
+        <!-- Page Title -->
+        <div class="col-12 text-center checkout-title">
+            <h1 class="font-weight-bold">My Profile</h1>
+        </div>
+        
+        <!-- Horizontal rule -->
+        <div class="col-12">
+            <hr>
+        </div>
+        
+         <!-- Orders Column -->
+        <div class="col-12 col-md-4 orders-col">
+
+            <!-- Orders History Heading -->
+            <div class="row no-gutters mt-5 mb-3 content-alignment">
+                <div class="col-10 products-checkout-title">
+                    <h2 class="text-center">Orders History</h2>
+                </div>
+            </div>
+            
+            <!-- Orders History -->
+            <div class="row no-gutters">
+                <div class="col-12"></div>
+            </div>
+
+        </div>
+        
+        <!-- Horizontal Rule -->
+        <div class="col-12 d-md-none">
+            <hr>
+        </div>
+
+        <!-- Profile form -->
+        <div class="col-12 col-md-8 checkout-form-wrapper">
+            <div class="row no-gutters mt-5 mb-1 content-alignment">
+                <div class="col-10 form-title">
+                    <h2 class="text-center">Profile Informations</h2>
+                </div>
+            </div>
+
+            <div class="row no-gutters content-alignment">
+                <div class="col-10">
+
+                    <form action="" method="POST" id="payment-form">
+                        {% csrf_token %}
+
+                        <fieldset class="mb-5">
+                        </fieldset>
+
+                        <div class="submit-button text-right mt-5 mb-2">
+                            <button id="submit-button" class="btn btn-danger btn-shadow rounded-0">
+                                <span class="font-weight-bold">Update Profile</span>
+                                <span class="icon">
+                                    <i class="fas fa-user-edit"></i>
+                                </span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 
     <!-- Custom Js -->
     {% block postloadjs %}
         {{ block.super }}
-        <!-- <script src="{% static 'checkout/js/checkout.js' %}"></script> -->
+        <!-- <script src="{% static 'profiles/js/profile.js' %}"></script> -->
     {% endblock %}
 {% endblock %}
