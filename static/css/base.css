@@ -44,7 +44,7 @@ hr {
 .content-wrapper {
     min-height: calc(100vh - 150px);
     overflow: hidden;
-    background-color: #fff;
+    background-color: #f4f5f7;
 }
 
 .content-alignment {

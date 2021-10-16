@@ -10,7 +10,7 @@
     <div class="row no-gutters mt-5">
         
         <!-- Page Title -->
-        <div class="col-12 text-center checkout-title">
+        <div class="col-12 text-center profile-title">
             <h1 class="font-weight-bold">My Profile</h1>
         </div>
         
@@ -19,8 +19,9 @@
             <hr>
         </div>
 
+        <!-- Profile User Name -->
         <div class="col-12 text-center">
-            <h4 class="font-weight-bold">Welcome {{ profile }},</h4>
+            <h4 class="font-weight-bold">Welcome <span class="user-name">{{ profile }}</span>,</h4>
         </div>
         
          <!-- Orders Column -->
@@ -28,7 +29,7 @@
 
             <!-- Orders History Heading -->
             <div class="row no-gutters mt-5 mb-3 content-alignment">
-                <div class="col-10 products-checkout-title">
+                <div class="col-10 products-profile-title">
                     <h2 class="text-center">Orders History</h2>
                 </div>
             </div>
@@ -46,7 +47,7 @@
         </div>
 
         <!-- Profile form -->
-        <div class="col-12 col-md-8 checkout-form-wrapper">
+        <div class="col-12 col-md-8 profile-form-wrapper">
             <div class="row no-gutters mt-5 mb-1 content-alignment">
                 <div class="col-10 form-title">
                     <h2 class="text-center">Profile Informations</h2>
@@ -56,7 +57,7 @@
             <div class="row no-gutters content-alignment">
                 <div class="col-10">
 
-                    <form action="" method="POST" id="payment-form">
+                    <form action="" method="POST" id="profile-form">
                         {% csrf_token %}
 
                         <fieldset class="mb-5">
