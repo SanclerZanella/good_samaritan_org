@@ -13,6 +13,8 @@ from django.views.decorators.http import require_POST
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 import json
+from profiles.models import UserProfile
+from profiles.forms import UserProfileForm
 
 
 @require_POST
@@ -40,7 +42,7 @@ def checkout(request):
     cart = request.session.get('cart', {})
     if not cart:
         messages.error(request,
-                        "There's nothing in your cart at the moment")
+                       "There's nothing in your cart at the moment")
         return redirect(reverse('products'))
 
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -186,9 +188,25 @@ def checkout(request):
                 amount=stripe_total,
                 currency=settings.STRIPE_CURRENCY,
             )
+
+            if request.user.is_authenticated:
+                try:
+                    profile = UserProfile.objects.get(user=request.user)
+                    order_form = OrderForm(initial={
+                        'full_name': profile.user.get_full_name(),
+                        'email': profile.user.email,
+                        'country': profile.default_country,
+                        'town_or_city': profile.default_town_or_city,
+                        'street_address1': profile.default_street_address1,
+                        'street_address2': profile.default_street_address2,
+                    })
+                except UserProfile.DoesNotExist:
+                    order_form = OrderForm()
+            else:
+                order_form = OrderForm()
+
         except Exception as e:
-            messages.error(request,
-                        f"Is there any product in your cart?!")
+            messages.error(request, "Is there any product in your cart?!")
             return redirect(reverse('products'))
 
     if not stripe_public_key:
@@ -209,7 +227,27 @@ def checkout_success(request, order_number):
     """
     Handle successful checkouts
     """
+    save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
+
+    # Save the user's info
+    if save_info:
+        profile_data = {
+            'default_country': order.country,
+            'default_town_or_city': order.town_or_city,
+            'default_street_address1': order.street_address1,
+            'default_street_address2': order.street_address2,
+        }
+        user_profile_form = UserProfileForm(profile_data, instance=profile)
+        if user_profile_form.is_valid():
+            user_profile_form.save()
+
     messages.success(request, f'Donation successfully processed! \
         Your Donation number is {order_number}. A confirmation \
         email will be sent to {order.email}.')

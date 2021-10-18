@@ -5,4 +5,5 @@ from . import views
 # Base url for this app and urls for other functions in this app
 urlpatterns = [
     path('', views.profile, name='profile'),
+    path('order_history/<order_number>/', views.order_history, name='order_history'),
 ]

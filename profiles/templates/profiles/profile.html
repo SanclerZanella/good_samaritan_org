@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row no-gutters mt-5">
+    <div class="row no-gutters mt-5 profile-content">
         
         <!-- Page Title -->
         <div class="col-12 text-center profile-title">
@@ -30,14 +30,49 @@
             <!-- Orders History Heading -->
             <div class="row no-gutters mt-5 mb-3 content-alignment">
                 <div class="col-10 products-profile-title">
-                    <h2 class="text-center">Orders History</h2>
+                    <h2 class="text-center font-weight-bold">Orders History</h2>
                 </div>
             </div>
             
             <!-- Orders History -->
-            <div class="row no-gutters">
-                <div class="col-12">
-                    {{ orders }}
+            <div class="row no-gutters text-center content-alignment">
+
+                <div class="col-10 order-list-titles">
+                    <div class="row no-gutters">
+                        <div class="col-4">
+                            <h3>Order Number</h3>
+                        </div>
+                        <div class="col-4">
+                            <h3>Date</h3>
+                        </div>
+                        <div class="col-4">
+                            <h3>Order Total</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-10 order-list">
+                    <div class="row no-gutters">
+                        <div class="col-12">
+                            {% for order in orders %}
+                                <div class="col-12 mt-5">
+                                    <div class="row no-gutters">
+                                        <div class="col-4 my-auto">
+                                            <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
+                                                {{ order.order_number|truncatechars:6 }}
+                                            </a>
+                                        </div>
+                                        <div class="col-4 my-auto">
+                                            {{ order.date }}
+                                        </div>
+                                        <div class="col-4 my-auto">
+                                            $ {{ order.grand_total }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -52,7 +87,7 @@
         <div class="col-12 col-md-8 profile-form-wrapper">
             <div class="row no-gutters mt-5 mb-1 content-alignment">
                 <div class="col-10 form-title">
-                    <h2 class="text-center">Profile Informations</h2>
+                    <h2 class="text-center font-weight-bold">Profile Informations</h2>
                 </div>
             </div>
 
