@@ -13,7 +13,7 @@ $(document).ready(() => {
     });
     
     param = currentUrl.searchParams.get('parcel')
-    if(param == 'parcel_1') {
+    if(param == 'parcel_1' || param == null) {
         $('#parcel_1').css({
             'border': '2px solid #e72b37'
         });

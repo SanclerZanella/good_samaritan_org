@@ -5,3 +5,16 @@
 .user-name {
     color: #e72b37;
 }
+
+.textinput {
+    color: #000;
+}
+
+#id_default_country,
+#id_default_country option:not(:first-child) {
+    color: #000;
+}
+
+#id_default_country option:first-child {
+    color: #aab7c4;
+}
