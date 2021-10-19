@@ -12,7 +12,11 @@
         
         <!-- Product Image -->
         <div class="col-12 col-md-6 mt-5 product-img content-alignment bg-white">
-            <img class="" src="{{ MEDIA_URL }}/products/items/{{ product.image }}" alt="{{ product.name }}">
+            {% if product.image %}
+                <img class="" src="{{ MEDIA_URL }}/products/items/{{ product.image }}" alt="{{ product.name }}">
+            {% else %}
+                <img class="" src="{{ product.image_url }}" alt="{{ product.name }}">
+            {% endif %}
         </div>
 
         <div class="col-12 col-md-6 mt-5 product-details">

@@ -142,9 +142,15 @@
 
                             <!-- Product Picture -->
                             <div class="row no-gutters product-picture mt-3">
-                                <div class="col-12 content-alignment">
-                                    <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}" loading="lazy">
-                                </div>
+                                {% if product.image %}
+                                    <div class="col-12 content-alignment">
+                                        <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}" loading="lazy">
+                                    </div>
+                                {% else %}
+                                    <div class="col-12 content-alignment">
+                                        <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+                                    </div>
+                                {% endif %}
                             </div>
                             
                             <!-- Product Name -->
@@ -165,6 +171,19 @@
                             <div class="row no-gutters donate-button mb-3">
                                 <div class="col-12 text-center">
                                     <a class="btn btn-outline-danger" href="{% url 'product_details' product.id %}">Donate <span class="first-heart"><i class="far fa-heart"></span></i><span class="second-heart"><i class="fas fa-heart"></i></span></a>
+                                </div>
+                            </div>
+
+                            <div class="row no-gutters text-center">
+                                <div class="col-6">
+                                    <a class="text-success" href="">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a class="text-danger" href="">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
                                 </div>
                             </div>
 

@@ -119,6 +119,265 @@
 
     </div>
 
+    {% if request.user.is_authenticated %}
+        {% if request.user.is_superuser %}
+            <div class="row no-gutters mb-5">
+                <div class="col-12">
+                    <hr>
+                </div>
+
+                <div class="col-12 text-center product-management-title">
+                    <h2 id="mg-title" class="font-weight-bold">Product Management</h2>
+                </div>
+
+                <div class="col-12 mt-5">
+                    <div class="row no-gutters text-center">
+                        
+                        <!-- Products List -->
+                        <div class="col-12 col-md-8 products-mg-list">
+
+                            <!-- Search Product -->
+                            {% if not parcel_param %}
+                                <div class="row no-gutters mb-3 content-alignment">
+                                    <div class="col-8">
+                                        <form method="GET" action="{% url 'profile' %}">
+                                            <div class="input-group w-100">
+                                                <input class="form-control border border-black rounded-0" type="text" name="q-mg" placeholder="Search Product">
+                                                <div class="input-group-append search-btn">
+                                                    <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                                                        <span class="icon">
+                                                            <i class="fas fa-search"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <!-- Sorting, Categories Dropdown, Items Quantity -->
+                            <div class="row no-gutters">
+                                <div class="col-12">
+                                    <div class="row no-gutters">
+
+                                        {% if not parcel_param %}
+                                            <!-- Sort Options -->
+                                            <div class="col-12 col-md-4 sort-input">
+                                                <select name="sort-md" id="sort" class="ml-3 sort">
+                                                    <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                                                    <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                                                    <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                                                    <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                                                    <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                                                    <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
+                                                    <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
+                                                </select>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if not parcel_param %}
+                                            <!-- Quantity of Products -->
+                                            <div class="col-6 col-md-4 my-auto">
+                                                <p class="text-center mr-3">
+
+                                                    {% if search_term or current_category or current_sorting != 'None_None' %}
+                                                        {{ all_products_len }} Products
+                                                    {% else %}
+                                                        {{ all_products_len }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                                                    {% endif %}
+
+                                                </p>
+                                            </div>
+                                        {% else %}
+                                            <!-- Quantity of Products -->
+                                            <div class="col-12">
+                                                <p class="text-center mr-3">
+
+                                                    {% if search_term or current_category or current_sorting != 'None_None' %}
+                                                        {{ all_products_len }} Parcels
+                                                    {% else %}
+                                                        {{ all_products_len }} Parcels{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                                                    {% endif %}
+
+                                                </p>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if not parcel_param %}
+                                            <!-- Categories Options -->
+                                            <div class="categories-dropdown col-6 col-md-4 text-right">
+
+                                                <div class="dropdown dropleft mr-3">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Categories
+                                                    </button>
+                                                    <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                                                            <a href="{% url 'profile' %}?urgent=most_needed">
+                                                                <p class="category-item my-3 font-weight-bold">Most-Needed Items</p>
+                                                            </a>
+                                                            <a href="{% url 'profile' %}#mg-title">
+                                                                <p class="category-item my-3 font-weight-bold">Browse All</p>
+                                                            </a>
+
+                                                            <hr>
+
+                                                        {% for category in categories %}
+                                                            <a href="{% url 'profile' %}?category={{ category.name }}">
+                                                                <p class="category-item my-3 font-weight-bold">{{ category.friendly_name }}</p>
+                                                            </a>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Products and Parcels List -->
+                            <div class="row no-gutters content-alignment mb-5">
+
+                                {% if parcel_param %}
+                                    <div class="col-10 products-list">
+                                        {% for parcel in parcels %}
+                                            <div class="row no-gutters my-3 text-center content-alignment product-card">
+                                                <div class="col-2 img-wrapper d-none d-md-flex">
+                                                    {% if parcel.image %}
+                                                        <div class="col-12 content-alignment product-mg-img">
+                                                            <img src="{{MEDIA_URL}}products/items/{{ parcel.image }}" alt="{{ parcel.name }}" loading="lazy">
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="col-12 content-alignment product-mg-img">
+                                                            <img src="{{ parcel.image_url }}" alt="{{ parcel.name }}" loading="lazy">
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-8 my-auto">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">Parcel Name: </span><span>{{ parcel.name }}</span>
+                                                        </div>
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">SKU: </span><span>{{ parcel.sku }}</span>
+                                                        </div>
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">Description: </span>
+                                                            <span title="{{ parcel.description }}">
+                                                                {{ parcel.description|truncatechars:50 }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">Price: </span><span>$ {{ parcel.price }}</span>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 text-left edit-product-btn">
+                                                            <span>
+                                                                <a class="ml-3" href="">Edit Parcel <i class="fas fa-edit"></i></a>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                <!-- Product Card -->
+                                {% else %}
+                                    <div class="col-10 products-list">
+                                        {% for product in products %}
+                                            <div class="row no-gutters my-3 text-center content-alignment product-card">
+                                                <div class="col-8 col-md-2 img-wrapper d-none d-md-flex">
+                                                    {% if product.image %}
+                                                        <div class="content-alignment product-mg-img">
+                                                            <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}" loading="lazy">
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="content-alignment product-mg-img">
+                                                            <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-8 my-auto">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">Product Name: </span><span>{{ product.name }}</span>
+                                                        </div>
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">Category: </span><span>{{ product.category }}</span>
+                                                        </div>
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">SKU: </span><span>{{ product.sku }}</span>
+                                                        </div>
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">Description: </span>
+                                                            <span class="d-none d-md-flex" title="{{ product.description }}">
+                                                                {{ product.description|truncatechars:50 }}
+                                                            </span>
+                                                            <span class="d-md-none" title="{{ product.description }}">
+                                                                {{ product.description|truncatechars:10 }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">Most-Needed Item? </span>
+                                                            {% if product.m_needed == None or product.m_needed == False %}
+                                                                <span class="text-danger">{{ product.m_needed }}</span>
+                                                            {% else %}
+                                                                <span class="text-success">{{ product.m_needed }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="col-12 text-left ml-3">
+                                                            <span class="font-weight-bold">Price: </span><span>$ {{ product.price }}</span>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 text-left edit-product-btn">
+                                                            <span>
+                                                                <a class="ml-3" href="">Edit Product <i class="fas fa-edit"></i></a>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 text-left remove-product-btn">
+                                                            <a class="d-none d-md-flex" href="">Remove Product <i class="fas fa-trash"></i></a>
+                                                            <a class="d-md-none ml-3" href="">Remove Product <i class="fas fa-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+
+                        <div class="col-12 col-md-4 my-auto">
+                            <div class="row no-gutters buttons-col mx-3 py-5">
+                                <div class="col-12">
+                                    <a href="" class="btn btn-danger btn-shadow rounded-0">
+                                        <span class="font-weight-bold">Add New Product</span>
+                                        <span class="icon">
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="col-12 my-3">
+                                    <a href="{% url 'profile' %}#mg-title" class="btn btn-danger btn-shadow rounded-0">
+                                        <span class="font-weight-bold">Products</span>
+                                    </a>
+                                </div>
+                                <div class="col-12">
+                                    <a href="{% url 'profile' %}?parcel=parcel_param" class="btn btn-danger btn-shadow rounded-0">
+                                        <span class="font-weight-bold">Parcels</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
     <!-- Custom Js -->
     {% block postloadjs %}
         {{ block.super }}

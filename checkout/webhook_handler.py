@@ -86,7 +86,6 @@ class StripeWH_Handler:
                 time.sleep(1)
 
         if order_exists:
-            print('HERE!!! 1')
             self._send_confirmation_email(order)
             return HttpResponse(
                 content=f'Webhook received: {event["type"]} |\
@@ -124,7 +123,6 @@ class StripeWH_Handler:
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
 
-        print('HERE!!! 2')
         self._send_confirmation_email(order)
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',

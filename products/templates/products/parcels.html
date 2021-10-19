@@ -37,15 +37,27 @@
                     <div id="parcel_{{ p.id }}" class="col-5 col-md-3 mt-5 bg-white parcel-card">
                         <div class="row no-gutters">
 
+                            <div class="col-6">
+                                <a class="text-success ml-1" href="">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </div>
+                            
                             <!-- Check Icon -->
                             <div id="check_{{ p.id }}" class="col-12 text-right check-icon">
                                 <i class="fas fa-check fa-lg my-1 mx-1"></i>
                             </div>
 
                             <!-- Parcel Image -->
-                            <div class="col-12">
-                                <img src="{{MEDIA_URL}}parcels/{{ p.image }}" alt="{{ p.name }}" loading="lazy">
-                            </div>
+                            {% if p.image %}
+                                <div class="col-12">
+                                    <img src="{{MEDIA_URL}}parcels/{{ p.image }}" alt="{{ p.name }}" loading="lazy">
+                                </div>
+                            {% else %}
+                                <div class="col-12">
+                                    <img src="{{ p.image_url }}" alt="{{ p.name }}" loading="lazy">
+                                </div>
+                            {% endif %}
 
                             <!-- Parcel Name -->
                             <div class="col-12">
@@ -66,14 +78,25 @@
                         <div class="row no-gutters">
 
                             <!-- Check Icon -->
-                            <div id="check_{{ p.id }}" class="col-12 text-right check-icon">
+                            <div class="col-6">
+                                <a class="text-success ml-1" href="">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </div>
+                            <div id="check_{{ p.id }}" class="col-6 text-right check-icon">
                                 <i class="fas fa-check fa-lg my-1 mx-1"></i>
                             </div>
 
                             <!-- Parcel Image -->
-                            <div class="col-12">
-                                <img src="{{MEDIA_URL}}parcels/{{ p.image }}" alt="{{ p.name }}" loading="lazy">
-                            </div>
+                            {% if p.image %}
+                                <div class="col-12">
+                                    <img src="{{MEDIA_URL}}parcels/{{ p.image }}" alt="{{ p.name }}" loading="lazy">
+                                </div>
+                            {% else %}
+                                <div class="col-12">
+                                    <img src="{{ p.image_url }}" alt="{{ p.name }}" loading="lazy">
+                                </div>
+                            {% endif %}
 
                             <!-- Parcel Name -->
                             <div class="col-12">
@@ -132,9 +155,15 @@
                     <div class="row no-gutters">
 
                         <!-- Product Image -->
-                        <div class="col-12 product-picture content-alignment mt-1">
-                            <img src="{{MEDIA_URL}}products/items/{{ item.image }}" alt="{{ item.name }}">
-                        </div>
+                        {% if item.image %}
+                            <div class="col-12 product-picture content-alignment mt-1">
+                                <img src="{{MEDIA_URL}}products/items/{{ item.image }}" alt="{{ item.name }}">
+                            </div>
+                        {% else %}
+                            <div class="col-12 product-picture content-alignment mt-1">
+                                <img src="{{ item.image_url }}" alt="{{ item.name }}">
+                            </div>
+                        {% endif %}
 
                         <!-- Product Name -->
                         <div class="col-12 text-center my-2">

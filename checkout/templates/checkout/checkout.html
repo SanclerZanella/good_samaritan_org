@@ -46,7 +46,11 @@
 
                                                 <!-- Product image -->
                                                 <div class="col-3 product-cart-img content-alignment">
-                                                    <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}">
+                                                    {% if product.image %}
+                                                        <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}">
+                                                    {% else %}
+                                                        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                                                    {% endif %}
                                                 </div>
 
                                                 <!-- Products Info -->
