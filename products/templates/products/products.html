@@ -174,18 +174,22 @@
                                 </div>
                             </div>
 
-                            <div class="row no-gutters text-center">
-                                <div class="col-6">
-                                    <a class="text-success" href="">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </div>
-                                <div class="col-6">
-                                    <a class="text-danger" href="">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </div>
-                            </div>
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_superuser %}
+                                    <div class="row no-gutters text-center">
+                                        <div class="col-6">
+                                            <a class="text-success" href="">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a class="text-danger" href="">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
 
                         </div>
                     {% endfor %}

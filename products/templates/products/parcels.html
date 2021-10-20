@@ -37,16 +37,25 @@
                     <div id="parcel_{{ p.id }}" class="col-5 col-md-3 mt-5 bg-white parcel-card">
                         <div class="row no-gutters">
 
-                            <div class="col-6">
-                                <a class="text-success ml-1" href="">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </div>
-                            
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_superuser %}
+                                    <div class="col-6">
+                                        <a class="text-success ml-1" href="">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </div>
+
+                                    <!-- Check Icon -->
+                                    <div id="check_{{ p.id }}" class="col-6 text-right check-icon">
+                                        <i class="fas fa-check fa-lg my-1 mx-1"></i>
+                                    </div>
+                                {% endif %}
+                            {% else %}
                             <!-- Check Icon -->
                             <div id="check_{{ p.id }}" class="col-12 text-right check-icon">
                                 <i class="fas fa-check fa-lg my-1 mx-1"></i>
                             </div>
+                            {% endif %}
 
                             <!-- Parcel Image -->
                             {% if p.image %}
@@ -77,15 +86,26 @@
                     <div id="parcel_{{ p.id }}" class="col-5 col-md-3 mx-5 mt-5 bg-white parcel-card">
                         <div class="row no-gutters">
 
+                            
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_superuser %}
+                                    <div class="col-6">
+                                        <a class="text-success ml-1" href="">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </div>
+
+                                    <!-- Check Icon -->
+                                    <div id="check_{{ p.id }}" class="col-6 text-right check-icon">
+                                        <i class="fas fa-check fa-lg my-1 mx-1"></i>
+                                    </div>
+                                {% endif %}
+                            {% else %}
                             <!-- Check Icon -->
-                            <div class="col-6">
-                                <a class="text-success ml-1" href="">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </div>
-                            <div id="check_{{ p.id }}" class="col-6 text-right check-icon">
+                            <div id="check_{{ p.id }}" class="col-12 text-right check-icon">
                                 <i class="fas fa-check fa-lg my-1 mx-1"></i>
                             </div>
+                            {% endif %}
 
                             <!-- Parcel Image -->
                             {% if p.image %}
