@@ -1,14 +1,9 @@
-from django.shortcuts import (render, get_object_or_404,
-                              redirect, reverse)
+from django.shortcuts import (render, get_object_or_404)
 from .models import UserProfile
 from .forms import UserProfileForm
-from django.db.models import Q
-from django.db.models.functions import Lower
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from checkout.models import Order
-from products.models import (Product, Parcel, Category)
-from products.utils import get_id_data
 
 
 @login_required

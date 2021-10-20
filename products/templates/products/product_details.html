@@ -13,7 +13,7 @@
         <!-- Product Image -->
         <div class="col-12 col-md-6 mt-5 product-img content-alignment bg-white">
             {% if product.image %}
-                <img class="" src="{{ MEDIA_URL }}/products/items/{{ product.image }}" alt="{{ product.name }}">
+                <img class="" src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.name }}">
             {% else %}
                 <img class="" src="{{ product.image_url }}" alt="{{ product.name }}">
             {% endif %}
@@ -79,6 +79,54 @@
                     </div>
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 </form>
+
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                        <div class="col-12">
+                            <div class="row no-gutters">
+                                <div class="col-6 col-lg-4 col-xl-3 text-right edit-product-btn">
+                                    <span>
+                                        <a class="mr-3" href="">Edit Product <i class="fas fa-edit"></i></a>
+                                    </span>
+                                </div>
+                                <div class="col-6 col-lg-4 col-xl-3 text-left remove-product-btn">
+                                    <a id="trigger_{{ product.id }}" class="remove-item-btn ml-3">Remove Product <i class="fas fa-trash"></i></a>
+                                </div>
+                            </div>
+
+                            <!-- Remove Item Modal (from W3Schools) -->
+                            <div id="modal_{{ product.id }}" class="modal">
+
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <div class="row no-gutters">
+                                        <div class="col-12">
+                                            <span class="closeBtn close-modal text-right">&times;</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row no-gutters">
+                                        <div class="col-12">
+                                            <p class="text-center">Yor are going to remove <span class="font-weight-bold">{{ product.name }}</span> from the shop</p>
+                                            <p class="text-center">Are you sure?</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row no-gutters">
+                                        <div class="col-6">
+                                            <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'delete_product' product.id %}">Remove</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
             </div>
         </div>
 

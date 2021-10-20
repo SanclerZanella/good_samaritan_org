@@ -177,7 +177,7 @@
                         <!-- Product Image -->
                         {% if item.image %}
                             <div class="col-12 product-picture content-alignment mt-1">
-                                <img src="{{MEDIA_URL}}products/items/{{ item.image }}" alt="{{ item.name }}">
+                                <img src="{{MEDIA_URL}}{{ item.image }}" alt="{{ item.name }}">
                             </div>
                         {% else %}
                             <div class="col-12 product-picture content-alignment mt-1">

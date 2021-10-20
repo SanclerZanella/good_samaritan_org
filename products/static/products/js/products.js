@@ -86,3 +86,30 @@ $('.sort').each((key, value) => {
 
     });
 });
+
+// Show and Hide Modal
+function open_modal(trigger, modal, closeBtn) {
+    trigger.click(() => {
+        modal.show(500);
+    });
+
+    closeBtn.click(() => {
+        modal.hide(500);
+    });
+};
+
+// Remove a product from cart modal and prevent double submission
+$('.remove-item-btn').each((key, value) => {
+    $(value).click(() => {
+        $(value).prop("disabled", true);
+        let openButton = $(value);
+        let openButton_id = $(value).attr('id');
+        let item_id = openButton_id.split('_')[1];
+        let modal_id = `#modal_${item_id}`;
+        let modal = $(modal_id);
+        let closeBtn = $('.closeBtn');
+        
+        open_modal(openButton, modal, closeBtn);
+
+    });
+});
