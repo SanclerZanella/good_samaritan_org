@@ -1,12 +1,14 @@
 from django.shortcuts import (render, redirect,
-                              reverse, get_object_or_404)
+                              reverse, get_object_or_404,
+                              HttpResponse)
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.db.models import Q, Sum
 from django.db.models.functions import Lower
 from django.contrib.auth.decorators import user_passes_test
 from .models import (Product, Category,
                      Parcel)
-from .forms import ProductForm
+from .forms import ProductForm, ParcelForm
 from django.core.paginator import (Paginator, EmptyPage,
                                    PageNotAnInteger)
 from .utils import get_id_data
@@ -271,6 +273,62 @@ def add_product(request):
 
 
 @user_passes_test(lambda u: u.is_superuser)
+def edit_product(request, product_id, product_sku):
+    """ Edit a product in the shop """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store managers can do that.')
+        return redirect(reverse('products'))
+
+    item_type = product_sku.split('_')[-1]
+    products = Product.objects.all()
+
+    if item_type == 'pc':
+        product = get_object_or_404(Parcel, pk=product_id)
+        list_items = product.items
+        items_ids = list_items.split(',')
+        items_in_parcel = list()
+
+        for item in items_ids:
+            item_id = int(item)
+            items_in_parcel.append(Product.objects.get(pk=item_id))
+
+    else:
+        product = get_object_or_404(Product, pk=product_id)
+        items_in_parcel = None
+
+    if request.method == 'POST':
+        if item_type == 'pc':
+            form = ParcelForm(request.POST, request.FILES, instance=product)
+        else:
+            form = ProductForm(request.POST, request.FILES, instance=product)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated product!')
+            return redirect(reverse('product_details', args=[product.id]))
+        else:
+            messages.error(request, 'Failed to update product.\
+                Please ensure the form is valid.')
+    else:
+        if item_type == 'pc':
+            form = ParcelForm(instance=product)
+        else:
+            form = ProductForm(instance=product)
+
+        messages.info(request, f'You are editing {product.name}')
+
+    template = 'products/edit_product.html'
+    context = {
+        'form': form,
+        'product': product,
+        'products': products,
+        'items_in_parcel': items_in_parcel,
+    }
+
+    return render(request, template, context)
+
+
+@user_passes_test(lambda u: u.is_superuser)
 def delete_product(request, product_id):
     """ Delete a product from the shop """
     if not request.user.is_superuser:
@@ -281,3 +339,69 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('product_management'))
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def delete_product_parcel(request, parcel_id, product_id):
+    """ Delete a product from the parcel items """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only site staff can do that.')
+        return redirect(reverse('home'))
+
+    parcel = get_object_or_404(Parcel, pk=parcel_id)
+    list_items = parcel.items
+    items_ids = list_items.split(',')
+    items_in_parcel = list()
+
+    for item in items_ids:
+        item_id = int(item)
+        items_in_parcel.append(Product.objects.get(pk=item_id).id)
+
+    if int(product_id) in items_in_parcel:
+        items_in_parcel.remove(int(product_id))
+        list_string = ",".join(str(id) for id in items_in_parcel)
+        Parcel.objects.filter(pk=parcel.id).update(items=list_string)
+
+    messages.success(request, 'Product deleted from parcel!')
+    return redirect(reverse('edit_product', args=[parcel.id, parcel.sku]))
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def add_product_parcel(request):
+    """ Add a product to the parcel items """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only site staff can do that.')
+        return redirect(reverse('home'))
+
+    parcel_id = None
+    product_id = None
+
+    if 'parcel_id' in request.POST:
+        parcel_id = request.POST['parcel_id']
+    else:
+        messages.error(request, 'You have select a product\
+            before add to the parcel')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    if 'product_id' in request.POST:
+        product_id = request.POST['product_id']
+
+    parcel = get_object_or_404(Parcel, pk=parcel_id)
+    list_items = parcel.items
+    items_ids = list_items.split(',')
+    items_in_parcel = list()
+
+    for item in items_ids:
+        item_id = int(item)
+        items_in_parcel.append(Product.objects.get(pk=item_id).id)
+
+    list_string = ",".join(str(id) for id in items_in_parcel)
+    new_products_str = list_string + "," + product_id
+    new_products_i = sorted(list(int(x) for x in new_products_str.split(',')))
+    new_products_s = list(str(x) for x in new_products_i)
+    new_products = ','.join(new_products_s)
+
+    Parcel.objects.filter(pk=parcel_id).update(items=new_products)
+
+    messages.success(request, 'Product added to parcel!')
+    return HttpResponse(status=200)

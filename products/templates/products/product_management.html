@@ -159,7 +159,7 @@
                                                         </div>
                                                         <div class="col-12 col-md-6 text-left edit-product-btn">
                                                             <span>
-                                                                <a class="ml-3" href="">Edit Parcel <i class="fas fa-edit"></i></a>
+                                                                <a class="ml-3" href="{% url 'edit_product' parcel.id parcel.sku %}">Edit Parcel <i class="fas fa-edit"></i></a>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -215,7 +215,7 @@
                                                         </div>
                                                         <div class="col-12 col-md-6 text-left edit-product-btn">
                                                             <span>
-                                                                <a class="ml-3" href="">Edit Product <i class="fas fa-edit"></i></a>
+                                                                <a class="ml-3" href="{% url 'edit_product' product.id product.sku %}">Edit Product <i class="fas fa-edit"></i></a>
                                                             </span>
                                                         </div>
                                                         <div class="col-12 col-md-6 text-left remove-product-btn">
