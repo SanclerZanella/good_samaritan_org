@@ -80,7 +80,6 @@ def all_products(request):
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
             all_items = get_id_data(all_products)
-            current_category = all_products.filter(queries)
             most_n = None
 
         if 'urgent' in request.GET:

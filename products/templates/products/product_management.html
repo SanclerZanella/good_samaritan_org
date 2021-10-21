@@ -135,13 +135,9 @@
                                             <div class="row no-gutters my-3 text-center content-alignment product-card">
                                                 <div class="col-2 img-wrapper d-none d-md-flex">
                                                     {% if parcel.image %}
-                                                        <div class="col-12 content-alignment product-mg-img">
-                                                            <img src="{{MEDIA_URL}}products/items/{{ parcel.image }}" alt="{{ parcel.name }}" loading="lazy">
-                                                        </div>
+                                                        <img class="my-auto" src="{{MEDIA_URL}}/products/items/{{ parcel.image }}" alt="{{ parcel.name }}" loading="lazy">
                                                     {% else %}
-                                                        <div class="col-12 content-alignment product-mg-img">
-                                                            <img src="{{ parcel.image_url }}" alt="{{ parcel.name }}" loading="lazy">
-                                                        </div>
+                                                        <img class="my-auto" src="{{ parcel.image_url }}" alt="{{ parcel.name }}" loading="lazy">
                                                     {% endif %}
                                                 </div>
                                                 <div class="col-8 my-auto">
@@ -176,12 +172,14 @@
                                 {% else %}
                                     <div class="col-10 products-list">
                                         {% for product in products %}
-                                            <div class="row no-gutters my-3 text-center content-alignment product-card">
-                                                <div class="col-8 col-md-4 img-wrapper d-none d-md-flex">
+                                            <div class="row no-gutters my-3 text-center product-card">
+                                                <div class="col-8 col-md-4 img-wrapper d-none d-md-flex content-alignment">
                                                     {% if product.image %}
-                                                        <img src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }}" loading="lazy">
+                                                        <img class="my-auto" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }}" loading="lazy">
+                                                    {% elif not product.image and not product.image_url %}
+                                                        <img class="my-auto" src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
                                                     {% else %}
-                                                        <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+                                                        <img class="my-auto" src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
                                                     {% endif %}
                                                 </div>
                                                 <div class="col-8 my-auto">

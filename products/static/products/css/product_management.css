@@ -6,11 +6,6 @@
     background-color: #fff;
 }
 
-.product-mg-img img {
-    height: 20vh;
-    margin: 1rem 0;
-}
-
 .edit-product-btn a {
     color: #007168;
     text-decoration: none;
@@ -43,6 +38,10 @@
 
 .search-btn {
     background-color: #e72b37;
+}
+
+.product-card img {
+    height: 30vh;
 }
 
 /* ----------------------- Modal */
@@ -100,8 +99,8 @@
         max-height: 65vh;
         min-height: 65vh;
     }
-    .product-mg-img img {
-        height: 10vh;
+    .product-card img {
+        height: 15vh;
     }
 }
 
@@ -110,14 +109,17 @@
         max-height: 65vh;
         min-height: 65vh;
     }
-    .product-mg-img img {
-        height: 10vh;
+    .product-card img {
+        height: 15vh;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .modal-content {
       width: 80%;
+    }
+    .product-card img {
+        height: 25vh;
     }
 }
 

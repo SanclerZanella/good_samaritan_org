@@ -14,6 +14,8 @@
         <div class="col-12 col-md-6 mt-5 product-img content-alignment bg-white">
             {% if product.image %}
                 <img class="" src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.name }}">
+            {% elif not product.image and not product.image_url %}
+                <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
             {% else %}
                 <img class="" src="{{ product.image_url }}" alt="{{ product.name }}">
             {% endif %}
