@@ -26,6 +26,10 @@
     border: 2px solid #e72b37;
 }
 
+.parcel_product img {
+    height: 15vh;
+}
+
 /* ----------------------- Modal */
 .modal {
     display: none;

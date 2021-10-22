@@ -1,7 +1,8 @@
 import os
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
-from .models import Product
+from .models import Product, Parcel
+from .utils import get_id_data
 
 
 @receiver(post_delete, sender=Product)
@@ -35,3 +36,26 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
     if not old_file == new_file:
         if os.path.isfile(old_file.path):
             os.remove(old_file.path)
+
+
+@receiver(post_delete, sender=Product)
+def update_parcels_on_delete(sender, instance, **kwargs):
+    """
+    Deletes product from parcel
+    when corresponding `Product` object is deleted.
+    """
+
+    parcels = Parcel.objects.all()
+    parcels_id = get_id_data(parcels)
+    product_id = str(instance.id)
+
+    for pid in parcels_id:
+        parcel = Parcel.objects.filter(id=pid)
+
+        for data in parcel.values():
+            items_list = data['items'].split(',')
+
+            if product_id in items_list:
+                items_list.remove(product_id)
+                new_products = ",".join(items_list)
+                Parcel.objects.filter(id=pid).update(items=new_products)

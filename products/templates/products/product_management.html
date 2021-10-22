@@ -133,7 +133,7 @@
                                     <div class="col-12 products-list">
                                         {% for parcel in parcels %}
                                             <div class="row no-gutters my-3 text-center content-alignment product-card">
-                                                <div class="col-2 img-wrapper d-none d-md-flex">
+                                                <div class="col-2 img-wrapper d-none d-md-flex content-alignment">
                                                     {% if parcel.image %}
                                                         <img class="my-auto" src="{{MEDIA_URL}}/products/items/{{ parcel.image }}" alt="{{ parcel.name }}" loading="lazy">
                                                     {% else %}

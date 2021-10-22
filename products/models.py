@@ -67,6 +67,21 @@ class Product(models.Model):
     image = models.ImageField(null=True, blank=True,
                               upload_to='products/items/')
 
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to remove
+        any suffix equal to the parcel sku suffix.
+        """
+
+        product_sku = self.sku
+        suffix = product_sku.split('_')[-1]
+
+        if suffix == 'pc':
+            self.sku = product_sku.split('_')[0]
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
@@ -97,6 +112,21 @@ class Parcel(models.Model):
     items = models.TextField()
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the
+        suffix to the parcel sku.
+        """
+
+        parcel_sku = self.sku
+        suffix = parcel_sku.split('_')[-1]
+
+        if suffix == 'pc':
+            super().save(*args, **kwargs)
+        else:
+            self.sku = f'{self.sku}_pc'
+            super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

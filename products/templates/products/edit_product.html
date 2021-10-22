@@ -20,10 +20,13 @@
 
         <div class="col-12 col-md-6 mt-5 product-form">
             <form action="{% url 'edit_product' product.id product.sku %}" method="POST">
+
                 {% csrf_token %}
                 {{ form|crispy }}
 
                 {% if items_in_parcel %}
+
+                    <!-- Remove item from parcel -->
                     <div class="col-12 my-5">
                         <div class="row no-gutters">
                             <div class="col-12 text-center">
@@ -35,14 +38,22 @@
                             <div class="col-12 text-center">
                                 <small>Select one Item to delete</small>
                             </div>
-                            <div class="col-12">
-                                <div class="row no-gutters parcel-items-list content-alignment">
+                            <div class="col-12 mx-5">
+                                <div class="row no-gutters parcel-items-list">
+
                                     {% for p in items_in_parcel %}
-                                        <div class="col-2 mx-3 my-3 product-card">
+
+                                        <div class="col-2 mx-2 my-3 product-card">
                                             <a id="trigger_{{ p.id }}" class="parcel_product remove-item-btn">
                                                 <div class="row no-gutters">
-                                                    <div class="col-12">
-                                                        <img src="{{MEDIA_URL}}{{ p.image }}" alt="{{ p.name }}">
+                                                    <div class="col-12 content-alignment">
+                                                        {% if p.image %}
+                                                            <img src="{{MEDIA_URL}}{{ p.image }}" alt="{{ p.name }}">
+                                                        {% elif not p.image and not p.image_url %}
+                                                            <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ p.name }}" loading="lazy">
+                                                        {% else %}
+                                                            <img src="{{MEDIA_URL}}{{ p.image_url }}" alt="{{ p.name }}">
+                                                        {% endif %}
                                                     </div>
                                                     <div class="col-12 text-center">
                                                         <p>{{ p.name }}</p>
@@ -82,12 +93,15 @@
                                             </div>
                                         
                                         </div>
+
                                     {% endfor %}
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Add item to parcel -->
                     <div class="col-12 my-5">
                         <div class="row no-gutters">
                             <div class="col-12 text-center">
@@ -101,7 +115,10 @@
                                     <small>1. Select the items you wish to add to <strong>{{ product.name }}</strong>;</small>
                                 </p>
                                 <p>
-                                    <small>2. Click the button <strong>Add Items</strong>.</small>
+                                    <small>2. To deselect an item just click on item again;</small>
+                                </p>
+                                <p>
+                                    <small>3. Click the button <strong>Add Items</strong>.</small>
                                 </p>
                             </div>
                             <div class="col-12 text-center my-5">
@@ -115,14 +132,21 @@
                                 </a>
                                 <input id="token" type="hidden" value="{{ csrf_token }}">
                             </div>
-                            <div class="col-12">
+
+                            <div class="col-12 mx-5">
                                 <div class="row no-gutters parcel-items-list">
                                     {% for p in products %}
-                                        <div data-pcid="{{ product.id }}" data-pdid="{{ p.id }}" class="col-2 mx-5 my-3 product-card add-items">
+                                        <div data-pcid="{{ product.id }}" data-pdid="{{ p.id }}" class="col-2 mx-2  my-3 product-card add-items">
                                             <a class="parcel_product">
                                                 <div class="row no-gutters">
-                                                    <div class="col-12">
-                                                        <img src="{{MEDIA_URL}}{{ p.image }}" alt="{{ p.name }}">
+                                                    <div class="col-12 content-alignment">
+                                                        {% if p.image %}
+                                                            <img src="{{MEDIA_URL}}{{ p.image }}" alt="{{ p.name }}">
+                                                        {% elif not p.image and not p.image_url %}
+                                                            <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ p.name }}" loading="lazy">
+                                                        {% else %}
+                                                            <img src="{{MEDIA_URL}}{{ p.image_url }}" alt="{{ p.name }}">
+                                                        {% endif %}
                                                     </div>
                                                     <div class="col-12 text-center">
                                                         <p>{{ p.name }}</p>
@@ -138,8 +162,11 @@
                             </div>
                         </div>
                     </div>
+
                 {% endif %}
+
                 <button type="submit" class="btn btn-danger btn-lg btn-shadow">Update Product</button>
+
             </form>
         </div>
 

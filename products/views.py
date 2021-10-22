@@ -305,7 +305,7 @@ def edit_product(request, product_id, product_sku):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully updated product!')
-            return redirect(reverse('product_details', args=[product.id]))
+            return redirect(reverse('product_management'))
         else:
             messages.error(request, 'Failed to update product.\
                 Please ensure the form is valid.')
@@ -335,7 +335,7 @@ def delete_product(request, product_id):
         messages.error(request, 'Sorry, only site staff can do that.')
         return redirect(reverse('home'))
 
-    product = get_object_or_404(Product, pk=product_id)
+    product = get_object_or_404(Product, id=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('product_management'))
@@ -390,16 +390,15 @@ def add_product_parcel(request):
     list_items = parcel.items
     items_ids = list_items.split(',')
     items_in_parcel = list()
+    product_id_list = list(map(int, product_id.split(',')))
 
     for item in items_ids:
         item_id = int(item)
         items_in_parcel.append(Product.objects.get(pk=item_id).id)
 
-    list_string = ",".join(str(id) for id in items_in_parcel)
-    new_products_str = list_string + "," + product_id
-    new_products_i = sorted(list(int(x) for x in new_products_str.split(',')))
-    new_products_s = list(str(x) for x in new_products_i)
-    new_products = ','.join(new_products_s)
+    items_in_parcel.extend(product_id_list)
+    new_products_list = sorted(list(set(items_in_parcel)))
+    new_products = ",".join(map(str, new_products_list))
 
     Parcel.objects.filter(pk=parcel_id).update(items=new_products)
 
