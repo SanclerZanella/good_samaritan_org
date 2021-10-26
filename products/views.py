@@ -8,6 +8,7 @@ from django.db.models.functions import Lower
 from django.contrib.auth.decorators import user_passes_test
 from .models import (Product, Category,
                      Parcel)
+from djstripe.models import Product as Sponsorship
 from .forms import ProductForm, ParcelForm
 from django.core.paginator import (Paginator, EmptyPage,
                                    PageNotAnInteger)
@@ -172,6 +173,26 @@ def product_details(request, product_id):
         'product': product,
     }
 
+    return render(request, template, context)
+
+
+def sponsorship(request):
+
+    sponsor_op = Sponsorship.objects.all()
+    sponsor = get_object_or_404(Sponsorship, id='prod_KTO0rZ3DSbX6cu')
+
+    if request.GET:
+        if 'sponsor' in request.GET:
+            sponsor_param = request.GET['sponsor'].split('-')
+            sponsor_id = sponsor_param[-1]
+            sponsor = get_object_or_404(Sponsorship, id=sponsor_id)
+
+    context = {
+        'sponsor_op': sponsor_op,
+        'sponsor': sponsor,
+    }
+
+    template = 'products/sponsorship.html'
     return render(request, template, context)
 
 

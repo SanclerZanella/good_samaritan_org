@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/subscription.css' %}">
+{% endblock %}
+
+{% block content %}
+
+        <div class="row no-gutters">
+            <div class="col-12">
+                <h1>{{ sponsor }}</h1>
+            </div>
+        </div>
+
+        <div class="row no-gutters">
+            <div class="col-12">
+
+                <form id="sponsor-form" action="{% url 'subscription' sponsor.id %}" method="POST">
+                    {% csrf_token %}
+
+                    {{ form.full_name | as_crispy_field }}
+                    {{ form.email | as_crispy_field }}
+                    {{ form.street_address1 | as_crispy_field }}
+                    {{ form.street_address2 | as_crispy_field }}
+                    {{ form.town_or_city | as_crispy_field }}
+                    {{ form.country | as_crispy_field }}
+
+                    <div class="row no-gutters">
+                        <div class="col-12">
+                            {% if user.is_authenticated %}
+                                <label class="form-check-label" for="id-save-info">Save this information to my profile</label>
+                                <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                            {% else %}
+                                <label class="form-check-label" for="id-save-info">
+                                    <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                                    <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                                </label>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-12">
+                            <div id="card-element">
+                                <!-- Elements will create input elements here -->
+                              </div>
+                              <div id="card-errors" role="alert"></div>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters my-5">
+                        <div class="col-12 text-center">
+                            <input id="priceId" type="hidden" value="{{ price.id }}">
+                            <button id="submit-button" class="btn btn-danger btn-shadow">Subscribe</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div id="loading-overlay">
+            <h1 class="text-light logo-font loading-spinner">
+                <span class="icon">
+                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                </span>
+            </h1>
+        </div>
+
+    <!-- Custom Js -->
+    {% block postloadjs %}
+        {{ block.super }}
+        {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+        {{ client_secret|json_script:"id_client_secret" }}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{% static 'checkout/js/subscription.js' %}"></script>
+    {% endblock %}
+{% endblock %}

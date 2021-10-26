@@ -102,17 +102,17 @@
                                                         Categories
                                                     </button>
                                                     <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-                                                            <a href="{% url 'product_management' %}?urgent=most_needed">
+                                                            <a class="text-dark" href="{% url 'product_management' %}?urgent=most_needed">
                                                                 <p class="category-item my-3 font-weight-bold">Most-Needed Items</p>
                                                             </a>
-                                                            <a href="{% url 'product_management' %}">
+                                                            <a class="text-dark" href="{% url 'product_management' %}">
                                                                 <p class="category-item my-3 font-weight-bold">Browse All</p>
                                                             </a>
 
                                                             <hr>
 
                                                         {% for category in categories %}
-                                                            <a href="{% url 'product_management' %}?category={{ category.name }}">
+                                                            <a class="text-dark" href="{% url 'product_management' %}?category={{ category.name }}">
                                                                 <p class="category-item my-3 font-weight-bold">{{ category.friendly_name }}</p>
                                                             </a>
                                                         {% endfor %}
@@ -135,7 +135,7 @@
                                             <div class="row no-gutters my-3 text-center content-alignment product-card">
                                                 <div class="col-2 img-wrapper d-none d-md-flex content-alignment">
                                                     {% if parcel.image %}
-                                                        <img class="my-auto" src="{{MEDIA_URL}}/products/items/{{ parcel.image }}" alt="{{ parcel.name }}" loading="lazy">
+                                                        <img class="my-auto" src="{{MEDIA_URL}}{{ parcel.image }}" alt="{{ parcel.name }}" loading="lazy">
                                                     {% else %}
                                                         <img class="my-auto" src="{{ parcel.image_url }}" alt="{{ parcel.name }}" loading="lazy">
                                                     {% endif %}

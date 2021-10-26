@@ -1,0 +1,19 @@
+Hello {{ sponsor.full_name }}!
+
+This is a confirmation of your subscription at The Good Samaritan Org. Your subscription information is below:
+
+Subscription: {{ sponsor.subscription }}
+Subscription Date: {{ sponsor.date }}
+Grand Total: ${{ sponsor.grand_total }}
+
+Your Donation will be shipped to Mozambique and will support children, elders and widows in Mozambique to have a more dignified life..
+
+We've got your email on file as {{ sponsor.email }}.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your donation!
+
+Sincerely,
+
+The Good Samaritan Organization

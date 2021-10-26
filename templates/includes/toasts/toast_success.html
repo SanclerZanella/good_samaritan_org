@@ -23,9 +23,11 @@
                     <div class="row">
                         <div class="col-3 my-1">
                             {% if item.product.image %}
-                            <img class="w-100" src="{{ MEDIA_URL }}/products/items/{{ item.product.image }}" alt="{{ item.product.name }}">
+                                <img src="{{MEDIA_URL}}{{ item.product.image }}" alt="{{ item.product.name }}">
+                            {% elif not item.product.image and not item.product.image_url %}
+                                <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ item.product.name }}" loading="lazy">
                             {% else %}
-                            <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                                <img src="{{MEDIA_URL}}{{ item.product.image_url }}" alt="{{ item.product.name }}">
                             {% endif %}
                         </div>
                         <div class="col-9">

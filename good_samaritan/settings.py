@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'checkout',
     'crispy_forms',
     'profiles',
+    'djstripe',
 
     # The following apps are required for Allauth:
     'django.contrib.sites',
@@ -196,5 +197,13 @@ STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
+
+STRIPE_TEST_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
+STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
+STRIPE_LIVE_MODE = False
+DJSTRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WH_SECRET', '')
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = 'id'
+DJSTRIPE_USE_NATIVE_JSONFIELD = True
+# AUTH_USER_MODEL = 'checkout.Sponsor'
 
 DEFAULT_FROM_EMAIL = 'goodsamaritan@example.com'

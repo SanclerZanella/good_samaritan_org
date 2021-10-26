@@ -47,9 +47,11 @@
                                                 <!-- Product image -->
                                                 <div class="col-3 product-cart-img content-alignment">
                                                     {% if product.image %}
-                                                        <img src="{{MEDIA_URL}}products/items/{{ product.image }}" alt="{{ product.name }}">
+                                                        <img src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }}">
+                                                    {% elif not product.image and not product.image_url %}
+                                                        <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
                                                     {% else %}
-                                                        <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                                                        <img src="{{MEDIA_URL}}{{ product.image_url }}" alt="{{ product.name }}">
                                                     {% endif %}
                                                 </div>
 

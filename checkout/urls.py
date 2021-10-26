@@ -11,5 +11,10 @@ urlpatterns = [
          name='checkout_success'),
     path('cache_checkout_data/', views.cache_checkout_data,
          name='cache_checkout_data'),
+    path('subscription/<sponsor_id>', views.subscription, name='subscription'),
+    path("subscription_checkout/", views.subscription_checkout,
+         name="subscription_checkout"),
+    path("subscription_success/<customer_id>/", views.subscription_success,
+         name="subscription_success"),
     path('wh/', webhook, name='webhook'),
 ]

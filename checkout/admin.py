@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, OrderLineItem
+from .models import Order, OrderLineItem, Sponsor
 
 
 class OrderLineItemAdminInline(admin.TabularInline):
@@ -25,4 +25,20 @@ class OrderAdmin(admin.ModelAdmin):
     ordering = ('-date',)
 
 
+class SponsorAdmin(admin.ModelAdmin):
+
+    readonly_fields = ('customer', 'subscription', 'user_profile', 'date',
+                       'grand_total')
+
+    fields = ('customer', 'subscription', 'user_profile', 'date', 'full_name',
+              'email', 'country', 'town_or_city', 'street_address1',
+              'street_address2', 'grand_total')
+
+    list_display = ('customer', 'subscription', 'date', 'full_name',
+                    'grand_total',)
+
+    ordering = ('-date',)
+
+
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Sponsor, SponsorAdmin)

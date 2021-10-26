@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load products_tools %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'products/css/sponsorship.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section>
+        
+        <!-- Cover Picture and Title -->
+        <div class="row no-gutters sponsor-cover">
+            <div class="col-12">
+                <h1>Sponsorship</h1>
+            </div>
+        </div>
+
+    </section>
+
+    <section>
+        <!-- Sponsor Options (image, name and price) -->
+        <div class="row no-gutters parcels-options content-alignment my-5">
+            
+            {% for option in sponsor_op %}
+                {% if forloop.counter|divisibleby:2 %}
+                    <div id="sponsor-{{ option.id }}" class="col-5 col-md-3 mt-5 bg-white sponsor-card">
+                        <div class="row no-gutters">
+
+                            <div id="check_{{ option.id }}" class="col-12 text-right check-icon">
+                                <i class="fas fa-check fa-lg my-1 mx-1"></i>
+                            </div>
+
+                            <!-- Sponsor option Image -->
+                            {% if option.images|first %}
+                                <div class="col-12">
+                                    <img src="{{ option.images|first }}" alt="{{ option }}" loading="lazy">
+                                </div>
+                            {% else %}
+                                <div class="col-12">
+                                    <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ option }}" loading="lazy">
+                                </div>
+                            {% endif %}
+
+                            <!-- Sponsor option Name -->
+                            <div class="col-12">
+                                <h3 class="text-center font-weight-bold">{{ option }}</h3>
+                            </div>
+
+                            <!-- Sponsor Price -->
+                            <div class="col-12 my-2">
+                                <h3 class="text-center">$ {{ option.id | sponsor_price }}/month</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                {% else %}
+
+                    <!-- Middle Sponsor option Card with horizonal margin in both sides  -->
+                    <div id="sponsor-{{ option.id }}" class="col-5 col-md-3 mx-5 mt-5 bg-white sponsor-card">
+                        <div class="row no-gutters">
+
+                            <div id="check_{{ option.id }}" class="col-12 text-right check-icon">
+                                <i class="fas fa-check fa-lg my-1 mx-1"></i>
+                            </div>
+
+                            <!-- Sponsor option Image -->
+                            {% if option.images %}
+                                <div class="col-12">
+                                    <img src="{{ option.images|first }}" alt="{{ option }}" loading="lazy">
+                                </div>
+                            {% else %}
+                                <div class="col-12">
+                                    <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ option }}" loading="lazy">
+                                </div>
+                            {% endif %}
+
+                            <!-- Parcel Name -->
+                            <div class="col-12">
+                                <h3 class="text-center font-weight-bold">{{ option.name }}</h3>
+                            </div>
+
+                            <!-- Parcel Price -->
+                            <div class="col-12 my-2">
+                                <h3 class="text-center">$ {{ option.id | sponsor_price }}/month</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            
+        </div>
+
+    </section>
+
+    <hr>
+
+    <section>
+
+        <!-- Sponsor option Description and subscribe sponsorship Button -->
+        <div class="row no-gutters text-center content-alignment my-5">
+
+            <!-- Sponsor option Description -->
+            <div class="col-12 col-md-6 px-5 mt-3">
+                <p>
+                    {{ sponsor.description }}
+                </p>
+            </div>
+
+            <!-- Donate Parcel Button -->
+            <div class="col-10 col-md-6 mt-3 my-auto">
+                <a href="{% url 'subscription' sponsor.id %}" class="btn btn-danger btn-lg mr-2 btn-shadow">{{ sponsor }} ($ {{ sponsor.id | sponsor_price }}/month)</a>
+            </div>
+        </div>
+    
+    </section>
+    
+    <!-- Custom Js -->
+    {% block postloadjs %}
+        {{ block.super }}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{% static 'products/js/sponsorship.js' %}"></script>
+    {% endblock %}
+{% endblock %}

@@ -39,9 +39,16 @@ def webhook(request):
     # Map webhook events to relevant handler functions
     int_succ = handler.handle_payment_intent_succeeded
     int_fail = handler.handle_payment_intent_payment_failed
+    inv_paid = handler.handle_payment_invoice_paid
+    pay_failed = handler.handle_payment_failed
+    sub_deleted = handler.handle_subscription_deleted
+
     event_map = {
         'payment_intent.succeeded': int_succ,
         'payment_intent.payment_failed': int_fail,
+        'invoice.paid': inv_paid,
+        'invoice.payment_failed': pay_failed,
+        'customer.subscription.deleted': sub_deleted,
     }
 
     # Get the webhook type from Stripe

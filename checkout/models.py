@@ -3,6 +3,7 @@ from django.db.models import Sum
 from products.models import Product, Parcel
 from profiles.models import UserProfile
 from django_countries.fields import CountryField
+from djstripe.models import Customer, Subscription
 import uuid
 
 
@@ -82,3 +83,22 @@ class OrderLineItem(models.Model):
             return f'SKU {self.product.sku} on order {self.order.order_number}'
         else:
             return f'SKU {self.parcel.sku} on order {self.order.order_number}'
+
+
+class Sponsor(models.Model):
+    customer = models.ForeignKey(Customer, null=True, blank=True,
+                                 on_delete=models.SET_NULL)
+    subscription = models.ForeignKey(Subscription, null=True, blank=True,
+                                     on_delete=models.SET_NULL)
+    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
+                                     null=True, blank=True,
+                                     related_name='sponsorship')
+    full_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.EmailField(max_length=254, null=False, blank=False)
+    country = CountryField(blank_label='Country *', null=False, blank=False)
+    town_or_city = models.CharField(max_length=40, null=False, blank=False)
+    street_address1 = models.CharField(max_length=80, null=False, blank=False)
+    street_address2 = models.CharField(max_length=80, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    grand_total = models.DecimalField(max_digits=10, decimal_places=2,
+                                      null=False, default=0)
