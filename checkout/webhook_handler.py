@@ -63,7 +63,6 @@ class StripeWH_Handler:
         """
         intent = event.data.object
         if 'cart' in intent.metadata:
-            print('WORKS!!!')
             pid = intent.id
             cart = intent.metadata.cart
             save_info = intent.metadata.save_info

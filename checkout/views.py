@@ -286,6 +286,7 @@ def subscription(request, sponsor_id):
     return render(request, template, context)
 
 
+@require_POST
 def subscription_checkout(request):
 
     if request.method == 'POST':
@@ -309,8 +310,6 @@ def subscription_checkout(request):
             )
 
             ct = djstripe.models.Customer.sync_from_stripe_data(customer)
-            print('HERE!!!')
-            print(data)
 
             subs = stripe.Subscription.create(
                 customer=customer.id,
@@ -319,7 +318,11 @@ def subscription_checkout(request):
                         "price": data["price_id"],
                     },
                 ],
-                expand=["latest_invoice.payment_intent"]
+                expand=["latest_invoice.payment_intent"],
+                metadata={
+                    'save_info': data_form['save_info'],
+                    'username': request.user,
+                }
             )
 
             dj_sub = djstripe.models.Subscription
@@ -353,7 +356,7 @@ def subscription_success(request, customer_id):
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
-        
+
         # Attach the user's profile to the sponsor
         sponsor.user_profile = profile
         sponsor.save()

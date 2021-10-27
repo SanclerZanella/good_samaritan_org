@@ -49,14 +49,17 @@ function stripeElements() {
 
     paymentForm.submit((evt) => {
         evt.preventDefault();
+        let saveInfo = Boolean($('#id-save-info').prop('checked'));
+        card.update({ 'disabled': true});
         var data = {
+            'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
             'name': $('#id_full_name').val(),
-            'csrfToken': $('input[name="csrfmiddlewaretoken"]').val(),
             'email': $('#id_email').val(),
             'address1': $('#id_street_address1').val(),
             'address2': $('#id_street_address2').val(),
             'town_or_city': $('#id_town_or_city').val(),
             'country': $('#id_country').val(),
+            'save_info': saveInfo,
         }
 
         // create new payment method & create subscription
@@ -68,16 +71,26 @@ function stripeElements() {
 
 function createPaymentMethod({ card }, data) {
 
+    $('#submit-button').attr('disabled', true);
+    $('#sponsor-form').fadeToggle(100);
+    $('#loading-overlay').fadeToggle(100);
+
     // Set up payment method for recurring usage
-    let billingName = data['name'];
-    let token = data['csrfToken']
+    let token = data['csrfmiddlewaretoken'];
   
     stripe
       .createPaymentMethod({
         type: 'card',
         card: card,
         billing_details: {
-          name: billingName,
+          name: $.trim(data['name']),
+          email: $.trim(data['email']),
+          address:{
+              line1: $.trim(data['address1']),
+              line2: $.trim(data['address2']),
+              city: $.trim(data['town_or_city']),
+              country: $.trim(data['country']),
+          },
         },
       })
       .then((result) => {
@@ -110,7 +123,8 @@ function createPaymentMethod({ card }, data) {
   
             window.location.href = result.url;
           };
-        })
+        });
+
         }
       });
 }
