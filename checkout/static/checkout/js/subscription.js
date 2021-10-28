@@ -53,12 +53,12 @@ function stripeElements() {
         card.update({ 'disabled': true});
         var data = {
             'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-            'name': $('#id_full_name').val(),
-            'email': $('#id_email').val(),
-            'address1': $('#id_street_address1').val(),
-            'address2': $('#id_street_address2').val(),
-            'town_or_city': $('#id_town_or_city').val(),
-            'country': $('#id_country').val(),
+            'name': $.trim($('#id_full_name').val()),
+            'email': $.trim($('#id_email').val()),
+            'address1': $.trim($('#id_street_address1').val()),
+            'address2': $.trim($('#id_street_address2').val()),
+            'town_or_city': $.trim($('#id_town_or_city').val()),
+            'country': $.trim($('#id_country').val()),
             'save_info': saveInfo,
         }
 

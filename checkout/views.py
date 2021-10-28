@@ -24,14 +24,23 @@ from djstripe.models import Price, Customer
 @require_POST
 def cache_checkout_data(request):
     try:
-        pid = request.POST.get('client_secret').split('_secret')[0]
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        stripe.PaymentIntent.modify(pid, metadata={
-            'cart': json.dumps(request.session.get('cart', {})),
-            'save_info': request.POST.get('save_info'),
-            'username': request.user,
-        })
-        return HttpResponse(status=200)
+        if 'cart' in request.session:
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            stripe.api_key = settings.STRIPE_SECRET_KEY
+            stripe.PaymentIntent.modify(pid, metadata={
+                'cart': json.dumps(request.session.get('cart', {})),
+                'save_info': request.POST.get('save_info'),
+                'username': request.user,
+            })
+            return HttpResponse(status=200)
+        else:
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            stripe.api_key = settings.STRIPE_SECRET_KEY
+            stripe.PaymentIntent.modify(pid, metadata={
+                'save_info': request.POST.get('save_info'),
+                'username': request.user,
+            })
+            return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
@@ -322,6 +331,12 @@ def subscription_checkout(request):
                 metadata={
                     'save_info': data_form['save_info'],
                     'username': request.user,
+                    'name': str(data_form['name']),
+                    'email': str(data_form['email']),
+                    'line1': str(data_form['address1']),
+                    'line2': str(data_form['address2']),
+                    'city': str(data_form['town_or_city']),
+                    'country': str(data_form['country'])
                 }
             )
 
@@ -341,10 +356,11 @@ def subscription_checkout(request):
             )
             sponsor.save()
 
-            return redirect(reverse('subscription_success', args=[sponsor.customer]))
+            return redirect(reverse('subscription_success',
+                                    args=[sponsor.customer]))
 
         except Exception as e:
-            return JsonResponse({'error': (e.args[0])}, status =403)
+            return JsonResponse({'error': (e.args[0])}, status=403)
     else:
         return HttpResponse(status=500)
 
