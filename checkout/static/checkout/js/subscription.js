@@ -59,6 +59,7 @@ function stripeElements() {
             'address2': $.trim($('#id_street_address2').val()),
             'town_or_city': $.trim($('#id_town_or_city').val()),
             'country': $.trim($('#id_country').val()),
+            'productId': $('#productId').val(),
             'save_info': saveInfo,
         }
 

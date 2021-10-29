@@ -18,7 +18,7 @@ from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 import djstripe
 from djstripe.models import Product as Sponsorship
-from djstripe.models import Price, Customer
+from djstripe.models import Price, Customer, Subscription, Plan
 
 
 @require_POST
@@ -290,9 +290,35 @@ def subscription(request, sponsor_id):
         'stripe_public_key': stripe_public_key,
         'price': sponsor_price,
     }
-
     template = 'checkout/subscription.html'
-    return render(request, template, context)
+
+    if request.user.is_authenticated:
+        user = UserProfile.objects.get(user=request.user)
+        sponsor_exist = Sponsor.objects.filter(user_profile=user).exists()
+
+        if sponsor_exist:
+            sponsor = Sponsor.objects.get(user_profile=user)
+            subs = Subscription.objects.get(customer=sponsor.customer)
+            plan = Plan.objects.get(id=subs.plan.id)
+            current_option = Sponsorship.objects.get(id=sponsor_id)
+            current_sponsor = Sponsorship.objects.get(name=plan.product)
+
+            if current_sponsor.name == current_option.name:
+
+                messages.warning(request,
+                                 f"You're already sponsoring! Your current sponsorship\
+                                    is {plan.product}. To change your current\
+                                        sponsorship select another option.")
+                return redirect('sponsorship')
+
+            else:
+                return render(request, template, context)
+
+        else:
+            return render(request, template, context)
+
+    else:
+        return render(request, template, context)
 
 
 @require_POST
@@ -302,65 +328,277 @@ def subscription_checkout(request):
         data = json.loads(request.body)
         payment_method = data['payment_method']
         data_form = data['data_form']
+        sponsor_id = data_form['productId']
         email = data_form['email']
         stripe.api_key = djstripe.settings.STRIPE_SECRET_KEY
 
         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
         djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
 
-        try:
-            # This creates a new Customer and attaches the PaymentMethod in one API call.
-            customer = stripe.Customer.create(
-                payment_method=payment_method,
-                email=email,
-                invoice_settings={
-                    'default_payment_method': payment_method
-                }
-            )
+        if request.user.is_authenticated:
+            user = UserProfile.objects.get(user=request.user)
+            sponsor_exist = Sponsor.objects.filter(user_profile=user).exists()
 
-            ct = djstripe.models.Customer.sync_from_stripe_data(customer)
+            if sponsor_exist:
+                sponsor = Sponsor.objects.get(user_profile=user)
+                subscrip = Subscription.objects.get(customer=sponsor.customer)
+                plan = Plan.objects.get(id=subscrip.plan)
+                current_option = Sponsorship.objects.get(id=sponsor_id)
+                current_sponsor = Sponsorship.objects.get(name=plan.product)
 
-            subs = stripe.Subscription.create(
-                customer=customer.id,
-                items=[
-                    {
-                        "price": data["price_id"],
-                    },
-                ],
-                expand=["latest_invoice.payment_intent"],
-                metadata={
-                    'save_info': data_form['save_info'],
-                    'username': request.user,
-                    'name': str(data_form['name']),
-                    'email': str(data_form['email']),
-                    'line1': str(data_form['address1']),
-                    'line2': str(data_form['address2']),
-                    'city': str(data_form['town_or_city']),
-                    'country': str(data_form['country'])
-                }
-            )
+                if current_sponsor.name == current_option.name:
+                    messages.warning(request,
+                                     f"You're already sponsoring! Your current sponsorship\
+                                     is {plan.product}. To change your current\
+                                        sponsorship select another option.")
+                    return redirect('sponsorship')
+                else:
+                    stripe.api_key = settings.STRIPE_SECRET_KEY
+                    stripe.Customer.delete(sponsor.customer.id)
 
-            dj_sub = djstripe.models.Subscription
-            djstripe_subscription = dj_sub.sync_from_stripe_data(subs)
+                    Sponsor.objects.filter(customer=sponsor.customer).delete()
+                    Customer.objects.filter(id=sponsor.customer.id).delete()
 
-            sponsor = Sponsor(
-                customer=ct,
-                subscription=djstripe_subscription,
-                full_name=data_form['name'],
-                email=data_form['email'],
-                country=data_form['country'],
-                town_or_city=data_form['town_or_city'],
-                street_address1=data_form['address1'],
-                street_address2=data_form['address2'],
-                grand_total=50.00
-            )
-            sponsor.save()
+                    try:
+                        # This creates a new Customer and attaches the PaymentMethod in one API call.
+                        customer = stripe.Customer.create(
+                            payment_method=payment_method,
+                            email=email,
+                            invoice_settings={
+                                'default_payment_method': payment_method
+                            }
+                        )
 
-            return redirect(reverse('subscription_success',
-                                    args=[sponsor.customer]))
+                        ct = djstripe.models.Customer.sync_from_stripe_data(customer)
 
-        except Exception as e:
-            return JsonResponse({'error': (e.args[0])}, status=403)
+                        subs = stripe.Subscription.create(
+                            customer=customer.id,
+                            items=[
+                                {
+                                    "price": data["price_id"],
+                                },
+                            ],
+                            expand=["latest_invoice.payment_intent"],
+                            metadata={
+                                'save_info': data_form['save_info'],
+                                'username': request.user,
+                                'name': str(data_form['name']),
+                                'email': str(data_form['email']),
+                                'line1': str(data_form['address1']),
+                                'line2': str(data_form['address2']),
+                                'city': str(data_form['town_or_city']),
+                                'country': str(data_form['country'])
+                            }
+                        )
+
+                        dj_sub = djstripe.models.Subscription
+                        djstripe_subscription = dj_sub.sync_from_stripe_data(subs)
+                        plan = Plan.objects.get(id=subs.plan.id)
+
+                        sponsor = Sponsor(
+                            customer=ct,
+                            subscription=djstripe_subscription,
+                            full_name=data_form['name'],
+                            email=data_form['email'],
+                            country=data_form['country'],
+                            town_or_city=data_form['town_or_city'],
+                            street_address1=data_form['address1'],
+                            street_address2=data_form['address2'],
+                            grand_total=plan.amount
+                        )
+                        sponsor.save()
+
+                        return redirect(reverse('subscription_success',
+                                                args=[sponsor.customer]))
+                    except Exception as e:
+                        return JsonResponse({'error': (e.args[0])}, status=403)
+
+            else:
+                try:
+                    # This creates a new Customer and attaches the PaymentMethod in one API call.
+                    customer = stripe.Customer.create(
+                        payment_method=payment_method,
+                        email=email,
+                        invoice_settings={
+                            'default_payment_method': payment_method
+                        }
+                    )
+
+                    ct = djstripe.models.Customer.sync_from_stripe_data(customer)
+
+                    subs = stripe.Subscription.create(
+                        customer=customer.id,
+                        items=[
+                            {
+                                "price": data["price_id"],
+                            },
+                        ],
+                        expand=["latest_invoice.payment_intent"],
+                        metadata={
+                            'save_info': data_form['save_info'],
+                            'username': request.user,
+                            'name': str(data_form['name']),
+                            'email': str(data_form['email']),
+                            'line1': str(data_form['address1']),
+                            'line2': str(data_form['address2']),
+                            'city': str(data_form['town_or_city']),
+                            'country': str(data_form['country'])
+                        }
+                    )
+
+                    dj_sub = djstripe.models.Subscription
+                    djstripe_subscription = dj_sub.sync_from_stripe_data(subs)
+                    plan = Plan.objects.get(id=subs.plan.id)
+
+                    sponsor = Sponsor(
+                        customer=ct,
+                        subscription=djstripe_subscription,
+                        full_name=data_form['name'],
+                        email=data_form['email'],
+                        country=data_form['country'],
+                        town_or_city=data_form['town_or_city'],
+                        street_address1=data_form['address1'],
+                        street_address2=data_form['address2'],
+                        grand_total=plan.amount
+                    )
+                    sponsor.save()
+
+                    return redirect(reverse('subscription_success',
+                                            args=[sponsor.customer]))
+                except Exception as e:
+                    return JsonResponse({'error': (e.args[0])}, status=403)
+
+        else:
+            sponsor_exist = Sponsor.objects.filter(email=email).exists()
+
+            if sponsor_exist:
+                an_sponsor = Sponsor.objects.get(email=email)
+                subscrip = Subscription.objects.get(customer=an_sponsor.customer)
+                plan = Plan.objects.get(id=subscrip.plan)
+                current_option = Sponsorship.objects.get(id=sponsor_id)
+                current_sponsor = Sponsorship.objects.get(name=plan.product)
+
+                if current_sponsor.name == current_option.name:
+                    return redirect(reverse('subscription',
+                                            args=[sponsor_id]))
+
+                else:
+                    stripe.api_key = settings.STRIPE_SECRET_KEY
+                    stripe.Customer.delete(an_sponsor.customer.id)
+
+                    Sponsor.objects.filter(customer=an_sponsor.customer).delete()
+                    Customer.objects.filter(id=an_sponsor.customer.id).delete()
+
+                    try:
+                        # This creates a new Customer and attaches the PaymentMethod in one API call.
+                        customer = stripe.Customer.create(
+                            payment_method=payment_method,
+                            email=email,
+                            invoice_settings={
+                                'default_payment_method': payment_method
+                            }
+                        )
+
+                        ct = djstripe.models.Customer.sync_from_stripe_data(customer)
+
+                        subs = stripe.Subscription.create(
+                            customer=customer.id,
+                            items=[
+                                {
+                                    "price": data["price_id"],
+                                },
+                            ],
+                            expand=["latest_invoice.payment_intent"],
+                            metadata={
+                                'save_info': data_form['save_info'],
+                                'username': request.user,
+                                'name': str(data_form['name']),
+                                'email': str(data_form['email']),
+                                'line1': str(data_form['address1']),
+                                'line2': str(data_form['address2']),
+                                'city': str(data_form['town_or_city']),
+                                'country': str(data_form['country'])
+                            }
+                        )
+
+                        dj_sub = djstripe.models.Subscription
+                        djstripe_subscription = dj_sub.sync_from_stripe_data(subs)
+                        plan = Plan.objects.get(id=subs.plan.id)
+
+                        sponsor = Sponsor(
+                            customer=ct,
+                            subscription=djstripe_subscription,
+                            full_name=data_form['name'],
+                            email=data_form['email'],
+                            country=data_form['country'],
+                            town_or_city=data_form['town_or_city'],
+                            street_address1=data_form['address1'],
+                            street_address2=data_form['address2'],
+                            grand_total=plan.amount
+                        )
+                        sponsor.save()
+
+                        return redirect(reverse('subscription_success',
+                                                args=[sponsor.customer]))
+
+                    except Exception as e:
+                        return JsonResponse({'error': (e.args[0])}, status=403)
+
+            else:
+                try:
+                    # This creates a new Customer and attaches the PaymentMethod in one API call.
+                    customer = stripe.Customer.create(
+                        payment_method=payment_method,
+                        email=email,
+                        invoice_settings={
+                            'default_payment_method': payment_method
+                        }
+                    )
+
+                    ct = djstripe.models.Customer.sync_from_stripe_data(customer)
+
+                    subs = stripe.Subscription.create(
+                        customer=customer.id,
+                        items=[
+                            {
+                                "price": data["price_id"],
+                            },
+                        ],
+                        expand=["latest_invoice.payment_intent"],
+                        metadata={
+                            'save_info': data_form['save_info'],
+                            'username': request.user,
+                            'name': str(data_form['name']),
+                            'email': str(data_form['email']),
+                            'line1': str(data_form['address1']),
+                            'line2': str(data_form['address2']),
+                            'city': str(data_form['town_or_city']),
+                            'country': str(data_form['country'])
+                        }
+                    )
+
+                    dj_sub = djstripe.models.Subscription
+                    djstripe_subscription = dj_sub.sync_from_stripe_data(subs)
+                    plan = Plan.objects.get(id=subs.plan.id)
+
+                    sponsor = Sponsor(
+                        customer=ct,
+                        subscription=djstripe_subscription,
+                        full_name=data_form['name'],
+                        email=data_form['email'],
+                        country=data_form['country'],
+                        town_or_city=data_form['town_or_city'],
+                        street_address1=data_form['address1'],
+                        street_address2=data_form['address2'],
+                        grand_total=plan.amount
+                    )
+                    sponsor.save()
+
+                    return redirect(reverse('subscription_success',
+                                            args=[sponsor.customer]))
+                except Exception as e:
+                    return JsonResponse({'error': (e.args[0])}, status=403)
+
     else:
         return HttpResponse(status=500)
 
