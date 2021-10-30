@@ -52,7 +52,12 @@
     background: url("/media/home/all-products.jpg") no-repeat center center;
 }
 
+#sponsorship-card {
+    background: url("/media/home/sponsorship.jpg") no-repeat center center;
+}
+
 #family-parcel-card,
+#sponsorship-card,
 #all-products-card,
 #most-needed-card {
     width: 30vh;

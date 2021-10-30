@@ -46,7 +46,7 @@
             </div>
 
             <!-- Family Parcel Option -->
-            <div class="col-12 col-md-4 col-lg-3 mx-5">
+            <div class="col-12 col-md-4 col-lg-4 mx-5 mt-1">
                 <div class="row no-gutters content-alignment">
                     <a href="">
                         <div id="family-parcel-card" class="col-12"></div>
@@ -66,8 +66,29 @@
                 </div>
             </div>
 
+            <!-- Sponsorship Option -->
+            <div class="col-12 col-md-4 col-lg-4 mx-5 mt-1">
+                <div class="row no-gutters content-alignment">
+                    <a href="">
+                        <div id="sponsorship-card" class="col-12"></div>
+                    </a>
+                </div>
+                <div class="row no-gutters text-center my-3">
+                    <div class="col-12">
+                        <h3 class="font-weight-bold">Sponsorship</h3>
+                    </div>
+                </div>
+                <div class="row donate-btn no-gutters text-center my-3">
+                    <div class="col-12">
+                        <a href="{% url 'sponsorship' %}" class="btn btn-outline-danger">
+                        Donate <span class="first-heart"><i class="far fa-heart"></span></i><span class="second-heart"><i class="fas fa-heart"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Most-Needed Option -->
-            <div class="col-12 col-md-4 col-lg-3 mx-5">
+            <div class="col-12 col-md-4 col-lg-4 mx-5 mt-1">
                 <div class="row no-gutters content-alignment">
                     <a href="">
                         <div id="most-needed-card" class="col-12"></div>
@@ -88,7 +109,7 @@
             </div>
 
             <!-- All Products Option -->
-            <div class="col-12 col-md-4 col-lg-3 mx-5">
+            <div class="col-12 col-md-4 col-lg-4 mx-5 mt-1">
                 <div class="row no-gutters content-alignment">
                     <a href="{% url 'products' %}">
                         <div id="all-products-card" class="col-12"></div>

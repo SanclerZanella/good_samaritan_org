@@ -1,3 +1,4 @@
+/* Page Cover Picture and Title */
 .sponsor-cover {
     background: url("/media/sponsorship/sponsorship_cover.jpg") no-repeat center center;
     height: 250px;
@@ -18,6 +19,7 @@
     font-weight: 700;
 }
 
+/* Sponsor Option Card and Content */
 .sponsor-card {
     cursor: pointer;
 }
@@ -25,4 +27,24 @@
 .check-icon {
     color: #e72b37;
     visibility: hidden;
+}
+
+/* Media Queries */
+
+@media (min-width: 1440px) {
+    .sponsor-option {
+        margin-top: 5rem;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .sponsor-option {
+        margin-top: 5rem;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .sponsor-btn {
+        margin-top: 2rem;
+    }
 }

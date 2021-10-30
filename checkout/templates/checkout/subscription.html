@@ -7,61 +7,97 @@
 {% endblock %}
 
 {% block content %}
+        <section>
 
-        <div class="row no-gutters">
-            <div class="col-12">
-                <h1>{{ sponsor }}</h1>
-            </div>
-        </div>
+            <!-- Title and Description -->
+            <div class="row no-gutters text-center content-alignment title-desc">
 
-        <div class="row no-gutters">
-            <div class="col-12">
+                <!-- Title -->
+                <div class="col-12">
+                    <h1 class="font-weight-bold sponsor-title">{{ sponsor }}</h1>
+                </div>
 
-                <form id="sponsor-form" action="{% url 'subscription' sponsor.id %}" method="POST">
-                    {% csrf_token %}
-
-                    {{ form.full_name | as_crispy_field }}
-                    {{ form.email | as_crispy_field }}
-                    {{ form.street_address1 | as_crispy_field }}
-                    {{ form.street_address2 | as_crispy_field }}
-                    {{ form.town_or_city | as_crispy_field }}
-                    {{ form.country | as_crispy_field }}
-
-                    <div class="row no-gutters">
-                        <div class="col-12">
-                            {% if user.is_authenticated %}
-                                <label class="form-check-label" for="id-save-info">Save this information to my profile</label>
-                                <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
-                            {% else %}
-                                <label class="form-check-label" for="id-save-info">
-                                    <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                                    <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                                </label>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="row no-gutters">
-                        <div class="col-12">
-                            <div id="card-element">
-                                <!-- Elements will create input elements here -->
-                              </div>
-                              <div id="card-errors" role="alert"></div>
-                        </div>
-                    </div>
-
-                    <div class="row no-gutters my-5">
-                        <div class="col-12 text-center">
-                            <input id="priceId" type="hidden" value="{{ price.id }}">
-                            <input id="productId" type="hidden" value="{{ sponsor.id }}">
-                            <button id="submit-button" class="btn btn-danger btn-shadow">Subscribe</button>
-                        </div>
-                    </div>
-                </form>
+                <!-- Description -->
+                <div class="col-12 col-md-8 my-3">
+                    <p>{{ sponsor.description }}</p>
+                </div>
 
             </div>
-        </div>
 
+        </section>
+
+        <hr>
+
+        <section>
+
+            <!-- Sponsorship Form -->
+            <div class="row no-gutters content-alignment my-5">
+                <div class="col-12 col-md-8">
+
+                    <!-- Form -->
+                    <form id="sponsor-form" action="{% url 'subscription' sponsor.id %}" method="POST">
+                        {% csrf_token %}
+
+                        <!-- Billing Details Fields -->
+                        {{ form.full_name | as_crispy_field }}
+                        {{ form.email | as_crispy_field }}
+                        {{ form.street_address1 | as_crispy_field }}
+                        {{ form.street_address2 | as_crispy_field }}
+                        {{ form.town_or_city | as_crispy_field }}
+                        {{ form.country | as_crispy_field }}
+
+                        <!-- Save Info to Profile Checkbox -->
+                        <div class="row no-gutters">
+                            <div class="col-12">
+                                {% if user.is_authenticated %}
+                                    
+                                    <!-- Checkbox if user is logged in -->
+                                    <label class="form-check-label" for="id-save-info">Save this information to my profile</label>
+                                    <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+
+                                {% else %}
+
+                                    <!-- Sign up or Log In Links if user is not logged -->
+                                    <label class="form-check-label" for="id-save-info">
+                                        <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                                        <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                                    </label>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Card Field -->
+                        <div class="row no-gutters">
+                            <div class="col-12">
+
+                                <!-- Card Element (input) -->
+                                <div id="card-element">
+                                    <!-- Elements will create input elements here -->
+                                </div>
+
+                                <!-- Error Message -->
+                                <div id="card-errors" role="alert"></div>
+
+                            </div>
+                        </div>
+
+                        <!-- Sponsorship Button -->
+                        <div class="row no-gutters my-5">
+                            <div class="col-12 text-center">
+                                <input id="priceId" type="hidden" value="{{ price.id }}">
+                                <input id="productId" type="hidden" value="{{ sponsor.id }}">
+                                <button id="submit-button" class="btn btn-danger btn-shadow">{{ sponsor }}</button>
+                            </div>
+                        </div>
+
+                    </form>
+    
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Screen -->
         <div id="loading-overlay">
             <h1 class="text-light logo-font loading-spinner">
                 <span class="icon">

@@ -23,8 +23,18 @@ from djstripe.models import Price, Customer, Subscription, Plan
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    Cache information on stripe api when payment intent
+    is created, saving on payment intent metadata
+    """
+
     try:
+
+        # Modify payment intent metadata if a products,
+        # parcel or both has checked out
         if 'cart' in request.session:
+
+            # Modify Payment Intent
             pid = request.POST.get('client_secret').split('_secret')[0]
             stripe.api_key = settings.STRIPE_SECRET_KEY
             stripe.PaymentIntent.modify(pid, metadata={
@@ -33,7 +43,12 @@ def cache_checkout_data(request):
                 'username': request.user,
             })
             return HttpResponse(status=200)
+
+        # Modify payment intent metadata if a
+        # sponsorship (subscription) has checked out
         else:
+
+            # Modify Payment Intent
             pid = request.POST.get('client_secret').split('_secret')[0]
             stripe.api_key = settings.STRIPE_SECRET_KEY
             stripe.PaymentIntent.modify(pid, metadata={
@@ -41,19 +56,26 @@ def cache_checkout_data(request):
                 'username': request.user,
             })
             return HttpResponse(status=200)
+
     except Exception as e:
+
+        # Rise any error
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
+
         return HttpResponse(content=e, status=400)
 
 
 def checkout(request):
     """
-     Render checkout template
+     Render checkout template and handle
+     payment creation
     """
 
+    # Get cart products
     cart = request.session.get('cart', {})
     if not cart:
+        # Raise error if there is not cart session
         messages.error(request,
                        "There's nothing in your cart at the moment")
         return redirect(reverse('products'))
@@ -65,9 +87,13 @@ def checkout(request):
         cart = request.session.get('cart', {'products': {},
                                             'parcels': {},
                                             })
+
+        # Distinguishes products and parcels
         cart_products = cart['products']
         cart_parcels = cart['parcels']
 
+        # Form data and attribute to related form
+        # class and object on db
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
@@ -78,15 +104,24 @@ def checkout(request):
         }
         order_form = OrderForm(form_data)
 
+        # If form is valid save data on db
         if order_form.is_valid():
+
+            # Create an Order object on db
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_cart = json.dumps(cart)
             order.save()
 
+            # If there are parcels and products on cart, then
+            # Create an Orderline object for each parcel and product
             if cart_parcels:
 
+                # If there are Parcels and products in the cart
+                # Create an Orderline object for each parcel and product
+
+                # Save products
                 for item_id, item_data in cart_products.items():
 
                     try:
@@ -107,8 +142,10 @@ def checkout(request):
                                 "Please call us for assistance!")
                                 )
                         order.delete()
+
                         return redirect(reverse('view_cart'))
 
+                # Save parcels
                 for item_id, item_data in cart_parcels.items():
 
                     try:
@@ -131,8 +168,11 @@ def checkout(request):
                         order.delete()
                         return redirect(reverse('view_cart'))
 
+            # If there are just products on cart, then
+            # Create an Orderline object for each product
             elif cart_products:
 
+                # Save products to Orderline
                 for item_id, item_data in cart_products.items():
 
                     try:
@@ -155,8 +195,11 @@ def checkout(request):
                         order.delete()
                         return redirect(reverse('view_cart'))
 
+            # If there are just parcels on cart, then
+            # Create an Orderline object for each parcels
             elif cart_parcels:
 
+                # Save parcel to Orderline
                 for item_id, item_data in cart_parcels.items():
 
                     try:
@@ -190,13 +233,16 @@ def checkout(request):
     else:
 
         try:
+
+            # Get checkout form
             order_form = OrderForm()
 
             current_cart = cart_contents(request)
             total = current_cart['grand_total']
             stripe_total = round(total * 100)
             stripe.api_key = stripe_secret_key
-
+            
+            # Create Payment intent
             intent = stripe.PaymentIntent.create(
                 amount=stripe_total,
                 currency=settings.STRIPE_CURRENCY,
@@ -204,6 +250,9 @@ def checkout(request):
 
             if request.user.is_authenticated:
                 try:
+
+                    # If user is logged in then pre populate form
+                    # with user details
                     profile = UserProfile.objects.get(user=request.user)
                     order_form = OrderForm(initial={
                         'full_name': profile.user.get_full_name(),
@@ -216,13 +265,16 @@ def checkout(request):
                 except UserProfile.DoesNotExist:
                     order_form = OrderForm()
             else:
+                # If user is not logged in then
+                # render empty form
                 order_form = OrderForm()
 
-        except Exception as e:
+        except Exception:
             messages.error(request, "Is there any product in your cart?!")
             return redirect(reverse('products'))
 
     if not stripe_public_key:
+        # Verify if stripe public key is missing
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
@@ -240,17 +292,21 @@ def checkout_success(request, order_number):
     """
     Handle successful checkouts
     """
+
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
+        # If user is logged in attach the user's profile to the order
         profile = UserProfile.objects.get(user=request.user)
-        # Attach the user's profile to the order
+
         order.user_profile = profile
         order.save()
 
-    # Save the user's info
+    # Save the user's info to profile
     if save_info:
+
+        # Get data and set to related form and db
         profile_data = {
             'default_country': order.country,
             'default_town_or_city': order.town_or_city,
@@ -258,13 +314,16 @@ def checkout_success(request, order_number):
             'default_street_address2': order.street_address2,
         }
         user_profile_form = UserProfileForm(profile_data, instance=profile)
+
         if user_profile_form.is_valid():
+            # Save data to profile if form is valid
             user_profile_form.save()
 
     messages.success(request, f'Donation successfully processed! \
         Your Donation number is {order_number}. A confirmation \
         email will be sent to {order.email}.')
 
+    # Delete Cart session
     if 'cart' in request.session:
         del request.session['cart']
 
@@ -277,7 +336,11 @@ def checkout_success(request, order_number):
 
 
 def subscription(request, sponsor_id):
+    """
+    Handle subscription view
+    """
 
+    # Sponsor option, Sponsor price and Sponsor form
     sponsor_prod = Sponsorship.objects.get(id=sponsor_id)
     sponsor_price = Price.objects.get(product=sponsor_id)
     form = SponsorForm()
@@ -293,10 +356,17 @@ def subscription(request, sponsor_id):
     template = 'checkout/subscription.html'
 
     if request.user.is_authenticated:
+        # Verify if user is logged in, then check if
+        # the user already has a sponsorship(subscription)
+
         user = UserProfile.objects.get(user=request.user)
         sponsor_exist = Sponsor.objects.filter(user_profile=user).exists()
 
         if sponsor_exist:
+            # If user already has a sponsorship(subscription)
+            # then verify if current sponsor option is the
+            # same which user has
+
             sponsor = Sponsor.objects.get(user_profile=user)
             subs = Subscription.objects.get(customer=sponsor.customer)
             plan = Plan.objects.get(id=subs.plan.id)
@@ -304,6 +374,8 @@ def subscription(request, sponsor_id):
             current_sponsor = Sponsorship.objects.get(name=plan.product)
 
             if current_sponsor.name == current_option.name:
+                # If current sponsor option is the same which user has
+                # redirect to sponsorship page
 
                 messages.warning(request,
                                  f"You're already sponsoring! Your current sponsorship\
@@ -312,12 +384,21 @@ def subscription(request, sponsor_id):
                 return redirect('sponsorship')
 
             else:
+                # If current sponsor option is not the same which user has
+                # then go to sponsorship(subscription) form page
+
                 return render(request, template, context)
 
         else:
+            # If user has not a sponsorship(subscription)
+            # then go to sponsorship(subscription) form page
+
             return render(request, template, context)
 
     else:
+        # If user is not logged in
+        # then go to sponsorship(subscription) form page
+
         return render(request, template, context)
 
 

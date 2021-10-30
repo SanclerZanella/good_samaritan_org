@@ -1,3 +1,48 @@
+/* Title and Description */
+
+.sponsor-title {
+    font-size: 2em;
+}
+
+.title-desc {
+    margin-top: 1rem;
+}
+
+/* Form */
+
+.form-control {
+    border-radius: 0;
+}
+
+.StripeElement,
+.stripe-style-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.stripe-style-input::placeholder {
+    color: #aab7c4;
+}
+
+/* Loading Screen */
+
 #loading-overlay {
 	display: none;
 	position: fixed;
@@ -15,4 +60,18 @@
     justify-content: center;
     margin: 0;
     height: 100%;
+}
+
+/*-------------------------------- Media Queries  */
+
+@media (min-width: 1440px) {
+    .title-desc {
+        margin-top: 5rem;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1160px) {
+    .title-desc {
+        margin-top: 5rem;
+    }
 }

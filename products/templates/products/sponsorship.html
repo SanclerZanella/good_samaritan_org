@@ -21,13 +21,16 @@
 
     <section>
         <!-- Sponsor Options (image, name and price) -->
-        <div class="row no-gutters parcels-options content-alignment my-5">
+        <div class="row no-gutters parcels-options content-alignment sponsor-option">
             
             {% for option in sponsor_op %}
                 {% if forloop.counter|divisibleby:2 %}
+                    
+                    <!-- Sponsor Card -->
                     <div id="sponsor-{{ option.id }}" class="col-5 col-md-3 mt-5 bg-white sponsor-card">
                         <div class="row no-gutters">
 
+                            <!-- Check Icon -->
                             <div id="check_{{ option.id }}" class="col-12 text-right check-icon">
                                 <i class="fas fa-check fa-lg my-1 mx-1"></i>
                             </div>
@@ -58,9 +61,10 @@
                 {% else %}
 
                     <!-- Middle Sponsor option Card with horizonal margin in both sides  -->
-                    <div id="sponsor-{{ option.id }}" class="col-5 col-md-3 mx-5 mt-5 bg-white sponsor-card">
+                    <div id="sponsor-{{ option.id }}" class="col-5 col-md-3 mx-2 mt-5 bg-white sponsor-card">
                         <div class="row no-gutters">
 
+                            <!-- Check Icon -->
                             <div id="check_{{ option.id }}" class="col-12 text-right check-icon">
                                 <i class="fas fa-check fa-lg my-1 mx-1"></i>
                             </div>
@@ -76,12 +80,12 @@
                                 </div>
                             {% endif %}
 
-                            <!-- Parcel Name -->
+                            <!-- Sponsor Name -->
                             <div class="col-12">
                                 <h3 class="text-center font-weight-bold">{{ option.name }}</h3>
                             </div>
 
-                            <!-- Parcel Price -->
+                            <!-- Sponsor Price -->
                             <div class="col-12 my-2">
                                 <h3 class="text-center">$ {{ option.id | sponsor_price }}/month</h3>
                             </div>
@@ -109,9 +113,9 @@
                 </p>
             </div>
 
-            <!-- Donate Parcel Button -->
+            <!-- Sponsor Checkout Button -->
             <div class="col-10 col-md-6 mt-3 my-auto">
-                <a href="{% url 'subscription' sponsor.id %}" class="btn btn-danger btn-lg mr-2 btn-shadow">{{ sponsor }} ($ {{ sponsor.id | sponsor_price }}/month)</a>
+                <a href="{% url 'subscription' sponsor.id %}" class="btn btn-danger btn-lg mr-2 btn-shadow sponsor-btn">{{ sponsor }} ($ {{ sponsor.id | sponsor_price }}/month)</a>
             </div>
         </div>
     
