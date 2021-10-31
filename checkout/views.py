@@ -1,24 +1,41 @@
+"""
+Handle all views and functionalities related to checkouts and payments
+"""
+
+# Django tools
 from django.shortcuts import (render, redirect,
                               reverse, get_object_or_404,
                               HttpResponse)
+from django.template.loader import render_to_string
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 from django.contrib import messages
 from django.conf import settings
-from io import BytesIO
-import stripe
-from xhtml2pdf import pisa
-from django.template.loader import render_to_string
-from products.models import Product, Parcel
-from cart.contexts import cart_contents
-from django.views.decorators.http import require_POST
-from .forms import OrderForm, SponsorForm
+
+# Models
 from .models import Order, OrderLineItem, Sponsor
-import json
-from django.http import JsonResponse
+from products.models import Product, Parcel
 from profiles.models import UserProfile
-from profiles.forms import UserProfileForm
-import djstripe
 from djstripe.models import Product as Sponsorship
 from djstripe.models import Price, Customer, Subscription, Plan
+
+# Forms
+from .forms import OrderForm, SponsorForm
+from profiles.forms import UserProfileForm
+
+# Context
+from cart.contexts import cart_contents
+
+# Python tools
+import json
+
+# PDF
+from io import BytesIO
+from xhtml2pdf import pisa
+
+# Stripe
+import stripe
+import djstripe
 
 
 @require_POST
@@ -241,7 +258,7 @@ def checkout(request):
             total = current_cart['grand_total']
             stripe_total = round(total * 100)
             stripe.api_key = stripe_secret_key
-            
+
             # Create Payment intent
             intent = stripe.PaymentIntent.create(
                 amount=stripe_total,
@@ -404,6 +421,10 @@ def subscription(request, sponsor_id):
 
 @require_POST
 def subscription_checkout(request):
+    """
+    Handle subscription checkout creating a customer
+    and a subscription
+    """
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -416,24 +437,43 @@ def subscription_checkout(request):
         payment_method_obj = stripe.PaymentMethod.retrieve(payment_method)
         djstripe.models.PaymentMethod.sync_from_stripe_data(payment_method_obj)
 
+        # Verify if user is logged
         if request.user.is_authenticated:
             user = UserProfile.objects.get(user=request.user)
             sponsor_exist = Sponsor.objects.filter(user_profile=user).exists()
 
+            # Verify if there is a sponsor object for this user on db
             if sponsor_exist:
                 sponsor = Sponsor.objects.get(user_profile=user)
                 subscrip = Subscription.objects.get(customer=sponsor.customer)
                 plan = Plan.objects.get(id=subscrip.plan)
+
+                # Sponsorship(subscription) option chosen on sponsorship page
                 current_option = Sponsorship.objects.get(id=sponsor_id)
+
+                # Current user's sponsorship(subscription) on db
                 current_sponsor = Sponsorship.objects.get(name=plan.product)
 
+                # If there is a sponsor object for this user on db
+                # then verify if the chosen sponsorship is the same
+                # as current user's sponsorship using the user name
                 if current_sponsor.name == current_option.name:
+
+                    # If the chosen sponsorship is the same as
+                    # the current user's sponsorship
+                    # then redirect to sponsorship page
+                    # Allowing just one sponsorship(subscription) per user
                     messages.warning(request,
                                      f"You're already sponsoring! Your current sponsorship\
                                      is {plan.product}. To change your current\
                                         sponsorship select another option.")
                     return redirect('sponsorship')
                 else:
+
+                    # If the chosen sponsorship is not the same as
+                    # the current user's sponsorship
+                    # then delete the old sponsorship and
+                    # add the new one
                     stripe.api_key = settings.STRIPE_SECRET_KEY
                     stripe.Customer.delete(sponsor.customer.id)
 
@@ -441,7 +481,8 @@ def subscription_checkout(request):
                     Customer.objects.filter(id=sponsor.customer.id).delete()
 
                     try:
-                        # This creates a new Customer and attaches the PaymentMethod in one API call.
+                        # This creates a new Customer and attaches the
+                        # PaymentMethod in one API call.
                         customer = stripe.Customer.create(
                             payment_method=payment_method,
                             email=email,
@@ -450,7 +491,8 @@ def subscription_checkout(request):
                             }
                         )
 
-                        ct = djstripe.models.Customer.sync_from_stripe_data(customer)
+                        djstripe_model = djstripe.models.Customer
+                        ct = djstripe_model.sync_from_stripe_data(customer)
 
                         subs = stripe.Subscription.create(
                             customer=customer.id,
@@ -472,13 +514,13 @@ def subscription_checkout(request):
                             }
                         )
 
-                        dj_sub = djstripe.models.Subscription
-                        djstripe_subscription = dj_sub.sync_from_stripe_data(subs)
+                        dj_sub_model = djstripe.models.Subscription
+                        dj_sub = dj_sub_model.sync_from_stripe_data(subs)
                         plan = Plan.objects.get(id=subs.plan.id)
 
                         sponsor = Sponsor(
                             customer=ct,
-                            subscription=djstripe_subscription,
+                            subscription=dj_sub,
                             full_name=data_form['name'],
                             email=data_form['email'],
                             country=data_form['country'],
@@ -495,8 +537,12 @@ def subscription_checkout(request):
                         return JsonResponse({'error': (e.args[0])}, status=403)
 
             else:
+
+                # If there is not a Sponsor object for the user on db
+                # then create one for the user
                 try:
-                    # This creates a new Customer and attaches the PaymentMethod in one API call.
+                    # This creates a new Customer and attaches the
+                    # PaymentMethod in one API call.
                     customer = stripe.Customer.create(
                         payment_method=payment_method,
                         email=email,
@@ -505,7 +551,8 @@ def subscription_checkout(request):
                         }
                     )
 
-                    ct = djstripe.models.Customer.sync_from_stripe_data(customer)
+                    djstripe_model = djstripe.models.Customer
+                    ct = djstripe_model.sync_from_stripe_data(customer)
 
                     subs = stripe.Subscription.create(
                         customer=customer.id,
@@ -550,28 +597,52 @@ def subscription_checkout(request):
                     return JsonResponse({'error': (e.args[0])}, status=403)
 
         else:
+
+            # If the user is not logged, then verify if
+            # there is a sponsor object for the anonymous user
+            # on db, using email provided on form
             sponsor_exist = Sponsor.objects.filter(email=email).exists()
 
             if sponsor_exist:
                 an_sponsor = Sponsor.objects.get(email=email)
-                subscrip = Subscription.objects.get(customer=an_sponsor.customer)
+                gsub = Subscription.objects.get(customer=an_sponsor.customer)
+                subscrip = gsub
                 plan = Plan.objects.get(id=subscrip.plan)
+
+                # Sponsorship(subscription) option chosen on sponsorship page
                 current_option = Sponsorship.objects.get(id=sponsor_id)
+
+                # Current user's sponsorship(subscription) on db
                 current_sponsor = Sponsorship.objects.get(name=plan.product)
 
+                # If there is a sponsor object for this user on db
+                # then verify if the chosen sponsorship is the same
+                # as current user's sponsorship using the user name
                 if current_sponsor.name == current_option.name:
+
+                    # If the chosen sponsorship is the same as
+                    # the current user's sponsorship
+                    # then redirect to sponsorship page
+                    # Allowing just one sponsorship(subscription) per user
                     return redirect(reverse('subscription',
                                             args=[sponsor_id]))
 
                 else:
+
+                    # If the chosen sponsorship is not the same as
+                    # the current user's sponsorship
+                    # then delete the old sponsorship and
+                    # add the new one
                     stripe.api_key = settings.STRIPE_SECRET_KEY
                     stripe.Customer.delete(an_sponsor.customer.id)
 
-                    Sponsor.objects.filter(customer=an_sponsor.customer).delete()
+                    sponsorob = Sponsor.objects
+                    sponsorob.filter(customer=an_sponsor.customer).delete()
                     Customer.objects.filter(id=an_sponsor.customer.id).delete()
 
                     try:
-                        # This creates a new Customer and attaches the PaymentMethod in one API call.
+                        # This creates a new Customer and attaches the
+                        # PaymentMethod in one API call.
                         customer = stripe.Customer.create(
                             payment_method=payment_method,
                             email=email,
@@ -580,7 +651,8 @@ def subscription_checkout(request):
                             }
                         )
 
-                        ct = djstripe.models.Customer.sync_from_stripe_data(customer)
+                        djstripe_model = djstripe.models.Customer
+                        ct = djstripe_model.sync_from_stripe_data(customer)
 
                         subs = stripe.Subscription.create(
                             customer=customer.id,
@@ -602,13 +674,13 @@ def subscription_checkout(request):
                             }
                         )
 
-                        dj_sub = djstripe.models.Subscription
-                        djstripe_subscription = dj_sub.sync_from_stripe_data(subs)
+                        submodel = djstripe.models.Subscription
+                        dj_sub = submodel.sync_from_stripe_data(subs)
                         plan = Plan.objects.get(id=subs.plan.id)
 
                         sponsor = Sponsor(
                             customer=ct,
-                            subscription=djstripe_subscription,
+                            subscription=dj_sub,
                             full_name=data_form['name'],
                             email=data_form['email'],
                             country=data_form['country'],
@@ -626,8 +698,12 @@ def subscription_checkout(request):
                         return JsonResponse({'error': (e.args[0])}, status=403)
 
             else:
+
+                # If there is not a Sponsor object for the user on db
+                # then create one for the user
                 try:
-                    # This creates a new Customer and attaches the PaymentMethod in one API call.
+                    # This creates a new Customer and attaches the
+                    # PaymentMethod in one API call.
                     customer = stripe.Customer.create(
                         payment_method=payment_method,
                         email=email,
@@ -636,7 +712,8 @@ def subscription_checkout(request):
                         }
                     )
 
-                    ct = djstripe.models.Customer.sync_from_stripe_data(customer)
+                    djstripe_model = djstripe.models.Customer
+                    ct = djstripe_model.sync_from_stripe_data(customer)
 
                     subs = stripe.Subscription.create(
                         customer=customer.id,
@@ -685,11 +762,18 @@ def subscription_checkout(request):
 
 
 def subscription_success(request, customer_id):
+    """
+    Handle successful subscriptions
+    """
+
     save_info = request.session.get('save_info')
     customer_data = get_object_or_404(Customer, id=customer_id)
     sponsor = get_object_or_404(Sponsor, customer=customer_data)
 
     if request.user.is_authenticated:
+
+        # If the user is logged, then update Sponsor object
+        # Add user object from db
         profile = UserProfile.objects.get(user=request.user)
 
         # Attach the user's profile to the sponsor
@@ -719,18 +803,25 @@ def subscription_success(request, customer_id):
 
 
 def render_pdf(request, order_number):
+    """
+    Create pdf with donation details after checkout
+    """
+
     order = get_object_or_404(Order, order_number=order_number)
     path = 'checkout/document/checkout_success_print.html'
     context = {
         'order': order,
     }
 
+    # Convert HTML to byte string
     html = render_to_string(path, context)
     io_bytes = BytesIO()
 
+    # Convert string to PDF
     pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), io_bytes)
 
     if not pdf.err:
-        return HttpResponse(io_bytes.getvalue(), content_type='application/pdf')
+        return HttpResponse(io_bytes.getvalue(),
+                            content_type='application/pdf')
     else:
         return HttpResponse("Error while rendering PDF", status=400)
