@@ -90,6 +90,7 @@
                                 {% else %}
                                     <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
                                     <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                                    <a href="{% url 'finish_sponsorship_form' %}" class="dropdown-item">Finish Sponsorship</a>
                                 {% endif %}
                             </div>
                         </li>
@@ -194,6 +195,7 @@
                             {% else %}
                                 <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
                                 <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                                <a href="{% url 'finish_sponsorship_form' %}" class="dropdown-item">Finish Sponsorship</a>
                             {% endif %}
                         </div>
                     </li>
@@ -330,13 +332,18 @@
                         </li>
                     {% else %}
                         <li>
-                            <a href="">
+                            <a href="{% url 'account_signup' %}">
                                 <p>Register</p>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{% url 'account_login' %}">
                                 <p>Login</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'finish_sponsorship_form' %}">
+                                <p>Finish Sponsorship</p>
                             </a>
                         </li>
                     {% endif %}

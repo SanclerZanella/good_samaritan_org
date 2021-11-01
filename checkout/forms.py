@@ -69,6 +69,8 @@ class SponsorForm(forms.ModelForm):
                    labels and set autofocus on first field;
     """
 
+    subscription_id = forms.CharField(label='Image', required=True)
+
     class Meta:
         """
         Meta
@@ -91,6 +93,7 @@ class SponsorForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
+            'subscription_id': 'Subscription Id',
             'full_name': 'Full Name',
             'email': 'Email Address',
             'town_or_city': 'Town or City',

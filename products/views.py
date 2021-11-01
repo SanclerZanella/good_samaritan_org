@@ -2,17 +2,22 @@ from django.shortcuts import (render, redirect,
                               reverse, get_object_or_404,
                               HttpResponse)
 from django.http import HttpResponseRedirect
+from django.conf import settings
 from django.contrib import messages
 from django.db.models import Q, Sum
 from django.db.models.functions import Lower
 from django.contrib.auth.decorators import user_passes_test
 from .models import (Product, Category,
                      Parcel)
+from checkout.models import Sponsor
+from djstripe.models import Subscription, Plan, Customer
 from djstripe.models import Product as Sponsorship
 from .forms import ProductForm, ParcelForm
+from checkout.forms import SponsorForm
 from django.core.paginator import (Paginator, EmptyPage,
                                    PageNotAnInteger)
 from .utils import get_id_data
+import stripe
 
 
 def all_products(request):
@@ -473,3 +478,62 @@ def add_product_parcel(request):
 
     messages.success(request, 'Product added to parcel!')
     return HttpResponse(status=200)
+
+
+def finish_sponsorship_form(request):
+    """
+    A view to render the finish sponsorship form
+    """
+
+    form = SponsorForm()
+    subscription = None
+    sponsor = None
+    subs_query = None
+
+    if request.method == 'POST':
+        try:
+            subs_id = request.POST['subscription_id'].strip()
+            subs_exist = Subscription.objects.filter(id=subs_id).exists()
+
+            if subs_exist:
+                subscription = Subscription.objects.get(id=subs_id)
+                sponsor = Sponsor.objects.get(customer=subscription.customer)
+                subs_query = True
+            else:
+                subs_query = None
+                subscription = None
+                sponsor = None
+                messages.error(request, "We can't find the subscription with this\
+                    subscription id. Are you providing the right subscription id?")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        except Exception as e:
+            subs_query = None
+            subscription = None
+            sponsor = None
+            messages.error(request, "We can't find the subscription with this\
+                subscription id. Are you providing the right subscription id?")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    context = {
+        'form': form,
+        'subs_query': subs_query,
+        'subscription': subscription,
+        'sponsor': sponsor,
+
+    }
+
+    template = 'products/finish_sponsorship.html'
+    return render(request, template, context)
+
+
+def finish_sponsorship(request, customer_id):
+
+    customer = Customer.objects.get(id=customer_id)
+    Sponsor.objects.filter(customer=customer).delete()
+    Customer.objects.filter(id=customer_id).delete()
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    stripe.Customer.delete(customer_id)
+
+    messages.success(request, "Sponsorship Finished")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

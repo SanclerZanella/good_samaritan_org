@@ -204,18 +204,18 @@ class StripeWH_Handler:
 
                 sponsor.save()
 
+                self._subscription_confirmation_email(sponsor)
+
+                return HttpResponse(
+                    content=f'Webhook received: {event["type"]}',
+                    status=200)
+
             except Exception as e:
                 if sponsor:
                     sponsor.delete()
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
-
-        self._subscription_confirmation_email(sponsor)
-
-        return HttpResponse(
-            content=f'Webhook received: {event["type"]}',
-            status=200)
 
     def handle_payment_intent_succeeded(self, event):
         """

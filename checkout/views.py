@@ -809,6 +809,7 @@ def render_pdf(request, order_number):
 
     order_type = order_number.split('_')[0]
 
+    # Check if it is a subscription
     if order_type == 'cus':
         customer_data = get_object_or_404(Customer, id=order_number)
         order = get_object_or_404(Sponsor, customer=customer_data)
