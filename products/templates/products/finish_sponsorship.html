@@ -39,7 +39,7 @@
                             <form id="sponsor-form" action="{% url 'finish_sponsorship_form' %}" method="POST">
                                 {% csrf_token %}
 
-                                <!-- Billing Details Fields -->
+                                <!-- Sponsorship Details Fields -->
                                 {{ form.subscription_id | as_crispy_field }}
                                 {{ form.full_name | as_crispy_field }}
                                 {{ form.email | as_crispy_field }}
@@ -48,7 +48,7 @@
                                 {{ form.town_or_city | as_crispy_field }}
                                 {{ form.country | as_crispy_field }}
 
-                                <!-- Sponsorship Button -->
+                                <!-- Search sponsorship Button -->
                                 <div class="row no-gutters my-5">
                                     <div class="col-12 text-center">
                                         <button id="submit-button" class="btn btn-danger btn-shadow">Search <i class="fas fa-search"></i></button>
@@ -69,7 +69,11 @@
                         <h2 class="font-weight-bold sponsor-title mt-5">Sponsorship</h2>
                         <hr>
                     </div>
+
+                    <!-- Sponsorship card -->
                     <div class="col-12 col-md-8 my-3 sponsor-card">
+
+                        <!-- Sponsorship details -->
                         <div class="row no-gutters">
                             <div class="col-5">
                                 <p class="my-1 ml-1"><strong>Sponsorship:</strong> {{ subscription.plan.product }}</p>
@@ -81,10 +85,12 @@
                                 <p class="my-1 ml-1"><strong>Country:</strong> {{ sponsor.country.name }}</p>
                                 <p class="my-1 ml-1"><strong>Price:</strong> ${{ sponsor.grand_total }}/month</p>
                             </div>
+
+                            <!-- Remove sponsorship button and modal -->
                             <div class="col-3 my-auto">
                                 <button class="ml-1 btn btn-danger btn-sm btn-shadow text-center finish-sponsor-btn">Finish Sponsorship</button>
 
-                                <!-- Remove Item Modal (from W3Schools) -->
+                                <!-- Remove sponsorship Modal (from W3Schools) -->
                                 <div id="modal_finish-sponsor" class="modal">
 
                                     <!-- Modal content -->

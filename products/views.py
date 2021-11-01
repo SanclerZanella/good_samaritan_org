@@ -495,6 +495,7 @@ def finish_sponsorship_form(request):
             subs_id = request.POST['subscription_id'].strip()
             subs_exist = Subscription.objects.filter(id=subs_id).exists()
 
+            # Check if sponsorship exists
             if subs_exist:
                 subscription = Subscription.objects.get(id=subs_id)
                 sponsor = Sponsor.objects.get(customer=subscription.customer)
@@ -504,9 +505,10 @@ def finish_sponsorship_form(request):
                 subscription = None
                 sponsor = None
                 messages.error(request, "We can't find the subscription with this\
-                    subscription id. Are you providing the right subscription id?")
+                    subscription id. Are you providing the right subscription\
+                        id?")
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        except Exception as e:
+        except Exception:
             subs_query = None
             subscription = None
             sponsor = None
@@ -527,11 +529,16 @@ def finish_sponsorship_form(request):
 
 
 def finish_sponsorship(request, customer_id):
+    """
+    Delete subscription from database and stripe
+    """
 
+    # Delete Sponsor and Customer object
     customer = Customer.objects.get(id=customer_id)
     Sponsor.objects.filter(customer=customer).delete()
     Customer.objects.filter(id=customer_id).delete()
-
+    
+    # Delete Customer from stripe
     stripe.api_key = settings.STRIPE_SECRET_KEY
     stripe.Customer.delete(customer_id)
 
