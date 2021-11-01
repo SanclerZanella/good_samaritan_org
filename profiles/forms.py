@@ -3,7 +3,27 @@ from .models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
+    """
+    UserProfileForm
+
+    Sub-classes:
+        *Meta: Represent related model and form fields
+               caught from related model.
+
+    Methods:
+        *__init__: Add placeholders and classes, remove auto-generated
+                   labels and set autofocus on first field;
+    """
+
     class Meta:
+        """
+        Meta
+
+        Attributes:
+            *Model: Model related to the form ;
+            *fields: Representation of the fields in the form
+                    caught from related model.
+        """
         model = UserProfile
         exclude = ('user',)
 

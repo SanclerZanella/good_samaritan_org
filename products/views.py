@@ -33,6 +33,8 @@ def all_products(request):
     most_n = None
 
     if request.GET:
+
+        # Query products by sorting
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
             sort = sortkey
@@ -57,6 +59,7 @@ def all_products(request):
             all_items = get_id_data(all_products)
             most_n = None
 
+        # Query products by category
         if 'category' in request.GET:
             category = request.GET['category'].split(',')
             all_products = all_products.filter(category__name__in=category)
@@ -68,6 +71,7 @@ def all_products(request):
             current_category = ctg.friendly_name
             most_n = None
 
+        # Query products by searching
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -85,6 +89,7 @@ def all_products(request):
             all_items = get_id_data(all_products)
             most_n = None
 
+        # Query products by most-needed status
         if 'urgent' in request.GET:
             all_products = all_products.filter(m_needed=True)
             all_products_len = len(all_products)
@@ -98,6 +103,8 @@ def all_products(request):
     page = request.GET.get('page', 1)
     paginator = Paginator(all_products, 20)
 
+    # Create pagination and define number of products per page
+    # use pagination to infinite scroll
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
@@ -133,6 +140,7 @@ def parcels(request):
     items_ids = list_items.split(',')
     items_in_parcel = list()
 
+    # Items in the chosen parcel
     for item in items_ids:
         item_id = int(item)
         items_in_parcel.append(Product.objects.get(pk=item_id))
@@ -147,6 +155,7 @@ def parcels(request):
             items_ids = list_items.split(',')
             items_in_parcel = list()
 
+            # Items in the chosen parcel
             for item in items_ids:
                 item_id = int(item)
                 items_in_parcel.append(Product.objects.get(pk=item_id))
@@ -177,6 +186,9 @@ def product_details(request, product_id):
 
 
 def sponsorship(request):
+    """
+    A view to render the sponsorship page
+    """
 
     sponsor_op = Sponsorship.objects.all()
     sponsor = get_object_or_404(Sponsorship, id='prod_KTO0rZ3DSbX6cu')
@@ -198,6 +210,9 @@ def sponsorship(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def product_mangement(request):
+    """
+    A view to render the product management dashboard
+    """
 
     form = ProductForm()
     all_products = Product.objects.all()
@@ -207,58 +222,55 @@ def product_mangement(request):
     query = None
     sort = None
     direction = None
-    most_n = None
     parcel_param = None
 
-    if request.method == 'POST':
-        profileForm = UserProfileForm(request.POST, instance=profile_user)
-        if profileForm.is_valid():
-            profileForm.save()
-            messages.success(request, 'Profile updated successfully')
-    else:
-        if 'sort' in request.GET:
-            sortkey = request.GET['sort']
-            sort = sortkey
-            if sortkey == 'name':
-                sortkey = 'lower_name'
-                all_products = all_products.annotate(lower_name=Lower('name'))
-                all_products_len = len(all_products)
-            if sortkey == 'category':
-                sortkey = 'category__name'
-            if 'direction' in request.GET:
-                direction = request.GET['direction']
-                if direction == 'desc':
-                    sortkey = f'-{sortkey}'
-            all_products = all_products.order_by(sortkey)
+    # Query products by sorting
+    if 'sort' in request.GET:
+        sortkey = request.GET['sort']
+        sort = sortkey
+        if sort == 'name':
+            sortkey = 'lower_name'
+            all_products = all_products.annotate(lower_name=Lower('name'))
             all_products_len = len(all_products)
+        if sort == 'category':
+            sortkey = 'category__name'
+        if 'direction' in request.GET:
+            direction = request.GET['direction']
+            if direction == 'desc':
+                sortkey = f'-{sortkey}'
+        all_products = all_products.order_by(sortkey)
+        all_products_len = len(all_products)
 
-        if 'category' in request.GET:
-            category = request.GET['category'].split(',')
-            all_products = all_products.filter(category__name__in=category)
-            all_products_len = len(all_products)
+    # Query products by category
+    if 'category' in request.GET:
+        category = request.GET['category'].split(',')
+        all_products = all_products.filter(category__name__in=category)
+        all_products_len = len(all_products)
 
-        if 'q-mg' in request.GET:
-            query = request.GET['q-mg']
-            if not query:
-                messages.error(request,
-                               "You didn't enter any search criteria!")
-                return redirect(reverse('profile'))
+    # Query products by searching
+    if 'q-mg' in request.GET:
+        query = request.GET['q-mg']
+        if not query:
+            messages.error(request,
+                           "You didn't enter any search criteria!")
+            return redirect(reverse('profile'))
 
-            qr1 = Q(name__icontains=query)
-            qr2 = Q(description__icontains=query)
-            queries = qr1 | qr2
-            all_products = all_products.filter(queries)
-            all_products_len = len(all_products)
+        qr1 = Q(name__icontains=query)
+        qr2 = Q(description__icontains=query)
+        queries = qr1 | qr2
+        all_products = all_products.filter(queries)
+        all_products_len = len(all_products)
 
-        if 'urgent' in request.GET:
-            all_products = all_products.filter(m_needed=True)
-            all_products_len = len(all_products)
-            most_n = True
+    # Query products by most-needed status
+    if 'urgent' in request.GET:
+        all_products = all_products.filter(m_needed=True)
+        all_products_len = len(all_products)
 
-        if 'parcel' in request.GET:
-            all_parcels = Parcel.objects.all()
-            all_products_len = len(all_parcels)
-            parcel_param = True
+    # Query products by parcel category
+    if 'parcel' in request.GET:
+        all_parcels = Parcel.objects.all()
+        all_products_len = len(all_parcels)
+        parcel_param = True
 
     template = 'products/product_management.html'
     context = {
@@ -275,13 +287,19 @@ def product_mangement(request):
 
 @user_passes_test(lambda u: u.is_superuser)
 def add_product(request):
-    """ Add a product to the shop """
+    """ Add a new product to the shop """
+
+    # Restric functionality to superuser
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only site staff can do that.')
         return redirect(reverse('home'))
 
     if request.method == 'POST':
+
+        # New product form
         form = ProductForm(request.POST, request.FILES)
+
+        # Add new product to db
         if form.is_valid():
             product = form.save()
             messages.success(request, 'Successfully added product!')
@@ -296,6 +314,8 @@ def add_product(request):
 @user_passes_test(lambda u: u.is_superuser)
 def edit_product(request, product_id, product_sku):
     """ Edit a product in the shop """
+
+    # Restric functionality to superuser
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store managers can do that.')
         return redirect(reverse('products'))
@@ -303,12 +323,14 @@ def edit_product(request, product_id, product_sku):
     item_type = product_sku.split('_')[-1]
     products = Product.objects.all()
 
+    # Verify if the item is a parcel
     if item_type == 'pc':
         product = get_object_or_404(Parcel, pk=product_id)
         list_items = product.items
         items_ids = list_items.split(',')
         items_in_parcel = list()
 
+        # Append all parcel items to items_in_parcel list
         for item in items_ids:
             item_id = int(item)
             items_in_parcel.append(Product.objects.get(pk=item_id))
@@ -318,11 +340,20 @@ def edit_product(request, product_id, product_sku):
         items_in_parcel = None
 
     if request.method == 'POST':
+
+        # Verify if the item is a parcel
         if item_type == 'pc':
+
+            # Render form to edit a parcel
             form = ParcelForm(request.POST, request.FILES, instance=product)
+
+        # It's not a parcel (a single product in this case)
         else:
+
+            # Render form to edit a product
             form = ProductForm(request.POST, request.FILES, instance=product)
 
+        # Update parcel or product on db
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully updated product!')
@@ -332,8 +363,12 @@ def edit_product(request, product_id, product_sku):
                 Please ensure the form is valid.')
     else:
         if item_type == 'pc':
+
+            # Render form to edit a parcel
             form = ParcelForm(instance=product)
         else:
+
+            # Render form to edit a product
             form = ProductForm(instance=product)
 
         messages.info(request, f'You are editing {product.name}')
@@ -352,19 +387,25 @@ def edit_product(request, product_id, product_sku):
 @user_passes_test(lambda u: u.is_superuser)
 def delete_product(request, product_id):
     """ Delete a product from the shop """
+
+    # Restric functionality to superuser
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only site staff can do that.')
         return redirect(reverse('home'))
 
+    # Delete chosen product from db
     product = get_object_or_404(Product, id=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')
+
     return redirect(reverse('product_management'))
 
 
 @user_passes_test(lambda u: u.is_superuser)
 def delete_product_parcel(request, parcel_id, product_id):
     """ Delete a product from the parcel items """
+
+    # Restric functionality to superuser
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only site staff can do that.')
         return redirect(reverse('home'))
@@ -374,10 +415,12 @@ def delete_product_parcel(request, parcel_id, product_id):
     items_ids = list_items.split(',')
     items_in_parcel = list()
 
+    # Append products from parcel to items_in_parcel
     for item in items_ids:
         item_id = int(item)
         items_in_parcel.append(Product.objects.get(pk=item_id).id)
 
+    # Remove product from parcel
     if int(product_id) in items_in_parcel:
         items_in_parcel.remove(int(product_id))
         list_string = ",".join(str(id) for id in items_in_parcel)
@@ -390,6 +433,8 @@ def delete_product_parcel(request, parcel_id, product_id):
 @user_passes_test(lambda u: u.is_superuser)
 def add_product_parcel(request):
     """ Add a product to the parcel items """
+
+    # Restric functionality to superuser
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only site staff can do that.')
         return redirect(reverse('home'))
@@ -397,6 +442,7 @@ def add_product_parcel(request):
     parcel_id = None
     product_id = None
 
+    # Get parcel id
     if 'parcel_id' in request.POST:
         parcel_id = request.POST['parcel_id']
     else:
@@ -404,6 +450,7 @@ def add_product_parcel(request):
             before add to the parcel')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+    # Get product id
     if 'product_id' in request.POST:
         product_id = request.POST['product_id']
 
@@ -413,14 +460,15 @@ def add_product_parcel(request):
     items_in_parcel = list()
     product_id_list = list(map(int, product_id.split(',')))
 
+    # Append products from parcel to items_in_parcel
     for item in items_ids:
         item_id = int(item)
         items_in_parcel.append(Product.objects.get(pk=item_id).id)
 
+    # Add product to parcel
     items_in_parcel.extend(product_id_list)
     new_products_list = sorted(list(set(items_in_parcel)))
     new_products = ",".join(map(str, new_products_list))
-
     Parcel.objects.filter(pk=parcel_id).update(items=new_products)
 
     messages.success(request, 'Product added to parcel!')

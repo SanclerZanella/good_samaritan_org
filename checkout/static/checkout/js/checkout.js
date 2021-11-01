@@ -5,6 +5,7 @@
     https://stripe.com/docs/stripe-js
 */
 
+// Render card element
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
@@ -63,6 +64,7 @@ form.addEventListener('submit', function(ev) {
     };
     var url = '/checkout/cache_checkout_data/';
 
+    // Confirm payment card
     $.post(url, postData).done(() => {
         stripe.confirmCardPayment(clientSecret, {
             payment_method: {

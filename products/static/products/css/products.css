@@ -1,3 +1,4 @@
+/* ----------------------- Products page */
 /* Page's Cover Picture */
 .hero-image {
     background: url("/media/products/products-cover.jpg") no-repeat center center;
@@ -148,8 +149,7 @@
     font-size: 1.5em;
   }
 
-/* Media Queries */
-
+/* ----------------------- Media Queries */
 @media (min-width: 1440px) {
     .products-col {
         margin-left: 14.5rem;

@@ -3,11 +3,20 @@ from .models import Order, OrderLineItem, Sponsor
 
 
 class OrderLineItemAdminInline(admin.TabularInline):
+    """
+    Sort and Displays products table in an Order
+    object in Admin interface.
+    """
+
     model = OrderLineItem
     readonly_fields = ('lineitem_total',)
 
 
 class OrderAdmin(admin.ModelAdmin):
+    """
+    Sort and Displays Order table in Admin interface.
+    """
+
     inlines = (OrderLineItemAdminInline,)
 
     readonly_fields = ('order_number', 'date',
@@ -26,6 +35,9 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class SponsorAdmin(admin.ModelAdmin):
+    """
+    Sort and Displays Sponsor table in Admin interface.
+    """
 
     readonly_fields = ('customer', 'subscription', 'user_profile', 'date',
                        'grand_total')
@@ -40,5 +52,6 @@ class SponsorAdmin(admin.ModelAdmin):
     ordering = ('-date',)
 
 
+# Register Order and Sponsor model
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Sponsor, SponsorAdmin)

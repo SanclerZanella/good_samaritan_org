@@ -1,3 +1,4 @@
+/* ----------------------- Parcel page */
 .parcel-cover {
     background: url("/media/parcels/parcels_cover.jpg") no-repeat center center;
     height: 200px;
@@ -39,8 +40,7 @@
     height: 20vh;
 }
 
-/* Media queries */
-
+/* ----------------------- Media queries */
 @media (min-width: 320px) and (max-width: 767px) {
     .parcels-options {
         overflow-y: hidden;

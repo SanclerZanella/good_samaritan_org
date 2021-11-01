@@ -1,3 +1,4 @@
+// Sort products in products management page
 $('.sort').each((key, value) => {
     $(value).change(() => {
         function slt(select) {

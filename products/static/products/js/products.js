@@ -1,3 +1,4 @@
+// Stick categories col in the page side
 if($(document).height() < 1000){
     let catg_col = $('.categories-col');
     let product_col = $('.products-col');
@@ -48,6 +49,7 @@ var infinite = new Waypoint.Infinite({
     }
 });
 
+// Sort products
 $('.sort').each((key, value) => {
     $(value).change(() => {
         function slt(select) {

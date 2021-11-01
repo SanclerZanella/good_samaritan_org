@@ -39,6 +39,8 @@
 
                 <div class="col-10 order-list-titles">
                     <div class="row no-gutters">
+
+                        <!-- Orders History Info Titles -->
                         <div class="col-4 my-auto">
                             <h3>Donation Number</h3>
                         </div>
@@ -53,25 +55,37 @@
 
                 <div class="col-10 order-list">
                     <div class="row no-gutters">
+
+                        <!-- Order history card -->
                         <div class="col-12">
+
                             {% for order in orders %}
                                 <div class="col-12 mt-5">
                                     <div class="row no-gutters">
+
+                                        <!-- Order number -->
                                         <div class="col-4 my-auto">
                                             <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
                                                 {{ order.order_number|truncatechars:6 }}
                                             </a>
                                         </div>
+
+                                        <!-- Order date -->
                                         <div class="col-4 my-auto">
                                             {{ order.date }}
                                         </div>
+
+                                        <!-- Order Grand total -->
                                         <div class="col-4 my-auto">
                                             $ {{ order.grand_total }}
                                         </div>
+
                                     </div>
                                 </div>
                             {% endfor %}
+
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -121,6 +135,7 @@
 
     {% if request.user.is_authenticated %}
         {% if request.user.is_superuser %}
+            <!-- product management button (go to product management dashboard) -->
             <div class="row no-gutters my-5 text-center">
                 <div class="col-12">
                     <hr>

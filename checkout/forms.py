@@ -3,7 +3,28 @@ from .models import Order, Sponsor
 
 
 class OrderForm(forms.ModelForm):
+    """
+    Order form
+
+    Sub-classes:
+        *Meta: Represent related model and form fields
+               caught from related model.
+
+    Methods:
+        *__init__: Add placeholders and classes, remove auto-generated
+                   labels and set autofocus on first field;
+    """
+
     class Meta:
+        """
+        Meta
+
+        Attributes:
+            *Model: Model related to the form ;
+            *fields: Representation of the fields in the form
+                    caught from related model.
+        """
+
         model = Order
         fields = ('full_name', 'email', 'street_address1',
                   'street_address2', 'town_or_city',
@@ -36,7 +57,28 @@ class OrderForm(forms.ModelForm):
 
 
 class SponsorForm(forms.ModelForm):
+    """
+    Sponsor form
+
+    Sub-classes:
+        *Meta: Represent related model and form fields
+               caught from related model.
+
+    Methods:
+        *__init__: Add placeholders and classes, remove auto-generated
+                   labels and set autofocus on first field;
+    """
+
     class Meta:
+        """
+        Meta
+
+        Attributes:
+            *Model: Model related to the form ;
+            *fields: Representation of the fields in the form
+                    caught from related model.
+        """
+
         model = Sponsor
         fields = ('full_name', 'email', 'street_address1',
                   'street_address2', 'town_or_city',

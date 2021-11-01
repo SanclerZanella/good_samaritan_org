@@ -9,9 +9,12 @@ from checkout.models import Order
 @login_required
 def profile(request):
     """ Display the user's profile. """
+
     profile_user = get_object_or_404(UserProfile, user=request.user)
 
+    # Render profile form with default details
     profileForm = UserProfileForm(instance=profile_user)
+
     orders = profile_user.orders.all()
 
     template = 'profiles/profile.html'
@@ -26,6 +29,10 @@ def profile(request):
 
 
 def order_history(request, order_number):
+    """
+    A view to render the checkout success
+    """
+
     order = get_object_or_404(Order, order_number=order_number)
 
     messages.info(request, (

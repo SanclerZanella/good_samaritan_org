@@ -1,3 +1,4 @@
+// Highlight chosen sponsorship and change url to related sponsorship option
 $(document).ready(() => {
 
     let currentUrl = new URL(window.location);

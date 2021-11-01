@@ -10,25 +10,39 @@ class Category(models.Model):
         *friendly_name: A string indicating category friendly name.
 
     Sub-classes:
-        *Display the object's plural name.
+        *Meta: Display the object's plural name.
 
     Methods:
         *__str__: Display the object's headline in the admin interface,
-                        it returns a nice, human-readable representation of
-                        the model;
+                  it returns a nice, human-readable representation of
+                  the model;
         *get_friendly_name: Display the object's friendly name.
     """
 
     class Meta:
+        """
+        Meta
+
+        Attributes:
+            *verbose_name_plural: Display the object's plural name..
+        """
         verbose_name_plural = 'Categories'
 
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
     def __str__(self):
+        """
+        Display the object's headline in the admin interface,
+        it returns a nice, human-readable representation of
+        the model;
+        """
         return self.name
 
     def get_friendly_name(self):
+        """
+        Display the object's friendly name.
+        """
         return self.friendly_name
 
 

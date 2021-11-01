@@ -12,21 +12,55 @@ import time
 
 
 class StripeWH_Handler:
-    """Handle Stripe webhooks"""
+    """
+    StripeWH_Handler
+
+    Methods:
+        *__init__: Receive URL request;
+        *_send_confirmation_email: Send the user a confirmation email
+                                   when a product or parcel is purchased;
+        *_subscription_confirmation_email: Send the user a confirmation email
+                                           when a subscription is purchased;
+        *handle_event: Handle a generic/unknown/unexpected webhook event;
+        *handle_subscription_created: Handle the customer.subscription.created
+                                      event webhook from Stripe;
+        *handle_payment_intent_succeeded: Handle the payment_intent.succeeded
+                                          event webhook from Stripe;
+        *handle_payment_intent_payment_failed: Handle the
+                                               payment_intent.payment_failed
+                                               event webhook from Stripe;
+        *handle_payment_invoice_paid: Handle the invoice.paid webhook
+                                      event from Stripe;
+        *handle_payment_failed: Handle the invoice.payment_failed event
+                                webhook from Stripe;
+        *handle_subscription_deleted: Handle the customer.subscription.deleted
+                                      event webhook from Stripe
+    """
 
     def __init__(self, request):
+        """
+        Receive URL request.
+        """
+
         self.request = request
 
     def _send_confirmation_email(self, order):
         """Send the user a confirmation email"""
+
+        # Customer email
         cust_email = order.email
+
+        # Load the email subject text file template and turn on in string
         subject = render_to_string(
             'checkout/confirmation_emails/confirmation_email_subject.txt',
             {'order': order})
+
+        # Load the email body text file template and turn on in string
         body = render_to_string(
             'checkout/confirmation_emails/confirmation_email_body.txt',
             {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
 
+        # Submit checkout confirmation email
         send_mail(
             subject,
             body,
@@ -36,17 +70,24 @@ class StripeWH_Handler:
 
     def _subscription_confirmation_email(self, sponsor):
         """Send the user a confirmation email"""
+
+        # Customer email
         cust_email = sponsor.email
+
+        # Load the email subject text file template and turn on in string
         subs = Subscription.objects.get(customer=sponsor.customer)
-        subject = render_to_string(
-            'checkout/confirmation_emails/subscription_confirmation_subject.txt',
-            {'sponsor': sponsor})
+        file_path = 'checkout/confirmation_emails/'
+        file = f'{file_path}subscription_confirmation_subject.txt'
+        subject = render_to_string(file, {'sponsor': sponsor})
+
+        # Load the email body text file template and turn on in string
         body = render_to_string(
             'checkout/confirmation_emails/subscription_confirmation_body.txt',
             {'sponsor': sponsor,
              'contact_email': settings.DEFAULT_FROM_EMAIL,
              'subscription': subs})
 
+        # Submit checkout confirmation email
         send_mail(
             subject,
             body,
@@ -64,7 +105,7 @@ class StripeWH_Handler:
 
     def handle_subscription_created(self, event):
         """
-        Handle the customer.subscription.created webhook from Stripe
+        Handle the customer.subscription.created event webhook from Stripe
         """
         intent = event.data.object
         long_date = intent.start_date
@@ -77,10 +118,10 @@ class StripeWH_Handler:
         subscription = Subscription.objects.get(id=subs_id)
 
         metadata = intent.metadata
-        pid = intent.id
         save_info = metadata.save_info
         username = intent.metadata.username
 
+        # Billing details from response event metadata
         billing_details = {
             'name': metadata.name,
             'email': metadata.email,
@@ -105,9 +146,15 @@ class StripeWH_Handler:
                 profile.default_street_address2 = address['line2']
                 profile.save()
 
+        # Try to create a sponsor object if it was not created
+        # by the subscriptio_checkout view
         sponsor_exists = False
         attempt = 1
         while attempt <= 5:
+            # Check if sponsor object exists in db five times
+            # to avoid duplication if view creates object in db
+            # with delay
+
             try:
                 sponsor = Sponsor.objects.get(
                         full_name__iexact=billing_details['name'],
@@ -125,6 +172,9 @@ class StripeWH_Handler:
                 time.sleep(1)
 
         if sponsor_exists:
+            # If sponsor object exist in db, then send
+            # subscription confirmation email to user
+
             self._subscription_confirmation_email(sponsor)
 
             return HttpResponse(
@@ -132,6 +182,10 @@ class StripeWH_Handler:
                     SUCCESS: Verified order already in database',
                 status=200)
         else:
+            # If sponsor object does not exist in db, then
+            # save sponsor in db and send subscription
+            # confirmation email to user
+
             sponsor = None
             try:
                 sponsor = Sponsor(
@@ -165,32 +219,47 @@ class StripeWH_Handler:
 
     def handle_payment_intent_succeeded(self, event):
         """
-        Handle the payment_intent.succeeded webhook from Stripe
+        Handle the payment_intent.succeeded event webhook from Stripe
         """
+
         intent = event.data.object
+
+        # Check if there is a cart key in event metadata
         if 'cart' in intent.metadata:
             pid = intent.id
             cart = intent.metadata.cart
             save_info = intent.metadata.save_info
 
+            # Billing details from response event metadata
             billing_details = intent.charges.data[0].billing_details
             grand_total = round(intent.charges.data[0].amount / 100, 2)
 
             # Update profile information if save_info was checked
             profile = None
             username = intent.metadata.username
+
+            # Check if the user has an account
             if username != 'AnonymousUser':
                 profile = UserProfile.objects.get(user__username=username)
+
+                # Update profile information if save_info was checked
                 if save_info:
+                    ad_1 = billing_details.address.line1
+                    ad_2 = billing_details.address.line2
+
                     profile.default_country = billing_details.address.country
                     profile.default_town_or_city = billing_details.address.city
-                    profile.default_street_address1 = billing_details.address.line1
-                    profile.default_street_address2 = billing_details.address.line2
+                    profile.default_street_address1 = ad_1
+                    profile.default_street_address2 = ad_2
                     profile.save()
 
             order_exists = False
             attempt = 1
             while attempt <= 5:
+                # Check if order object exists in db five times
+                # to avoid duplication if view creates object in db
+                # with delay
+
                 try:
                     order = Order.objects.get(
                         full_name__iexact=billing_details.name,
@@ -210,12 +279,19 @@ class StripeWH_Handler:
                     time.sleep(1)
 
             if order_exists:
+                # If order object exist in db, then send
+                # donation confirmation email to user
+
                 self._send_confirmation_email(order)
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} |\
                         SUCCESS: Verified order already in database',
                     status=200)
             else:
+                # If order object does not exist in db, then
+                # save order in db and send donation
+                # confirmation email to user
+
                 order = None
                 try:
                     order = Order.objects.get(
@@ -244,7 +320,8 @@ class StripeWH_Handler:
                     if order:
                         order.delete()
                     return HttpResponse(
-                        content=f'Webhook received: {event["type"]} | ERROR: {e}',
+                        content=f'Webhook received: {event["type"]}\
+                            | ERROR: {e}',
                         status=500)
             self._send_confirmation_email(order)
         else:
@@ -256,7 +333,7 @@ class StripeWH_Handler:
 
     def handle_payment_intent_payment_failed(self, event):
         """
-        Handle the payment_intent.payment_failed webhook from Stripe
+        Handle the payment_intent.payment_failed event webhook from Stripe
         """
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
@@ -264,7 +341,7 @@ class StripeWH_Handler:
 
     def handle_payment_invoice_paid(self, event):
         """
-        Handle the invoice.paid webhook from Stripe
+        Handle the invoice.paid webhook event from Stripe
         """
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
@@ -272,7 +349,7 @@ class StripeWH_Handler:
 
     def handle_payment_failed(self, event):
         """
-        Handle the invoice.payment_failed webhook from Stripe
+        Handle the invoice.payment_failed event webhook from Stripe
         """
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
@@ -280,7 +357,7 @@ class StripeWH_Handler:
 
     def handle_subscription_deleted(self, event):
         """
-        Handle the customer.subscription.deleted webhook from Stripe
+        Handle the customer.subscription.deleted event webhook from Stripe
         """
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',

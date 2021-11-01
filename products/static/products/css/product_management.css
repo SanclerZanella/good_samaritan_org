@@ -1,3 +1,4 @@
+/* ----------------------- product management page */
 .product-management-title h2 {
     font-size: 2em;
 }
@@ -92,7 +93,7 @@
     font-size: 1.5em;
 }
 
-/* Media Queries */
+/* ----------------------- Media Queries */
 
 @media (min-width: 1440px) {
     .products-list {

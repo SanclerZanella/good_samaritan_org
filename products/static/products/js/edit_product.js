@@ -25,7 +25,7 @@ $('.remove-item-btn').each((key, value) => {
     });
 });
 
-
+// Mark product as selected to add to parcel
 $('.add-items').each((key, value) => {
     $(value).click(() => {
         let item_class = $(value).attr('class');
@@ -41,7 +41,7 @@ $('.add-items').each((key, value) => {
     
 });
 
-
+// Add selected products to parcel
 $('#add_items_btn').click(() => {
 
     let parcel_id;

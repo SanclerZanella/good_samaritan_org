@@ -17,7 +17,10 @@ def cart_contents(request):
     cart_products = cart['products']
     cart_parcels = cart['parcels']
 
+    # Check if there are products in the cart
     if cart_products.items():
+
+        # Append each product to cart_items list
         for item_id, item_qty in cart_products.items():
             if isinstance(item_qty, int):
                 product = get_object_or_404(Product, pk=item_id)
@@ -29,7 +32,10 @@ def cart_contents(request):
                     'product': product
                 })
 
+    # Check if there are parcels in the cart
     if cart_parcels.items():
+
+        # Append each parcel to cart_items list
         for item_id, item_qty in cart_parcels.items():
             if isinstance(item_qty, int):
                 parcel = get_object_or_404(Parcel, pk=item_id)

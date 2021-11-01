@@ -11,7 +11,8 @@ $(document).ready(() => {
             window.location.replace(currentUrl);
         });
     });
-    
+
+    // Highlight chosen parcel
     param = currentUrl.searchParams.get('parcel')
     if(param == 'parcel_1' || param == null) {
         $('#parcel_1').css({

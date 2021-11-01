@@ -142,19 +142,25 @@
                             <input type="hidden">
                         </fieldset>
 
-                        <div class="submit-button text-right mt-5 mb-2">                    
+                        <div class="submit-button text-right mt-5 mb-2"> 
+                            
+                            <!-- Adjust cart button -->
                             <a href="{% url 'view_cart' %}" class="btn btn-outline-black rounded-0">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>
                                 <span class="font-weight-bold">Adjust Cart</span>
                             </a>
+
+                            <!-- Complete donation button -->
                             <button id="submit-button" class="btn btn-danger btn-shadow rounded-0">
                                 <span class="font-weight-bold">Complete Donation</span>
                                 <span class="icon">
                                     <i class="fas fa-lock"></i>
                                 </span>
                             </button>
+
+                            <!-- info -->
                             <p class="small text-danger mt-3">
                                 <span class="icon">
                                     <i class="fas fa-exclamation-circle"></i>
@@ -172,6 +178,7 @@
 
     </div>
 
+    <!-- Loading screen -->
     <div id="loading-overlay">
         <h1 class="text-light logo-font loading-spinner">
             <span class="icon">

@@ -32,23 +32,40 @@ def add_to_cart(request, item_id, sku):
         cart_products = cart['products']
         cart_parcels = cart['parcels']
 
+        # Verify if quantity from POST request is greater than zero
         if quantity > 0:
+
+            # Check if added item is a parcel
             if item_type == 'pc':
                 parcel = Parcel.objects.get(pk=item_id)
+
+                # If the parcel is already in the cart, then
+                # increase the quantity in the cart
                 if item_id in list(cart_parcels.keys()):
                     cart_parcels[item_id] += quantity
                     messages.success(request, f'Updated {parcel.name} quantity to\
                         {cart_parcels[item_id]}.')
+
+                # If the parcel is not in the cart,
+                # then add to the cart
                 else:
                     cart_parcels[item_id] = quantity
                     messages.success(request, f'Added {parcel.name} to\
                         your shopping cart.')
+
+            # If the item is not a parcel (a single product in this case)
             else:
                 product = Product.objects.get(pk=item_id)
+
+                # If the product is already in the cart, then
+                # increase the quantity in the cart
                 if item_id in list(cart_products.keys()):
                     cart_products[item_id] += quantity
                     messages.success(request, f'Updated {product.name} quantity to\
                         {cart_products[item_id]}.')
+
+                # If the product is not in the cart,
+                # then add to the cart
                 else:
                     cart_products[item_id] = quantity
                     messages.success(request, f'Added {product.name} to\
@@ -82,8 +99,14 @@ def add_all_cart(request):
         cart_products = cart['products']
 
         for item_id in id_list:
+
+            # If any item is already in the cart,
+            # then increase the quantity in the cart
             if item_id in list(cart_products.keys()):
                 cart_products[item_id] += quantity
+
+            # If none of the items is in the cart,
+            # then add to the cart with quantity of 1
             else:
                 cart_products[item_id] = quantity
 
@@ -114,14 +137,23 @@ def update_cart(request, item_id, sku):
         cart_products = cart['products']
         cart_parcels = cart['parcels']
 
+        # Verify if quantity from request i greater than zero
         if quantity > 0:
+
+            # Check if item is a parcel
             if item_type == 'pc':
                 parcel = Parcel.objects.get(pk=item_id)
+
+                # Update parcel quantity in the cart
                 cart_parcels[item_id] = quantity
                 messages.success(request, f'Updated {parcel.name} quantity to\
                         {cart_parcels[item_id]}.')
+
+            # It's not a parcel (a single product in this case)
             else:
                 product = Product.objects.get(pk=item_id)
+
+                # Update product quantity in the cart
                 cart_products[item_id] = quantity
                 messages.success(request, f'Updated {product.name} quantity to\
                         {cart_products[item_id]}.')
@@ -152,13 +184,20 @@ def remove_from_cart(request, item_id, sku):
         cart_products = cart['products']
         cart_parcels = cart['parcels']
 
+        # Check if item is a parcel
         if item_type == 'pc':
             parcel = Parcel.objects.get(pk=item_id)
+
+            # Remove the parcel from cart
             cart_parcels.pop(item_id)
             messages.success(request, f'Removed {parcel.name} from\
                     your shopping cart.')
+
+        # It's not a parcel (a single product in this case)
         else:
             product = Product.objects.get(pk=item_id)
+
+            # Remove product from cart
             cart_products.pop(item_id)
             messages.success(request, f'Removed {product.name} from\
                     your shopping cart.')
@@ -178,6 +217,8 @@ def clear_cart(request):
 
     try:
         if 'cart' in request.session:
+
+            # Delete cart session (remove all items from cart)
             del request.session['cart']
             messages.success(request, 'Removed all products from\
                     your shopping cart.')

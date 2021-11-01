@@ -1,4 +1,4 @@
-/* Title and Description */
+/*-------------------------------- Title and Description  */
 
 .sponsor-title {
     font-size: 2em;
@@ -41,7 +41,7 @@
     color: #aab7c4;
 }
 
-/* Loading Screen */
+/*-------------------------------- Loading Screen */
 
 #loading-overlay {
 	display: none;

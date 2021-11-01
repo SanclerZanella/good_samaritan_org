@@ -1,3 +1,4 @@
+/* ----------------------- Sponsorship page */
 /* Page Cover Picture and Title */
 .sponsor-cover {
     background: url("/media/sponsorship/sponsorship_cover.jpg") no-repeat center center;
@@ -29,8 +30,7 @@
     visibility: hidden;
 }
 
-/* Media Queries */
-
+/* ----------------------- Media Queries */
 @media (min-width: 1440px) {
     .sponsor-option {
         margin-top: 5rem;

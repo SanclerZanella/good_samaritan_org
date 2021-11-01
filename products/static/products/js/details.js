@@ -1,3 +1,4 @@
+// Increase quantity input in details page
 $('.add-qty').each((key, value) => {
     $(value).click((e) => {
         e.preventDefault();
@@ -18,9 +19,10 @@ $('.add-qty').each((key, value) => {
     });
 });
 
+// Keep quantity always in 1
 $('#quantity-field').change(() => {
     let field_val = parseInt($('#quantity-field').val());
-    if(field_val == 0) {
+    if(field_val == 0 || field_val <= 0) {
         let default_val = 1;
         $('#quantity-field').val(default_val);
     }
