@@ -55,9 +55,15 @@
         </div>
 
         <div>
-            <div class="info-wrapper">
-                <span class="info info-title">Donation Number:</span> <span class="info"> {{ order.order_number }} </span>
-            </div>
+            {% if order.order_number %}
+                <div class="info-wrapper">
+                    <span class="info info-title">Donation Number:</span> <span class="info"> {{ order.order_number }} </span>
+                </div>
+            {% else %}
+                <div class="info-wrapper">
+                    <span class="info info-title">Donation Number:</span> <span class="info"> {{ order.subscription.id }} </span>
+                </div>
+            {% endif %}
 
             <div class="info-wrapper">
                 <span class="info info-title">Donation Date:</span> <span class="info"> {{ order.date }} </span>
@@ -78,21 +84,29 @@
             </thead>
     
             <tbody>
-                {% for item in order.lineitems.all %}
-                    {% if item.product %}
-                        <tr>
-                            <td>{{ item.product.name }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>{{ item.product.price }}</td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td>{{ item.parcel.name }}</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>{{ item.parcel.price }}</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
+                {% if order.lineitems %}
+                    {% for item in order.lineitems.all %}
+                        {% if item.product %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ item.product.price }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ item.parcel.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ item.parcel.price }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>{{ order.subscription.plan.product }}</td>
+                        <td>1</td>
+                        <td>${{ order.grand_total }}</td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
 
@@ -130,7 +144,7 @@
 
         <div>
             <div class="info-wrapper">
-                <span class="info info-title">Grand Total:</span> <span class="info"> {{ order.grand_total }} </span>
+                <span class="info info-title">Grand Total:</span> <span class="info"> ${{ order.grand_total }} </span>
             </div>
         </div>
 </body>

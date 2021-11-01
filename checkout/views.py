@@ -796,7 +796,7 @@ def subscription_success(request, customer_id):
 
     template = 'checkout/subscription_success.html'
     context = {
-        'sponsor': 'sponsor',
+        'sponsor': sponsor,
     }
 
     return render(request, template, context)
@@ -807,7 +807,15 @@ def render_pdf(request, order_number):
     Create pdf with donation details after checkout
     """
 
-    order = get_object_or_404(Order, order_number=order_number)
+    order_type = order_number.split('_')[0]
+
+    if order_type == 'cus':
+        customer_data = get_object_or_404(Customer, id=order_number)
+        order = get_object_or_404(Sponsor, customer=customer_data)
+
+    else:
+        order = get_object_or_404(Order, order_number=order_number)
+
     path = 'checkout/document/checkout_success_print.html'
     context = {
         'order': order,
