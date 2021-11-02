@@ -1,5 +1,9 @@
 from django.shortcuts import (render, get_object_or_404)
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from .models import UserProfile
+from checkout.models import Sponsor
+from djstripe.models import Subscription, Customer
 from .forms import UserProfileForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -10,10 +14,55 @@ from checkout.models import Order
 def profile(request):
     """ Display the user's profile. """
 
-    profile_user = get_object_or_404(UserProfile, user=request.user)
+    profile_user = UserProfile.objects.get(user=request.user)
+    user_auth = get_object_or_404(User, username=request.user)
 
     # Render profile form with default details
     profileForm = UserProfileForm(instance=profile_user)
+
+    if request.method == 'POST':
+        form_data = {
+            'default_full_name': request.POST['default_full_name'],
+            'default_street_address1': request.POST['default_street_address1'],
+            'default_street_address2': request.POST['default_street_address2'],
+            'default_town_or_city': request.POST['default_town_or_city'],
+            'default_country': request.POST['default_country']
+        }
+
+        user_profile_form = UserProfileForm(form_data, instance=profile_user)
+        if user_profile_form.is_valid():
+            user_profile_form.save()
+
+            messages.success(request, "Profile details updated")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    sponsor_exist = Sponsor.objects.filter(user_profile=profile_user,
+                                           email=user_auth.email,
+                                           ).exists()
+    sponsor = None
+
+    if sponsor_exist:
+        sponsor = Sponsor.objects.get(user_profile=profile_user,
+                                      email=user_auth.email)
+    else:
+        sponsor_exist = Sponsor.objects.filter(email=user_auth.email
+                                               ).exists()
+
+        if sponsor_exist:
+            sponsor = Sponsor.objects.get(email=user_auth.email)
+            user_null = Sponsor.objects.filter(
+                user_profile__isnull=True).exists()
+
+            if user_null:
+                Sponsor.objects.filter(
+                    email=user_auth.email).update(user_profile=profile_user)
+
+    if not sponsor_exist:
+        sponsor_exist = Sponsor.objects.filter(user_profile=profile_user
+                                               ).exists()
+
+        if sponsor_exist:
+            sponsor = Sponsor.objects.get(user_profile=profile_user)
 
     orders = profile_user.orders.all()
 
@@ -23,14 +72,20 @@ def profile(request):
         'profileForm': profileForm,
         'orders': orders,
         'on_profile_page': True,
+        'sponsor': sponsor
     }
 
     return render(request, template, context)
 
 
+@login_required
+def redeem_subscription(request):
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 def order_history(request, order_number):
     """
-    A view to render the checkout success
+    A view to past confirmation for order
     """
 
     order = get_object_or_404(Order, order_number=order_number)

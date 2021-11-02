@@ -74,54 +74,59 @@
                     <div class="col-12 col-md-8 my-3 sponsor-card">
 
                         <!-- Sponsorship details -->
-                        <div class="row no-gutters">
-                            <div class="col-5">
+                        <div class="row no-gutters sponsor-details">
+                            <div class="col-12 col-lg-5">
                                 <p class="my-1 ml-1"><strong>Sponsorship:</strong> {{ subscription.plan.product }}</p>
                                 <p class="my-1 ml-1"><strong>Sponsorship id:</strong> {{ subscription.id }}</p>
                                 <p class="my-1 ml-1"><strong>Sponsor:</strong> {{ sponsor.full_name }}</p>
                             </div>
-                            <div class="col-4">
+                            <div class="col-12 col-lg-4">
                                 <p class="my-1 ml-1"><strong>Email:</strong> {{ sponsor.email }}</p>
                                 <p class="my-1 ml-1"><strong>Country:</strong> {{ sponsor.country.name }}</p>
                                 <p class="my-1 ml-1"><strong>Price:</strong> ${{ sponsor.grand_total }}/month</p>
                             </div>
 
                             <!-- Remove sponsorship button and modal -->
-                            <div class="col-3 my-auto">
-                                <button class="ml-1 btn btn-danger btn-sm btn-shadow text-center finish-sponsor-btn">Finish Sponsorship</button>
-
-                                <!-- Remove sponsorship Modal (from W3Schools) -->
-                                <div id="modal_finish-sponsor" class="modal">
-
-                                    <!-- Modal content -->
-                                    <div class="modal-content">
-                                        <div class="row no-gutters">
-                                            <div class="col-12">
-                                                <span class="closeBtn close-modal text-right">&times;</span>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row no-gutters">
-                                            <div class="col-12">
-                                                <p class="text-center">Yor are going to Finish <span class="font-weight-bold">{{ subscription.plan.product }}</span></p>
-                                                <p class="text-center">Are you sure?</p>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row no-gutters">
-                                            <div class="col-6">
-                                                <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Cancel</a>
-                                            </div>
-                                            <div class="col-6 text-right">
-                                                <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'finish_sponsorship' sponsor.customer %}">Finish Sponsorship</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  
-                                </div>
-
+                            <div class="col-12 col-lg-3 my-auto">
+                                <button class="ml-1 btn btn-danger btn-sm btn-shadow finish-sponsor-btn">Finish Sponsorship</button>
                             </div>
                         </div>
+
+                        <!-- Remove sponsorship Modal (from W3Schools) -->
+                        <div id="modal_finish-sponsor" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <div class="row no-gutters">
+                                    <div class="col-12">
+                                        <span class="closeBtn close-modal text-right">&times;</span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row no-gutters">
+                                    <div class="col-12">
+                                        <p class="text-center">Yor are going to Finish <span class="font-weight-bold">{{ subscription.plan.product }}</span></p>
+                                        <p class="text-center">Are you sure?</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row no-gutters">
+                                    <div class="col-6">
+                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow btn-sm" >Cancel</a>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <a class="btn btn-lg btn-danger btn-shadow btn-sm" href="{% url 'finish_sponsorship' sponsor.customer %}">Finish Sponsorship</a>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-12 back-to-form">
+                        <a class="text-danger font-weight-bold" href="{% url 'finish_sponsorship_form' %}">&#8592 Back to form</a>
                     </div>
                 </div>
             {% endif %}

@@ -108,7 +108,7 @@
             <div class="row no-gutters content-alignment">
                 <div class="col-10">
 
-                    <form action="" method="POST" id="profile-form">
+                    <form action="{% url 'profile' %}" method="POST" id="profile-form">
                         {% csrf_token %}
 
                         <fieldset class="mb-5">
@@ -129,6 +129,87 @@
                 </div>
             </div>
 
+        </div>
+        
+        <!-- Subscription -->
+        <div class="col-12">
+            <hr>
+            <div class="row no-gutters content-alignment">
+                <div class="col-12 text-center">
+                    <h2 class="font-weight-bold">Subscrition</h2>
+                </div>
+                {% if sponsor %}
+                    <div class="col-12 col-md-8 my-3 sponsor-card">
+                        <!-- Sponsorship details -->
+                        <div class="row no-gutters sponsor-details">
+                            <div class="col-12 col-lg-5">
+                                <p class="my-1 ml-1"><strong>Sponsorship:</strong> {{ sponsor.subscription.plan.product }}</p>
+                                <p class="my-1 ml-1"><strong>Sponsorship id:</strong> {{ sponsor.subscription.id }}</p>
+                                <p class="my-1 ml-1"><strong>Sponsor:</strong> {{ sponsor.full_name }}</p>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <p class="my-1 ml-1"><strong>Email:</strong> {{ sponsor.email }}</p>
+                                <p class="my-1 ml-1"><strong>Country:</strong> {{ sponsor.country.name }}</p>
+                                <p class="my-1 ml-1"><strong>Price:</strong> ${{ sponsor.grand_total }}/month</p>
+                            </div>
+
+                            <!-- Remove sponsorship button and modal -->
+                            <div class="col-12 col-lg-3 my-auto">
+                                <button class="ml-1 btn btn-danger btn-sm btn-shadow finish-sponsor-btn">Finish Sponsorship</button>
+                            </div>
+                        </div>
+
+                        <!-- Remove sponsorship Modal (from W3Schools) -->
+                        <div id="modal_finish-sponsor" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <div class="row no-gutters">
+                                    <div class="col-12">
+                                        <span class="closeBtn close-modal text-right">&times;</span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row no-gutters">
+                                    <div class="col-12">
+                                        <p class="text-center">Yor are going to Finish <span class="font-weight-bold">{{ sponsor.subscription.plan.product }}</span></p>
+                                        <p class="text-center">Are you sure?</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row no-gutters">
+                                    <div class="col-6">
+                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow btn-sm" >Cancel</a>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <a class="btn btn-lg btn-danger btn-shadow btn-sm" href="{% url 'finish_sponsorship' sponsor.customer %}">Finish Sponsorship</a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                    </div>
+                {% else %}
+                    <div class="col-12 col-md-8 my-3 text-center content-alignment">
+                        <form class="mt-5" action="">
+                            {% csrf_token %}
+
+                            <fieldset>
+                                <label class="d-block" for="redeem-subs">Redeem subscription with subscription id:</label>
+                                <input id="redeem-subs" name="redeem-subs" class="mb-1" type="text" required>
+                                <label class="d-block" for="last-digs">Last 4 digits of the card used to pay this subscription:</label>
+                                <input id="last-digs" name="last-digs" class="mb-1" type="text" required>
+                            </fieldset>
+
+                            <fieldset>
+                                <button class="btn btn-danger btn-sm btn-shadow mt-3">Redeem</button>
+                            </fieldset>
+
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
         </div>
 
     </div>
@@ -155,7 +236,7 @@
     <!-- Custom Js -->
     {% block postloadjs %}
         {{ block.super }}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="{% static 'profiles/js/profile.js' %}"></script>
     {% endblock %}
 {% endblock %}

@@ -5,6 +5,7 @@ function open_modal(trigger, modal, closeBtn) {
     });
 
     closeBtn.click(() => {
+        $('.finish-sponsor-btn').prop("disabled", false);
         modal.hide(500);
     });
 };

@@ -15,6 +15,7 @@ from django.conf import settings
 # Models
 from .models import Order, OrderLineItem, Sponsor
 from products.models import Product, Parcel
+from django.contrib.auth.models import User
 from profiles.models import UserProfile
 from djstripe.models import Product as Sponsorship
 from djstripe.models import Price, Customer, Subscription, Plan
@@ -362,6 +363,16 @@ def subscription(request, sponsor_id):
     sponsor_price = Price.objects.get(product=sponsor_id)
     form = SponsorForm()
 
+    if request.user.is_authenticated:
+        user = UserProfile.objects.get(user=request.user)
+        form = SponsorForm(initial={
+            'full_name': user.default_full_name,
+            'street_address1': user.default_street_address1,
+            'street_address2': user.default_street_address2,
+            'town_or_city': user.default_town_or_city,
+            'country': user.default_country
+        })
+
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
 
     context = {
@@ -377,14 +388,24 @@ def subscription(request, sponsor_id):
         # the user already has a sponsorship(subscription)
 
         user = UserProfile.objects.get(user=request.user)
-        sponsor_exist = Sponsor.objects.filter(user_profile=user).exists()
+        user_auth = User.objects.get(username=request.user)
+        user_exist = Sponsor.objects.filter(user_profile=user).exists()
+        email_exist = Sponsor.objects.filter(email=user_auth.email).exists()
 
-        if sponsor_exist:
+        if user_exist or email_exist:
             # If user already has a sponsorship(subscription)
             # then verify if current sponsor option is the
             # same which user has
 
-            sponsor = Sponsor.objects.get(user_profile=user)
+            sponsor = None
+            if user_exist and email_exist:
+                sponsor = Sponsor.objects.get(user_profile=user,
+                                              email=user_auth.email)
+            elif user_exist and not email_exist:
+                sponsor = Sponsor.objects.get(user_profile=user)
+            elif email_exist and not user_exist:
+                sponsor = Sponsor.objects.get(email=user_auth.email)
+
             subs = Subscription.objects.get(customer=sponsor.customer)
             plan = Plan.objects.get(id=subs.plan.id)
             current_option = Sponsorship.objects.get(id=sponsor_id)
@@ -440,11 +461,21 @@ def subscription_checkout(request):
         # Verify if user is logged
         if request.user.is_authenticated:
             user = UserProfile.objects.get(user=request.user)
-            sponsor_exist = Sponsor.objects.filter(user_profile=user).exists()
+            user_exist = Sponsor.objects.filter(user_profile=user).exists()
+            email_exist = Sponsor.objects.filter(email=email).exists()
 
             # Verify if there is a sponsor object for this user on db
-            if sponsor_exist:
-                sponsor = Sponsor.objects.get(user_profile=user)
+            if user_exist or email_exist:
+
+                sponsor = None
+                if user_exist and email_exist:
+                    sponsor = Sponsor.objects.get(user_profile=user,
+                                                  email=email)
+                elif user_exist and not email_exist:
+                    sponsor = Sponsor.objects.get(user_profile=user)
+                elif email_exist and not user_exist:
+                    sponsor = Sponsor.objects.get(email=email)
+
                 subscrip = Subscription.objects.get(customer=sponsor.customer)
                 plan = Plan.objects.get(id=subscrip.plan)
 

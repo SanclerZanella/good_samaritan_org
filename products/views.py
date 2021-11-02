@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import user_passes_test
 from .models import (Product, Category,
                      Parcel)
 from checkout.models import Sponsor
-from djstripe.models import Subscription, Plan, Customer
+from djstripe.models import Subscription, Customer
 from djstripe.models import Product as Sponsorship
 from .forms import ProductForm, ParcelForm
 from checkout.forms import SponsorForm
@@ -493,13 +493,48 @@ def finish_sponsorship_form(request):
     if request.method == 'POST':
         try:
             subs_id = request.POST['subscription_id'].strip()
+            full_name = request.POST['full_name'].strip()
+            email = request.POST['email'].strip()
+            address1 = request.POST['street_address1'].strip()
+            address2 = request.POST['street_address2'].strip()
+            city = request.POST['town_or_city'].strip()
+            country = request.POST['country'].strip()
+
             subs_exist = Subscription.objects.filter(id=subs_id).exists()
 
+            sponsor_exist = Sponsor.objects.filter(full_name=full_name,
+                                                   email=email,
+                                                   street_address1=address1,
+                                                   street_address2=address2,
+                                                   town_or_city=city,
+                                                   country=country
+                                                   ).exists()
+
             # Check if sponsorship exists
-            if subs_exist:
+            if subs_exist and sponsor_exist:
                 subscription = Subscription.objects.get(id=subs_id)
-                sponsor = Sponsor.objects.get(customer=subscription.customer)
-                subs_query = True
+                sponsor = Sponsor.objects.get(full_name=full_name,
+                                              email=email,
+                                              street_address1=address1,
+                                              street_address2=address2,
+                                              town_or_city=city,
+                                              country=country
+                                              )
+
+                # Check if sponsor and subscription are related
+                if sponsor.subscription == subscription:
+                    subs_query = True
+                else:
+                    subs_query = None
+                    subscription = None
+                    sponsor = None
+                    messages.error(request, "We can't find the subscription with this\
+                        subscription id. Are you providing the\
+                            right subscription id?")
+
+                    return HttpResponseRedirect(
+                        request.META.get('HTTP_REFERER'))
+
             else:
                 subs_query = None
                 subscription = None
@@ -508,6 +543,7 @@ def finish_sponsorship_form(request):
                     subscription id. Are you providing the right subscription\
                         id?")
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
         except Exception:
             subs_query = None
             subscription = None
@@ -537,7 +573,7 @@ def finish_sponsorship(request, customer_id):
     customer = Customer.objects.get(id=customer_id)
     Sponsor.objects.filter(customer=customer).delete()
     Customer.objects.filter(id=customer_id).delete()
-    
+
     # Delete Customer from stripe
     stripe.api_key = settings.STRIPE_SECRET_KEY
     stripe.Customer.delete(customer_id)

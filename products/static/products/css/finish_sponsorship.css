@@ -7,11 +7,17 @@
     border: 1px solid #e72b37;
 }
 
+.back-to-form a {
+  font-size: 1.2em;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
 /* ----------------------- Modal */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 9999;
     padding-top: 100px;
     left: 0;
     top: 0;
@@ -49,4 +55,30 @@
 
 .modal-body p {
     font-size: 1.3em;
+}
+
+/* ----------------------- Media Queries */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sponsor-details {
+    text-align: center;
+  }
+  .finish-sponsor-btn {
+    margin-bottom: 1rem;
+  }
+  .modal-content {
+    width: 80%;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .sponsor-details {
+    text-align: center;
+  }
+  .finish-sponsor-btn {
+    margin-bottom: 1rem;
+  }
+  .modal-content {
+    width: 100%;
+  }
 }
