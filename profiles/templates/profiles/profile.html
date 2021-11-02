@@ -131,14 +131,16 @@
 
         </div>
         
-        <!-- Subscription -->
+        <!-- Sponsorship -->
         <div class="col-12">
             <hr>
             <div class="row no-gutters content-alignment">
-                <div class="col-12 text-center">
-                    <h2 class="font-weight-bold">Subscrition</h2>
-                </div>
+
+                <!-- Display any sponsorship that user currently has -->
                 {% if sponsor %}
+                    <div class="col-12 text-center">
+                        <h2 class="font-weight-bold">Sponsorship</h2>
+                    </div>
                     <div class="col-12 col-md-8 my-3 sponsor-card">
                         <!-- Sponsorship details -->
                         <div class="row no-gutters sponsor-details">
@@ -191,15 +193,26 @@
 
                     </div>
                 {% else %}
+
+                    <!-- 
+                        Redeem any sponsorship created before the user
+                        create an account, if the user has not already an
+                        sponsorship
+                     -->
+                    <div class="col-12 text-center">
+                        <h2 class="font-weight-bold">Redeem Sponsorship</h2>
+                    </div>
+
+                    <!-- Redeem sponsorship form -->
                     <div class="col-12 col-md-8 my-3 text-center content-alignment">
-                        <form class="mt-5" action="">
+                        <form id="redeem-form" class="mt-5" action="{% url 'redeem_subscription' %}" method="POST">
                             {% csrf_token %}
 
                             <fieldset>
-                                <label class="d-block" for="redeem-subs">Redeem subscription with subscription id:</label>
-                                <input id="redeem-subs" name="redeem-subs" class="mb-1" type="text" required>
-                                <label class="d-block" for="last-digs">Last 4 digits of the card used to pay this subscription:</label>
-                                <input id="last-digs" name="last-digs" class="mb-1" type="text" required>
+                                <label class="d-block mt-2" for="redeem-subs">Sponsorship id:</label>
+                                <input id="redeem-subs" name="redeem-subs" class="mb-1" type="text">
+                                <label class="d-block mt-2" for="last-digits">Last 4 digits of the card used to pay the sponsorship:</label>
+                                <input id="last-digits" name="last-digits" class="mb-1" type="number">
                             </fieldset>
 
                             <fieldset>

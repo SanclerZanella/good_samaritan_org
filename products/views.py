@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import user_passes_test
 from .models import (Product, Category,
                      Parcel)
 from checkout.models import Sponsor
-from djstripe.models import Subscription, Customer
+from djstripe.models import Subscription, Customer, PaymentMethod
 from djstripe.models import Product as Sponsorship
 from .forms import ProductForm, ParcelForm
 from checkout.forms import SponsorForm
@@ -572,6 +572,8 @@ def finish_sponsorship(request, customer_id):
     # Delete Sponsor and Customer object
     customer = Customer.objects.get(id=customer_id)
     Sponsor.objects.filter(customer=customer).delete()
+    PaymentMethod.objects.filter(
+        id=customer.default_payment_method.id).delete()
     Customer.objects.filter(id=customer_id).delete()
 
     # Delete Customer from stripe

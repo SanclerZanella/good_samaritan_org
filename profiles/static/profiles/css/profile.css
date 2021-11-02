@@ -43,6 +43,10 @@
     border: 1px solid #e72b37;
 }
 
+.alert {
+    border: 1px solid red;
+}
+
 /* ----------------------- Modal */
 .modal {
     display: none;

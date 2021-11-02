@@ -1,9 +1,9 @@
-from django.shortcuts import (render, get_object_or_404)
+from django.shortcuts import (render, get_object_or_404, redirect)
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from .models import UserProfile
 from checkout.models import Sponsor
-from djstripe.models import Subscription, Customer
+from djstripe.models import Subscription, Customer, PaymentMethod
 from .forms import UserProfileForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -80,7 +80,49 @@ def profile(request):
 
 @login_required
 def redeem_subscription(request):
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    """
+    Redeem any sponsorship created before the user creates
+    an account
+    """
+    if not request.user.is_authenticated:
+        return redirect('home')
+
+    if request.method == 'POST':
+        subs_id = request.POST['redeem-subs']
+        last_digts_form = request.POST['last-digits']
+
+        profile_user = UserProfile.objects.get(user=request.user)
+        user_auth = get_object_or_404(User, username=request.user)
+
+        subs_exist = Subscription.objects.filter(id=subs_id).exists()
+
+        # Check if the subscription provided exist
+        if subs_exist:
+            subscription = Subscription.objects.get(id=subs_id)
+            sponsor = Sponsor.objects.get(subscription=subscription)
+            pay_method = sponsor.customer.default_payment_method.card
+            last_digts_card = pay_method['last4']
+
+            # Check that the last 4 digits provided by user
+            # match the last 4 digits from payment card
+            if last_digts_form == last_digts_card:
+
+                # Update sponsor with the current user profile
+                # and email
+                Sponsor.objects.filter(
+                    subscription=subscription
+                    ).update(user_profile=profile_user, email=user_auth.email)
+
+                messages.success(request, "Sponsorship Redemeed!")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            else:
+                messages.error(request, "The sponsorship id or the last 4 digits\
+                    does not match with any sponsorship")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            messages.error(request, "The sponsorship id or the last 4 digits\
+                    does not match with any sponsorship")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def order_history(request, order_number):
