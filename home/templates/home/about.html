@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'home/css/about.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<!-- Cover Picture and Title -->
+<section>
+        
+    <div class="row no-gutters hero-image">
+        <div class="col-12 hero-text">
+            <h1>Who We Are</h1>
+        </div>
+    </div>
+
+</section>
+
+<section>
+    <div class="row no-gutters content-alignment about-presentation">
+        <div class="col-10 mt-5 text-center">
+            <p>
+                Poor children in Mozambique only eat once a day, usually at 6 pm.
+                Among the causes of hunger are drought, not appropriate cultivation land,
+                undiversified type of cultivation, corruption in politics and others.
+                The National Institute of Statistics in Mozambique indicates that 35%
+                of the population live in chronic food insecurity and 43% of children
+                0-5 years suffer from chronic malnutrition.
+            </p>
+            <p>
+                Many children have inadequate nutrient intake due to a poor diet, infectious
+                diseases, especially malaria, diarrheal diseases and AIDS, in short, poverty.
+                about one and a half million people live with the AIDS virus in Mozambique,
+                and only 640,000 seek treatment. About a third of the infected population
+                abandons treatment in the first year, due to lack of food and information,
+                but also due to lack of resources in the national health system.
+            </p>
+            <p>
+                In an interview with a widow named Sara, she said that she lost her husband
+                in 2016 to AIDS. Also infected, she says that she has abandoned the treatment
+                because the treatment is too strong and she needs to eat something before taking
+                the medicine. Their children do not eat during the day and are always without
+                strength to play with their friends.
+            </p>
+        </div>
+        <div class="col-10 my-5 text-center">
+            <h2 class="font-weight-bold">How does the Good Samaritan organization arise in Mozambique?</h2>
+        </div>
+
+        <div class="col-10">
+            <div class="row no-gutters">
+                <div class="col-12 col-lg-6">
+                    <img src="{{ MEDIA_URL }}home/cover-land.jpg" alt="">
+                </div>
+                <div class="col-12 col-lg-6 text-left org-rise my-auto">
+                    <p>
+                        The care for the community of Quelimane in Mozambique began with Pastor Danilo Montanha and his
+                        family concerned about the precarious situation of orphaned children, widows and abandoned
+                        elderly in their community, living with extreme poverty.
+                    </p>
+                    <p>
+                        After being dismissed from Concern Worldwide, the company he worked for, he received compensation
+                        of 150,000 meticais, equivalent to $2,350.70. For some years, the community was supported by Danilo
+                        and his wife, with their local efforts.
+                    </p>
+                    <p>
+                        In 2015, through the internet, pastor Danilo met the Brazilian pastor Leonidas Duarte,
+                        who embraced the project and has worked tirelessly in search of help for this place. Today
+                        we care for 80 orphaned and vulnerable children, 48 widows and 15 elderly people. We take
+                        care of the distribution of food, clothing, school supplies and agricultural resources.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-10 my-5">
+            <div class="row no-gutters padoca">
+                <div class="col-12 col-lg-6 org-rise my-auto">
+                    <p>
+                        In July 2017, the village was visited by the baker Alex Ribeiro Duarte, who taught the
+                        community how to make bread from natural sources and created a structure with ovens and other
+                        necessary equipment so that the community could produce bread and thus survive by producing
+                        its own food.
+                    </p>
+                    <p>
+                        <a class="text-danger font-weight-bold" href="https://4db79901-ccd2-49b3-8eb6-4150756d7cf7.filesusr.com/ugd/402649_01f1e632e8fd4045883bd4f5df8b6f82.pdf" target="_blank">Read more about this project here!</a>
+                    </p>
+                </div>
+                <div class="col-12 col-lg-6 text-center">
+                    <img src="{{ MEDIA_URL }}home/padoca.jpg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-10 my-5">
+            <div class="row no-gutters">
+                <div class="col-12 col-lg-6">
+                    <img src="{{ MEDIA_URL }}home/changes.jpg" alt="">
+                </div>
+                <div class="col-12 col-lg-6 text-left org-rise my-auto">
+                    <div class="row no-gutters">
+                        <div class="col-12 text-center my-2">
+                            <h3 class="font-weight-bold">Main Changes In The Village</h3>
+                        </div>
+                        <div class="col-12 text-center list">
+                            <ul>
+                                <li>Access to clothing in good condition;</li>
+                                <li>Access to more than one meal a day;</li>
+                                <li>Training for making bread;</li>
+                                <li>Training to sew clothes;</li>
+                                <li>Access to school supplies;</li>
+                                <li>Hope for a better future.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-10 mb-5">
+            <hr>
+            <div class="row no-gutters">
+
+                <div class="col-12 col-lg-6">
+                    <div class="row no-gutters">
+                        <div class="col-12 text-center my-2">
+                            <h3 class="font-weight-bold">Challenges</h3>
+                        </div>
+                        <div class="col-12 text-center list">
+                            <ul>
+                                <li>Lack of enough food for the daily routine;</li>
+                                <li>Lack of an appropriate building that works as
+                                    an orphanage center to house our children;</li>
+                                <li>Lack of means of transport that would facilitate
+                                    the transport of children, widows and the elderly,
+                                    on the way to medical appointments and school;</li>
+                                <li>Lack of a local chicken breeding project to produce
+                                    eggs and meat to feed children;</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 text-left org-rise my-auto">
+                    <div class="row no-gutters">
+                        <div class="col-12 text-center my-2">
+                            <h3 class="font-weight-bold">Perspectives</h3>
+                        </div>
+                        <div class="col-12 text-center list">
+                            <ul>
+                                <li>To be able to provide assistance to orphans and vulnerable children, establishing
+                                    a shelter that works as an orphanage center and also in the construction of a
+                                    teaching site for pre-school learning, as the government of Mozambique does not
+                                    provide pre-school education;</li>
+                                <li>Develop agricultural programs for the development of the village, through self-sufficiency,
+                                    obtained from the population in the production of seeds, vegetables, as well as the raising
+                                    of chicken;</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

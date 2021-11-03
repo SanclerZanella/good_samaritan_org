@@ -8,3 +8,12 @@ def index(request):
     template = 'home/index.html'
 
     return render(request, template)
+
+
+def about(request):
+    """
+    A view to render the about page
+    """
+    template = 'home/about.html'
+
+    return render(request, template)
