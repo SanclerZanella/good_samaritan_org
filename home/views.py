@@ -17,3 +17,12 @@ def about(request):
     template = 'home/about.html'
 
     return render(request, template)
+
+
+def faq(request):
+    """
+    A view to render the FAQ page
+    """
+    template = 'home/faq.html'
+
+    return render(request, template)

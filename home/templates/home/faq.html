@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Custom css -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'home/css/faq.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <div class="row no-gutters my-5 content-alignment page-title">
+        <div class="col-8">
+            <h1 class="font-weight-bold">Frequently Asked Questions</h1>
+        </div>
+        <div class="col-8 my-5">
+            <p>
+                The below questions are our most frequently asked questions at The Good Samaritan Org.
+                If your question hasn't been answered below, please get in touch through the contact us page.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ section from https://www.bootdey.com/snippets/view/Frequently-Asked-Questions-section#css -->
+<section>
+    <div class="faq_area section_padding_130 my-5" id="faq">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- FAQ Area-->
+                <div class="col-12 col-sm-10 col-lg-8">
+                    <div class="accordion faq-accordian" id="faqAccordion">
+
+                        <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                            <div class="card-header" id="headingTwo">
+                                <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Who receives food parcels?<span class="lni-chevron-up"></span></h6>
+                            </div>
+                            <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    <p>Our shelves are always in need of food for our individuals and families who are facing poverty and health problems.</p>
+                                    <p>Often we hear that people who come to us for food are worried whether they can feed themselves or their families or if they will be forced to choose between food and other life essentials.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                            <div class="card-header" id="headingOne">
+                                <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Who receives food parcels?<span class="lni-chevron-up"></span></h6>
+                            </div>
+                            <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    <p>People from all walks of life come through the doors of The Salvation Army looking for help with food. We see many</p>
+                                    <p>individuals, solo parents, small and large families and those who are in work and those who aren’t.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                            <div class="card-header" id="headingThree">
+                                <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">How do food parcels provide a hand up?<span class="lni-chevron-up"></span></h6>
+                            </div>
+                            <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    <p>For someone to receive food assistance for a prolonged period is a great relief.</p>
+                                    <p>Food is at the base of the life essentials, well nourished our community can keep health treatments, studies and hope of a prosperous future.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                            <div class="card-header" id="headingFour">
+                                <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">How do I change details on my account?<span class="lni-chevron-up"></span></h6>
+                            </div>
+                            <div class="collapse" id="collapseFour" aria-labelledby="headingFour" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    <p>
+                                        To change any details on your account, please log in to your account using the email address
+                                        and password you chose when you created an account. In your account dashboard,
+                                        use the form to change your details.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                            <div class="card-header" id="headingFive">
+                                <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">How do I set up a recurring donation?<span class="lni-chevron-up"></span></h6>
+                            </div>
+                            <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-parent="#faqAccordion">
+                                <div class="card-body">
+                                    <p>
+                                        You can choose one of the three options of sponsorship (sponsor a kid, sponsor a widow or sponsor an Elderly),
+                                        and your card will be charged every month with the chose sponsorship value. Just one sponsorship is allowed
+                                        per user or email.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Support Button-->
+                    <div class="support-button text-center d-flex align-items-center justify-content-center mt-4 wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                        <i class="lni-emoji-sad"></i>
+                        <p class="mb-0 px-2">Can't find your answers?</p>
+                        <a href="#"> Contact us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
