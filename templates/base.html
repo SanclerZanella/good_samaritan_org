@@ -68,8 +68,8 @@
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="user-options">
                                 <a href="{% url 'about' %}" class="dropdown-item">Who We Are</a>
-                                <a href="" class="dropdown-item">How it Works</a>
-                                <a href="" class="dropdown-item">FAQs</a>
+                                <a href="{% url 'faq' %}" class="dropdown-item">FAQs</a>
+                                <a href="{% url 'contact' %}" class="dropdown-item">Contact Us</a>
                             </div>
                         </li>
 
@@ -174,8 +174,8 @@
                         </a>
                         <div class="dropdown-menu border-0" aria-labelledby="user-options">
                             <a href="{% url 'about' %}" class="dropdown-item">Who We Are</a>
-                            <a href="" class="dropdown-item">How it Works</a>
-                            <a href="" class="dropdown-item">FAQs</a>
+                            <a href="{% url 'faq' %}" class="dropdown-item">FAQs</a>
+                            <a href="{% url 'contact' %}" class="dropdown-item">Contact Us</a>
                         </div>
                     </li>
 
@@ -296,13 +296,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
-                            <p>How It Works</p>
+                        <a href="{% url 'faq' %}">
+                            <p>FAQs</p>
                         </a>
                     </li>
                     <li>
-                        <a href="">
-                            <p>FAQs</p>
+                        <a href="{% url 'contact' %}">
+                            <p>Contact Us</p>
                         </a>
                     </li>
                 </ul>

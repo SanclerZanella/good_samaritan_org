@@ -26,3 +26,12 @@ def faq(request):
     template = 'home/faq.html'
 
     return render(request, template)
+
+
+def contact(request):
+    """
+    A view to render the contact page
+    """
+    template = 'home/contact.html'
+
+    return render(request, template)
