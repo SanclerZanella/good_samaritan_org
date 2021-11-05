@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
+from django.conf import settings
 from django.contrib import messages
 from .forms import ContactForm
 
@@ -62,7 +63,9 @@ def contact(request):
                 {'data': data_form})
 
             try:
-                send_mail(subject, body, cust_email, ['sanclerzjj@gmail.com'])
+                # Send contact email
+                send_mail(subject, body, cust_email,
+                          [settings.DEFAULT_FROM_EMAIL])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
 
