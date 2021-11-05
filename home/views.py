@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
+from django.core.mail import send_mail, BadHeaderError
+from django.template.loader import render_to_string
+from django.contrib import messages
+from .forms import ContactForm
 
 
 def index(request):
@@ -32,6 +36,45 @@ def contact(request):
     """
     A view to render the contact page
     """
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+
+            # Customer email
+            cust_email = form.cleaned_data['email_address']
+
+            # Load the email subject text file template and turn on in string
+            subject = render_to_string(
+                'home/contact_email/contact_email_subject.txt')
+
+            data_form = {
+                    'first_name': form.cleaned_data['first_name'],
+                    'last_name': form.cleaned_data['last_name'],
+                    'email': form.cleaned_data['email_address'],
+                    'message': form.cleaned_data['message'],
+                    }
+
+            # Load the email body text file template and turn on in string
+            body = render_to_string(
+                'home/contact_email/contact_email_body.txt',
+                {'data': data_form})
+
+            try:
+                send_mail(subject, body, cust_email, ['sanclerzjj@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+
+            messages.success(request, "Message successfully sent,\
+                Thank you for contact us!")
+            return redirect("home")
+
+    form = ContactForm()
+    context = {
+        'form': form,
+    }
+
     template = 'home/contact.html'
 
-    return render(request, template)
+    return render(request, template, context)

@@ -3,9 +3,29 @@
 
 <!-- Custom css -->
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'home/css/faq.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
 {% endblock %}
 
 
 {% block content %}
+    <div class="row no-gutters content-alignment my-5">
+        <div class="col-10 text-center">
+            <h2 class="font-weight-bold contact-title">Contact Us</h2>
+        </div>
+        <div class="col-10 my-5 text-center">
+
+            <form action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
+
+                <fieldset>
+                    {{form|crispy}}
+                </fieldset>
+
+                <fieldset>
+                    <button type="submit" class="btn btn-danger btn-shadow">Send Message</button>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
 {% endblock %}

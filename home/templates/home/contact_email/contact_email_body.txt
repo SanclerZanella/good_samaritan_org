@@ -1,0 +1,15 @@
+Hello!
+
+This is a contact email from an user. The message is below:
+
+{{ data.message }}
+
+User Details:
+
+First Name: {{ data.first_name }}
+Last Name: {{ data.last_name }}
+Email: {{ data.email }}
+
+Sincerely,
+
+The Good Samaritan Organization

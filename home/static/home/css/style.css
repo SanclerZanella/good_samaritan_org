@@ -78,6 +78,11 @@
     display: none;
 }
 
+/*-------------------------------- Contact form */
+.contact-title {
+    font-size: 2em;
+}
+
 /* 
 Home Page Timeline from:
 https://webdesign.tutsplus.com/tutorials/building-a-vertical-timeline-with-css-and-a-touch-of-javascript--cms-26528 
