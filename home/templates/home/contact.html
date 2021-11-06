@@ -14,13 +14,16 @@
         </div>
         <div class="col-10 my-5 text-center">
 
+            <!-- Contact Form -->
             <form action="{% url 'contact' %}" method="POST">
                 {% csrf_token %}
 
+                <!-- Fields -->
                 <fieldset>
                     {{form|crispy}}
                 </fieldset>
 
+                <!-- Submit Button -->
                 <fieldset>
                     <button type="submit" class="btn btn-danger btn-shadow">Send Message</button>
                 </fieldset>

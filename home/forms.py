@@ -2,6 +2,20 @@ from django import forms
 
 
 class ContactForm(forms.Form):
+    """
+    Contact form
+
+    Attributes:
+        *first_name: A string indicating the user's first name;
+        *last_name: A string indicating the user's last name;
+        *email_address: A string indicating the user's email;
+        *message: A string indicating the user's message.
+
+    Methods:
+        *__init__: Add placeholders and classes, remove auto-generated
+                   labels and set autofocus on first field;
+    """
+
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
     email_address = forms.EmailField(max_length=150)
