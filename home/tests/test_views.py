@@ -1,3 +1,4 @@
+from django.shortcuts import reverse
 from django.test import TestCase
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
@@ -24,6 +25,10 @@ class testViews(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/index.html')
+        self.assertContains(response, '<h2>Ways You Can Support</h2>')
+
+        url_name = self.client.get(reverse('home'))
+        self.assertEquals(url_name.status_code, 200)
 
     def test_get_about(self):
         """
@@ -32,6 +37,10 @@ class testViews(TestCase):
         response = self.client.get('/about/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/about.html')
+        self.assertContains(response, '<h1>Who We Are</h1>')
+
+        url_name = self.client.get(reverse('about'))
+        self.assertEquals(url_name.status_code, 200)
 
     def test_get_faq(self):
         """
@@ -40,6 +49,11 @@ class testViews(TestCase):
         response = self.client.get('/faq/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/faq.html')
+        self.assertContains(response,
+        '<h1 class="font-weight-bold">Frequently Asked Questions</h1>')
+
+        url_name = self.client.get(reverse('faq'))
+        self.assertEquals(url_name.status_code, 200)
 
     def test_get_contact(self):
         """
@@ -48,6 +62,11 @@ class testViews(TestCase):
         response = self.client.get('/contact/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/contact.html')
+        self.assertContains(response,
+        '<h2 class="font-weight-bold contact-title">Contact Us</h2>')
+
+        url_name = self.client.get(reverse('contact'))
+        self.assertEquals(url_name.status_code, 200)
 
     def test_post_contact(self):
         """

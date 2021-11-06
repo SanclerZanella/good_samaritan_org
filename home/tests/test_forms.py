@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .forms import ContactForm
+from home.forms import ContactForm
 
 
 class testContactForm(TestCase):
