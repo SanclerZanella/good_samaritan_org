@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from .models import UserProfile
 from checkout.models import Sponsor
-from djstripe.models import Subscription, Customer, PaymentMethod
+from djstripe.models import Subscription
 from .forms import UserProfileForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required

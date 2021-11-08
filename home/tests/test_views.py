@@ -49,8 +49,8 @@ class testViews(TestCase):
         response = self.client.get('/faq/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/faq.html')
-        self.assertContains(response,
-        '<h1 class="font-weight-bold">Frequently Asked Questions</h1>')
+        el = '<h1 class="font-weight-bold">Frequently Asked Questions</h1>'
+        self.assertContains(response, el)
 
         url_name = self.client.get(reverse('faq'))
         self.assertEquals(url_name.status_code, 200)
@@ -62,8 +62,8 @@ class testViews(TestCase):
         response = self.client.get('/contact/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home/contact.html')
-        self.assertContains(response,
-        '<h2 class="font-weight-bold contact-title">Contact Us</h2>')
+        el = '<h2 class="font-weight-bold contact-title">Contact Us</h2>'
+        self.assertContains(response, el)
 
         url_name = self.client.get(reverse('contact'))
         self.assertEquals(url_name.status_code, 200)
@@ -78,8 +78,10 @@ class testViews(TestCase):
                     'email': 'test@test.com',
                     'message': 'Mock message for test',
                     }
+        self.assertIsInstance(data_form, dict)
 
-        response = self.client.post('/contact/', data_form)
+        response = self.client.post('/contact/', data=data_form)
+        self.assertEqual(response.status_code, 200)
 
         cust_email = 'test@test.com'
 

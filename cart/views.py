@@ -175,7 +175,6 @@ def remove_from_cart(request, item_id, sku):
     """
 
     try:
-        # redirect_url = request.POST.get('redirect_url')
         item_type = sku.split('_')[-1]
         cart = request.session.get('cart', {'products': {},
                                             'parcels': {},
