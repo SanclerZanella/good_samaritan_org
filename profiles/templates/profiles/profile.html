@@ -209,10 +209,7 @@
                             {% csrf_token %}
 
                             <fieldset>
-                                <label class="d-block mt-2" for="redeem-subs">Sponsorship id:</label>
-                                <input id="redeem-subs" name="redeem-subs" class="mb-1" type="text">
-                                <label class="d-block mt-2" for="last-digits">Last 4 digits of the card used to pay the sponsorship:</label>
-                                <input id="last-digits" name="last-digits" class="mb-1" type="number">
+                                {{ redeem_form|crispy }}
                             </fieldset>
 
                             <fieldset>

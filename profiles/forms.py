@@ -1,5 +1,7 @@
 from django import forms
 from .models import UserProfile
+from django.core.validators import (MaxValueValidator,
+                                    MinValueValidator)
 
 
 class UserProfileForm(forms.ModelForm):
@@ -51,3 +53,42 @@ class UserProfileForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'w-100 rounded-0 mt-5'
             self.fields[field].label = False
+
+
+class RedeemForm(forms.Form):
+    """
+    Contact form
+
+    Attributes:
+        *redeem_subs: A string indicating the subscription id;
+        *last_digits: An integer indicating the last 4 digits of the card.
+
+    Methods:
+        *__init__: Add placeholders and classes, remove auto-generated
+                labels and set autofocus on first field;
+    """
+
+    redeem_subs = forms.CharField(max_length=100,
+                                  label='Subscription Id:')
+    last_digits = forms.IntegerField(validators=[MaxValueValidator(4),
+                                                 MinValueValidator(4)],
+                                     label='Last 4 digits of the card\
+                                        used to pay the sponsorship:')
+
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+        ph = 'Last 4 digits of the card used to pay the sponsorship'
+        placeholders = {
+            'redeem_subs': 'Subscription Id',
+            'last_digits': ph
+        }
+
+        for field in self.fields:
+            self.fields[field].required = True
+            placeholder = f'{placeholders[field]} *'
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'w-100 rounded-0'

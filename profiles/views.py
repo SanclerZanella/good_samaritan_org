@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from .models import UserProfile
 from checkout.models import Sponsor
 from djstripe.models import Subscription
-from .forms import UserProfileForm
+from .forms import UserProfileForm, RedeemForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from checkout.models import Order
@@ -20,7 +20,11 @@ def profile(request):
     # Render profile form with default details
     profileForm = UserProfileForm(instance=profile_user)
 
+    # Render redeem subscription form
+    redeem_sub = RedeemForm()
+
     if request.method == 'POST':
+
         form_data = {
             'default_full_name': request.POST['default_full_name'],
             'default_street_address1': request.POST['default_street_address1'],
@@ -36,32 +40,53 @@ def profile(request):
             messages.success(request, "Profile details updated")
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+    # Check if user has any Sponsor Object in db
+    # using user profile and email
     sponsor_exist = Sponsor.objects.filter(user_profile=profile_user,
                                            email=user_auth.email,
                                            ).exists()
     sponsor = None
-
     if sponsor_exist:
+
+        # If user has Sponsor object in db, then query
+        # Sponsor object using user profile and email
         sponsor = Sponsor.objects.get(user_profile=profile_user,
                                       email=user_auth.email)
     else:
+
+        # If user has not Sponsor object in db matching
+        # user profile and email, then check if user has
+        # any Sponsor object in db using just email
         sponsor_exist = Sponsor.objects.filter(email=user_auth.email
                                                ).exists()
 
         if sponsor_exist:
+
+            # If user has Sponsor object in db matching email
+            # then query Sponsor and check if user_profile
+            # field is empty
             sponsor = Sponsor.objects.get(email=user_auth.email)
             user_null = Sponsor.objects.filter(
                 user_profile__isnull=True).exists()
 
             if user_null:
+
+                # If user_profile field is empty, then add the
+                # current user profile to user_profile field
                 Sponsor.objects.filter(
                     email=user_auth.email).update(user_profile=profile_user)
 
+    # If user has not Sponsor object in db matching
+    # email, then check if user has any Sponsor
+    # object in db using just user profile
     if not sponsor_exist:
         sponsor_exist = Sponsor.objects.filter(user_profile=profile_user
                                                ).exists()
 
         if sponsor_exist:
+
+            # If user has Sponsor object in db matching
+            # user profile, then query Sponsor
             sponsor = Sponsor.objects.get(user_profile=profile_user)
 
     orders = profile_user.orders.all()
@@ -70,6 +95,7 @@ def profile(request):
     context = {
         'profile': profile_user,
         'profileForm': profileForm,
+        'redeem_form': redeem_sub,
         'orders': orders,
         'on_profile_page': True,
         'sponsor': sponsor
@@ -88,8 +114,8 @@ def redeem_subscription(request):
         return redirect('home')
 
     if request.method == 'POST':
-        subs_id = request.POST['redeem-subs']
-        last_digts_form = request.POST['last-digits']
+        subs_id = request.POST['redeem_subs']
+        last_digts_form = request.POST['last_digits']
 
         profile_user = UserProfile.objects.get(user=request.user)
         user_auth = get_object_or_404(User, username=request.user)

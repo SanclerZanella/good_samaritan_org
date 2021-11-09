@@ -5,7 +5,7 @@ from products.models import Product, Category
 
 class testViews(TestCase):
     """
-    Test home app views
+    Test cart app views
 
     Methods:
         *test_get_cart: Test cart view;
