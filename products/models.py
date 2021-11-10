@@ -119,7 +119,7 @@ class Parcel(models.Model):
                         the model.
     """
 
-    sku = models.CharField(max_length=254, null=True, blank=True)
+    sku = models.CharField(max_length=254, null=True, blank=False)
     name = models.CharField(max_length=254)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
