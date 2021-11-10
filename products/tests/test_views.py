@@ -1,13 +1,8 @@
 from django.shortcuts import reverse
 from django.test import TestCase
 from products.models import Product, Category, Parcel
-from djstripe.models import Product as Sponsorship
 from django.contrib.auth.models import User
 from django.test.client import Client
-from django.template.loader import render_to_string
-from django.core.mail import send_mail
-from django.conf import settings
-from django.template.loader import get_template
 
 
 class testViews(TestCase):
@@ -16,10 +11,31 @@ class testViews(TestCase):
 
     Methods:
         *test_get_all_products: Test all_products view get response;
-        *test_get_about: Test about view get response;
-        *test_get_faq: Test faq view get response;
-        *test_get_contact: Test contact view get response;
-        *test_post_contact: Test contact view post response;
+        *test_get_all_products_sort_param: Test all_products view sort
+                                           parameter in get response;
+        *test_get_all_products_category_param: Test all_products view category
+                                               parameter in get response;
+        *test_get_all_products_q_param: Test all_products view q parameter in
+                                        get response;
+        *test_get_all_products_urgent_param: Test all_products view urgent
+                                             parameter in get response;
+        *test_get_parcels: Test parcels view get response;
+        *test_get_parcels_param: Test parcels view parcel parameter
+                                 in get response;
+        *test_get_product_details: Test product_details view;
+        *test_get_product_management: Test product_mangement view;
+        *test_get_product_management_sort_param: Test product_management view
+                                                 sort parameter in
+                                                 get response;
+        *test_get_product_management_category_param: Test product_management
+                                                     view category parameter
+                                                     in get response;
+        *test_get_product_management_q_param: Test product_management view q
+                                              parameter in get response;
+        *test_get_product_management_urgent_param: Test product_management view
+                                                   urgent parameter in
+                                                   get response;
+        *test_get_add_product: Test add_product view;
     """
 
     def test_get_all_products(self):
