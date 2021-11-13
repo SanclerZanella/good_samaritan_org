@@ -31,6 +31,11 @@
     cursor: pointer;
 }
 
+.middle-card {
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
 .check-icon {
     color: #e72b37;
     display: none;
@@ -41,12 +46,26 @@
 }
 
 /* ----------------------- Media queries */
+@media (min-width: 767px) and (max-width: 1023px) {
+    .btn-donate {
+        padding: .5rem;
+        font-size: 1.2em;
+    }
+}
+
 @media (min-width: 320px) and (max-width: 767px) {
     .parcels-options {
         overflow-y: hidden;
         overflow-x: scroll;
     }
+    .middle-card {
+        margin-right: 1rem;
+    }
     .parcel-cover h1{
         font-size: 1.4em;
+    }
+    .btn-donate {
+        padding: .3rem;
+        font-size: 1em;
     }
 }

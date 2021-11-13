@@ -70,7 +70,7 @@ Find out more about this project and help:
   * *donate products as a guest.*
   * *donate all products at once.*
   * *sort products.*
-  * *sort products by category.*
+  * *Filter products by category.*
   * *search products by trip name and category.*
   * *donate a parcel as a guest.*
   * *sponsor a child, widow or elderly as a guest. (recurrent donation)*
@@ -141,7 +141,7 @@ Back to the [Tables of Contents](#tables-of-contents)
     * **"Sponsorship"** page where the user can choose a sponsorship to subscribe;
     * **"Products"** page where the user can choose a product to donate;
     * **"Products Details"** page where the user can view the product details before donate;
-    * **"Shopping Cart"** page where the user can see all chosen products before checkout;
+    * **"Donation Cart"** page where the user can see all chosen products before checkout;
     * **Check Out (products, parcels or sponsorship)** page which contains a form to the user checkout the chosen donation;
     * **"Confirmation Order"** page where the user can view and download donation details after checkout;
     * **"Past Confirmation Order"** page where the user can view and download donation details of a past order in the order history;
@@ -243,17 +243,17 @@ Back to the [Tables of Contents](#tables-of-contents)
       ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
   
   * **Update Product Quantity Button**:
-    * Button located in shopping cart page to update the quantity of a product in the cart.
+    * Button located in Donation Cart page to update the quantity of a product in the cart.
 
       ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
   
   * **Remove Product Button**:
-    * Button located in shopping cart page to remove a product from cart.
+    * Button located in Donation Cart page to remove a product from cart.
 
       ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
   
   * **Remove All Items From The Cart**:
-    * Button located in shopping cart page to remove all products from cart at once.
+    * Button located in Donation Cart page to remove all products from cart at once.
 
       ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
   
@@ -293,11 +293,8 @@ Back to the [Tables of Contents](#tables-of-contents)
   * [Balsamiq](https://balsamiq.com/)
     * Used for wireframing the project. [see wireframe](app/static/files/readme/borderless_wireframe.pdf)
 
-  * [Google Sheets](https://www.google.com/sheets/about/)
-      * Used to create the database schema. [See data base schema](app/static/files/readme/NoSQL_Schema.pdf) 
-
-  * [Lucidchart](https://www.lucidchart.com/)
-    * Used to build cloud folders diagrams. [see main diagram](app/static/files/readme/register-cloud-folder-diagram.pdf) / [see trips diagram](app/static/files/readme/trips-cloud-folder-diagram.pdf)
+  * [draw.io](https://drawio-app.com/)
+      * Used to create the database schema. [See data base schema](app/static/files/readme/NoSQL_Schema.pdf)
   
   * [Chrome Dev Tools](https://developers.google.com/web/tools/chrome-devtools)
     * A set of web developer tools built directly into the Google Chrome browser. I used these tools constantly thoughout the development cycle.
@@ -348,24 +345,30 @@ Back to the [Tables of Contents](#tables-of-contents)
   * [Jquery](https://jquery.com/):
     * Used as the primary JavaScript functionality. In an effort to keep the JavaScript minimal, I have decided to use jQuery as foundation to my scripts framework.
 
+  * [Django Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/):
+    * Django-crispy-forms is an application that helps to manage Django forms. It allows adjusting forms' properties (such as method, send button or CSS classes) on the backend without having to re-write them in the template.
+
 Back to the [Tables of Contents](#tables-of-contents)
   
   ### Back-End Technologies
 
-  * [Flask](https://flask.palletsprojects.com/en/2.0.x/):
-    * Used as a microframework.
-
-  * [Flask Blueprints](https://flask.palletsprojects.com/en/1.0.x/blueprints/):
-    * Used to split the python code for routes.
-
-  * [Jinja](https://jinja.palletsprojects.com/en/2.10.x/):
-    * Used for templating with Flask.
-
-  * [Werkzeug](https://werkzeug.palletsprojects.com/en/0.16.x/):
-    * Used for password hashing, authentication, and authorization.
+  * [Django](https://www.djangoproject.com/):
+    * Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.
+  
+  * [django-allauth](https://django-allauth.readthedocs.io/en/latest/index.html)
+    * Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication.
+  
+  * [django-countries](https://pypi.org/project/django-countries/)
+    * A Django application that provides country choices for use with forms, flag icons static files, and a country field for models.
+  
+  * [Pillow](https://pillow.readthedocs.io/en/stable/)
+    * This library provides extensive file format support, an efficient internal representation, and fairly powerful image processing capabilities.
+  
+  * [pylint-django](https://pypi.org/project/pylint-django/)
+    * pylint-django is a Pylint plugin for improving code analysis when analysing code using Django. It is also used by the Prospector tool.
 
   * [Cloudinary](https://cloudinary.com/)
-    * Used to store users's pictures
+    * Used to store products pictures
 
   * [Heroku](https://www.heroku.com/what)
     * Used for app hosting.
@@ -373,11 +376,17 @@ Back to the [Tables of Contents](#tables-of-contents)
   * [Python 3.9.6](https://www.python.org/)
     * Used as the back-end programming language.
   
-  * [MongoDB Atlas](https://www.mongodb.com/pt-br)
-    * Used to store my database in the 'cloud'.
+  * [Stripe](https://stripe.com/ie/about)
+    * Online payment and subscription API, used as UI to manage the store payments as well.
   
-  * [PyMongo](https://pypi.org/project/pymongo/)
-    * Used as the Python API for MongoDB.
+  * [Dj-stripe](https://dj-stripe.readthedocs.io/en/master/)
+    * dj-stripe implements all of the Stripe models, for Django. Set up your webhook endpoint and start receiving model updates. You will then have a copy of all the Stripe models available in Django models, as soon as they are updated!
+  
+  * [xhtml2pdf](https://xhtml2pdf.readthedocs.io/en/latest/usage.html)
+    * xhtml2pdf enables users to generate PDF documents from HTML content easily and with automated flow control such as pagination and keeping text together.
+  
+  * [Waypoints](http://imakewebthings.com/waypoints/)
+    * Waypoints is the easiest way to trigger a function when you scroll to an element, used to infinite scroll.
 
 Back to the [Tables of Contents](#tables-of-contents)
 
@@ -396,200 +405,61 @@ Back to the [Tables of Contents](#tables-of-contents)
     * Asking for feedback from friends and family who opened and interacted with the project on their devices.
     ![responsiveness TEST](app/static/images/readme/test/manual/responsive_test.png)
 
-* *view all trip posts as a guest.*
-* *view all trip as a guest.*
-* *view public profile as a guest.*
-  * All visitors are able to see public trips, public profiles and trip views without an account.
+* *donate products as a guest.*
+  * All visitors are able to donate products without an account.
     ![feed page](app/static/images/readme/test/manual/feed_page.png)
 
-* *search trip posts by trip name or place.*
+* *donate all products at once.*
 ![feed page](app/static/images/readme/test/manual/search.png)
 
-* *create my own profile.*
-    I've created my own personal account. In addition to this primary account, I've tested with about 5 fake accounts in order to confirm authentication and validation worked as expected. The authentication and validation to create an account consists in:
+* *sort products.*
 
-    1. Check if the Sign up form is properly filled out.
-        * If the "First name" and "Last name" fields are filled out, with a minimum length of 2 characters and maximum of 15 characters;
-          ```html
-          <!-- First Name Field -->
-          <div class="row no-gutters content-alignment">
-              <div class="col-8">
-                  <label for="fname">First Name</label>
-                  <input type="text" id="fname" name="fname" minlength="5" maxlenght="15"
-                      pattern="^[a-zA-Z0-9]{2,15}$" class="form-control"
-                      placeholder="First name" required>
-              </div>
-          </div>
+* *Filter products by category.*
 
-          <!-- Last Name Field -->
-          <div class="row no-gutters content-alignment">
-              <div class="col-8">
-                  <label for="lname">Last Name</label>
-                  <input type="text" id="lname" name="lname" minlength="5" maxlenght="15"
-                      pattern="^[a-zA-Z0-9]{2,15}$" class="form-control"
-                      placeholder="Last name" required>
-              </div>
-          </div>
-          
-          ```
-          - Checking if the above fields are filled out:
-          ![fname lname check](app/static/images/readme/test/manual/signup_fname.png)
+* *search products by trip name and category.*
 
-          - Checking if the above fields have the right length:
-          ![fname lname len check](app/static/images/readme/test/manual/signup_fname_len.png)
+* *donate a parcel as a guest.*
+* *sponsor a child, widow or elderly as a guest. (recurrent donation)*
+  * All visitors are able to donate parcels or subscribe to a Sponsorship without an account.
 
-        * If the "Email" field is filled out with the properly email format;
-          ```html
-          <!-- Email Field -->
-          <div class="row no-gutters content-alignment">
-              <div class="col-8">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" class="form-control"
-                      placeholder="Email" required>
-              </div>
-          </div>
+* *view my donation in a pre checkout are like a cart or a bag*
 
-          ```
-          - Checking if the email field has the right format:
-          ![email format check](app/static/images/readme/test/manual/signup_email.png)
+* *edit my donation in the cart*
 
-        * If the "Password" and "Confirm Password" field are properly filled out with a minimum length of 6 characters and maximum of 15 characters and if these fields match, in case of these fields not match, the register button "Register" keep disabled.
-          ```html
-          <!-- Password Field -->
-          <div class="row no-gutters content-alignment">
-              <div class="col-8">
-                  <label for="password">Password</label>
-                  <input type="password" id="password" name="password" minlenght="6"
-                      maxlenght="15" pattern="^[a-zA-Z0-9]{5,15}$" class="form-control"
-                      placeholder="Password" required>
-              </div>
-          </div>
+* *remove products from the cart*
 
-          <!-- Repeat Password Field -->
-          <div class="row no-gutters content-alignment">
-              <div class="col-8">
-                  <label for="Rpassword">Confirm Password</label>
-                  <input type="password" id="Rpassword" name="Rpassword" minlenght="6"
-                      maxlenght="15" pattern="^[a-zA-Z0-9]{5,15}$" class="form-control"
-                      placeholder="Password" required>
-              </div>
-          </div>
+* *remove all products from the cart at once*
 
-          ```
-          - Checking if the above fields have the right length:
-          ![password length check](app/static/images/readme/test/manual/password_check.png)
+* *have a secure checkout*
 
-          - If the above fields match, then "Register" button is no longer disabled:
-            * Match:
-              ![password match check](app/static/images/readme/test/manual/password_match.png)
-            * No Match:
-              ![password match check](app/static/images/readme/test/manual/password_no_match.png)
+* *receive an email confirming my donation after checkout*
 
-    2. Check if the user already exists in the database, using the email as parameter, if the user already exists, the return to the previous page with a flash message which says "User already exists";
-        ```python
-        # Check if the username already exists in db
-        existing_user = users_collections.find_one(
-            {"email": request.form.get("email")})
+* *have the possibility to download a pdf with donation details after checkout*
 
-        if existing_user:
-            flash("User already exists")
+* *find a page where I can know more about the organization*
 
-            # redirect to previous page if the users already exists
-            return redirect(request.referrer)
-        ```
+* *Finish any current sponsorship as a guest*
 
-* *choose my trip post privacy.*
-![privacy](app/static/images/readme/test/manual/privacy.png)
+* *create my own account.*
+    I've created my own personal account. In addition to this primary account, I've tested with about 5 fake accounts in order to confirm authentication and validation worked as expected. All authentication is handled by Django-Allauth.
 
-* *edit my own profile.*
-![edit profile](app/static/images/readme/test/manual/edit_profile.png)
+* *login with my email or user name.*
 
-* *add my own trips.*
-* *edit my own trips.*
-* *delete my own trips.*
-Several trip posts were created in order to prepare for pagination building. These trip posts were created using my actual account, the admin account, and several test accounts.
-For several posts, I've edited minor things to test all parts of a trip post, adding place and country, description, photos and creating without photos to test the functionality of creating and updating a trip post to the database and cloud platform.
+* *login with third party account(google).*
 
-  * Add:
-  ![add trip button](app/static/images/readme/test/manual/add_trip_btn.png)
-  ![add trip form](app/static/images/readme/test/manual/add_trip_form.png)
+* *Redeem any sponsorship created before create my account on my profile*
 
-  * Edit
-  ![edit trip form](app/static/images/readme/test/manual/edit_trip_form.png)
-  
-  * Delete
-  ![delete trip warning](app/static/images/readme/test/manual/delete_trip_warn.png)
+* *view my order history on my own profile.*
 
-* *be able to like and dislike a trips.*
-![like button](app/static/images/readme/test/manual/like.png)
+* *manage my sponsorship on my own profile. (see details and finish sponsorship)*
 
-* *be able to follow or unfollow other users.*
-![follow button](app/static/images/readme/test/manual/follow_btn.png)
+* *edit my profile details.*
 
-* *be able to receive a notification when another user send a follow request.*
-![notification](app/static/images/readme/test/manual/notification.png)
+* *save my profile details when checkout.*
 
-* *be able to to remove a follower.*
-![remove follower](app/static/images/readme/test/manual/remove_follower.png)
-
-* *be able see my followers and following users in my profile.*
-![follow tabs](app/static/images/readme/test/manual/follow_tabs.png)
-
-* *be able see a statistic about my trips in my profile.*
-![statistics](app/static/images/readme/test/manual/statistics.png)
+* *find a contact form.*
 
 * *be able to log out.*
-![log out button](app/static/images/readme/test/manual/logout_btn.png)
-
-### Log in
-
-I've tested the log in form and functionality in all initial pages, filling the form with the correct values and different values to try to catch any unexpected error, authentication and validation worked as expected. The authentication and validation to log in consists in:
-
-1. Check if the Log in form is properly filled out.
-    * If the "Email" field is filled out with the properly email format;
-
-      - Checking if the email field has the right format:
-      ![email format check](app/static/images/readme/test/manual/login_email.png)
-
-    * If the "Password" field is properly filled out with a minimum length of 6 characters and maximum of 15 characters.
-
-      - Checking if the password field has the right length:
-      ![email format check](app/static/images/readme/test/manual/login_password.png)
-
-2. Check if the user exists in the database, using the email as parameter, in the case the user exists in the database, then check if the password match with the password stored in the database. If the email or password is incorrect, then reload the previous page with a flash message, which is "Incorrect email and/or password";
-
-### Pagination
-
-When implementing pagination, I had a lot of manual tests to undergo, in order to make pagination work for multiple scenarios. I needed to test that all aspects of pagination worked with and without the option for searching the database. These included:
-
-* Pagination without Search
-  * Pagination works if no URL args present on initial load;
-  * Previous Page button disabled on first page of trips shown;
-  * Next Page button disabled on last page of all trips shown;
-  * Appropriate number of pages appear based on the number of 10 items per page in the feed page or 5 items in the profile and public profile pages with correct number of trips in database;
-  * Additional page numbers appear if more trips are added;
-  * Each page number returns their correct page URL.
-
-- Pagination without search query:
-  ![pagination no search check](app/static/images/readme/test/manual/pagination_no_search.png)
-
-* Pagination with Search
-  * Pagination works if no URL args present on initial search;
-  * Previous Page button disabled on first page of search results;
-  * Next Page button disabled on last page of search results;
-  * Additional page numbers appear if more trips are added.
-  * Each page number returns their correct page URL.
-
-- Pagination with search query:
-  ![pagination search check](app/static/images/readme/test/manual/pagination_search.png)
-
-### Trip Post
-
-I've checked the trip post in different pages (Profile, Public Profile and Feed). Each user is just allowed to modify or delete your own trip posts, in this case the delete trip button and edit trip button need to be hidden in other users trip posts. The like button can't be seen with the user is logged out.
-
-- Trip post delete and edit buttons:
-  ![trip post icons check](app/static/images/readme/test/manual/post_edit_btn.png)
-
 
 ### Validating The HTML and CSS code
   
