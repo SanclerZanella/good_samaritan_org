@@ -69,7 +69,7 @@ class RedeemForm(forms.Form):
     """
 
     redeem_subs = forms.CharField(max_length=100,
-                                  label='Subscription Id:')
+                                  label='Sponsorship Id:')
     last_digits = forms.IntegerField(validators=[MaxValueValidator(4),
                                                  MinValueValidator(4)],
                                      label='Last 4 digits of the card\
@@ -83,7 +83,7 @@ class RedeemForm(forms.Form):
         super().__init__(*args, **kwargs)
         ph = 'Last 4 digits of the card used to pay the sponsorship'
         placeholders = {
-            'redeem_subs': 'Subscription Id',
+            'redeem_subs': 'Sponsorship Id',
             'last_digits': ph
         }
 

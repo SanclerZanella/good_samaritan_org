@@ -86,7 +86,7 @@ Find out more about this project and help:
   * *create my own account.*
   * *login with my email or user name.*
   * *login with third party account(google).*
-  * *Redeem any sponsorship created before create my account on my profile*
+  * *Recover any sponsorship created before create my account on my profile*
   * *view my order history on my own profile.*
   * *manage my sponsorship on my own profile. (see details and finish sponsorship)*
   * *edit my profile details.*
@@ -136,7 +136,7 @@ Back to the [Tables of Contents](#tables-of-contents)
     * **"Finish Sponsorship"** page which contains a form to the user finish a sponsorship as a guest;
     * **"Product Management"** page where the site owner can manage products and parcels;
     * **"Update Product or Parcel"** page which contains a form to the site owner update products or parcels details;
-    * **"My Profile"** page where the user can view his donation history, current sponsorship, redeem a sponsorship, edit profile details and access the Product Management page (if site owner);
+    * **"My Profile"** page where the user can view his donation history, current sponsorship, recover a sponsorship, edit profile details and access the Product Management page (if site owner);
     * **"Family Parcels"** page where the user can choose a parcel to donate;
     * **"Sponsorship"** page where the user can choose a sponsorship to subscribe;
     * **"Products"** page where the user can choose a product to donate;
@@ -212,8 +212,8 @@ Back to the [Tables of Contents](#tables-of-contents)
 
       ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
   
-  * **Redeem Sponsorship**:
-    * Section in the profile page where the user can redeem any sponsorship created as a guest, the user only can see this section if he does not created a sponsorship while logged.
+  * **Recover Sponsorship**:
+    * Section in the profile page where the user can recover any sponsorship created as a guest, the user only can see this section if he does not created a sponsorship while logged.
 
       ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
   
@@ -447,7 +447,7 @@ Back to the [Tables of Contents](#tables-of-contents)
 
 * *login with third party account(google).*
 
-* *Redeem any sponsorship created before create my account on my profile*
+* *Recover any sponsorship created before create my account on my profile*
 
 * *view my order history on my own profile.*
 

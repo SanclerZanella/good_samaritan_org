@@ -61,26 +61,24 @@
 
                             {% for order in orders %}
                                 <div class="col-12 mt-5">
-                                    <div class="row no-gutters">
+                                    <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
+                                        <div class="row no-gutters">
+                                                <!-- Order number -->
+                                                <div class="col-4 my-auto">
+                                                    {{ order.order_number|truncatechars:6 }}
+                                                </div>
 
-                                        <!-- Order number -->
-                                        <div class="col-4 my-auto">
-                                            <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
-                                                {{ order.order_number|truncatechars:6 }}
-                                            </a>
+                                                <!-- Order date -->
+                                                <div class="col-4 my-auto">
+                                                    {{ order.date }}
+                                                </div>
+
+                                                <!-- Order Grand total -->
+                                                <div class="col-4 my-auto">
+                                                    $ {{ order.grand_total }}
+                                                </div>
                                         </div>
-
-                                        <!-- Order date -->
-                                        <div class="col-4 my-auto">
-                                            {{ order.date }}
-                                        </div>
-
-                                        <!-- Order Grand total -->
-                                        <div class="col-4 my-auto">
-                                            $ {{ order.grand_total }}
-                                        </div>
-
-                                    </div>
+                                    </a>
                                 </div>
                             {% endfor %}
 
@@ -195,12 +193,12 @@
                 {% else %}
 
                     <!-- 
-                        Redeem any sponsorship created before the user
+                        Recover any sponsorship created before the user
                         create an account, if the user has not already an
                         sponsorship
                      -->
                     <div class="col-12 text-center">
-                        <h2 class="font-weight-bold">Redeem Sponsorship</h2>
+                        <h2 class="font-weight-bold">Recover Sponsorship</h2>
                     </div>
 
                     <!-- Redeem sponsorship form -->
@@ -213,7 +211,7 @@
                             </fieldset>
 
                             <fieldset>
-                                <button class="btn btn-danger btn-sm btn-shadow mt-3">Redeem</button>
+                                <button class="btn btn-danger btn-sm btn-shadow mt-3">Recover</button>
                             </fieldset>
 
                         </form>
