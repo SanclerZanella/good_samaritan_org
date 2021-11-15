@@ -42,6 +42,7 @@ def all_products(request):
         print('OK')
     else:
         for product in all_products:
+            Product.objects.filter(pk=product.id).update(image=None)
             path = f'products/items/{product.image}'
             Product.objects.filter(pk=product.id).update(image=path)
 
