@@ -206,17 +206,46 @@ def sponsorship(request):
         stripe.api_key = settings.STRIPE_SECRET_KEY
 
         # sponsor a child
-        stripe_data_c = stripe.Product.retrieve("prod_KTO0rZ3DSbX6cu")
-        djstripe.models.Product.sync_from_stripe_data(stripe_data_c)
+
+        # Retrieve Product
+        stripe_product_c = stripe.Product.retrieve("prod_KTO0rZ3DSbX6cu")
+        djstripe.models.Product.sync_from_stripe_data(stripe_product_c)
+
+        # Retrieve Plan
+        stripe_plan_c = stripe.Plan.retrieve("price_1JoREqK073rHrzv3AiYRMd6M")
+        djstripe.models.Plan.sync_from_stripe_data(stripe_plan_c)
+
+        # Retrieve Price
+        stripe_price_c = stripe.Price.retrieve("price_1JoREqK073rHrzv3AiYRMd6M")
+        djstripe.models.Price.sync_from_stripe_data(stripe_price_c)
+
         sponsor = get_object_or_404(Sponsorship, id='prod_KTO0rZ3DSbX6cu')
 
         # sponsor a widow
-        stripe_data_w = stripe.Product.retrieve("prod_KTO2NqA3YSYuwN")
-        djstripe.models.Product.sync_from_stripe_data(stripe_data_w)
+
+        # Retrieve Product
+        stripe_product_w = stripe.Product.retrieve("prod_KTO2NqA3YSYuwN")
+        djstripe.models.Product.sync_from_stripe_data(stripe_product_w)
+
+        # Retrieve Plan
+        stripe_plan_w = stripe.Plan.retrieve("price_1JoRGhK073rHrzv3gyPNKRFX")
+        djstripe.models.Plan.sync_from_stripe_data(stripe_plan_w)
+
+        # Retrieve Price
+        stripe_price_w = stripe.Price.retrieve("price_1JoRGhK073rHrzv3gyPNKRFX")
+        djstripe.models.Price.sync_from_stripe_data(stripe_price_w)
 
         # sponsor an elderly
-        stripe_data_e = stripe.Product.retrieve("prod_KTO3PepAZNLNtl")
-        djstripe.models.Product.sync_from_stripe_data(stripe_data_e)
+        stripe_product_e = stripe.Product.retrieve("prod_KTO3PepAZNLNtl")
+        djstripe.models.Product.sync_from_stripe_data(stripe_product_e)
+
+        # Retrieve Plan
+        stripe_plan_e = stripe.Plan.retrieve("price_1JoRHbK073rHrzv3ATAy15nG")
+        djstripe.models.Plan.sync_from_stripe_data(stripe_plan_e)
+
+        # Retrieve Price
+        stripe_price_e = stripe.Price.retrieve("price_1JoRHbK073rHrzv3ATAy15nG")
+        djstripe.models.Price.sync_from_stripe_data(stripe_price_e)
 
     if request.GET:
         if 'sponsor' in request.GET:
