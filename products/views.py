@@ -12,6 +12,8 @@ from .models import (Product, Category,
 from checkout.models import Sponsor
 from djstripe.models import Subscription, Customer, PaymentMethod
 from djstripe.models import Product as Sponsorship
+import djstripe.models
+import djstripe.settings
 from .forms import ProductForm, ParcelForm
 from checkout.forms import SponsorForm
 from django.core.paginator import (Paginator, EmptyPage,
@@ -196,7 +198,25 @@ def sponsorship(request):
     """
 
     sponsor_op = Sponsorship.objects.all()
-    sponsor = get_object_or_404(Sponsorship, id='prod_KTO0rZ3DSbX6cu')
+    sponsor_ex = Sponsorship.objects.filter(id='prod_KTO0rZ3DSbX6cu').exists()
+
+    if sponsor_ex:
+        sponsor = get_object_or_404(Sponsorship, id='prod_KTO0rZ3DSbX6cu')
+    else:
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+
+        # sponsor a child
+        stripe_data_c = stripe.Product.retrieve("prod_KTO0rZ3DSbX6cu")
+        djstripe.models.Product.sync_from_stripe_data(stripe_data_c)
+        sponsor = get_object_or_404(Sponsorship, id='prod_KTO0rZ3DSbX6cu')
+
+        # sponsor a widow
+        stripe_data_w = stripe.Product.retrieve("prod_KTO2NqA3YSYuwN")
+        djstripe.models.Product.sync_from_stripe_data(stripe_data_w)
+
+        # sponsor an elderly
+        stripe_data_e = stripe.Product.retrieve("prod_KTO3PepAZNLNtl")
+        djstripe.models.Product.sync_from_stripe_data(stripe_data_e)
 
     if request.GET:
         if 'sponsor' in request.GET:
