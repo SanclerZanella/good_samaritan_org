@@ -18,7 +18,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['good-samaritan-org.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -130,7 +130,7 @@ WSGI_APPLICATION = 'good_samaritan.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if 'DEVELOPMENT' in os.environ:
+if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
