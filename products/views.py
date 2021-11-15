@@ -27,7 +27,14 @@ def all_products(request):
     A view to show all products, including sorting and search queries
     """
 
-    all_products = Product.objects.all()
+    products_ex = Product.objects.all().exists()
+    if products_ex:
+        all_products = Product.objects.all()
+    else:
+        messages.error(request,
+                       "There are no products")
+        return redirect(reverse('home'))
+
     all_products_len = len(all_products)
     sum_price = all_products.aggregate(Sum('price'))
     total_price = round(sum_price['price__sum'], 2)
@@ -151,6 +158,15 @@ def parcels(request):
     A view to show all parcel
     """
 
+    products_ex = Product.objects.all().exists()
+    parcels_ex = Parcel.objects.all().exists()
+    if products_ex and parcels_ex:
+        parcels = Parcel.objects.all()
+    else:
+        messages.error(request,
+                       "There are no parcels")
+        return redirect(reverse('home'))
+
     parcels = Parcel.objects.all()
     parcel = get_object_or_404(Parcel, pk=1)
 
@@ -220,43 +236,49 @@ def sponsorship(request):
 
         # Retrieve Product
         stripe_product_c = stripe.Product.retrieve("prod_KTO0rZ3DSbX6cu")
-        djstripe.models.Product.sync_from_stripe_data(stripe_product_c)
 
-        # Retrieve Plan
-        stripe_plan_c = stripe.Plan.retrieve("price_1JoREqK073rHrzv3AiYRMd6M")
-        djstripe.models.Plan.sync_from_stripe_data(stripe_plan_c)
+        if stripe_product_c:
+            djstripe.models.Product.sync_from_stripe_data(stripe_product_c)
 
-        # Retrieve Price
-        stripe_price_c = stripe.Price.retrieve("price_1JoREqK073rHrzv3AiYRMd6M")
-        djstripe.models.Price.sync_from_stripe_data(stripe_price_c)
+            # Retrieve Plan
+            stripe_plan_c = stripe.Plan.retrieve("price_1JoREqK073rHrzv3AiYRMd6M")
+            djstripe.models.Plan.sync_from_stripe_data(stripe_plan_c)
 
-        sponsor = get_object_or_404(Sponsorship, id='prod_KTO0rZ3DSbX6cu')
+            # Retrieve Price
+            stripe_price_c = stripe.Price.retrieve("price_1JoREqK073rHrzv3AiYRMd6M")
+            djstripe.models.Price.sync_from_stripe_data(stripe_price_c)
 
-        # sponsor a widow
+            sponsor = get_object_or_404(Sponsorship, id='prod_KTO0rZ3DSbX6cu')
 
-        # Retrieve Product
-        stripe_product_w = stripe.Product.retrieve("prod_KTO2NqA3YSYuwN")
-        djstripe.models.Product.sync_from_stripe_data(stripe_product_w)
+            # sponsor a widow
 
-        # Retrieve Plan
-        stripe_plan_w = stripe.Plan.retrieve("price_1JoRGhK073rHrzv3gyPNKRFX")
-        djstripe.models.Plan.sync_from_stripe_data(stripe_plan_w)
+            # Retrieve Product
+            stripe_product_w = stripe.Product.retrieve("prod_KTO2NqA3YSYuwN")
+            djstripe.models.Product.sync_from_stripe_data(stripe_product_w)
 
-        # Retrieve Price
-        stripe_price_w = stripe.Price.retrieve("price_1JoRGhK073rHrzv3gyPNKRFX")
-        djstripe.models.Price.sync_from_stripe_data(stripe_price_w)
+            # Retrieve Plan
+            stripe_plan_w = stripe.Plan.retrieve("price_1JoRGhK073rHrzv3gyPNKRFX")
+            djstripe.models.Plan.sync_from_stripe_data(stripe_plan_w)
 
-        # sponsor an elderly
-        stripe_product_e = stripe.Product.retrieve("prod_KTO3PepAZNLNtl")
-        djstripe.models.Product.sync_from_stripe_data(stripe_product_e)
+            # Retrieve Price
+            stripe_price_w = stripe.Price.retrieve("price_1JoRGhK073rHrzv3gyPNKRFX")
+            djstripe.models.Price.sync_from_stripe_data(stripe_price_w)
 
-        # Retrieve Plan
-        stripe_plan_e = stripe.Plan.retrieve("price_1JoRHbK073rHrzv3ATAy15nG")
-        djstripe.models.Plan.sync_from_stripe_data(stripe_plan_e)
+            # sponsor an elderly
+            stripe_product_e = stripe.Product.retrieve("prod_KTO3PepAZNLNtl")
+            djstripe.models.Product.sync_from_stripe_data(stripe_product_e)
 
-        # Retrieve Price
-        stripe_price_e = stripe.Price.retrieve("price_1JoRHbK073rHrzv3ATAy15nG")
-        djstripe.models.Price.sync_from_stripe_data(stripe_price_e)
+            # Retrieve Plan
+            stripe_plan_e = stripe.Plan.retrieve("price_1JoRHbK073rHrzv3ATAy15nG")
+            djstripe.models.Plan.sync_from_stripe_data(stripe_plan_e)
+
+            # Retrieve Price
+            stripe_price_e = stripe.Price.retrieve("price_1JoRHbK073rHrzv3ATAy15nG")
+            djstripe.models.Price.sync_from_stripe_data(stripe_price_e)
+        else:
+            messages.error(request,
+                           "There are no sponsorships")
+        return redirect(reverse('home'))
 
     if request.GET:
         if 'sponsor' in request.GET:
@@ -279,8 +301,15 @@ def product_mangement(request):
     A view to render the product management dashboard
     """
 
+    products_ex = Product.objects.all().exists()
+    if products_ex:
+        all_products = Product.objects.all()
+    else:
+        messages.error(request,
+                       "There are no products")
+        return redirect(reverse('home'))
+
     form = ProductForm()
-    all_products = Product.objects.all()
     all_parcels = None
     all_products_len = len(all_products)
     categories = Category.objects.all()
