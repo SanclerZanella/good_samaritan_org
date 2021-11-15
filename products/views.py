@@ -44,7 +44,7 @@ def all_products(request):
         for product in all_products:
             Product.objects.filter(pk=product.id).update(image=None)
             path = f'products/items/{product.image}'
-            Product.objects.filter(pk=product.id).update(image=path)
+            Product.objects.filter(pk=product.id).update(image=product.image)
 
     all_products_len = len(all_products)
     sum_price = all_products.aggregate(Sum('price'))
