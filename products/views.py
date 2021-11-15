@@ -20,6 +20,9 @@ from django.core.paginator import (Paginator, EmptyPage,
                                    PageNotAnInteger)
 from .utils import get_id_data
 import stripe
+import os
+if os.path.exists('env.py'):
+    import env
 
 
 def all_products(request):
@@ -34,6 +37,12 @@ def all_products(request):
         messages.error(request,
                        "There are no products")
         return redirect(reverse('home'))
+
+    if 'DEVELOPMENT' in os.environ:
+        print('OK')
+    else:
+        for product in all_products:
+            Product.objects.filter(pk=product.id).update(image=product.image)
 
     all_products_len = len(all_products)
     sum_price = all_products.aggregate(Sum('price'))
