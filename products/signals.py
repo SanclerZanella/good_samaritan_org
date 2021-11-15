@@ -33,9 +33,11 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
         return False
 
     new_file = instance.image
+
     if not old_file == new_file:
-        if os.path.isfile(old_file.path):
-            os.remove(old_file.path)
+        if old_file.path:
+            if os.path.isfile(old_file.path):
+                os.remove(old_file.path)
 
 
 @receiver(post_delete, sender=Product)
