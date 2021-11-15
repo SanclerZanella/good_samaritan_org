@@ -98,13 +98,24 @@ def all_products(request):
 
         # Query products by most-needed status
         if 'urgent' in request.GET:
-            all_products = all_products.filter(m_needed=True)
-            all_products_len = len(all_products)
-            sum_price = all_products.aggregate(Sum('price'))
-            total_price = round(sum_price['price__sum'], 2)
-            all_items = get_id_data(all_products)
-            current_category = None
-            most_n = True
+            m_needed_ex = all_products.filter(m_needed=True).exists()
+
+            if m_needed_ex:
+                all_products = all_products.filter(m_needed=True)
+                all_products_len = len(all_products)
+                sum_price = all_products.aggregate(Sum('price'))
+                total_price = round(sum_price['price__sum'], 2)
+                all_items = get_id_data(all_products)
+                current_category = None
+                most_n = True
+            else:
+                all_products = Product.objects.all()
+                all_products_len = len(all_products)
+                sum_price = all_products.aggregate(Sum('price'))
+                total_price = round(sum_price['price__sum'], 2)
+                all_items = get_id_data(all_products)
+                current_category = None
+                most_n = False
 
     current_sorting = f'{sort}_{direction}'
     page = request.GET.get('page', 1)
