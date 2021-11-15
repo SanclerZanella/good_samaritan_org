@@ -42,7 +42,8 @@ def all_products(request):
         print('OK')
     else:
         for product in all_products:
-            Product.objects.filter(pk=product.id).update(image=product.image)
+            path = f'products/items/{product.image}'
+            Product.objects.filter(pk=product.id).update(image=path)
 
     all_products_len = len(all_products)
     sum_price = all_products.aggregate(Sum('price'))
