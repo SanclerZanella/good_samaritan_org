@@ -53,15 +53,17 @@
                                         {% if not parcel_param %}
                                             <!-- Sort Options -->
                                             <div class="col-12 col-md-4 sort-input">
-                                                <select name="sort-md" id="sort" class="ml-3 sort">
-                                                    <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
-                                                    <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
-                                                    <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
-                                                    <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
-                                                    <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
-                                                    <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
-                                                    <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
-                                                </select>
+                                                {% if all_products_len != 0 %}
+                                                    <select name="sort-md" id="sort" class="ml-3 sort">
+                                                        <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                                                        <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                                                        <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                                                        <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                                                        <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                                                        <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
+                                                        <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
+                                                    </select>      
+                                                {% endif %}
                                             </div>
                                         {% endif %}
 
@@ -97,27 +99,29 @@
                                             <!-- Categories Options -->
                                             <div class="categories-dropdown col-6 col-md-4 text-right">
 
-                                                <div class="dropdown dropleft mr-3">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Categories
-                                                    </button>
-                                                    <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-                                                            <a class="text-dark" href="{% url 'product_management' %}?urgent=most_needed">
-                                                                <p class="category-item my-3 font-weight-bold">Most-Needed Items</p>
-                                                            </a>
-                                                            <a class="text-dark" href="{% url 'product_management' %}">
-                                                                <p class="category-item my-3 font-weight-bold">Browse All</p>
-                                                            </a>
+                                                {% if all_products_len != 0 %}
+                                                    <div class="dropdown dropleft mr-3">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Categories
+                                                        </button>
+                                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                                                                <a class="text-dark" href="{% url 'product_management' %}?urgent=most_needed">
+                                                                    <p class="category-item my-3 font-weight-bold">Most-Needed Items</p>
+                                                                </a>
+                                                                <a class="text-dark" href="{% url 'product_management' %}">
+                                                                    <p class="category-item my-3 font-weight-bold">Browse All</p>
+                                                                </a>
 
-                                                            <hr>
+                                                                <hr>
 
-                                                        {% for category in categories %}
-                                                            <a class="text-dark" href="{% url 'product_management' %}?category={{ category.name }}">
-                                                                <p class="category-item my-3 font-weight-bold">{{ category.friendly_name }}</p>
-                                                            </a>
-                                                        {% endfor %}
+                                                            {% for category in categories %}
+                                                                <a class="text-dark" href="{% url 'product_management' %}?category={{ category.name }}">
+                                                                    <p class="category-item my-3 font-weight-bold">{{ category.friendly_name }}</p>
+                                                                </a>
+                                                            {% endfor %}
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                {% endif %}
 
                                             </div>
                                         {% endif %}

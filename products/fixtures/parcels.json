@@ -9,7 +9,7 @@
           "price":30.00,
           "items":"8,18,19,28,30,41,74,75,78,96,97,111",
           "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632937789/good_samaritan/parcels/Small-Family_2_360x_k82pyg.png",
-          "image":"Small-Family_2_360x.png"
+          "image":"products/items/Small-Family_2_360x.png"
        }
     },
     {
@@ -22,7 +22,7 @@
          "price":60.00,
          "items":"10,11,12,16,19,23,24,26,28,30,31,34,41,53,64,68,73,76,77,86,87,92,98,100,103,104,106,109,114,115,118",
          "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632937789/good_samaritan/parcels/Medium-Family_360x_eseo2w.png",
-         "image":"Medium-Family_360x.png"
+         "image":"products/items/Medium-Family_360x.png"
       }
    },
    {
@@ -35,7 +35,7 @@
          "price":90.00,
          "items":"7,10,11,14,15,19,27,28,29,30,31,33,34,41,52,53,62,64,66,77,80,88,86,92,93,94,95,100,102,103,105,106,108,114,115,117,118",
          "image_url":"https://res.cloudinary.com/borderless/image/upload/v1632937790/good_samaritan/parcels/Large-Family_1_360x_durtrl.png",
-         "image":"Large-Family_1_360x.png"
+         "image":"products/items/Large-Family_1_360x.png"
       }
    }  
 ]

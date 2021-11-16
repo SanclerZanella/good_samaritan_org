@@ -38,14 +38,6 @@ def all_products(request):
                        "There are no products")
         return redirect(reverse('home'))
 
-    if 'DEVELOPMENT' in os.environ:
-        print('OK')
-    else:
-        for product in all_products:
-            Product.objects.filter(pk=product.id).update(image=None)
-            path = f'{product.image}'
-            Product.objects.filter(pk=product.id).update(image=path.split("/")[-1])
-
     all_products_len = len(all_products)
     sum_price = all_products.aggregate(Sum('price'))
     total_price = round(sum_price['price__sum'], 2)
@@ -312,17 +304,10 @@ def product_mangement(request):
     A view to render the product management dashboard
     """
 
-    products_ex = Product.objects.all().exists()
-    if products_ex:
-        all_products = Product.objects.all()
-    else:
-        messages.error(request,
-                       "There are no products")
-        return redirect(reverse('home'))
-
+    all_products = Product.objects.all()
+    all_products_len = len(all_products)
     form = ProductForm()
     all_parcels = None
-    all_products_len = len(all_products)
     categories = Category.objects.all()
     query = None
     sort = None
