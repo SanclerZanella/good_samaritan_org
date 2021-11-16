@@ -245,6 +245,14 @@ def sponsorship(request):
 
         # Retrieve Product
         stripe_product_c = stripe.Product.retrieve("prod_KTO0rZ3DSbX6cu")
+        id = 'prod_KTO0rZ3DSbX6cu'
+        d = '100% of your gift goes directly to providing Home, Health, Education\
+            and Food for children in Mozambique. Your  $50 per month\
+                combined with others allow us to give a child more\
+                    than the basic necessities to survive, but the\
+                        skills and opportunities to thrive as they\
+                            transition to adulthood.'
+        Sponsorship.objects.filter(id=id).update(description=d)
 
         if stripe_product_c:
             djstripe.models.Product.sync_from_stripe_data(stripe_product_c)
@@ -264,6 +272,19 @@ def sponsorship(request):
             # Retrieve Product
             stripe_product_w = stripe.Product.retrieve("prod_KTO2NqA3YSYuwN")
             djstripe.models.Product.sync_from_stripe_data(stripe_product_w)
+            id = 'prod_KTO2NqA3YSYuwN'
+            d = 'You can provide lifesaving help to a widow in Mozambique\
+                suffering from extreme poverty. In Mozambique, widows are\
+                    highly ostracized and neglected by society.\
+                        They are often the poorest of the poor and denied\
+                            employment and housing. Your monthly sponsorship\
+                                shows a widow that she is valued and not\
+                                    forgotten. You will provide a widow with\
+                                        food, shelter, medical care, clothing,\
+                                            and hope for a better life. Thank\
+                                                you for empowering a\
+                                                    widow with your gift.'
+            Sponsorship.objects.filter(id=id).update(description=d)
 
             # Retrieve Plan
             stripe_plan_w = stripe.Plan.retrieve("price_1JoRGhK073rHrzv3gyPNKRFX")
@@ -276,6 +297,23 @@ def sponsorship(request):
             # sponsor an elderly
             stripe_product_e = stripe.Product.retrieve("prod_KTO3PepAZNLNtl")
             djstripe.models.Product.sync_from_stripe_data(stripe_product_e)
+            id = 'prod_KTO3PepAZNLNtl'
+            d = 'Today, there are plenty of neglected and vulnerable senior\
+                citizens in Mozambique facing isolation and poverty alone.\
+                    Many of these people have little or no access to even\
+                        the most basic of essentials, such as warm clothing\
+                            or shelter, food or nourishment. Sponsoring and\
+                                elderly , you too can join us in our bid to\
+                                    change statistics and deliver the aid and\
+                                        support that our elders need. Not\
+                                            forgetting, age often comes with\
+                                                a manner of health problems\
+                                                    too, and sufficient\
+                                                        medical attention\
+                                                            is of the utmost\
+                                                                importance\
+                                                                in many cases.'
+            Sponsorship.objects.filter(id=id).update(description=d)
 
             # Retrieve Plan
             stripe_plan_e = stripe.Plan.retrieve("price_1JoRHbK073rHrzv3ATAy15nG")

@@ -3,7 +3,7 @@
        "pk":1,
        "model":"products.parcel",
        "fields":{
-          "sku":"pp5001340272",
+          "sku":"pp5001340272_pc",
           "name":"Small Family Parcel",
           "description":"By selecting this item you will be donating a small family parcel, you will help feed a family of 1-2 people for 3-5 days. Please note: the worth of food and the items in this food parcel change over time.",
           "price":30.00,
@@ -16,7 +16,7 @@
       "pk":2,
       "model":"products.parcel",
       "fields":{
-         "sku":"pp5001340273",
+         "sku":"pp5001340273_pc",
          "name":"Medium Family Parcel",
          "description":"By selecting this item you will be donating a medium family parcel, you will help feed a family of 2-4 people for 3-5 days. Please note: the worth of food and the items in this food parcel change over time.",
          "price":60.00,
@@ -29,7 +29,7 @@
       "pk":3,
       "model":"products.parcel",
       "fields":{
-         "sku":"pp5001340274",
+         "sku":"pp5001340274_pc",
          "name":"Medium Family Parcel",
          "description":"By selecting this item you will be donating a large family parcel, you will help feed a family of 4+ people for 3-5 days. Please note: the worth of food and the items in this food parcel change over time.",
          "price":90.00,
