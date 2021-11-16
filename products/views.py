@@ -39,6 +39,7 @@ def all_products(request):
         return redirect(reverse('home'))
 
     all_products_len = len(all_products)
+    all_p = True
     sum_price = all_products.aggregate(Sum('price'))
     total_price = round(sum_price['price__sum'], 2)
     all_items = get_id_data(all_products)
@@ -78,6 +79,7 @@ def all_products(request):
 
         # Query products by category
         if 'category' in request.GET:
+            all_p = False
             category = request.GET['category'].split(',')
             all_products = all_products.filter(category__name__in=category)
             all_products_len = len(all_products)
@@ -100,6 +102,7 @@ def all_products(request):
             qr2 = Q(description__icontains=query)
             queries = qr1 | qr2
             all_products = all_products.filter(queries)
+            all_p = False
             all_products_len = len(all_products)
             sum_price = all_products.aggregate(Sum('price'))
             total_price = round(sum_price['price__sum'], 2)
@@ -112,6 +115,7 @@ def all_products(request):
 
             if m_needed_ex:
                 all_products = all_products.filter(m_needed=True)
+                all_p = False
                 all_products_len = len(all_products)
                 sum_price = all_products.aggregate(Sum('price'))
                 total_price = round(sum_price['price__sum'], 2)
@@ -120,6 +124,7 @@ def all_products(request):
                 most_n = True
             else:
                 all_products = Product.objects.all()
+                all_p = False
                 all_products_len = len(all_products)
                 sum_price = all_products.aggregate(Sum('price'))
                 total_price = round(sum_price['price__sum'], 2)
@@ -151,6 +156,7 @@ def all_products(request):
         'total_price': total_price,
         'all_items': all_items,
         'most_n': most_n,
+        'all_p': all_p
     }
 
     return render(request, template, context)

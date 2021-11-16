@@ -56,11 +56,11 @@ def cache_checkout_data(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             stripe.api_key = settings.STRIPE_SECRET_KEY
             stripe.PaymentIntent.modify(pid, metadata={
-                'cart': json.dumps(request.session.get('cart', {'products': {},
-                                                       'parcels': {}, })),
+                'cart': json.dumps(request.session.get('cart', {})),
                 'save_info': request.POST.get('save_info'),
                 'username': request.user,
             })
+
             return HttpResponse(status=200)
 
         # Modify payment intent metadata if a
@@ -80,7 +80,8 @@ def cache_checkout_data(request):
 
         # Rise any error
         messages.error(request, 'Sorry, your payment cannot be \
-            processed right now. Please try again later.')
+            processed right now. Please try again later or try \
+                to checkout with less products in the cart')
 
         return HttpResponse(content=e, status=400)
 
