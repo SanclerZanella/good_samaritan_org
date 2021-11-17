@@ -269,11 +269,11 @@ Back to the [Tables of Contents](#tables-of-contents)
 
 ### Future Implementations
 
-  * Complete and enhace automated tests.
+  * Enhace automated tests.
 
   * Create a way of interaction between sponsor and sponsored.
 
-  * Create an anual report page, to inform the organization improvements, events and detailed spending.
+  * Create an annual report page, to inform the organization improvements, events and detailed spending.
 
 Back to the [Tables of Contents](#tables-of-contents)
 
@@ -373,6 +373,18 @@ Back to the [Tables of Contents](#tables-of-contents)
   * [Heroku](https://www.heroku.com/what)
     * Used for app hosting.
   
+  * [Gunicorn - WSGI Server](https://docs.gunicorn.org/en/stable/)
+    * Web Server used on Heroku for this project.
+  
+  * [Dj-database-url](https://pypi.org/project/dj-database-url/)
+    * This simple Django utility allows you to utilize the 12factor inspired DATABASE_URL environment variable to configure your Django application.
+  
+  * [Dango-storages](https://django-storages.readthedocs.io/en/latest/)
+    * Django-storages is a collection of custom storage backends for Django.
+  
+  * [Amazon Web Services (S3)](https://aws.amazon.com/)
+    * S3 provides the ability to store, retrieve, access, and back up any amount of data at any time and place. Used to store static files.
+  
   * [Python 3.9.6](https://www.python.org/)
     * Used as the back-end programming language.
   
@@ -403,7 +415,7 @@ Back to the [Tables of Contents](#tables-of-contents)
   * I manually tested the live project by doing the following:  
     * Using Google Developer Tools to view the project on devices with different screen sizes.
     * Asking for feedback from friends and family who opened and interacted with the project on their devices.
-    ![responsiveness TEST](app/static/images/readme/test/manual/responsive_test.png)
+    ![responsiveness TEST](media/readme/responsiveness-test.PNG)
 
 * *donate products as a guest.*
   * All visitors are able to donate products without an account.
@@ -468,19 +480,11 @@ Back to the [Tables of Contents](#tables-of-contents)
   All pages checked. All errors and warnings fixed.
 
   * [W3C HTML Validator](https://validator.w3.org/) - In the first Check  some erros and warning were found, like:
-    * Legend element can't be inside a div, referent to Sign up and Log in form modals. The legend elements in the Sign up and Log in modals were changed to h3 elements;
-    * Were found duplicated IDs (startDate, endDate, totalDays and totalPhotos) in the trip posts, referent to trip post template (_post.html), which is used in a loop and it generates the duplicated IDs error. For each id was added the 'trip id' from the data base, then each id is different in each post. Exemple:
-      * Before :
-        ```html
-        <span id="startDate">{{ trip['trip_startdate'].strftime('%Y-%m-%d') }}</span>)
-        ```
-        It results in duplicated ID's when the database is iterated and the trip posts are rendered.
-
-      * After :
-        ```html
-        <span id="startDate_{{ trip._id }}">{{ trip['trip_startdate'].strftime('%Y-%m-%d') }}</span>)
-        ```
-        It results in different ID's when the database is iterated and the trip posts are rendered.
+    * Duplicated Id;
+    * Section lacks heading. Consider using h2-h6 elements to add identifying headings to all sections;
+    * Bad value for attribute action on element form: Must be non-empty;
+    * End tag span seen, but there were open elements;
+    * Unclosed element i;
   
   In the second check was found a typo error, in the maxlength and minlength attribute of some input elements. This error was fixed.
 
