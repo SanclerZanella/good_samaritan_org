@@ -485,6 +485,10 @@ Back to the [Tables of Contents](#tables-of-contents)
     * Bad value for attribute action on element form: Must be non-empty;
     * End tag span seen, but there were open elements;
     * Unclosed element i;
+
+    When checking the sponsorship form page the HTML validator rise the following error:
+    * "Duplicate ID id_stripe_public_key."
+    I still trying to find what is causing it, because I can't find this id duplicated in the HTML document.
   
   In the second check was found a typo error, in the maxlength and minlength attribute of some input elements. This error was fixed.
 
