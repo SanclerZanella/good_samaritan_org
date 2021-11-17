@@ -479,7 +479,7 @@ Back to the [Tables of Contents](#tables-of-contents)
 
   All pages checked. All errors and warnings fixed.
 
-  * [W3C HTML Validator](https://validator.w3.org/) - In the first Check  some erros and warning were found, like:
+  * [W3C HTML Validator](https://validator.w3.org/) - Some erros and warning were found, like:
     * Duplicated Id;
     * Section lacks heading. Consider using h2-h6 elements to add identifying headings to all sections;
     * Bad value for attribute action on element form: Must be non-empty;
