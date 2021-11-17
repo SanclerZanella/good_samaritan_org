@@ -13,7 +13,7 @@ $(document).ready(() => {
         });
     });
     
-    param = currentUrl.searchParams.get('sponsor')
+    param = currentUrl.searchParams.get('sponsor');
     if(param == 'sponsor-prod_KTO0rZ3DSbX6cu' || param == null) {
         $('#sponsor-prod_KTO0rZ3DSbX6cu').css({
             'border': '2px solid #e72b37'

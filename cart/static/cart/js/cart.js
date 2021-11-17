@@ -5,7 +5,7 @@ $('.add-qty').each((key, value) => {
 
         let id = $(value).attr('id');
         let product_id = id.split('_')[1];
-        let field_id = `#quantity-field_${product_id}`
+        let field_id = `#quantity-field_${product_id}`;
         let qty_field = $(field_id);
         let field_actual_val = parseInt(qty_field.val());
 
@@ -43,7 +43,7 @@ function open_modal(trigger, modal, closeBtn) {
     closeBtn.click(() => {
         modal.hide(500);
     });
-};
+}
 
 // Remove a product from cart modal and prevent double submission
 $('.remove-item-btn').each((key, value) => {

@@ -489,9 +489,6 @@ Back to the [Tables of Contents](#tables-of-contents)
     When checking the sponsorship form page the HTML validator rise the following error:
     * "Duplicate ID id_stripe_public_key."
     I still trying to find what is causing it, because I can't find this id duplicated in the HTML document.
-  
-  In the second check was found a typo error, in the maxlength and minlength attribute of some input elements. This error was fixed.
-
 
   #### CSS3
 
@@ -509,10 +506,9 @@ Back to the [Tables of Contents](#tables-of-contents)
     * "'template literal syntax' is only available in ES6 (use 'esversion: 6')."
     * This code works well despite these warnings
 
-    ##### Two undefined variables:
+    ##### One undefined variables:
 
     * '$' - This is for jQuery, is a sign to define/access jQuery;
-    * 'modal' - Which is a function to handle the modals;
 
 * [JSesprima](https://esprima.org/demo/validate.html) - "Code is syntactically valid."
 

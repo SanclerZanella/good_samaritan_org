@@ -8,7 +8,7 @@ function open_modal(trigger, modal, closeBtn) {
         $('.finish-sponsor-btn').prop("disabled", false);
         modal.hide(500);
     });
-};
+}
 
 // Finish sponsorship and prevent double submission
 $('.finish-sponsor-btn').click(() => {

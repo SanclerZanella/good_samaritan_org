@@ -7,7 +7,7 @@ $('#expand-menu-icon').click(() => {
 
 // Cole mobile nav bar
 $('.close-menu').click(() => {
-    $('.mobile-nav').addClass('display-mobile-nav')
+    $('.mobile-nav').addClass('display-mobile-nav');
     $('.mobile-nav').hide(300);
     $('.mobile-nav').children().hide(300);
 });
@@ -17,4 +17,4 @@ $('.toast').toast('show');
 
 // Update footer year
 var currentYear= new Date().getFullYear(); 
-$('#copyright-year').text(currentYear)
+$('#copyright-year').text(currentYear);

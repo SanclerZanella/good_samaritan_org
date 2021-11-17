@@ -51,7 +51,7 @@ function stripeElements() {
     card.on('change', function (event) {
       displayError(event);
     });
-  };
+  }
   
   // Handle Form Submission 
   let paymentForm = $('#sponsor-form');
@@ -80,14 +80,14 @@ function stripeElements() {
             'country': $.trim($('#id_country').val()),
             'productId': $('#productId').val(),
             'save_info': saveInfo,
-        }
+        };
 
         // Create new payment method & create subscription
         createPaymentMethod({ card }, data);
     });
   }
 
-};
+}
 
 function createPaymentMethod({ card }, data) {
   /*
@@ -154,14 +154,14 @@ function createPaymentMethod({ card }, data) {
             // Load Sponsor(subscription) success page
             if (result.status === 200) {
               window.location.href = result.url;
-            };
+            }
 
           });
 
         }
 
       });
-};
+}
 
 function displayError(event) {
   /*
@@ -182,4 +182,4 @@ function displayError(event) {
         errorDiv.textContent = '';
     }
 
-};
+}

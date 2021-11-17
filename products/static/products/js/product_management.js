@@ -50,7 +50,7 @@ function open_modal(trigger, modal, closeBtn) {
     closeBtn.click(() => {
         modal.hide(500);
     });
-};
+}
 
 // Remove a product from cart modal and prevent double submission
 $('.remove-item-btn').each((key, value) => {

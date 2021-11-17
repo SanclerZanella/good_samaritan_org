@@ -13,7 +13,7 @@ $(document).ready(() => {
     });
 
     // Highlight chosen parcel
-    param = currentUrl.searchParams.get('parcel')
+    param = currentUrl.searchParams.get('parcel');
     if(param == 'parcel_1' || param == null) {
         $('#parcel_1').css({
             'border': '2px solid #e72b37'

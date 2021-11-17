@@ -7,7 +7,7 @@ function open_modal(trigger, modal, closeBtn) {
     closeBtn.click(() => {
         modal.hide(500);
     });
-};
+}
 
 // Remove a product from parcel and prevent double submission
 $('.remove-item-btn').each((key, value) => {
@@ -35,7 +35,7 @@ $('.add-items').each((key, value) => {
             $(value).removeClass('selected');
         } else {
             $(value).addClass('selected');
-        };
+        }
 
     });
     
@@ -50,7 +50,7 @@ $('#add_items_btn').click(() => {
     $('.selected').each((key, value) => {
         parcel_id = $(value).data('pcid');
         let pdid = $(value).data('pdid');
-        product_id_list.push(pdid)
+        product_id_list.push(pdid);
     });
 
     let product_id = product_id_list.join(",").toString()

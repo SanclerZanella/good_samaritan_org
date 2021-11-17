@@ -2,7 +2,7 @@
 var countrySelected = $('#id_default_country').val();
 if(!countrySelected) {
     $('#id_default_country').css('color', '#aab7c4');
-};
+}
 $('#id_default_country').change(function() {
     countrySelected = $(this).val();
     if(!countrySelected) {
@@ -22,7 +22,7 @@ function open_modal(trigger, modal, closeBtn) {
         $('.finish-sponsor-btn').prop("disabled", false);
         modal.hide(500);
     });
-};
+}
 
 // Finish sponsorship and prevent double submission
 $('.finish-sponsor-btn').click(() => {
