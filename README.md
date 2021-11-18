@@ -558,17 +558,17 @@ Please note - in order to run this project locally on your own system, you will 
   * [PIP](https://pip.pypa.io/en/stable/installation/) to install all app requirements.
   * Any IDE such as [Microsoft Visual Studio Code](https://code.visualstudio.com/).
   * [GIT](https://www.atlassian.com/git/tutorials/install-git) for cloning and version control.
-  * [MongoDb](https://www.mongodb.com) to develop your own database either locally or remotely on MongoDB Atlas.
+  * [Microsoft Visual Studio Code](https://code.visualstudio.com/) (or any suitable IDE) to develop your project.
 
 Next, there's a series of steps to take in order to proceed with local deployment:
 
   * Clone this GitHub repository by either clicking the green Clone or download button and downloading the project as a zip-file (remember to unzip it first), or by entering the following into the Git CLI terminal:
-    * > git clone https://github.com/SanclerZanella/borderless_project.git
+    * > git clone https://github.com/SanclerZanella/good_samaritan_org.git
 
   * Navigate to the correct file location after unpacking the files.
     * > cd <path to folder>
   
-  * Create a .env file with your credentials. An example can be found [here](.env_sample). Be sure to include your MONGO_URI and SECRET_KEY values.
+  * Create an env.py file with your credentials. An example can be found [here](env_sample.py).
 
   * Create a .flaskenv file and add the following entries:
     * > FLASK_APP=run.py
@@ -576,43 +576,317 @@ Next, there's a series of steps to take in order to proceed with local deploymen
   
   * Install all requirements from the [requirements.txt](requirements.txt) file using this command:
     * > sudo -H pip3 -r requirements.txt
+
+  * [Database Schema](app/static/files/readme/NoSQL_Schema.pdf)
+
+  * In the IDE terminal, use the following command to launch the Django project:
+   * > python3 manage.py runserver
+
+  * The Django server should be running locally now on http://127.0.0.1:8000/ (or similar). If it doesn't automatically open, you can copy/paste it into your browser of choice.
+
+  * When you run the Django server for the first time, it should create a new SQLite3 database file: db.sqlite3
+
+  * Next, you'll need to make migrations to create the database schema:
+    * > python3 manage.py makemigrations
+    * > python3 manage.py migrate
   
-  * Sign up for a free account on [MongoDB](https://www.mongodb.com) and create a new Database called 2BN-Desserts. The Collections in that database should be as in the schema:
-    * [Database Schema](app/static/files/readme/NoSQL_Schema.pdf)
-
-  * You should now be able to launch your app using the following command in your terminal:
-   * > flask run
-
-  * The app should now be running on localhost on an address similar to http://10.116.8.16:8000/. Simply copy/paste this into the browser of your choice!
+  * In order to access the Django Admin Panel, you must generate a superuser:
+    * > python3 manage.py createsuperuser
+    * (assign an admin username, email, and secure password)
 
 Back to the [Tables of Contents](#tables-of-contents)
 
 ### Remote Deployment
 
-This site is currently deployed on [Heroku](https://circleci.com/signup/?gclid=CjwKCAjw9uKIBhA8EiwAYPUS3Jo8VIjh71KAycLOnAlgya-XRQB5GyYpVMR-wvLIxuVPrR3sgcD2bRoCZS0QAvD_BwE) using the master branch on GitHub. To implement this project on Heroku, the following steps were taken:
+This site is currently deployed on [Heroku](https://signup.heroku.com/) using the main branch on GitHub. To implement this project on Heroku, the following steps were taken:
 
 1. Create a requirements.txt file so Heroku can install the required dependencies to run the app.
     * > pip3 freeze --local > requirements.txt
     * My file can be found [here](requirements.txt).
 
 2. Create a Procfile to tell Heroku what type of application is being deployed, and how to run it.
-    * > echo web: python run.py > Procfile
+    * > echo web: gunicorn good_samaritan.wsgi:application > project/Procfile
     * My file can be found [here](Procfile).
 
 3. Sign up for a free Heroku account, create your project app, and click the Deploy tab, at which point you can Connect GitHub as the Deployment Method, and select Enable Automatic Deployment.
 
-4. In the Heroku Settings tab, click on the Reveal Config Vars button to configure environmental variables as follows:
-    * IP: 0.0.0.0
-    * PORT: 5000
-    * MONGO_URI: <database_uri>
-    * MONGO_DBNAME: <database_name>
-    * SECRET_KEY: <your_own_secret_key>
-    * MAP_KEY: <Google_maps_API_key>
-    * CLOUDINARY_API_KEY: <Cloudinary_API_key>
-    * CLOUDINARY_API_SECRET: <Cloudinary_secret>
-    * CLOUDINARY_CLOUD_NAME: <Cloudinary_cloud_name>
+4. In the Heroku Resources tab, navigate to the Add-Ons section and search for Heroku Postgres. Make sure to select the free Hobby level. This will allow you to have a remote database instead of using the local sqlite3 database, and can be found in the Settings tab.
 
-5. Your app should be successfully deployed to Heroku at this point.
+5. In the Heroku Settings tab, click on the Reveal Config Vars button to configure environmental, but please omit the development=1 variable; this is only for local deployment. variables as follows:
+    * DJANGO_SECRET: <Your_Django_Secret>
+    * STRIPE_PUBLIC_KEY: <Your_Stripe_Public_Key>
+    * STRIPE_SECRET_KEY: <Your_Stripe_Client_Secret>
+    * STRIPE_WH_SECRET: <Your_Stripe_Webhook_Secret>
+    * EMAIL_HOST_PASS: <Your_email_host_password>
+    * EMAIL_HOST_USER: <email>
+    * AWS_ACCESS_KEY_ID: <From_downloaded_amazon_CSV_file>
+    * AWS_SECRET_ACCESS_KEY: <From_downloaded_amazon_CSV_file>
+    * USE_AWS: <True>
+    * DATABASE_URL: <Postgres_db_url>
+
+* Your app should be successfully deployed to Heroku at this point.
+
+6. In the project environment install "dj-database-url" and "psycopg2-binary":
+  * > pip3 install dj-database-url
+  * > pip install psycopg2-binary
+
+7. Import dj_database_url in settings.py:
+ * > Import dj_database_url
+
+8. Copy and paste the default DATABASES variable and comment one of these variable.
+
+9. In heroku config var at settings tab, copy the DATABASE_URL and paste in the env.py to use
+in the default "DATABASES" configuration;
+
+10. Set the default "DATABASES" configuration for production dj_database_url.parse() and save:
+  ```python
+   # DATABASES = {
+                # 'default': {
+                    # 'ENGINE': 'django.db.backends.sqlite3',
+                    # 'NAME': BASE_DIR / 'db.sqlite3',
+                # }
+    
+    DATABASE_URL = os.environ.get('DATABASE_URL', '')
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL)
+    }
+  ```
+
+10. Close any connection on CLI typing "ctrl + c" on CLI and Migrate database:
+    * > python3 manage.py migrate
+
+11. Load database objects:
+    * If you have Fixtures, you will need to load each fixture at a time, for this project will be
+  for categories fixture, products fixture and after for parcel fixture:
+      * > python3 manage.py loaddata categories
+      * > python3 manage.py loaddata products
+      * > python3 manage.py loaddata parcels
+    * If you don't have fixtures in your project, you can download your local mysql database and upload it to postgres:
+      * Make sure your manage.py file is connected to your mysql database:
+        ```python
+          DATABASES = {
+                        'default': {
+                            'ENGINE': 'django.db.backends.sqlite3',
+                            'NAME': BASE_DIR / 'db.sqlite3',
+                        }
+        ```
+      * Use this command to backup your current database and load it into a db.json file:
+          * > python3 manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
+      * Connect your manage.py file to your postgres database:
+        ```python
+          # DATABASES = {
+                      # 'default': {
+                          # 'ENGINE': 'django.db.backends.sqlite3',
+                          # 'NAME': BASE_DIR / 'db.sqlite3',
+                      # }
+          
+          DATABASE_URL = os.environ.get('DATABASE_URL', '')
+          DATABASES = {
+              'default': dj_database_url.parse(DATABASE_URL)
+          }
+        ```
+      * Then use this command to load your data from the db.json file into postgres:
+          * > python3 manage.py loaddata db.json
+12. Install gunicorn:
+    * > pip3 install gunicorn
+13. Login to heroku on CLI:
+    * > heroku login -i
+14. Temporarily disable collectstatic:
+    * > heroku config:set DISABLE_COLLECTSTATIC=1 --app good-samaritan-org
+15. Add the heroku app to ALLOWED_HOSTS in settings.py
+    ```python
+        ALLOWED_HOSTS = ['good-samaritan-org.herokuapp.com', 'localhost']
+    ```
+16. Initialize Heroku git remote:
+    * > heroku git:remote -a good-samaritan-org
+
+17. If you didn't setup the automatic deployment, then Push repository to heroku via CLI:
+    * > git push heroku main
+
+18. If you didn't setup the automatic deployment, then it's a good time to setup it.
+    * On deploy tab in heroku dashboard, choose github as Deployment method, look for the repository name (good_samaritan_org) and connect.
+    * In the same tab, enable automatically deploys.
+
+19. Create an AWS account.
+
+20. Choose the S3 service in the services menu.
+
+21. Create a new bucket, unset "Block all public access" option and set "Turning off block all public access might result in this bucket and the objects within becoming public" option.
+
+22. In the bucket configuration, at the properties tab edit and enable the Static website hosting.
+
+23. As index document use index.html and as Error document error.html, then save changes.
+
+24. At the permission tabs edit Cross-origin resource sharing (CORS), Paste the CORS configuration, then save:
+    ```javascript
+      [
+        {
+          "AllowedHeaders": [
+            "Authorization"
+          ],
+          "AllowedMethods": [
+            "GET"
+          ],
+          "AllowedOrigins": [
+            "*"
+          ],
+          "ExposeHeaders": []
+        }
+      ]
+    ```
+
+25. Then edit the Bucket policy, click on AWS Policy Generator.
+    * Select Type of Policy: S3 Bucket Policy
+    * Effect: Allow
+    * Principal: *
+    * Actions: getObject
+    * Past the Amazon Resource Name (ARN)
+    * click add statement
+    * Then generate policy and copy
+
+26. Paste in the Bucket policy, add a "/*" to the end of resource field  ("arn:aws:s3:::good-samaritan-org/*") and save.
+
+27. Edit access control list (ACL).
+
+28. Set Everyone (public access): list, then save.
+
+29. In the Services menu, open the IAM.
+
+30. Click in User groups, then click create group.
+
+31. Click in Policies and then create policies.
+
+32. On Json tab click import managed policy.
+
+33. Search for s3 and import the AmazonS3FullAccess.
+
+34. In the Json tab change de "Resource" field content to and Then click review policy: 
+    ```javascript
+      [
+        "arn:aws:s3:::good-samaritan-org",
+        "arn:aws:s3:::good-samaritan-org/*"
+      ]
+    ```
+
+35. Give a name and a description, then click create policies.
+
+36. In the User Groups tab open your new created group.
+
+37. In the permission tab click add permissions and attach policies.
+
+38. Select the new created policy and click add permission, after click on Users, then click add user.
+
+39. Give a name, set Programmatic access, click "next: permissions" and set new created attached policy, then create user
+
+40. Download the CSV file (Don't leave this screen without download this file, you won't have another chance!)
+
+41. On project environment, install boto3 and django-storages:
+    * > pip3 install boto3
+    * > pip3 install django-storages
+
+42. Add 'storages' to INSTALLED_APPS in settings.py.
+
+43. Add, in settings.py, the variables AWS_STORAGE_BUCKET_NAME, AWS_STORAGE_BUCKET_NAME, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY:
+    ```python
+      if 'USE_AWS' in os.environ:
+        AWS_STORAGE_BUCKET_NAME = 'good-samaritan-org'
+        AWS_S3_REGION_NAME = 'eu-west-1'
+        AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    ```
+
+44. In heroku settings tab, add the AWS_ACCESS_KEY_ID  and AWS_SECRET_ACCESS_KEY to Config Vars.
+
+45. Remove DISABLE_COLLECTSTATIC variable from Config Vars in heroku.
+
+46. Add AWS_S3_CUSTOM_DOMAIN variable to settings.py:
+    ```python
+      if 'USE_AWS' in os.environ:
+      AWS_STORAGE_BUCKET_NAME = 'good-samaritan-org'
+      AWS_S3_REGION_NAME = 'eu-west-1'
+      AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+      AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+      AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    ```
+
+47. Create a [custom_storages.py](custom_storages.py) file on root directory.
+
+48. In the settings.py add STATICFILES_STORAGE, STATICFILES_LOCATION, DEFAULT_FILE_STORAGE, MEDIAFILES_LOCATION variables:
+    ```python
+      if 'USE_AWS' in os.environ:
+        # Bucket config
+        AWS_STORAGE_BUCKET_NAME = 'good-samaritan-org'
+        AWS_S3_REGION_NAME = 'eu-west-1'
+        AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+        AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+        # Static and media files
+        STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+        STATICFILES_LOCATION = 'static'
+        DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+        MEDIAFILES_LOCATION = 'media'
+    ```
+
+49. Then Override static and media URLs in production:
+    ```python
+      if 'USE_AWS' in os.environ:
+        # Bucket config
+        AWS_STORAGE_BUCKET_NAME = 'good-samaritan-org'
+        AWS_S3_REGION_NAME = 'eu-west-1'
+        AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+        AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+        # Static and media files
+        STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+        STATICFILES_LOCATION = 'static'
+        DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+        MEDIAFILES_LOCATION = 'media'
+        
+        # Override static and media URLs in production
+        STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    ```
+
+50. Add to settings.py the AWS_S3_OBJECT_PARAMETERS:
+    ```python
+      if 'USE_AWS' in os.environ:
+        # Cache control
+        AWS_S3_OBJECT_PARAMETERS = {
+            'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+            'CacheControl': 'max-age=94608000',
+        }
+
+        # Bucket config
+        AWS_STORAGE_BUCKET_NAME = 'good-samaritan-org'
+        AWS_S3_REGION_NAME = 'eu-west-1'
+        AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+        AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+        # Static and media files
+        STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+        STATICFILES_LOCATION = 'static'
+        DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+        MEDIAFILES_LOCATION = 'media'
+        
+        # Override static and media URLs in production
+        STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    ```
+
+51. In the s3 bucket interface, create a media folder and upload all media files.
+
+52. Confirm the email of the new superuser trying to login or direct on admin interface.
+
+53. Change stripe webhook endpoint.
+
+54. In the Admin interface, setup the most-need products in Products table.
+
+55. Change the domain name in Sites table.
+
+56. Add the Google API to Social Applications table if you're using the google account to log in.
 
 ---
 
@@ -642,7 +916,6 @@ Back to the [Tables of Contents](#tables-of-contents)
 Thank you to the following people who helped with support, inspiration and guidance at different stages in the project:
 
   * My mentor [Caleb Mbakwe](https://www.linkedin.com/in/calebmbakwe/?originalSubdomain=ng)
-  * [Tim Nelson](https://github.com/TravelTimN) whom I inspired to organize the project and the README file.
   * Code Institute Mentors and Tutors.
   * Code Institute Student Care, which is always Kind.
   * My class on slack.
