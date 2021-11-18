@@ -20,7 +20,7 @@ Find out more about this project and help:
 
 ## Tables of Contents
 
-- [Borderless](#borderless)
+- [The Good Samaritan Org](#the-good-samaritan-org)
 - [Tables of Contents](#tables-of-contents)
 - [UX](#ux)
   - [The purpose of the website is to present the follow values:](#the-purpose-of-the-website-is-to-present-the-follow-values)
@@ -35,15 +35,6 @@ Find out more about this project and help:
   - [Front-End Technologies](#front-end-technologies)
   - [Back-End Technologies](#back-end-technologies)
 - [Testing](#testing)
-  - [Testing User Stories](#testing-user-stories)
-  - [Creating an Account](#creating-an-account)
-  - [Log In](#log-in)
-  - [Add, Edit and Delete a Trip Post](#add-edit-and-delete-a-trip-post)
-  - [Pagination](#pagination)
-  - [Trip Post](#trip-post)
-  - [Validating The HTML and CSS code](#validating-the-html-and-css-code)
-  - [Testing in different browsers](#testing-in-different-browsers)
-  - [Known Issues](#known-issues)
 - [Accessibility](#accessibility)
 - [Deployment](#deployment)
   - [Local Deployment](#local-deployment)
@@ -148,7 +139,8 @@ Back to the [Tables of Contents](#tables-of-contents)
 
   * **Register Account**:
     * Anybody can register for free and create their own unique account. The project has built-in authentication and authorization to check certain criteria is met before an account is validated. All passwords are hashed for security purposes.
-    ![register form](media/readme/register.PNG)
+        
+        ![register form](media/readme/register.PNG)
 
   * **Log In to Account**:
     * For existing users, I have more authentication and authorization incorporated to check that the hashed passwords and username match the database, the user can log in using a third party account (google) as well.
@@ -289,7 +281,7 @@ Back to the [Tables of Contents](#tables-of-contents)
     * Used as a basic template to kick start the project.
 
   * [Balsamiq](https://balsamiq.com/)
-    * Used for wireframing the project. [see wireframe](app/static/files/readme/borderless_wireframe.pdf)
+    * Used for wireframing the project. [see wireframe](media/readme/docs/gsamaritan_wireframe.pdf)
 
   * [draw.io](https://drawio-app.com/)
       * Used to create the database schema. [See data base schema](media/readme/docs/schema.drawio.pdf)
@@ -631,8 +623,6 @@ Next, there's a series of steps to take in order to proceed with local deploymen
   * Install all requirements from the [requirements.txt](requirements.txt) file using this command:
     * > sudo -H pip3 -r requirements.txt
 
-  * [Database Schema](app/static/files/readme/NoSQL_Schema.pdf)
-
   * In the IDE terminal, use the following command to launch the Django project:
    * > python3 manage.py runserver
 
@@ -640,7 +630,7 @@ Next, there's a series of steps to take in order to proceed with local deploymen
 
   * When you run the Django server for the first time, it should create a new SQLite3 database file: db.sqlite3
 
-  * Next, you'll need to make migrations to create the database schema:
+  * Next, you'll need to make migrations to create the database:
     * > python3 manage.py makemigrations
     * > python3 manage.py migrate
   
