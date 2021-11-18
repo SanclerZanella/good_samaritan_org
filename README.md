@@ -14,7 +14,7 @@ Find out more about this project and help:
 
 [Facebook](https://www.facebook.com/Minist%C3%A9rio-BOM-Samaritano-Mozambique-800507056757640)
 
-[Click here to see the project live]()
+[Click here to see the project live](https://good-samaritan-org.herokuapp.com/)
 
 ---
 
@@ -71,7 +71,7 @@ Find out more about this project and help:
   * *donate all products at once.*
   * *sort products.*
   * *Filter products by category.*
-  * *search products by trip name and category.*
+  * *search products by name and category.*
   * *donate a parcel as a guest.*
   * *sponsor a child, widow or elderly as a guest. (recurrent donation)*
   * *view my donation in a pre checkout are like a cart or a bag*
@@ -116,7 +116,7 @@ Back to the [Tables of Contents](#tables-of-contents)
     * Software used to build the wireframe of this project. Because Code Institute have provided all students with free access for a limited time and the simplicity and ease of use.
 
   * **The wireframe can be seen here**:
-    <!-- * [Wireframe](app/static/files/readme/borderless_wireframe.pdf) -->
+    * [Wireframe](media/readme/docs/gsamaritan_wireframe.pdf)
 
 Back to the [Tables of Contents](#tables-of-contents)
 
@@ -148,124 +148,122 @@ Back to the [Tables of Contents](#tables-of-contents)
 
   * **Register Account**:
     * Anybody can register for free and create their own unique account. The project has built-in authentication and authorization to check certain criteria is met before an account is validated. All passwords are hashed for security purposes.
-    ![signup form](app/static/images/readme/test/manual/signup_form.png)
+    ![register form](media/readme/register.PNG)
 
   * **Log In to Account**:
     * For existing users, I have more authentication and authorization incorporated to check that the hashed passwords and username match the database, the user can log in using a third party account (google) as well.
-    ![signup form](app/static/images/readme/test/manual/login_form.png)
+    ![login form](media/readme/login.PNG)
 
   * **Log Out of Account**:
     * Users can easily log out of their account with the click of a button.
-    ![logout btn](app/static/images/readme/test/manual/logout_btn.png)
+    ![logout btn](media/readme/logout.PNG)
   
   * **Navbar**:
     * The navbar is different, depending whether the user is logged in or not. The 'My Account' Dropdown menu options will be different.
     
       * Navbar when the user is logged:
-      ![logged navbar](app/static/images/readme/test/manual/logged_navbar.png)
+      ![logged navbar](media/readme/logged_nav.PNG)
 
       * Navbar when the user is logged out:
-      ![logged out navbar](app/static/images/readme/test/manual/loggedout_navbar.png)
+      ![logged out navbar](media/readme/loggedout_nav.PNG)
   
   * **Donate as a guest**:
     * Every user logged or not can donate a product, parcel and subscribe to a sponsorship.
-
-        * [Feed Page](https://borderless-project.herokuapp.com/)
   
   * **Donate All Products**:
     * Button located in products page to donate all products at once, the products and total value may vary if the user sort the product list.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![donate all](media/readme/donate_all_btn.PNG)
   
   * **Most-Needed Items**:
     * Button located in products page to list the most needed items, products in this list may vary.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![most needed](media/readme/most_needed.PNG)
   
   * **Donate Button (Products page)**:
     * Button located in products page to open the product details.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![donate Button (Products page)](media/readme/donate_product_page.PNG)
   
   * **Donate Button (Product Details page)**:
     * Button located in products details page to add the product to the cart.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![donate Button (Product Details page)](media/readme/donate_details_page.PNG)
   
-  * **Donate Parcel Button (Parcels page)**:
-    * Button located in parcels page to add the parcel to the cart.
+  * **Donate Parcel Button (Products page)**:
+    * Button located in products page to add the parcel to the cart.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Donate Parcel Button (Products page)](media/readme/family_parcels_btn.PNG)
    
   * **Sponsor Button**:
     * Button located in Sponsorship page to subscribe to a sponsorship, just one subscription is allowed per user or email.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Sponsor Button](media/readme/sponsorship_btn.PNG)
   
   * **Profile Form**:
     * Form in the profile page to update profile details, this details are used to pre populate the checkout form and they can be updated when the user checkout a form and save details to profile.
 
-    ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+    ![Profile Form](media/readme/profile_form.PNG)
 
-  * **Order History Column**:
+  * **Donation History Column**:
     * Column in the profile page where the user can view his past donations and see the past donation details.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Donation History Column](media/readme/donation_col_profile.PNG)
   
   * **Recover Sponsorship**:
     * Section in the profile page where the user can recover any sponsorship created as a guest, the user only can see this section if he does not created a sponsorship while logged.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Recover Sponsorship](media/readme/recover_sponsor.PNG)
   
   * **Sponsorship**:
     * Section in the profile page where the user can view and manage his current sponsorship, the user only can see this section if he already has a sponsorship.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Sponsorship](media/readme/sponsor_profile.PNG)
   
   * **Product Management Button**:
     * Button located in Profile page access the Product Management page, Just the site owner can see this button.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Product Management Button](media/readme/product_management_btn.PNG)
   
   * **Edit Product or Parcel Button**:
     * Button to update product or parcel details, like price, name, sku and others details.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Edit Product or Parcel Button](media/readme/edit_prod.PNG)
   
   * **Remove Product Button**:
     * Button to remove a product from database.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Remove Product Button](media/readme/remove_prod.PNG)
   
   * **Add New Product Button**:
     * Button to add a new product to database, Parcels can't be added, the number of parcels is fixed, they can be just edited.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Add New Product Button](media/readme/add_new_prod.PNG)
   
   * **Update Product Quantity Button**:
     * Button located in Donation Cart page to update the quantity of a product in the cart.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Update Product Quantity Button](media/readme/update_prod_cart.PNG)
   
   * **Remove Product Button**:
     * Button located in Donation Cart page to remove a product from cart.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Remove Product Button](media/readme/remove_prod_cart.PNG)
   
   * **Remove All Items From The Cart**:
     * Button located in Donation Cart page to remove all products from cart at once.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Remove All Items From The Cart](media/readme/remove_all_cart.PNG)
   
   * **Save this information to my profile checkbox**:
     * checkbox located in checkout page to details from checkout form to profile.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![Save this information to my profile checkbox](media/readme/save_info.PNG)
   
   * **Top Page Search Bar**:
     * Search bar present in all pages to search any product by name or category.
 
-      ![search bar feature](app/static/images/readme/test/manual/search_feat.png)
+      ![search bar feature](media/readme/search_bar.PNG)
 
 ### Future Implementations
 
@@ -294,7 +292,7 @@ Back to the [Tables of Contents](#tables-of-contents)
     * Used for wireframing the project. [see wireframe](app/static/files/readme/borderless_wireframe.pdf)
 
   * [draw.io](https://drawio-app.com/)
-      * Used to create the database schema. [See data base schema](app/static/files/readme/NoSQL_Schema.pdf)
+      * Used to create the database schema. [See data base schema](media/readme/docs/schema.drawio.pdf)
   
   * [Chrome Dev Tools](https://developers.google.com/web/tools/chrome-devtools)
     * A set of web developer tools built directly into the Google Chrome browser. I used these tools constantly thoughout the development cycle.
@@ -406,6 +404,66 @@ Back to the [Tables of Contents](#tables-of-contents)
 
 ## Testing
 
+### Automated Tests
+
+* All apps are tested by django TestCase, it includes forms and views automated tests see example bellow:
+    ```python
+      from django.test import TestCase
+      from home.forms import ContactForm
+
+
+      class testContactForm(TestCase):
+          """
+          Test contact form
+
+          Methods:
+              *test_first_name_is_required: Test if first name field is required;
+              *test_last_name_is_required: Test if last name field is required;
+              *test_email_address_is_required: Test if email field is required;
+              *test_email_address_is_valid: Test if email field is valid;
+              *test_message_is_required: Test if message field is required;
+          """
+          def test_first_name_is_required(self):
+              """
+              Test if first name field is required
+              """
+
+              form = ContactForm({'first_name': ""})
+
+              self.assertFalse(form.is_valid())
+              self.assertIn('first_name', form.errors.keys())
+              self.assertEqual(form.errors['first_name'][0],
+                              'This field is required.')
+    ```
+
+* To check the test results in CLI, just run tyhe following command:
+    * > python3 manage.py test
+
+* To check the test results for a specific app in CLI, just run tyhe following command example:
+    * > python3 manage.py test home.tests
+
+* To check the test results and coverage, follow these steps:
+    1. Install Coverage:
+        * > pip3 install coverage
+
+    2. For running on a django project, use this command:
+        * > coverage run --source='.' manage.py test
+
+    3. If you need to remove gathered data, execute:
+        * > coverage erase
+    
+    4. If you want to show the results in the command line, run:
+        * > coverage report
+    
+    5. For more readable reports:
+        * > coverage html
+    
+    6. To check the coverage html:
+        * Open the project directory tree on browser:
+            * > python3 -m http.server
+        * Find the "htmlcov/" item in the list and click on this.
+        * Check the coverage status and click on any item in the list to see more details.
+
 ### Testing User Stories
 
 *"As a user, I would like to _____________________________"*
@@ -428,7 +486,7 @@ Back to the [Tables of Contents](#tables-of-contents)
 
 * *Filter products by category.*
 
-* *search products by trip name and category.*
+* *search products by name and category.*
 
 * *donate a parcel as a guest.*
 * *sponsor a child, widow or elderly as a guest. (recurrent donation)*
@@ -520,7 +578,7 @@ I manually tested the website on the following web browsers, checking buttons, r
   * Mozilla Firefox
   * Microsoft Edge
 
-### Known Issues
+<!-- ### Known Issues
 
   1. The Unfollow button in public profile page, when clicked all code related to remove user from the specific field in the database works well and the button UI turn to a Follow Button, but it does not behave as a Follow button unless the page is reloaded.
 
@@ -534,7 +592,7 @@ I manually tested the website on the following web browsers, checking buttons, r
 
   6. ~~Pictures in preview photos in edit trip page are not redering~~ Fixed adding 'blob:' data scheme to content security policy
 
-Back to the [Tables of Contents](#tables-of-contents)
+Back to the [Tables of Contents](#tables-of-contents) -->
 
 ---
 
@@ -569,10 +627,6 @@ Next, there's a series of steps to take in order to proceed with local deploymen
     * > cd <path to folder>
   
   * Create an env.py file with your credentials. An example can be found [here](env_sample.py).
-
-  * Create a .flaskenv file and add the following entries:
-    * > FLASK_APP=run.py
-    * > FLASK_ENV=development
   
   * Install all requirements from the [requirements.txt](requirements.txt) file using this command:
     * > sudo -H pip3 -r requirements.txt
@@ -627,11 +681,11 @@ This site is currently deployed on [Heroku](https://signup.heroku.com/) using th
 * Your app should be successfully deployed to Heroku at this point.
 
 6. In the project environment install "dj-database-url" and "psycopg2-binary":
-  * > pip3 install dj-database-url
-  * > pip install psycopg2-binary
+    * > pip3 install dj-database-url
+    * > pip install psycopg2-binary
 
 7. Import dj_database_url in settings.py:
- * > Import dj_database_url
+  * > Import dj_database_url
 
 8. Copy and paste the default DATABASES variable and comment one of these variable.
 
@@ -687,37 +741,54 @@ in the default "DATABASES" configuration;
         ```
       * Then use this command to load your data from the db.json file into postgres:
           * > python3 manage.py loaddata db.json
-12. Install gunicorn:
+
+12. Setup the default database to postgres in production environment:
+    ```python3
+      if 'DATABASE_URL' in os.environ:
+          DATABASE_URL = os.environ.get('DATABASE_URL', '')
+          DATABASES = {
+              'default': dj_database_url.parse(DATABASE_URL)
+          }
+      else:
+          DATABASES = {
+              'default': {
+                  'ENGINE': 'django.db.backends.sqlite3',
+                  'NAME': BASE_DIR / 'db.sqlite3',
+              }
+          }
+    ```
+
+13. Install gunicorn:
     * > pip3 install gunicorn
-13. Login to heroku on CLI:
+14. Login to heroku on CLI:
     * > heroku login -i
-14. Temporarily disable collectstatic:
+15. Temporarily disable collectstatic:
     * > heroku config:set DISABLE_COLLECTSTATIC=1 --app good-samaritan-org
-15. Add the heroku app to ALLOWED_HOSTS in settings.py
+16. Add the heroku app to ALLOWED_HOSTS in settings.py
     ```python
         ALLOWED_HOSTS = ['good-samaritan-org.herokuapp.com', 'localhost']
     ```
-16. Initialize Heroku git remote:
+17. Initialize Heroku git remote:
     * > heroku git:remote -a good-samaritan-org
 
-17. If you didn't setup the automatic deployment, then Push repository to heroku via CLI:
+18. If you didn't setup the automatic deployment, then Push repository to heroku via CLI:
     * > git push heroku main
 
-18. If you didn't setup the automatic deployment, then it's a good time to setup it.
+19. If you didn't setup the automatic deployment, then it's a good time to setup it.
     * On deploy tab in heroku dashboard, choose github as Deployment method, look for the repository name (good_samaritan_org) and connect.
     * In the same tab, enable automatically deploys.
 
-19. Create an AWS account.
+20. Create an AWS account.
 
-20. Choose the S3 service in the services menu.
+21. Choose the S3 service in the services menu.
 
-21. Create a new bucket, unset "Block all public access" option and set "Turning off block all public access might result in this bucket and the objects within becoming public" option.
+22. Create a new bucket, unset "Block all public access" option and set "Turning off block all public access might result in this bucket and the objects within becoming public" option.
 
-22. In the bucket configuration, at the properties tab edit and enable the Static website hosting.
+23. In the bucket configuration, at the properties tab edit and enable the Static website hosting.
 
-23. As index document use index.html and as Error document error.html, then save changes.
+24. As index document use index.html and as Error document error.html, then save changes.
 
-24. At the permission tabs edit Cross-origin resource sharing (CORS), Paste the CORS configuration, then save:
+25. At the permission tabs edit Cross-origin resource sharing (CORS), Paste the CORS configuration, then save:
     ```javascript
       [
         {
@@ -735,7 +806,7 @@ in the default "DATABASES" configuration;
       ]
     ```
 
-25. Then edit the Bucket policy, click on AWS Policy Generator.
+26. Then edit the Bucket policy, click on AWS Policy Generator.
     * Select Type of Policy: S3 Bucket Policy
     * Effect: Allow
     * Principal: *
@@ -744,23 +815,23 @@ in the default "DATABASES" configuration;
     * click add statement
     * Then generate policy and copy
 
-26. Paste in the Bucket policy, add a "/*" to the end of resource field  ("arn:aws:s3:::good-samaritan-org/*") and save.
+27. Paste in the Bucket policy, add a "/*" to the end of resource field  ("arn:aws:s3:::good-samaritan-org/*") and save.
 
-27. Edit access control list (ACL).
+28. Edit access control list (ACL).
 
-28. Set Everyone (public access): list, then save.
+29. Set Everyone (public access): list, then save.
 
-29. In the Services menu, open the IAM.
+30. In the Services menu, open the IAM.
 
-30. Click in User groups, then click create group.
+31. Click in User groups, then click create group.
 
-31. Click in Policies and then create policies.
+32. Click in Policies and then create policies.
 
-32. On Json tab click import managed policy.
+33. On Json tab click import managed policy.
 
-33. Search for s3 and import the AmazonS3FullAccess.
+34. Search for s3 and import the AmazonS3FullAccess.
 
-34. In the Json tab change de "Resource" field content to and Then click review policy: 
+35. In the Json tab change de "Resource" field content to and Then click review policy: 
     ```javascript
       [
         "arn:aws:s3:::good-samaritan-org",
@@ -768,25 +839,25 @@ in the default "DATABASES" configuration;
       ]
     ```
 
-35. Give a name and a description, then click create policies.
+36. Give a name and a description, then click create policies.
 
-36. In the User Groups tab open your new created group.
+37. In the User Groups tab open your new created group.
 
-37. In the permission tab click add permissions and attach policies.
+38. In the permission tab click add permissions and attach policies.
 
-38. Select the new created policy and click add permission, after click on Users, then click add user.
+39. Select the new created policy and click add permission, after click on Users, then click add user.
 
-39. Give a name, set Programmatic access, click "next: permissions" and set new created attached policy, then create user
+40. Give a name, set Programmatic access, click "next: permissions" and set new created attached policy, then create user
 
-40. Download the CSV file (Don't leave this screen without download this file, you won't have another chance!)
+41. Download the CSV file (Don't leave this screen without download this file, you won't have another chance!)
 
-41. On project environment, install boto3 and django-storages:
+42. On project environment, install boto3 and django-storages:
     * > pip3 install boto3
     * > pip3 install django-storages
 
-42. Add 'storages' to INSTALLED_APPS in settings.py.
+43. Add 'storages' to INSTALLED_APPS in settings.py.
 
-43. Add, in settings.py, the variables AWS_STORAGE_BUCKET_NAME, AWS_STORAGE_BUCKET_NAME, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY:
+44. Add, in settings.py, the variables AWS_STORAGE_BUCKET_NAME, AWS_STORAGE_BUCKET_NAME, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY:
     ```python
       if 'USE_AWS' in os.environ:
         AWS_STORAGE_BUCKET_NAME = 'good-samaritan-org'
@@ -795,11 +866,11 @@ in the default "DATABASES" configuration;
         AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     ```
 
-44. In heroku settings tab, add the AWS_ACCESS_KEY_ID  and AWS_SECRET_ACCESS_KEY to Config Vars.
+45. In heroku settings tab, add the AWS_ACCESS_KEY_ID  and AWS_SECRET_ACCESS_KEY to Config Vars.
 
-45. Remove DISABLE_COLLECTSTATIC variable from Config Vars in heroku.
+46. Remove DISABLE_COLLECTSTATIC variable from Config Vars in heroku.
 
-46. Add AWS_S3_CUSTOM_DOMAIN variable to settings.py:
+47. Add AWS_S3_CUSTOM_DOMAIN variable to settings.py:
     ```python
       if 'USE_AWS' in os.environ:
       AWS_STORAGE_BUCKET_NAME = 'good-samaritan-org'
@@ -809,9 +880,9 @@ in the default "DATABASES" configuration;
       AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     ```
 
-47. Create a [custom_storages.py](custom_storages.py) file on root directory.
+48. Create a [custom_storages.py](custom_storages.py) file on root directory.
 
-48. In the settings.py add STATICFILES_STORAGE, STATICFILES_LOCATION, DEFAULT_FILE_STORAGE, MEDIAFILES_LOCATION variables:
+49. In the settings.py add STATICFILES_STORAGE, STATICFILES_LOCATION, DEFAULT_FILE_STORAGE, MEDIAFILES_LOCATION variables:
     ```python
       if 'USE_AWS' in os.environ:
         # Bucket config
@@ -828,7 +899,7 @@ in the default "DATABASES" configuration;
         MEDIAFILES_LOCATION = 'media'
     ```
 
-49. Then Override static and media URLs in production:
+50. Then Override static and media URLs in production:
     ```python
       if 'USE_AWS' in os.environ:
         # Bucket config
@@ -849,7 +920,7 @@ in the default "DATABASES" configuration;
         MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
     ```
 
-50. Add to settings.py the AWS_S3_OBJECT_PARAMETERS:
+51. Add to settings.py the AWS_S3_OBJECT_PARAMETERS:
     ```python
       if 'USE_AWS' in os.environ:
         # Cache control
@@ -876,17 +947,17 @@ in the default "DATABASES" configuration;
         MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
     ```
 
-51. In the s3 bucket interface, create a media folder and upload all media files.
+52. In the s3 bucket interface, create a media folder and upload all media files.
 
-52. Confirm the email of the new superuser trying to login or direct on admin interface.
+53. Confirm the email of the new superuser trying to login or direct on admin interface.
 
-53. Change stripe webhook endpoint.
+54. Change stripe webhook endpoint.
 
-54. In the Admin interface, setup the most-need products in Products table.
+55. In the Admin interface, setup the most-need products in Products table.
 
-55. Change the domain name in Sites table.
+56. Change the domain name in Sites table.
 
-56. Add the Google API to Social Applications table if you're using the google account to log in.
+57. Add the Google API to Social Applications table if you're using the google account to log in.
 
 ---
 
