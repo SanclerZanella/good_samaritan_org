@@ -8,184 +8,190 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row no-gutters mt-5">
-        
-        <!-- Page Title -->
-        <div class="col-12 text-center checkout-title">
-            <h1 class="font-weight-bold">Check Out</h1>
-        </div>
-        
-        <!-- Horizontal rule -->
-        <div class="col-12">
-            <hr>
-        </div>
-        
-         <!-- Products Column -->
-        <div class="col-12 col-md-4 products-col">
-
-            <!-- Checkout Items Heading -->
-            <div class="row no-gutters mt-5 mb-3 content-alignment">
-                <div class="col-10 products-checkout-title">
-                    <h2 class="text-center">Order Summary</h2>
-                </div>
+    <section aria-labelledby="checkout_body">
+        <h2 class="sr-only" id="checkout_body">Checkout</h2>
+        <div class="row no-gutters mt-5">
+            
+            <!-- Page Title -->
+            <div class="col-12 text-center checkout-title">
+                <h1 class="font-weight-bold">Check Out</h1>
             </div>
             
-            <!-- Checkout Items -->
-            <div class="row no-gutters products-cart-list">
+            <!-- Horizontal rule -->
+            <div class="col-12">
+                <hr>
+            </div>
+            
+            <!-- Products Column -->
+            <div class="col-12 col-md-4 products-col">
 
-                <div class="col-12">
-                    {% for item in cart_items %}
-                        {% with product=item.product quantity=item.quantity %}
-                                    
-                                    <!-- Product Card -->
-                                    <div class="row no-gutters mt-3 content-alignment">
-                                        <div class="col-10 product-cart-wrapper">
-                                            
-                                            <!-- Product Image and Info -->
-                                            <div class="row no-gutters">
+                <!-- Checkout Items Heading -->
+                <div class="row no-gutters mt-5 mb-3 content-alignment">
+                    <div class="col-10 products-checkout-title">
+                        <h2 class="text-center">Order Summary</h2>
+                    </div>
+                </div>
+                
+                <!-- Checkout Items -->
+                <div class="row no-gutters products-cart-list">
 
-                                                <!-- Product image -->
-                                                <div class="col-3 product-cart-img content-alignment">
-                                                    {% if product.image %}
-                                                        <img src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }}">
-                                                    {% elif not product.image and not product.image_url %}
-                                                        <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
-                                                    {% else %}
-                                                        <img src="{{MEDIA_URL}}{{ product.image_url }}" alt="{{ product.name }}">
-                                                    {% endif %}
-                                                </div>
+                    <div class="col-12">
+                        {% for item in cart_items %}
+                            {% with product=item.product quantity=item.quantity %}
+                                        
+                                        <!-- Product Card -->
+                                        <div class="row no-gutters mt-3 content-alignment">
+                                            <div class="col-10 product-cart-wrapper">
+                                                
+                                                <!-- Product Image and Info -->
+                                                <div class="row no-gutters">
 
-                                                <!-- Products Info -->
-                                                <div class="col-9">
-                                                    <div class="row no-gutters">
-                                                        
-                                                        <!-- Product Name -->
-                                                        <div class="col-12 my-1">
-                                                            <h2 class="ml-1 font-weight-bold">{{ product.name }}</h2>
-                                                        </div>
-
-                                                        <!-- Product Quantity -->
-                                                        <div class="col-12">
-                                                            <p class="ml-1">Qty: <strong>{{ quantity }}</strong></p>
-                                                        </div>
-
-                                                        <!-- Subtotal -->
-                                                        <div class="col-12">
-                                                            <p class="ml-1">Subtotal: <strong>${{ product.price | calc_subtotal:quantity }}</strong></p>
-                                                        </div>
-
+                                                    <!-- Product image -->
+                                                    <div class="col-3 product-cart-img content-alignment">
+                                                        {% if product.image %}
+                                                            <img src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }}">
+                                                        {% elif not product.image and not product.image_url %}
+                                                            <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
+                                                        {% else %}
+                                                            <img src="{{MEDIA_URL}}{{ product.image_url }}" alt="{{ product.name }}">
+                                                        {% endif %}
                                                     </div>
+
+                                                    <!-- Products Info -->
+                                                    <div class="col-9">
+                                                        <div class="row no-gutters">
+                                                            
+                                                            <!-- Product Name -->
+                                                            <div class="col-12 my-1">
+                                                                <h2 class="ml-1 font-weight-bold">{{ product.name }}</h2>
+                                                            </div>
+
+                                                            <!-- Product Quantity -->
+                                                            <div class="col-12">
+                                                                <p class="ml-1">Qty: <strong>{{ quantity }}</strong></p>
+                                                            </div>
+
+                                                            <!-- Subtotal -->
+                                                            <div class="col-12">
+                                                                <p class="ml-1">Subtotal: <strong>${{ product.price | calc_subtotal:quantity }}</strong></p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                             </div>
-
                                         </div>
-                                    </div>
 
-                        {% endwith %}
-                    {% endfor %}
+                            {% endwith %}
+                        {% endfor %}
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
-        
-        <!-- Horizontal Rule -->
-        <div class="col-12 d-md-none">
-            <hr>
-        </div>
-
-        <!-- Check Out form -->
-        <div class="col-12 col-md-8 checkout-form-wrapper">
-            <div class="row no-gutters mt-5 mb-1 content-alignment">
-                <div class="col-10 form-title">
-                    <h2 class="text-center">Check Out Informations</h2>
-                </div>
+            
+            <!-- Horizontal Rule -->
+            <div class="col-12 d-md-none">
+                <hr>
             </div>
 
-            <div class="row no-gutters content-alignment">
-                <div class="col-10">
-                    <p class="text-center text-muted mb-5">Please fill out the form bellow to complete your donation</p>
+            <!-- Check Out form -->
+            <div class="col-12 col-md-8 checkout-form-wrapper">
+                <div class="row no-gutters mt-5 mb-1 content-alignment">
+                    <div class="col-10 form-title">
+                        <h2 class="text-center">Check Out Informations</h2>
+                    </div>
+                </div>
 
-                    <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-                        {% csrf_token %}
+                <div class="row no-gutters content-alignment">
+                    <div class="col-10">
+                        <p class="text-center text-muted mb-5">Please fill out the form bellow to complete your donation</p>
 
-                        <fieldset class="mb-5">
-                            {{ order_form.full_name | as_crispy_field }}
-                            {{ order_form.email | as_crispy_field }}
-                            {{ order_form.street_address1 | as_crispy_field }}
-                            {{ order_form.street_address2 | as_crispy_field }}
-                            {{ order_form.town_or_city | as_crispy_field }}
-                            {{ order_form.country | as_crispy_field }}
-                            <div class="form-check form-check-inline float-right mr-0">
-                                {% if user.is_authenticated %}
-                                    <label class="form-check-label" for="id-save-info">Save this information to my profile</label>
-                                    <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
-                                {% else %}
-                                    <label class="form-check-label" for="id-save-info">
-                                        <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                                        <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                                    </label>
-                                {% endif %}
+                        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                            {% csrf_token %}
+
+                            <fieldset class="mb-5">
+                                {{ order_form.full_name | as_crispy_field }}
+                                {{ order_form.email | as_crispy_field }}
+                                {{ order_form.street_address1 | as_crispy_field }}
+                                {{ order_form.street_address2 | as_crispy_field }}
+                                {{ order_form.town_or_city | as_crispy_field }}
+                                {{ order_form.country | as_crispy_field }}
+                                <div class="form-check form-check-inline float-right mr-0">
+                                    {% if user.is_authenticated %}
+                                        <label class="form-check-label" for="id-save-info">Save this information to my profile</label>
+                                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                                    {% else %}
+                                        <label class="form-check-label" for="id-save-info">
+                                            <a class="text-info" href="{% url 'account_signup' %}" aria-label="Create an account">Create an account</a> or 
+                                            <a class="text-info" href="{% url 'account_login' %}" aria-label="Login">login</a> to save this information
+                                        </label>
+                                    {% endif %}
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Payment</legend>
+                                <!-- Stripe Card Element -->
+                                <div class="mb-3" id="card-element"></div>
+
+                                <!-- Display Form Errors -->
+                                <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+
+                                <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                                <input type="hidden">
+                            </fieldset>
+
+                            <div class="submit-button text-right mt-5 mb-2"> 
+                                
+                                <!-- Adjust cart button -->
+                                <a href="{% url 'view_cart' %}" class="btn btn-outline-black rounded-0" aria-label="Go to shopping cart">
+                                    <span class="icon">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="font-weight-bold">Adjust Cart</span>
+                                </a>
+
+                                <!-- Complete donation button -->
+                                <button id="submit-button" class="btn btn-danger btn-shadow rounded-0">
+                                    <span class="font-weight-bold">Complete Donation</span>
+                                    <span class="icon">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </button>
+
+                                <!-- info -->
+                                <p class="small text-danger mt-3">
+                                    <span class="icon">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    </span>
+                                    <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                                </p>
                             </div>
-                        </fieldset>
 
-                        <fieldset>
-                            <legend>Payment</legend>
-                            <!-- Stripe Card Element -->
-                            <div class="mb-3" id="card-element"></div>
+                        </form>
 
-                            <!-- Display Form Errors -->
-                            <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-
-                            <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                            <input type="hidden">
-                        </fieldset>
-
-                        <div class="submit-button text-right mt-5 mb-2"> 
-                            
-                            <!-- Adjust cart button -->
-                            <a href="{% url 'view_cart' %}" class="btn btn-outline-black rounded-0">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="font-weight-bold">Adjust Cart</span>
-                            </a>
-
-                            <!-- Complete donation button -->
-                            <button id="submit-button" class="btn btn-danger btn-shadow rounded-0">
-                                <span class="font-weight-bold">Complete Donation</span>
-                                <span class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </button>
-
-                            <!-- info -->
-                            <p class="small text-danger mt-3">
-                                <span class="icon">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                </span>
-                                <span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
-                            </p>
-                        </div>
-
-                    </form>
-
+                    </div>
                 </div>
+
             </div>
 
         </div>
-
-    </div>
+    </section>
 
     <!-- Loading screen -->
-    <div id="loading-overlay">
-        <h1 class="text-light logo-font loading-spinner">
-            <span class="icon">
-                <i class="fas fa-3x fa-sync-alt fa-spin"></i>
-            </span>
-        </h1>
-    </div>
+    <section aria-labelledby="overlay">
+        <h2 class="sr-only" id="overlay">Loading Overlay</h2>
+        <div id="loading-overlay">
+            <h1 class="text-light logo-font loading-spinner">
+                <span class="icon">
+                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                </span>
+            </h1>
+        </div>
+    </section>
 
     <!-- Custom Js -->
     {% block postloadjs %}

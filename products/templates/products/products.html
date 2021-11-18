@@ -42,13 +42,13 @@
                     <div class="col-12 categories-list text-right">
                         <ul>
                                 <li>
-                                    <a href="{% url 'products' %}">
+                                    <a href="{% url 'products' %}" aria-label="Browse all products">
                                         <p class="mr-2 my-3">Browse All</p>
                                     </a>
                                 </li>
                             {% for category in categories %}
                                 <li>
-                                    <a href="{% url 'products' %}?category={{ category.name }}">
+                                    <a href="{% url 'products' %}?category={{ category.name }}" aria-label="{{ category.friendly_name }} category">
                                         <p class="mr-2 my-3">{{ category.friendly_name }}</p>
                                     </a>
                                 </li>
@@ -67,14 +67,14 @@
 
                     <!-- Most-Needed Items Button -->
                     <div class="col-2 text-center">
-                        <a class="btn btn-danger btn-shadow" href="{% url 'products' %}?urgent=most_needed">
+                        <a class="btn btn-danger btn-shadow" href="{% url 'products' %}?urgent=most_needed" aria-label="Filter by most needed items">
                             Most-Needed
                         </a>
                     </div>
                     
                     <!-- Family Parcels Button -->
                     <div class="col-2 text-center">
-                        <a class="btn btn-danger btn-shadow" href="{% url 'parcels' %}">Family Parcels</a>
+                        <a class="btn btn-danger btn-shadow" href="{% url 'parcels' %}" aria-label="Go to family parcels page">Family Parcels</a>
                     </div>
                     
                     <!-- Donate All Items Button -->
@@ -115,7 +115,7 @@
                         <p class="text-right mr-3">
 
                             {% if search_term or current_category or current_sorting != 'None_None' %}
-                                <span class="small"><a href="{% url 'products' %}">Browse All</a> | </span>
+                                <span class="small"><a href="{% url 'products' %}" aria-label="Browse all products">Browse All</a> | </span>
                             {% endif %}
 
                             {{ all_products_len }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
@@ -176,7 +176,7 @@
                             <!-- Donate Button -->
                             <div class="row no-gutters donate-button mb-3">
                                 <div class="col-12 text-center">
-                                    <a class="btn btn-outline-danger" href="{% url 'product_details' product.id %}">Donate <span class="first-heart"><i class="far fa-heart"></i></span><span class="second-heart"><i class="fas fa-heart"></i></span></a>
+                                    <a class="btn btn-outline-danger" href="{% url 'product_details' product.id %}" aria-label="Go to product details">Donate <span class="first-heart"><i class="far fa-heart"></i></span><span class="second-heart"><i class="fas fa-heart"></i></span></a>
                                 </div>
                             </div>
 
@@ -184,12 +184,12 @@
                                 {% if request.user.is_superuser %}
                                     <div class="row no-gutters">
                                         <div class="col-6 text-center">
-                                            <a class="text-success" href="">
+                                            <a class="text-success" href="{% url 'edit_product' product.id product.sku %}" aria-label="Edit product">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </div>
                                         <div class="col-6 text-center">
-                                            <a id="trigger_{{ product.id }}" class="remove-item-btn ml-3 text-danger">
+                                            <a id="trigger_{{ product.id }}" class="remove-item-btn ml-3 text-danger" aria-label="remove product">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>
@@ -213,10 +213,10 @@
                                                 <hr>
                                                 <div class="row no-gutters">
                                                     <div class="col-6">
-                                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
+                                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow" aria-label="Close remove product modal">Close</a>
                                                     </div>
                                                     <div class="col-6 text-right">
-                                                        <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'delete_product' product.id %}">Remove</a>
+                                                        <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'delete_product' product.id %}" aria-label="Confirm remove product modal">Remove</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -233,7 +233,7 @@
 
                 <!-- Infinite Loading Trigger -->
                 {% if products.has_next %}
-                    <a class="infinite-more-link" href="{% url 'products' %}?page={{ products.next_page_number }}">More</a>
+                    <a class="infinite-more-link" href="{% url 'products' %}?page={{ products.next_page_number }}" aria-label="infinite loading">More</a>
                 {% endif %}
 
                 <!-- Infinite Loading transition message -->

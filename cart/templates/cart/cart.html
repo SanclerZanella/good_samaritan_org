@@ -8,263 +8,266 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row no-gutters my-5 ">
-        
-        <!-- Page Title -->
-        <div class="col-12 text-center cart-title">
-            <h1>Donation Cart</h1>
-        </div>
-        
-        <!-- Horizontal rule -->
-        <div class="col-12">
-            <hr>
-        </div>
-        
-         <!-- Products Column -->
-        <div class="col-12 col-md-9 products-col">
+    <section aria-labelledby="cart">
+        <h2 class="sr-only" id="cart">Cart</h2>
+        <div class="row no-gutters my-5 ">
+            
+            <!-- Page Title -->
+            <div class="col-12 text-center cart-title">
+                <h1>Donation Cart</h1>
+            </div>
+            
+            <!-- Horizontal rule -->
+            <div class="col-12">
+                <hr>
+            </div>
+            
+            <!-- Products Column -->
+            <div class="col-12 col-md-9 products-col">
 
-            {% if cart_items %}
-                <!-- Cart Items Heading -->
-                <div class="row no-gutters mt-5 mb-3 content-alignment">
-                    <div class="col-5 cart-products-headers">
-                        <h1 class="mx-5 font-weight-bold">Products</h1>
+                {% if cart_items %}
+                    <!-- Cart Items Heading -->
+                    <div class="row no-gutters mt-5 mb-3 content-alignment">
+                        <div class="col-5 cart-products-headers">
+                            <h1 class="mx-5 font-weight-bold">Products</h1>
+                        </div>
+                        <div class="col-5 text-right cart-products-headers">
+                            <h1 class="font-weight-bold">Subtotal</h1>
+                        </div>
                     </div>
-                    <div class="col-5 text-right cart-products-headers">
-                        <h1 class="font-weight-bold">Subtotal</h1>
-                    </div>
-                </div>
-                
-                <!-- Cart Items -->
-                <div class="row no-gutters products-cart-list">
+                    
+                    <!-- Cart Items -->
+                    <div class="row no-gutters products-cart-list">
 
-                    <div class="col-12">
-                        {% for item in cart_items %}
-                            {% with product=item.product quantity=item.quantity %}
-                                        
-                                        <!-- Product Card -->
-                                        <div class="row no-gutters mt-3 content-alignment">
-                                            <div class="col-10 product-cart-wrapper">
-                                                
-                                                <!-- Product Image and Info -->
-                                                <div class="row no-gutters">
+                        <div class="col-12">
+                            {% for item in cart_items %}
+                                {% with product=item.product quantity=item.quantity %}
+                                            
+                                            <!-- Product Card -->
+                                            <div class="row no-gutters mt-3 content-alignment">
+                                                <div class="col-10 product-cart-wrapper">
+                                                    
+                                                    <!-- Product Image and Info -->
+                                                    <div class="row no-gutters">
 
-                                                    <!-- Product image -->
-                                                    <div class="col-3 product-cart-img content-alignment">
-                                                        {% if product.image %}
-                                                            <img src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }}">
-                                                        {% elif not product.image and not product.image_url %}
-                                                            <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
-                                                        {% else %}
-                                                            <img src="{{MEDIA_URL}}{{ product.image_url }}" alt="{{ product.name }}">
-                                                        {% endif %}
-                                                    </div>
+                                                        <!-- Product image -->
+                                                        <div class="col-3 product-cart-img content-alignment">
+                                                            {% if product.image %}
+                                                                <img src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }}">
+                                                            {% elif not product.image and not product.image_url %}
+                                                                <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
+                                                            {% else %}
+                                                                <img src="{{MEDIA_URL}}{{ product.image_url }}" alt="{{ product.name }}">
+                                                            {% endif %}
+                                                        </div>
 
-                                                    <!-- Products Info -->
-                                                    <div class="col-9">
-                                                        <div class="row no-gutters">
-                                                            
-                                                            <!-- Product Name -->
-                                                            <div class="col-12 my-1">
-                                                                <h2 class="text-center font-weight-bold">{{ product.name }}</h2>
-                                                            </div>
-                                                            
-                                                            <!-- Quantity, Subtotal, Update button and Remove button -->
-                                                            <div class="col-12">
-                                                                <form class="submit-form" action="{% url 'update_cart' product.id product.sku %}" method="POST">
-                                                                    {% csrf_token %}
-                                                                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                                        <!-- Products Info -->
+                                                        <div class="col-9">
+                                                            <div class="row no-gutters">
+                                                                
+                                                                <!-- Product Name -->
+                                                                <div class="col-12 my-1">
+                                                                    <h2 class="text-center font-weight-bold">{{ product.name }}</h2>
+                                                                </div>
+                                                                
+                                                                <!-- Quantity, Subtotal, Update button and Remove button -->
+                                                                <div class="col-12">
+                                                                    <form class="submit-form" action="{% url 'update_cart' product.id product.sku %}" method="POST">
+                                                                        {% csrf_token %}
+                                                                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
 
-                                                                    <div class="row">
+                                                                        <div class="row">
 
-                                                                        <!-- Quantity Input (from Boutique Ado) -->
-                                                                        <div class="col-12 col-md-8">
-                                                                            <div class="row no-gutters">
+                                                                            <!-- Quantity Input (from Boutique Ado) -->
+                                                                            <div class="col-12 col-md-8">
+                                                                                <div class="row no-gutters">
 
-                                                                                <div class="col-12 col-md-12">
-                                                                                    <small class="input-count-title">Current Quantity</small>
-                                                                                    <div class="input-count">
-                                                                                        <span><input type="button" value="-" id="button-minus_{{ product.id }}" class="add-qty button-minus btn-danger sm-btn-shadow-l" data-field="quantity"></span>
-                                                                                        <input type="number" step="1" max="" value="{{ quantity }}" name="quantity" id="quantity-field_{{ product.id }}" class="quantity-field">
-                                                                                        <span><input type="button" value="+" id="button-plus_{{ product.id }}" class="add-qty button-plus btn-danger sm-btn-shadow-r" data-field="quantity"></span>
+                                                                                    <div class="col-12 col-md-12">
+                                                                                        <small class="input-count-title">Current Quantity</small>
+                                                                                        <div class="input-count">
+                                                                                            <span><input type="button" value="-" id="button-minus_{{ product.id }}" class="add-qty button-minus btn-danger sm-btn-shadow-l" data-field="quantity"></span>
+                                                                                            <input type="number" step="1" max="" value="{{ quantity }}" name="quantity" id="quantity-field_{{ product.id }}" class="quantity-field">
+                                                                                            <span><input type="button" value="+" id="button-plus_{{ product.id }}" class="add-qty button-plus btn-danger sm-btn-shadow-r" data-field="quantity"></span>
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
 
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            <!-- Subtotal Medium and Large Screens -->
+                                                                            <div class="col-md-4 text-right subtotal d-none d-md-block">
+                                                                                <p class="mr-1">${{ product.price | calc_subtotal:quantity }}</p>
+                                                                            </div>
+
+                                                                            <!-- Update product Button -->
+                                                                            <div class="col-4 col-md-2 update-item">
+                                                                                <small class="ml-1">
+                                                                                    <input type="submit" class="cart-anchor submit-trigger" value="Update">
+                                                                                </small>
+                                                                            </div>
+
+                                                                            <!-- Remove product Button -->
+                                                                            <div class="col-4 col-md-2 remove-item">
+                                                                                <small>
+                                                                                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                                                                    <a class="text-danger remove-item-btn" id="remove-item_{{ product.id }}" aria-label="remove item from cart">Remove</a>
+                                                                                </small>
+                                                                            </div>
+
+                                                                            <!-- Subtotal Small Screens -->
+                                                                            <div class="col-4 text-right subtotal d-sm-flex d-md-none">
+                                                                                <p class="mr-1">${{ product.price | calc_subtotal:quantity }}</p>
                                                                             </div>
                                                                         </div>
-                                                                        
-                                                                        <!-- Subtotal Medium and Large Screens -->
-                                                                        <div class="col-md-4 text-right subtotal d-none d-md-block">
-                                                                            <p class="mr-1">${{ product.price | calc_subtotal:quantity }}</p>
-                                                                        </div>
+                                                                    </form>
+                                                                </div>
 
-                                                                        <!-- Update product Button -->
-                                                                        <div class="col-4 col-md-2 update-item">
-                                                                            <small class="ml-1">
-                                                                                <input type="submit" class="cart-anchor submit-trigger" value="Update">
-                                                                            </small>
-                                                                        </div>
-
-                                                                        <!-- Remove product Button -->
-                                                                        <div class="col-4 col-md-2 remove-item">
-                                                                            <small>
-                                                                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                                                                                <a class="text-danger remove-item-btn" id="remove-item_{{ product.id }}">Remove</a>
-                                                                            </small>
-                                                                        </div>
-
-                                                                        <!-- Subtotal Small Screens -->
-                                                                        <div class="col-4 text-right subtotal d-sm-flex d-md-none">
-                                                                            <p class="mr-1">${{ product.price | calc_subtotal:quantity }}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
                                                             </div>
+                                                        </div>
 
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- Remove Item Modal (from W3Schools) -->
+                                            <div id="modal_{{ product.id }}" class="modal">
+
+                                                <!-- Modal content -->
+                                                <div class="modal-content">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-12">
+                                                            <span class="closeBtn close-modal text-right">&times;</span>
                                                         </div>
                                                     </div>
-
+                                                    <hr>
+                                                    <div class="row no-gutters">
+                                                        <div class="col-12">
+                                                            <p class="text-center">Yor are going to remove <span class="font-weight-bold">{{ product.name }}</span> from your shopping cart</p>
+                                                            <p class="text-center">Are you sure?</p>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="row no-gutters">
+                                                        <div class="col-6">
+                                                            <a class="closeBtn btn btn-lg btn-danger btn-shadow" aria-label="close remove item modal">Close</a>
+                                                        </div>
+                                                        <div class="col-6 text-right">
+                                                            <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'remove_from_cart' product.id product.sku %}" aria-label="confirm remove item modal">Remove</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-
+                                            
                                             </div>
-                                        </div>
 
-                                        <!-- Remove Item Modal (from W3Schools) -->
-                                        <div id="modal_{{ product.id }}" class="modal">
-
-                                            <!-- Modal content -->
-                                            <div class="modal-content">
-                                                <div class="row no-gutters">
-                                                    <div class="col-12">
-                                                        <span class="closeBtn close-modal text-right">&times;</span>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row no-gutters">
-                                                    <div class="col-12">
-                                                        <p class="text-center">Yor are going to remove <span class="font-weight-bold">{{ product.name }}</span> from your shopping cart</p>
-                                                        <p class="text-center">Are you sure?</p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row no-gutters">
-                                                    <div class="col-6">
-                                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
-                                                    </div>
-                                                    <div class="col-6 text-right">
-                                                        <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'remove_from_cart' product.id product.sku %}">Remove</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          
-                                        </div>
-
-                            {% endwith %}
-                        {% endfor %}
-                    </div>
-
-                </div>
-
-            {% else %}
-
-                <!-- Empty Card Message -->
-                <div class="row no-gutters cart-empty">
-                    <div class="col-12 text-center">
-                        <p>Your cart is empty.</p>
-                        <a class="cart-anchor" href="{% url 'products' %}">
-                            &#8592 Back To All Products
-                        </a>
-                    </div>
-                </div>
-
-            {% endif %}
-        </div>
-        
-        <div class="col-12 d-md-none">
-            <hr>
-        </div>
-
-        <!-- Check Out column -->
-        <div class="col-12 col-md-3 checkout-cart-wrapper">
-
-            <!-- Check Out info -->
-            <div class="row no-gutters content-alignment">
-                <div class="col-10">
-                    <div class="row no-gutters text-center">
-
-                        <!-- Total Title -->
-                        <div class="col-12">
-                            <h2 class="font-weight-bold">Total</h2>
+                                {% endwith %}
+                            {% endfor %}
                         </div>
 
-                        <!-- Grand Total Value -->
-                        <div class="col-12 my-3">
-                            <h3>$ {{ grand_total }}</h3>
-                        </div>
-
-                        <!-- Check Out Button -->
-                        {% if cart_items %}
-                            <div class="col-12">
-                                <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'checkout' %}">Check Out</a>
-                            </div>
-                        {% else %}
-                            <div class="col-12">
-                                <a class="btn btn-lg btn-danger btn-shadow disabled" href="">Check Out</a>
-                            </div>
-                        {% endif %}
-
-                        <!-- Donate More Button -->
-                        <div class="col-12 my-3">
-                            <a class="cart-anchor" href="{% url 'products' %}">&#8592 Donate More</a>
-                        </div>
-
-                        <!-- Remove All Products Button -->
-                        {% if cart_items %}
-                            <div class="col-12">
-                                <a class="cart-anchor remove_all_trigger">Remove All Items From The Cart</a>
-                            </div>
-                        {% else %}
-                            <div class="col-12">
-                                <a class="cart-anchor" disabled>No Products to Remove</a>
-                            </div>
-                        {% endif %}
-
                     </div>
-                </div>
 
+                {% else %}
+
+                    <!-- Empty Card Message -->
+                    <div class="row no-gutters cart-empty">
+                        <div class="col-12 text-center">
+                            <p>Your cart is empty.</p>
+                            <a class="cart-anchor" href="{% url 'products' %}" aria-label="Go to products page">
+                                &#8592 Back To All Products
+                            </a>
+                        </div>
+                    </div>
+
+                {% endif %}
             </div>
-        </div>
+            
+            <div class="col-12 d-md-none">
+                <hr>
+            </div>
 
-    </div>
+            <!-- Check Out column -->
+            <div class="col-12 col-md-3 checkout-cart-wrapper">
+
+                <!-- Check Out info -->
+                <div class="row no-gutters content-alignment">
+                    <div class="col-10">
+                        <div class="row no-gutters text-center">
+
+                            <!-- Total Title -->
+                            <div class="col-12">
+                                <h2 class="font-weight-bold">Total</h2>
+                            </div>
+
+                            <!-- Grand Total Value -->
+                            <div class="col-12 my-3">
+                                <h3>$ {{ grand_total }}</h3>
+                            </div>
+
+                            <!-- Check Out Button -->
+                            {% if cart_items %}
+                                <div class="col-12">
+                                    <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'checkout' %}" aria-label="Checkout button">Check Out</a>
+                                </div>
+                            {% else %}
+                                <div class="col-12">
+                                    <a class="btn btn-lg btn-danger btn-shadow disabled" href="" aria-label="disabled checkout button">Check Out</a>
+                                </div>
+                            {% endif %}
+
+                            <!-- Donate More Button -->
+                            <div class="col-12 my-3">
+                                <a class="cart-anchor" href="{% url 'products' %}" aria-label="Go to products page">&#8592 Donate More</a>
+                            </div>
+
+                            <!-- Remove All Products Button -->
+                            {% if cart_items %}
+                                <div class="col-12">
+                                    <a class="cart-anchor remove_all_trigger" aria-label="Remove all items from cart">Remove All Items From The Cart</a>
+                                </div>
+                            {% else %}
+                                <div class="col-12">
+                                    <a class="cart-anchor" disabled aria-label="Remove all items from cart disabled">No Products to Remove</a>
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     
-    <!-- Remove All Items Modal (from W3Schools) -->
-    <div id="modal_clear" class="modal">
+        <!-- Remove All Items Modal (from W3Schools) -->
+        <div id="modal_clear" class="modal">
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="row no-gutters">
-                <div class="col-12">
-                    <span class="closeBtn close-modal text-right">&times;</span>
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <span class="closeBtn close-modal text-right">&times;</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row no-gutters">
+                    <div class="col-12">
+                        <p class="text-center">Yor are going to remove all products from your shopping cart</p>
+                        <p class="text-center">Are you sure?</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row no-gutters">
+                    <div class="col-6">
+                        <a class="closeBtn btn btn-lg btn-danger btn-shadow" aria-label="Close remove all items modal">Close</a>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a id="remove-all-modal-btn" class="btn btn-lg btn-danger btn-shadow" href="{% url 'clear_cart' %}" aria-label="Confirm remove all items modal">Remove</a>
+                    </div>
                 </div>
             </div>
-            <hr>
-            <div class="row no-gutters">
-                <div class="col-12">
-                    <p class="text-center">Yor are going to remove all products from your shopping cart</p>
-                    <p class="text-center">Are you sure?</p>
-                </div>
-            </div>
-            <hr>
-            <div class="row no-gutters">
-                <div class="col-6">
-                    <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
-                </div>
-                <div class="col-6 text-right">
-                    <a id="remove-all-modal-btn" class="btn btn-lg btn-danger btn-shadow" href="{% url 'clear_cart' %}">Remove</a>
-                </div>
-            </div>
+        
         </div>
-      
-    </div>
+    </section>
 
     <!-- Custom Js -->
     {% block postloadjs %}

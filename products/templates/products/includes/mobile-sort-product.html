@@ -26,11 +26,11 @@
                 Categories
             </button>
             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton2">
-                    <a href="{% url 'products' %}">
+                    <a href="{% url 'products' %}" aria-label="Go to products page">
                         <p class="category-item my-3 font-weight-bold">Browse All</p>
                     </a>
                 {% for category in categories %}
-                    <a href="{% url 'products' %}?category={{ category.name }}">
+                    <a href="{% url 'products' %}?category={{ category.name }}" aria-label="Filter products by {{ category.friendly_name }} category">
                         <p class="category-item my-3 font-weight-bold">{{ category.friendly_name }}</p>
                     </a>
                 {% endfor %}
@@ -44,7 +44,7 @@
         <p class="text-center mr-3">
 
             {% if search_term or current_category or current_sorting != 'None_None' %}
-                <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
+                <span class="small"><a href="{% url 'products' %}" aria-label="go to products page">Products Home</a> | </span>
             {% endif %}
 
             {{ all_products_len }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}

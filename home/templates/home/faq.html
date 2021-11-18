@@ -8,7 +8,8 @@
 
 
 {% block content %}
-<section>
+<section aria-labelledby="FAQs">
+    <h2 class="sr-only" id="FAQs">FAQs</h2>
 
     <!-- Tilte and Description -->
     <div class="row no-gutters my-5 content-alignment page-title">
@@ -30,7 +31,8 @@
 </section>
 
 <!-- FAQ section from https://www.bootdey.com/snippets/view/Frequently-Asked-Questions-section#css -->
-<section>
+<section aria-labelledby="question">
+    <h2 class="sr-only" id="question">question</h2>
     <div class="faq_area section_padding_130 my-5" id="faq">
         <div class="container">
             <div class="row justify-content-center">
@@ -109,7 +111,7 @@
                     <div class="support-button text-center d-flex align-items-center justify-content-center mt-4 wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                         <i class="lni-emoji-sad"></i>
                         <p class="mb-0 px-2">Can't find your answers?</p>
-                        <a href="{% url 'contact' %}"> Contact us</a>
+                        <a href="{% url 'contact' %}" aria-label="Go to contact page"> Contact us</a>
                     </div>
                 </div>
             </div>

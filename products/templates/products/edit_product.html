@@ -7,171 +7,173 @@
 {% endblock %}
 
 {% block content %}
+    <section aria-labelledby="edit_product_form">
+        <h2 class="sr-only" id="edit_product_form">edit product form</h2>
+        <div class="row no-gutters details-wrapper content-alignment my-5">
 
-    <div class="row no-gutters details-wrapper content-alignment my-5">
+            <div class="col-12 text-center page-title">
+                <h1 class="font-weight-bold">Update Product</h1>
+            </div>
 
-        <div class="col-12 text-center page-title">
-            <h1 class="font-weight-bold">Update Product</h1>
-        </div>
+            <div class="col-12">
+                <hr>
+            </div>
 
-        <div class="col-12">
-            <hr>
-        </div>
+            <div class="col-12 col-md-6 mt-5 product-form">
+                <form action="{% url 'edit_product' product.id product.sku %}" method="POST">
 
-        <div class="col-12 col-md-6 mt-5 product-form">
-            <form action="{% url 'edit_product' product.id product.sku %}" method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
 
-                {% csrf_token %}
-                {{ form|crispy }}
+                    {% if items_in_parcel %}
 
-                {% if items_in_parcel %}
+                        <!-- Remove item from parcel -->
+                        <div class="col-12 my-5">
+                            <div class="row no-gutters">
+                                <div class="col-12 text-center">
+                                    <h2 class="font-weight-bold">Remove Items From {{ product.name }}</h2>
+                                </div>
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <small>Select one Item to delete</small>
+                                </div>
+                                <div class="col-12 mx-5">
+                                    <div class="row no-gutters parcel-items-list">
 
-                    <!-- Remove item from parcel -->
-                    <div class="col-12 my-5">
-                        <div class="row no-gutters">
-                            <div class="col-12 text-center">
-                                <h2 class="font-weight-bold">Remove Items From {{ product.name }}</h2>
-                            </div>
-                            <div class="col-12">
-                                <hr>
-                            </div>
-                            <div class="col-12 text-center">
-                                <small>Select one Item to delete</small>
-                            </div>
-                            <div class="col-12 mx-5">
-                                <div class="row no-gutters parcel-items-list">
+                                        {% for p in items_in_parcel %}
 
-                                    {% for p in items_in_parcel %}
-
-                                        <div class="col-2 mx-2 my-3 product-card">
-                                            <a id="trigger_{{ p.id }}" class="parcel_product remove-item-btn">
-                                                <div class="row no-gutters">
-                                                    <div class="col-12 content-alignment">
-                                                        {% if p.image %}
-                                                            <img src="{{MEDIA_URL}}{{ p.image }}" alt="{{ p.name }}">
-                                                        {% elif not p.image and not p.image_url %}
-                                                            <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ p.name }}" loading="lazy">
-                                                        {% else %}
-                                                            <img src="{{MEDIA_URL}}{{ p.image_url }}" alt="{{ p.name }}">
-                                                        {% endif %}
+                                            <div class="col-2 mx-2 my-3 product-card">
+                                                <a id="trigger_{{ p.id }}" class="parcel_product remove-item-btn" aria-label="remove item in parcel">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-12 content-alignment">
+                                                            {% if p.image %}
+                                                                <img src="{{MEDIA_URL}}{{ p.image }}" alt="{{ p.name }}">
+                                                            {% elif not p.image and not p.image_url %}
+                                                                <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ p.name }}" loading="lazy">
+                                                            {% else %}
+                                                                <img src="{{MEDIA_URL}}{{ p.image_url }}" alt="{{ p.name }}">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <p>{{ p.name }}</p>
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <p>$ {{ p.price }}</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-12 text-center">
-                                                        <p>{{ p.name }}</p>
-                                                    </div>
-                                                    <div class="col-12 text-center">
-                                                        <p>$ {{ p.price }}</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-
-                                        <!-- Remove Item Modal (from W3Schools) -->
-                                        <div id="modal_{{ p.id }}" class="modal">
-
-                                            <!-- Modal content -->
-                                            <div class="modal-content">
-                                                <div class="row no-gutters">
-                                                    <div class="col-12">
-                                                        <span class="closeBtn close-modal text-right">&times;</span>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row no-gutters">
-                                                    <div class="col-12">
-                                                        <p class="text-center">Do you want to remove <span class="font-weight-bold">{{ p.name }}</span> from the <span class="font-weight-bold">{{ product.name }}</span>?</p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row no-gutters">
-                                                    <div class="col-6">
-                                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
-                                                    </div>
-                                                    <div class="col-6 text-right">
-                                                        <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'delete_product_parcel' product.id p.id %}">Remove</a>
-                                                    </div>
-                                                </div>
+                                                </a>
                                             </div>
-                                        
-                                        </div>
 
-                                    {% endfor %}
+                                            <!-- Remove Item Modal (from W3Schools) -->
+                                            <div id="modal_{{ p.id }}" class="modal">
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Add item to parcel -->
-                    <div class="col-12 my-5">
-                        <div class="row no-gutters">
-                            <div class="col-12 text-center">
-                                <h2 class="font-weight-bold">Add Products To Parcel</h2>
-                            </div>
-                            <div class="col-12">
-                                <hr>
-                            </div>
-                            <div class="col-12 text-center">
-                                <p>
-                                    <small>1. Select the items you wish to add to <strong>{{ product.name }}</strong>;</small>
-                                </p>
-                                <p>
-                                    <small>2. To deselect an item just click on item again;</small>
-                                </p>
-                                <p>
-                                    <small>3. Click the button <strong>Add Items</strong>.</small>
-                                </p>
-                            </div>
-                            <div class="col-12 text-center my-5">
-                                <a id="add_items_btn" class="btn btn-danger btn-shadow">
-                                    <span>
-                                        Add Items
-                                    </span>
-                                    <span>
-                                        <i class="fas fa-plus"></i>
-                                    </span>
-                                </a>
-                                <input id="token" type="hidden" value="{{ csrf_token }}">
-                            </div>
-
-                            <div class="col-12 mx-5">
-                                <div class="row no-gutters parcel-items-list">
-                                    {% for p in products %}
-                                        <div data-pcid="{{ product.id }}" data-pdid="{{ p.id }}" class="col-2 mx-2  my-3 product-card add-items">
-                                            <a class="parcel_product">
-                                                <div class="row no-gutters">
-                                                    <div class="col-12 content-alignment">
-                                                        {% if p.image %}
-                                                            <img src="{{MEDIA_URL}}{{ p.image }}" alt="{{ p.name }}">
-                                                        {% elif not p.image and not p.image_url %}
-                                                            <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ p.name }}" loading="lazy">
-                                                        {% else %}
-                                                            <img src="{{MEDIA_URL}}{{ p.image_url }}" alt="{{ p.name }}">
-                                                        {% endif %}
+                                                <!-- Modal content -->
+                                                <div class="modal-content">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-12">
+                                                            <span class="closeBtn close-modal text-right">&times;</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-12 text-center">
-                                                        <p>{{ p.name }}</p>
+                                                    <hr>
+                                                    <div class="row no-gutters">
+                                                        <div class="col-12">
+                                                            <p class="text-center">Do you want to remove <span class="font-weight-bold">{{ p.name }}</span> from the <span class="font-weight-bold">{{ product.name }}</span>?</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-12 text-center">
-                                                        <p>$ {{ p.price }}</p>
+                                                    <hr>
+                                                    <div class="row no-gutters">
+                                                        <div class="col-6">
+                                                            <a class="closeBtn btn btn-lg btn-danger btn-shadow" aria-label="Close remove item modal">Close</a>
+                                                        </div>
+                                                        <div class="col-6 text-right">
+                                                            <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'delete_product_parcel' product.id p.id %}" aria-label="Confirm remove item modal">Remove</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </a>
-                                        </div>
-                                    {% endfor %}
+                                            
+                                            </div>
+
+                                        {% endfor %}
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                {% endif %}
-                
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-danger btn-lg btn-shadow">Update Product</button>
+                        <!-- Add item to parcel -->
+                        <div class="col-12 my-5">
+                            <div class="row no-gutters">
+                                <div class="col-12 text-center">
+                                    <h2 class="font-weight-bold">Add Products To Parcel</h2>
+                                </div>
+                                <div class="col-12">
+                                    <hr>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <p>
+                                        <small>1. Select the items you wish to add to <strong>{{ product.name }}</strong>;</small>
+                                    </p>
+                                    <p>
+                                        <small>2. To deselect an item just click on item again;</small>
+                                    </p>
+                                    <p>
+                                        <small>3. Click the button <strong>Add Items</strong>.</small>
+                                    </p>
+                                </div>
+                                <div class="col-12 text-center my-5">
+                                    <a id="add_items_btn" class="btn btn-danger btn-shadow" aria-label="Add items button">
+                                        <span>
+                                            Add Items
+                                        </span>
+                                        <span>
+                                            <i class="fas fa-plus"></i>
+                                        </span>
+                                    </a>
+                                    <input id="token" type="hidden" value="{{ csrf_token }}">
+                                </div>
 
-            </form>
+                                <div class="col-12 mx-5">
+                                    <div class="row no-gutters parcel-items-list">
+                                        {% for p in products %}
+                                            <div data-pcid="{{ product.id }}" data-pdid="{{ p.id }}" class="col-2 mx-2  my-3 product-card add-items">
+                                                <a class="parcel_product" aria-label="select item to add to parcel">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-12 content-alignment">
+                                                            {% if p.image %}
+                                                                <img src="{{MEDIA_URL}}{{ p.image }}" alt="{{ p.name }}">
+                                                            {% elif not p.image and not p.image_url %}
+                                                                <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ p.name }}" loading="lazy">
+                                                            {% else %}
+                                                                <img src="{{MEDIA_URL}}{{ p.image_url }}" alt="{{ p.name }}">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <p>{{ p.name }}</p>
+                                                        </div>
+                                                        <div class="col-12 text-center">
+                                                            <p>$ {{ p.price }}</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                    
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-danger btn-lg btn-shadow">Update Product</button>
+
+                </form>
+            </div>
+
         </div>
-
-    </div>
+    </section>
     
     <!-- Custom Js -->
     {% block postloadjs %}

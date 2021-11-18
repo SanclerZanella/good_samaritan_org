@@ -118,7 +118,7 @@
 
             <!-- Sponsor Checkout Button -->
             <div class="col-10 col-md-6 mt-3 my-auto">
-                <a href="{% url 'subscription' sponsor.id %}" class="btn btn-danger btn-lg mr-2 btn-shadow sponsor-btn">{{ sponsor }} ($ {{ sponsor.id | sponsor_price }}/month)</a>
+                <a href="{% url 'subscription' sponsor.id %}" class="btn btn-danger btn-lg mr-2 btn-shadow sponsor-btn" aria-label="Go to sponsorship checkout form">{{ sponsor }} ($ {{ sponsor.id | sponsor_price }}/month)</a>
             </div>
         </div>
     

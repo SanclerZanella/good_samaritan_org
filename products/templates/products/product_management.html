@@ -105,17 +105,17 @@
                                                             Categories
                                                         </button>
                                                         <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-                                                                <a class="text-dark" href="{% url 'product_management' %}?urgent=most_needed">
+                                                                <a class="text-dark" href="{% url 'product_management' %}?urgent=most_needed" aria-label="Filter most needed items">
                                                                     <p class="category-item my-3 font-weight-bold">Most-Needed Items</p>
                                                                 </a>
-                                                                <a class="text-dark" href="{% url 'product_management' %}">
+                                                                <a class="text-dark" href="{% url 'product_management' %}" aria-label="Filter all products">
                                                                     <p class="category-item my-3 font-weight-bold">Browse All</p>
                                                                 </a>
 
                                                                 <hr>
 
                                                             {% for category in categories %}
-                                                                <a class="text-dark" href="{% url 'product_management' %}?category={{ category.name }}">
+                                                                <a class="text-dark" href="{% url 'product_management' %}?category={{ category.name }}" aria-label="filter by {{ category.friendly_name }} category">
                                                                     <p class="category-item my-3 font-weight-bold">{{ category.friendly_name }}</p>
                                                                 </a>
                                                             {% endfor %}
@@ -163,7 +163,7 @@
                                                         </div>
                                                         <div class="col-12 col-md-6 text-left edit-product-btn">
                                                             <span>
-                                                                <a class="ml-3" href="{% url 'edit_product' parcel.id parcel.sku %}">Edit Parcel <i class="fas fa-edit"></i></a>
+                                                                <a class="ml-3" href="{% url 'edit_product' parcel.id parcel.sku %}" aria-label="edit parcel">Edit Parcel <i class="fas fa-edit"></i></a>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -219,12 +219,12 @@
                                                         </div>
                                                         <div class="col-12 col-md-6 text-left edit-product-btn">
                                                             <span>
-                                                                <a class="ml-3" href="{% url 'edit_product' product.id product.sku %}">Edit Product <i class="fas fa-edit"></i></a>
+                                                                <a class="ml-3" href="{% url 'edit_product' product.id product.sku %}" aria-label="edit product">Edit Product <i class="fas fa-edit"></i></a>
                                                             </span>
                                                         </div>
                                                         <div class="col-12 col-md-6 text-left remove-product-btn">
-                                                            <a id="triggerlg_{{ product.id }}" class="d-none d-md-flex remove-item-btn">Remove Product <i class="fas fa-trash"></i></a>
-                                                            <a id="triggersm_{{ product.id }}" class="d-md-none ml-3 remove-item-btn">Remove Product <i class="fas fa-trash"></i></a>
+                                                            <a id="triggerlg_{{ product.id }}" class="d-none d-md-flex remove-item-btn" aria-label="remove product">Remove Product <i class="fas fa-trash"></i></a>
+                                                            <a id="triggersm_{{ product.id }}" class="d-md-none ml-3 remove-item-btn" aria-label="remove product">Remove Product <i class="fas fa-trash"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -250,10 +250,10 @@
                                                     <hr>
                                                     <div class="row no-gutters">
                                                         <div class="col-6">
-                                                            <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
+                                                            <a class="closeBtn btn btn-lg btn-danger btn-shadow" aria-label="Close remove product modal">Close</a>
                                                         </div>
                                                         <div class="col-6 text-right">
-                                                            <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'delete_product' product.id %}">Remove</a>
+                                                            <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'delete_product' product.id %}" aria-label="confirm remove product modal">Remove</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -269,7 +269,7 @@
                         <div class="col-12 col-md-4 my-auto text-center">
                             <div class="row no-gutters buttons-col mx-3 py-5">
                                 <div class="col-12">
-                                    <a class="btn btn-danger btn-shadow rounded-0 trigger_add_product">
+                                    <a class="btn btn-danger btn-shadow rounded-0 trigger_add_product" aria-label="Add new product">
                                         <span class="font-weight-bold">Add New Product</span>
                                         <span class="icon">
                                             <i class="fas fa-plus"></i>
@@ -277,12 +277,12 @@
                                     </a>
                                 </div>
                                 <div class="col-12 my-3">
-                                    <a href="{% url 'product_management' %}" class="btn btn-danger btn-shadow rounded-0">
+                                    <a href="{% url 'product_management' %}" class="btn btn-danger btn-shadow rounded-0" aria-label="filter by products">
                                         <span class="font-weight-bold">Products</span>
                                     </a>
                                 </div>
                                 <div class="col-12">
-                                    <a href="{% url 'product_management' %}?parcel=parcel_param" class="btn btn-danger btn-shadow rounded-0">
+                                    <a href="{% url 'product_management' %}?parcel=parcel_param" class="btn btn-danger btn-shadow rounded-0" aria-label="filter by parcels">
                                         <span class="font-weight-bold">Parcels</span>
                                     </a>
                                 </div>
@@ -320,7 +320,7 @@
                         <hr>
                         <div class="row no-gutters">
                             <div class="col-6">
-                                <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
+                                <a class="closeBtn btn btn-lg btn-danger btn-shadow" aria-label="Close new product modal">Close</a>
                             </div>
                             <div class="col-6 text-right">
                                 <button type="submit" class="btn btn-lg btn-danger btn-shadow">Add Product</button>

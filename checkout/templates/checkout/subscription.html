@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block content %}
-        <section>
+        <section aria-labelledby="sponsorship">
+            <h2 class="sr-only" id="sponsorship">sponsorship</h2>
 
             <!-- Title and Description -->
             <div class="row no-gutters text-center content-alignment title-desc">
@@ -28,7 +29,8 @@
 
         <hr>
 
-        <section>
+        <section aria-labelledby="sponsorship_form">
+            <h2 class="sr-only" id="sponsorship_form">sponsorship form</h2>
 
             <!-- Sponsorship Form -->
             <div class="row no-gutters content-alignment my-5">
@@ -59,8 +61,8 @@
 
                                     <!-- Sign up or Log In Links if user is not logged -->
                                     <label class="form-check-label" for="id-save-info">
-                                        <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                                        <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                                        <a class="text-info" href="{% url 'account_signup' %}" aria-label="Create an account">Create an account</a> or 
+                                        <a class="text-info" href="{% url 'account_login' %}" aria-label="login">login</a> to save this information
                                     </label>
 
                                 {% endif %}
@@ -96,15 +98,18 @@
                 </div>
             </div>
         </section>
-
-        <!-- Loading Screen -->
-        <div id="loading-overlay">
-            <h1 class="text-light logo-font loading-spinner">
-                <span class="icon">
-                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
-                </span>
-            </h1>
-        </div>
+        
+        <section aria-labelledby="overlay">
+            <h2 class="sr-only" id="overlay">loading overlay</h2>
+            <!-- Loading Screen -->
+            <div id="loading-overlay">
+                <h1 class="text-light logo-font loading-spinner">
+                    <span class="icon">
+                        <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                    </span>
+                </h1>
+            </div>
+        </section>
 
     <!-- Custom Js -->
     {% block postloadjs %}

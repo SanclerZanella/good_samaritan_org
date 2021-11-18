@@ -9,13 +9,13 @@
 
 {% block content %}
     <!-- Cover Picture and Introduction -->
-    <section>
-        <h2 class="sr-only">Cover Picture</h2>
+    <section aria-labelledby="c_picture">
+        <h2 class="sr-only" id="c_picture">Cover Picture</h2>
 
         <!-- Cover Picture -->
         <div class="row no-gutters hero-image">
             <div class="col-12 hero-text">
-                <a href="{% url 'products' %}" class="btn btn-lg"> <span>Donate</span> </a>
+                <a href="{% url 'products' %}" class="btn btn-lg" aria-label="Go to products page"> <span>Donate</span> </a>
             </div>
         </div>
 
@@ -38,8 +38,8 @@
     <hr>
 
     <!-- Support Options -->
-    <section>
-        <h2 class="sr-only">Support Options</h2>
+    <section aria-labelledby="s_options">
+        <h2 class="sr-only" id="s_options">Support Options</h2>
         <div class="row no-gutters support-options content-alignment">
 
             <!-- Section Title -->
@@ -50,7 +50,7 @@
             <!-- Family Parcel Option -->
             <div class="col-12 col-md-4 col-lg-4 mx-5 mt-1">
                 <div class="row no-gutters content-alignment">
-                    <a href="">
+                    <a href="{% url 'parcels' %}" aria-label="Go to family parcels page">
                         <div id="family-parcel-card" class="col-12"></div>
                     </a>
                 </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="row donate-btn no-gutters text-center my-3">
                     <div class="col-12">
-                        <a href="{% url 'parcels' %}" class="btn btn-outline-danger">
+                        <a href="{% url 'parcels' %}" class="btn btn-outline-danger" aria-label="Go to family parcels page">
                         Donate <span class="first-heart"><i class="far fa-heart"></i></span><span class="second-heart"><i class="fas fa-heart"></i></span>
                         </a>
                     </div>
@@ -71,7 +71,7 @@
             <!-- Sponsorship Option -->
             <div class="col-12 col-md-4 col-lg-4 mx-5 mt-1">
                 <div class="row no-gutters content-alignment">
-                    <a href="">
+                    <a href="{% url 'sponsorship' %}" aria-label="Go to sponsorship page">
                         <div id="sponsorship-card" class="col-12"></div>
                     </a>
                 </div>
@@ -92,7 +92,7 @@
             <!-- Most-Needed Option -->
             <div class="col-12 col-md-4 col-lg-4 mx-5 mt-1">
                 <div class="row no-gutters content-alignment">
-                    <a href="">
+                    <a href="{% url 'products' %}?urgent=most_needed" aria-label="Go to Most needed items">
                         <div id="most-needed-card" class="col-12"></div>
                     </a>
                 </div>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="row donate-btn no-gutters text-center my-3">
                     <div class="col-12">
-                        <a href="{% url 'products' %}?urgent=most_needed" class="btn btn-outline-danger">
+                        <a href="{% url 'products' %}?urgent=most_needed" class="btn btn-outline-danger" aria-label="Go to Most needed items">
                         Donate <span class="first-heart"><i class="far fa-heart"></i></span><span class="second-heart"><i class="fas fa-heart"></i></span>
                         </a>
                     </div>
@@ -113,7 +113,7 @@
             <!-- All Products Option -->
             <div class="col-12 col-md-4 col-lg-4 mx-5 mt-1">
                 <div class="row no-gutters content-alignment">
-                    <a href="{% url 'products' %}">
+                    <a href="{% url 'products' %}" aria-label="Go to products page">
                         <div id="all-products-card" class="col-12"></div>
                     </a>
                 </div>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="row donate-btn no-gutters text-center my-3">
                     <div class="col-12">
-                        <a href="{% url 'products' %}" class="btn btn-outline-danger">
+                        <a href="{% url 'products' %}" class="btn btn-outline-danger" aria-label="Go to products page">
                         Donate <span class="first-heart"><i class="far fa-heart"></i></span><span class="second-heart"><i class="fas fa-heart"></i></span>
                         </a>
                     </div>
@@ -137,8 +137,8 @@
     <hr>
     
     <!-- Facts About Mozambique Timeline -->
-    <section class="timeline">
-        <h2 class="sr-only">Facts</h2>
+    <section class="timeline" aria-labelledby="fact">
+        <h2 class="sr-only" id="fact">Facts</h2>
         <div class="row no-gutters">
             
             <!-- Timeline Title -->
@@ -156,7 +156,7 @@
                             <img src="{{ MEDIA_URL }}home/fact1.jpg" alt="Fact 1">
                             <q>Nearly a million people are hungry in Mozambique, UN warns.</q>
                             <p>
-                                <a class="timeline-links" href="https://www.publico.pt/2021/04/13/mundo/noticia/quase-milhao-pessoas-passam-fome-mocambique-alerta-onu-1958424" target="_blank" rel="external">
+                                <a class="timeline-links" href="https://www.publico.pt/2021/04/13/mundo/noticia/quase-milhao-pessoas-passam-fome-mocambique-alerta-onu-1958424" target="_blank" rel="external" aria-label="Fact 1 link">
                                     - Publico
                                 </a>
                             </p>
@@ -174,7 +174,7 @@
                                 socio-economic circumstances.
                             </q>
                             <p>
-                                <a class="timeline-links" href="https://www.unicef.org/mozambique/protec%C3%A7%C3%A3o-da-crian%C3%A7a" target="_blank" rel="external">
+                                <a class="timeline-links" href="https://www.unicef.org/mozambique/protec%C3%A7%C3%A3o-da-crian%C3%A7a" target="_blank" rel="external" aria-label="Fact 2 link">
                                     - Unicef
                                 </a>
                             </p>
@@ -190,7 +190,7 @@
                                 family fabric, social discrimination, among other factors.
                             </q>
                             <p>
-                                <a class="timeline-links" href="https://www.wlsa.org.mz/artigo/estrategias-de-sobrevivencia-de-um-grupo-de-viuvas-organizadas-em-associacao-cidade-de-maputo-2008/" target="_blank" rel="external">
+                                <a class="timeline-links" href="https://www.wlsa.org.mz/artigo/estrategias-de-sobrevivencia-de-um-grupo-de-viuvas-organizadas-em-associacao-cidade-de-maputo-2008/" target="_blank" rel="external" aria-label="Fact 3 link">
                                     - wlsa.org
                                 </a>
                             </p>
@@ -206,7 +206,7 @@
                                 alone, the police registered hundreds of cases of abandoned elderly people.
                             </q>
                             <p>
-                                <a class="timeline-links" href="https://www.dw.com/pt-002/ser-idoso-em-mo%C3%A7ambique-%C3%A9-um-pesadelo/a-38665038" target="_blank" rel="external">
+                                <a class="timeline-links" href="https://www.dw.com/pt-002/ser-idoso-em-mo%C3%A7ambique-%C3%A9-um-pesadelo/a-38665038" target="_blank" rel="external" aria-label="Fact 4 link">
                                     - Deutsche Welle
                                 </a>
                             </p>

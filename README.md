@@ -594,7 +594,7 @@ Back to the [Tables of Contents](#tables-of-contents) -->
   * Each anchor tag has an aria-label attribute describing where that link goes
   * Each section has an aria-labelledby attribute
   * Content has a contrast with the background to improve the visibility
-  * Form inputs have labels
+  * Form inputs have labels or placeholder
 
 Back to the [Tables of Contents](#tables-of-contents)
 ---
@@ -948,6 +948,8 @@ in the default "DATABASES" configuration;
 56. Change the domain name in Sites table.
 
 57. Add the Google API to Social Applications table if you're using the google account to log in.
+
+Back to the [Tables of Contents](#tables-of-contents)
 
 ---
 

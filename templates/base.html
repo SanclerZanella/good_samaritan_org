@@ -36,7 +36,7 @@
 
             <div class="row no-gutters nav-top">
                 <div class="col-12 col-lg-3 my-auto py-1 py-lg-0 text-center text-lg-left">
-                    <a href="{% url 'home' %}" class="nav-link main-logo-link">
+                    <a href="{% url 'home' %}" class="nav-link main-logo-link" aria-label="Go to Home page">
                         <img class="logo-img mr-1" src="{{ MEDIA_URL }}base/logo-no-bg.png" alt="Logo">
                         <h1 class="logo-font my-0 text-red">The Good Samaritan</h1>
                     </a>
@@ -46,36 +46,36 @@
                     <ul class="list-inline list-unstyled text-center text-lg-right my-0">
 
                         <li class="list-inline-item dropdown">
-                            <a class="text-red nav-link" href="#" id="user-options1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="text-red nav-link" href="#" id="user-options1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="nav item name">
                                 <div class="text-center">
                                     <div><i class="fas fa-hand-holding-usd fa-lg"></i></div>
                                     <p class="my-0">Donate <i class="fas fa-caret-down"></i></p>
                                 </div>
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="user-options1">
-                                <a href="{% url 'parcels' %}" class="dropdown-item">Family Parcels</a>
-                                <a href="{% url 'sponsorship' %}" class="dropdown-item">Sponsorship</a>
-                                <a href="{% url 'products' %}?urgent=most_needed" class="dropdown-item">Most-Needed Items</a>
-                                <a href="{% url 'products' %}" class="dropdown-item">Browse All</a>
+                                <a href="{% url 'parcels' %}" class="dropdown-item" aria-label="go to family parcels page">Family Parcels</a>
+                                <a href="{% url 'sponsorship' %}" class="dropdown-item" aria-label="go to sponsorship page">Sponsorship</a>
+                                <a href="{% url 'products' %}?urgent=most_needed" class="dropdown-item" aria-label="go to most needed items">Most-Needed Items</a>
+                                <a href="{% url 'products' %}" class="dropdown-item" aria-label="go to products page">Browse All</a>
                             </div>
                         </li>
 
                         <li class="list-inline-item dropdown">
-                            <a class="text-red nav-link" href="#" id="user-options2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="text-red nav-link" href="#" id="user-options2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="nav item name">
                                 <div class="text-center">
                                     <div><i class="fas fa-hands-helping fa-lg"></i></div>
                                     <p class="my-0">The Organization <i class="fas fa-caret-down"></i></p>
                                 </div>
                             </a>
                             <div class="dropdown-menu border-0" aria-labelledby="user-options2">
-                                <a href="{% url 'about' %}" class="dropdown-item">Who We Are</a>
-                                <a href="{% url 'faq' %}" class="dropdown-item">FAQs</a>
-                                <a href="{% url 'contact' %}" class="dropdown-item">Contact Us</a>
+                                <a href="{% url 'about' %}" class="dropdown-item" aria-label="go to about page">Who We Are</a>
+                                <a href="{% url 'faq' %}" class="dropdown-item" aria-label="go to FAQs page">FAQs</a>
+                                <a href="{% url 'contact' %}" class="dropdown-item" aria-label="go to contact page">Contact Us</a>
                             </div>
                         </li>
 
                         <li class="list-inline-item dropdown">
-                            <a class="text-red nav-link" href="#" id="user-options3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="text-red nav-link" href="#" id="user-options3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="nav item name">
                                 <div class="text-center">
                                     <div><i class="fas fa-user fa-lg"></i></div>
                                     <p class="my-0">My Account <i class="fas fa-caret-down"></i></p>
@@ -84,20 +84,20 @@
                             <div class="dropdown-menu border-0" aria-labelledby="user-options3">
                                 {% if request.user.is_authenticated %}
                                     {% if request.user.is_superuser %}
-                                        <a href="{% url 'product_management' %}" class="dropdown-item">Product Management</a>
+                                        <a href="{% url 'product_management' %}" class="dropdown-item" aria-label="go to products management page">Product Management</a>
                                     {% endif %}
-                                    <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-                                    <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                                    <a href="{% url 'profile' %}" class="dropdown-item" aria-label="go to profile page">My Profile</a>
+                                    <a href="{% url 'account_logout' %}" class="dropdown-item" aria-label="log out">Logout</a>
                                 {% else %}
-                                    <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                                    <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                                    <a href="{% url 'finish_sponsorship_form' %}" class="dropdown-item">Finish Sponsorship</a>
+                                    <a href="{% url 'account_signup' %}" class="dropdown-item" aria-label="go to register page">Register</a>
+                                    <a href="{% url 'account_login' %}" class="dropdown-item" aria-label="login">Login</a>
+                                    <a href="{% url 'finish_sponsorship_form' %}" class="dropdown-item" aria-label="finish sponsorship">Finish Sponsorship</a>
                                 {% endif %}
                             </div>
                         </li>
 
                         <li class="list-inline-item">
-                            <a class="{% if grand_total %}text-success font-weight-bold{% else %}text-red{% endif %} nav-link" href="{% url 'view_cart'%}">
+                            <a class="{% if grand_total %}text-success font-weight-bold{% else %}text-red{% endif %} nav-link" href="{% url 'view_cart'%}" aria-label="cart icon">
                                 <div class="text-center">
                                     <div><i class="fas fa-shopping-cart fa-lg"></i></div>
                                     <p class="my-0">
@@ -153,35 +153,35 @@
                 <ul>
 
                     <li>
-                        <a class="text-red nav-link" href="#" id="user-options4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="text-red nav-link" href="#" id="user-options4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="nav item name">
                             <div class="text-center">
                                 <h1 class="my-0">Donate <i class="fas fa-caret-down"></i></h1>
                             </div>
                         </a>
                         <div class="dropdown-menu border-0" aria-labelledby="user-options4">
-                            <a href="{% url 'parcels' %}" class="dropdown-item">Family Parcels</a>
-                            <a href="{% url 'sponsorship' %}" class="dropdown-item">Sponsorship</a>
-                            <a href="{% url 'products' %}?urgent=most_needed" class="dropdown-item">Most-Needed Items
+                            <a href="{% url 'parcels' %}" class="dropdown-item" aria-label="go to family parcels page">Family Parcels</a>
+                            <a href="{% url 'sponsorship' %}" class="dropdown-item" aria-label="go to sponsorship page">Sponsorship</a>
+                            <a href="{% url 'products' %}?urgent=most_needed" class="dropdown-item" aria-label="go to most needed items">Most-Needed Items
                             </a>
-                            <a href="{% url 'products' %}" class="dropdown-item">Browse All</a>
+                            <a href="{% url 'products' %}" class="dropdown-item" aria-label="go to products page">Browse All</a>
                         </div>
                     </li>
 
                     <li>
-                        <a class="text-red nav-link" href="#" id="user-options5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="text-red nav-link" href="#" id="user-options5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="nav item name">
                             <div class="text-center">
                                 <h1 class="my-0">The Organization <i class="fas fa-caret-down"></i></h1>
                             </div>
                         </a>
                         <div class="dropdown-menu border-0" aria-labelledby="user-options5">
-                            <a href="{% url 'about' %}" class="dropdown-item">Who We Are</a>
-                            <a href="{% url 'faq' %}" class="dropdown-item">FAQs</a>
-                            <a href="{% url 'contact' %}" class="dropdown-item">Contact Us</a>
+                            <a href="{% url 'about' %}" class="dropdown-item" aria-label="go to about page">Who We Are</a>
+                            <a href="{% url 'faq' %}" class="dropdown-item" aria-label="go to FAQs page">FAQs</a>
+                            <a href="{% url 'contact' %}" class="dropdown-item" aria-label="go to contact page">Contact Us</a>
                         </div>
                     </li>
 
                     <li>
-                        <a class="text-red nav-link" href="#" id="user-options6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="text-red nav-link" href="#" id="user-options6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="nav item name">
                             <div class="text-center">
                                 <h1 class="my-0">My Account <i class="fas fa-caret-down"></i></h1>
                             </div>
@@ -189,20 +189,20 @@
                         <div class="dropdown-menu border-0" aria-labelledby="user-options6">
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser %}
-                                    <a href="{% url 'product_management' %}" class="dropdown-item">Product Management</a>
+                                    <a href="{% url 'product_management' %}" class="dropdown-item" aria-label="go to products management page">Product Management</a>
                                 {% endif %}
-                                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-                                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                                <a href="{% url 'profile' %}" class="dropdown-item" aria-label="go to profile page">My Profile</a>
+                                <a href="{% url 'account_logout' %}" class="dropdown-item" aria-label="logout">Logout</a>
                             {% else %}
-                                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                                <a href="{% url 'finish_sponsorship_form' %}" class="dropdown-item">Finish Sponsorship</a>
+                                <a href="{% url 'account_signup' %}" class="dropdown-item" aria-label="go to register psge">Register</a>
+                                <a href="{% url 'account_login' %}" class="dropdown-item" aria-label="login">Login</a>
+                                <a href="{% url 'finish_sponsorship_form' %}" class="dropdown-item" aria-label="go to finish sponsorship page">Finish Sponsorship</a>
                             {% endif %}
                         </div>
                     </li>
 
                     <li>
-                        <a class="{% if grand_total %}text-success font-weight-bold{% else %}text-red{% endif %} nav-link" href="{% url 'view_cart'%}">
+                        <a class="{% if grand_total %}text-success font-weight-bold{% else %}text-red{% endif %} nav-link" href="{% url 'view_cart'%}" aria-label="cart icon">
                             <div class="text-center">
                                 <span class="mobile-cart-menu">Cart</span>
                                 <span class="my-0 mobile-cart-menu">
@@ -260,22 +260,22 @@
                         <h3>Donate</h3>
                     </li>
                     <li>
-                        <a href="{% url 'parcels' %}">
+                        <a href="{% url 'parcels' %}" aria-label="go to family parcels page">
                             <p>Family Parcels</p>
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'sponsorship' %}">
+                        <a href="{% url 'sponsorship' %}" aria-label="go to sponsorship page">
                             <p>Sponsorship</p>
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'products' %}?urgent=most_needed">
+                        <a href="{% url 'products' %}?urgent=most_needed" aria-label="go to most needed items">
                             <p>Most-Needed Items</p>
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'products' %}">
+                        <a href="{% url 'products' %}" aria-label="go to products page">
                             <p>Browse All</p>
                         </a>
                     </li>
@@ -287,22 +287,22 @@
                         <h3>Organization</h3>
                     </li>
                     <li>
-                        <a href="{% url 'home' %}">
+                        <a href="{% url 'home' %}" aria-label="go to home page">
                             <p>Home Page</p>
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'about' %}">
+                        <a href="{% url 'about' %}" aria-label="go to about page">
                             <p>Who We Are</p>
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'faq' %}">
+                        <a href="{% url 'faq' %}" aria-label="go to FAQs page">
                             <p>FAQs</p>
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'contact' %}">
+                        <a href="{% url 'contact' %}" aria-label="go to contact page">
                             <p>Contact Us</p>
                         </a>
                     </li>
@@ -316,34 +316,34 @@
                     {% if request.user.is_authenticated %}
                         {% if request.user.is_superuser %}
                             <li>
-                                <a href="{% url 'product_management' %}">
+                                <a href="{% url 'product_management' %}" aria-label="go to products management page">
                                     <p>Product Management</p>
                                 </a>
                             </li>
                             {% endif %}
                         <li>
-                            <a href="{% url 'profile' %}">
+                            <a href="{% url 'profile' %}" aria-label="go to profile page">
                                 <p>My Profile</p>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{% url 'account_logout' %}" aria-label="logout">
                                 <p>Log Out</p>
                             </a>
                         </li>
                     {% else %}
                         <li>
-                            <a href="{% url 'account_signup' %}">
+                            <a href="{% url 'account_signup' %}" aria-label="go to register page">
                                 <p>Register</p>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'account_login' %}">
+                            <a href="{% url 'account_login' %}" aria-label="login">
                                 <p>Login</p>
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'finish_sponsorship_form' %}">
+                            <a href="{% url 'finish_sponsorship_form' %}" aria-label="go to finish sponsorship page">
                                 <p>Finish Sponsorship</p>
                             </a>
                         </li>
@@ -352,10 +352,10 @@
             </div>
             <div class="col-12 col-md-6 col-lg-6 text-center text-md-right text-lg-center">
                 <div class="social-link">
-                    <a href="https://www.facebook.com/Minist%C3%A9rio-BOM-Samaritano-Mozambique-800507056757640/?ref=page_internal" target="_blank" rel="external">
+                    <a href="https://www.facebook.com/Minist%C3%A9rio-BOM-Samaritano-Mozambique-800507056757640/?ref=page_internal" target="_blank" rel="external" aria-label="go to facebook">
                         <i class="fab fa-facebook-square"></i>
                     </a>
-                    <a href="https://www.instagram.com/bomsamaritanomozambique/" target="_blank" rel="external">
+                    <a href="https://www.instagram.com/bomsamaritanomozambique/" target="_blank" rel="external" aria-label="go to instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div>

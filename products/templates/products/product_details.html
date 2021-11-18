@@ -7,137 +7,139 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="row no-gutters details-wrapper">
-        
-        <!-- Product Image -->
-        <div class="col-12 col-md-6 mt-5 product-img content-alignment bg-white">
-            {% if product.image %}
-                <img class="" src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.name }}">
-            {% elif not product.image and not product.image_url %}
-                <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
-            {% else %}
-                <img class="" src="{{ product.image_url }}" alt="{{ product.name }}">
-            {% endif %}
-        </div>
-
-        <div class="col-12 col-md-6 mt-5 product-details">
-
-            <!-- Product name and price -->
-            <div class="row no-gutters content-alignment">
-
-                <!-- Product Name -->
-                <div class="col-12">
-                    <h1 class="text-center font-weight-bold">{{ product.name }}</h1>
-                </div>
-
-                <!-- Product Price -->
-                <div class="col-12 my-3 text-center">
-                    <h2 class="font-weight-bold">$ {{ product.price }}</h2>
-                    <small class="text-muted">Tax included</small>
-                    <hr>
-                </div>
-
-            </div>
-
-            <!-- Donation Title, Product Quantity, Donate Button and Product Description -->
-            <div class="row no-gutters">
-                <form action="{% url 'add_to_cart' product.id product.sku %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-row content-alignment">
-                        <div class="col-12 donation-amount ml-3">
-
-                            <!-- Donation Title -->
-                            <div class="row no-gutters">
-                                <div class="col-12">
-                                    <p class="font-weight-bold">Donation amount</p>
-                                </div>
-                            </div>
-
-                            <!-- Product Quantity -->
-                            <div class="row no-gutters">
-                                <div class="col-12">
-
-                                    <div class="input-count">
-                                        <span><input type="button" value="-" id="button-minus" class="add-qty sm-btn-shadow-l" data-field="quantity"></span>
-                                        <input type="number" step="1" max="" value="1" name="quantity" id="quantity-field">
-                                        <span><input type="button" value="+" id="button-plus" class="add-qty sm-btn-shadow-r" data-field="quantity"></span>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!-- Donate Button -->
-                        <div class="col-12 text-center donate-detail">
-                            <input type="submit" class="btn btn-danger mr-2 btn-shadow btn-lg" value="Donate">
-                        </div>
-
-                        <!-- Product Description -->
-                        <div class="col-12 col-md-6 my-5 text-center">
-                            <p>{{ product.description }}</p>
-                        </div>
-                    </div>
-                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                </form>
-
-                {% if request.user.is_authenticated %}
-                    {% if request.user.is_superuser %}
-                        <div class="col-12">
-                            <div class="row no-gutters">
-                                <div class="col-6 col-lg-4 col-xl-3 text-right edit-product-btn">
-                                    <span>
-                                        <a class="mr-3" href="">Edit Product <i class="fas fa-edit"></i></a>
-                                    </span>
-                                </div>
-                                <div class="col-6 col-lg-4 col-xl-3 text-left remove-product-btn">
-                                    <a id="trigger_{{ product.id }}" class="remove-item-btn ml-3">Remove Product <i class="fas fa-trash"></i></a>
-                                </div>
-                            </div>
-
-                            <!-- Remove Item Modal (from W3Schools) -->
-                            <div id="modal_{{ product.id }}" class="modal">
-
-                                <!-- Modal content -->
-                                <div class="modal-content">
-                                    <div class="row no-gutters">
-                                        <div class="col-12">
-                                            <span class="closeBtn close-modal text-right">&times;</span>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row no-gutters">
-                                        <div class="col-12">
-                                            <p class="text-center">Yor are going to remove <span class="font-weight-bold">{{ product.name }}</span> from the shop</p>
-                                            <p class="text-center">Are you sure?</p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row no-gutters">
-                                        <div class="col-6">
-                                            <a class="closeBtn btn btn-lg btn-danger btn-shadow" >Close</a>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'delete_product' product.id %}">Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            </div>
-                        </div>
-                    {% endif %}
+    <section aria-labelledby="details">
+        <h2 class="sr-only" id="details">details</h2>
+        <div class="row no-gutters details-wrapper">
+            
+            <!-- Product Image -->
+            <div class="col-12 col-md-6 mt-5 product-img content-alignment bg-white">
+                {% if product.image %}
+                    <img class="" src="{{ MEDIA_URL }}{{ product.image }}" alt="{{ product.name }}">
+                {% elif not product.image and not product.image_url %}
+                    <img src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
+                {% else %}
+                    <img class="" src="{{ product.image_url }}" alt="{{ product.name }}">
                 {% endif %}
-
             </div>
-        </div>
 
-        <!-- Back to All Products Button -->
-        <div class="col-12 col-md-6 ml-5 my-5 back-to-all">
-            <a class="font-weight-bold" href="{% url 'products' %}">&#8592 Back To All Products</a>
-        </div>
+            <div class="col-12 col-md-6 mt-5 product-details">
 
-    </div>
+                <!-- Product name and price -->
+                <div class="row no-gutters content-alignment">
+
+                    <!-- Product Name -->
+                    <div class="col-12">
+                        <h1 class="text-center font-weight-bold">{{ product.name }}</h1>
+                    </div>
+
+                    <!-- Product Price -->
+                    <div class="col-12 my-3 text-center">
+                        <h2 class="font-weight-bold">$ {{ product.price }}</h2>
+                        <small class="text-muted">Tax included</small>
+                        <hr>
+                    </div>
+
+                </div>
+
+                <!-- Donation Title, Product Quantity, Donate Button and Product Description -->
+                <div class="row no-gutters">
+                    <form action="{% url 'add_to_cart' product.id product.sku %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row content-alignment">
+                            <div class="col-12 donation-amount ml-3">
+
+                                <!-- Donation Title -->
+                                <div class="row no-gutters">
+                                    <div class="col-12">
+                                        <p class="font-weight-bold">Donation amount</p>
+                                    </div>
+                                </div>
+
+                                <!-- Product Quantity -->
+                                <div class="row no-gutters">
+                                    <div class="col-12">
+
+                                        <div class="input-count">
+                                            <span><input type="button" value="-" id="button-minus" class="add-qty sm-btn-shadow-l" data-field="quantity"></span>
+                                            <input type="number" step="1" max="" value="1" name="quantity" id="quantity-field">
+                                            <span><input type="button" value="+" id="button-plus" class="add-qty sm-btn-shadow-r" data-field="quantity"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Donate Button -->
+                            <div class="col-12 text-center donate-detail">
+                                <input type="submit" class="btn btn-danger mr-2 btn-shadow btn-lg" value="Donate">
+                            </div>
+
+                            <!-- Product Description -->
+                            <div class="col-12 col-md-6 my-5 text-center">
+                                <p>{{ product.description }}</p>
+                            </div>
+                        </div>
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    </form>
+
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.is_superuser %}
+                            <div class="col-12">
+                                <div class="row no-gutters">
+                                    <div class="col-6 col-lg-4 col-xl-3 text-right edit-product-btn">
+                                        <span>
+                                            <a class="mr-3" href="{% url 'edit_product' product.id product.sku %}" aria-label="edit product">Edit Product <i class="fas fa-edit"></i></a>
+                                        </span>
+                                    </div>
+                                    <div class="col-6 col-lg-4 col-xl-3 text-left remove-product-btn">
+                                        <a id="trigger_{{ product.id }}" class="remove-item-btn ml-3" aria-label="remove product">Remove Product <i class="fas fa-trash"></i></a>
+                                    </div>
+                                </div>
+
+                                <!-- Remove Item Modal (from W3Schools) -->
+                                <div id="modal_{{ product.id }}" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <div class="row no-gutters">
+                                            <div class="col-12">
+                                                <span class="closeBtn close-modal text-right">&times;</span>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row no-gutters">
+                                            <div class="col-12">
+                                                <p class="text-center">Yor are going to remove <span class="font-weight-bold">{{ product.name }}</span> from the shop</p>
+                                                <p class="text-center">Are you sure?</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row no-gutters">
+                                            <div class="col-6">
+                                                <a class="closeBtn btn btn-lg btn-danger btn-shadow" aria-label="Close remove product modal">Close</a>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <a class="btn btn-lg btn-danger btn-shadow" href="{% url 'delete_product' product.id %}" aria-label="Confirm remove product modal">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+
+            <!-- Back to All Products Button -->
+            <div class="col-12 col-md-6 ml-5 my-5 back-to-all">
+                <a class="font-weight-bold" href="{% url 'products' %}" aria-label="Go to products page">&#8592 Back To All Products</a>
+            </div>
+
+        </div>
+    </section>
     
     <!-- Custom Js -->
     {% block postloadjs %}

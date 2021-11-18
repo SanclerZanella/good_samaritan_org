@@ -9,7 +9,8 @@
 
 {% block content %}
 <!-- Cover Picture and Title -->
-<section>
+<section aria-labelledby="title">
+    <h2 class="sr-only" id="title">title</h2>
         
     <div class="row no-gutters hero-image">
         <div class="col-12 hero-text">
@@ -19,7 +20,8 @@
 
 </section>
 
-<section>
+<section aria-labelledby="about_body">
+    <h2 class="sr-only" id="about_body">about body</h2>
     <div class="row no-gutters content-alignment about-presentation">
         <div class="col-10 mt-5 text-center">
             <p>
@@ -86,7 +88,7 @@
                         its own food.
                     </p>
                     <p>
-                        <a class="text-danger font-weight-bold" href="https://4db79901-ccd2-49b3-8eb6-4150756d7cf7.filesusr.com/ugd/402649_01f1e632e8fd4045883bd4f5df8b6f82.pdf" target="_blank">Read more about this project here!</a>
+                        <a class="text-danger font-weight-bold" href="https://4db79901-ccd2-49b3-8eb6-4150756d7cf7.filesusr.com/ugd/402649_01f1e632e8fd4045883bd4f5df8b6f82.pdf" target="_blank" aria-label="External link about the project">Read more about this project here!</a>
                     </p>
                 </div>
                 <div class="col-12 col-lg-6 text-center">

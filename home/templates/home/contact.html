@@ -8,27 +8,30 @@
 
 
 {% block content %}
-    <div class="row no-gutters content-alignment my-5">
-        <div class="col-10 text-center">
-            <h2 class="font-weight-bold contact-title">Contact Us</h2>
+    <section aria-labelledby="contact_form">
+        <h2 class="sr-only" id="contact_form">contact form</h2>
+        <div class="row no-gutters content-alignment my-5">
+            <div class="col-10 text-center">
+                <h2 class="font-weight-bold contact-title">Contact Us</h2>
+            </div>
+            <div class="col-10 my-5 text-center">
+
+                <!-- Contact Form -->
+                <form action="{% url 'contact' %}" method="POST">
+                    {% csrf_token %}
+
+                    <!-- Fields -->
+                    <fieldset>
+                        {{form|crispy}}
+                    </fieldset>
+
+                    <!-- Submit Button -->
+                    <fieldset>
+                        <button type="submit" class="btn btn-danger btn-shadow">Send Message</button>
+                    </fieldset>
+                </form>
+
+            </div>
         </div>
-        <div class="col-10 my-5 text-center">
-
-            <!-- Contact Form -->
-            <form action="{% url 'contact' %}" method="POST">
-                {% csrf_token %}
-
-                <!-- Fields -->
-                <fieldset>
-                    {{form|crispy}}
-                </fieldset>
-
-                <!-- Submit Button -->
-                <fieldset>
-                    <button type="submit" class="btn btn-danger btn-shadow">Send Message</button>
-                </fieldset>
-            </form>
-
-        </div>
-    </div>
+    </section>
 {% endblock %}

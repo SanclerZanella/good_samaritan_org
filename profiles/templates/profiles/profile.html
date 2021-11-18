@@ -61,7 +61,7 @@
 
                             {% for order in orders %}
                                 <div class="col-12 mt-5">
-                                    <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}">
+                                    <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}" aria-label="Past order {{ order.order_number|truncatechars:6 }}">
                                         <div class="row no-gutters">
                                                 <!-- Order number -->
                                                 <div class="col-4 my-auto">
@@ -179,10 +179,10 @@
                                 <hr>
                                 <div class="row no-gutters">
                                     <div class="col-6">
-                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow btn-sm" >Cancel</a>
+                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow btn-sm" aria-label="Close finish sponsorship modal">Cancel</a>
                                     </div>
                                     <div class="col-6 text-right">
-                                        <a class="btn btn-lg btn-danger btn-shadow btn-sm" href="{% url 'finish_sponsorship' sponsor.customer %}">Finish Sponsorship</a>
+                                        <a class="btn btn-lg btn-danger btn-shadow btn-sm" href="{% url 'finish_sponsorship' sponsor.customer %}" aria-label="Confirm finish sponsorship modal">Finish Sponsorship</a>
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                     <hr>
                 </div>
                 <div class="col-12">
-                    <a  href="{% url 'product_management' %}" class="btn btn-danger btn-shadow rounded-0">
+                    <a  href="{% url 'product_management' %}" class="btn btn-danger btn-shadow rounded-0" aria-label="Go to product management page">
                         <span class="font-weight-bold">Product Management</span>
                         <span class="icon">
                             <i class="far fa-edit"></i>

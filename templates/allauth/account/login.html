@@ -20,7 +20,7 @@
 <div class="row no-gutters">
   <div class="col-12 text-center mt-5">
     <p>{% blocktrans with site.name as site_name %}Please sign in with one
-    of your existing third party accounts. Or, <a class="auth-link" href="{{ signup_url }}">sign up</a>
+    of your existing third party accounts. Or, <a class="auth-link" href="{{ signup_url }}" aria-label="Go to signup page">sign up</a>
     for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   </div>
 
@@ -41,7 +41,7 @@
     {% else %}
     <div class="col-12 text-center">
       <p>{% blocktrans %}If you have not created an account yet, then please
-      <a class="auth-link" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+      <a class="auth-link" href="{{ signup_url }}" aria-label="go to signup page">sign up</a> first.{% endblocktrans %}</p>
     </div>
     {% endif %}
 
@@ -52,7 +52,7 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <a class="button secondaryAction auth-link" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <a class="button secondaryAction auth-link" href="{% url 'account_reset_password' %}" aria-label="reset password">{% trans "Forgot Password?" %}</a>
         <button class="primaryAction btn btn-danger btn-shadow ml-3" type="submit">{% trans "Sign In" %}</button>
       </form>
     </div>

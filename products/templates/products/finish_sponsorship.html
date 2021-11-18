@@ -9,7 +9,8 @@
 {% block content %}
     {% if subs_query %}
     {% else %}
-            <section>
+            <section aria-labelledby="title">
+                <h2 class="sr-only" id="title">title</h2>
 
                 <!-- Title and Description -->
                 <div class="row no-gutters text-center content-alignment title-desc">
@@ -30,7 +31,8 @@
 
             <hr>
 
-            <section>
+            <section aria-labelledby="finish_sponsorship_form_sec">
+                <h2 class="sr-only" id="finish_sponsorship_form_sec">finish sponsorship form</h2>
                     <!-- Sponsorship Form -->
                     <div class="row no-gutters content-alignment my-5">
                         <div class="col-12 col-md-8">
@@ -62,7 +64,8 @@
             </section>
     {% endif %}
 
-        <section>
+        <section aria-labelledby="Finish_sponsorship_form_2">
+            <h2 class="sr-only" id="Finish_sponsorship_form_2">Finish sponsorship form 2</h2>
             {% if subs_query %}
                 <div class="row no-gutters content-alignment">
                     <div class="col-12 text-center">
@@ -112,10 +115,10 @@
                                 <hr>
                                 <div class="row no-gutters">
                                     <div class="col-6">
-                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow btn-sm" >Cancel</a>
+                                        <a class="closeBtn btn btn-lg btn-danger btn-shadow btn-sm" aria-label="close finish sponsorship modal">Cancel</a>
                                     </div>
                                     <div class="col-6 text-right">
-                                        <a class="btn btn-lg btn-danger btn-shadow btn-sm" href="{% url 'finish_sponsorship' sponsor.customer %}">Finish Sponsorship</a>
+                                        <a class="btn btn-lg btn-danger btn-shadow btn-sm" href="{% url 'finish_sponsorship' sponsor.customer %}" aria-label="Confirm finish sponsorship modal">Finish Sponsorship</a>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +129,7 @@
                 </div>
                 <div class="row no-gutters">
                     <div class="col-12 back-to-form">
-                        <a class="text-danger font-weight-bold" href="{% url 'finish_sponsorship_form' %}">&#8592 Back to form</a>
+                        <a class="text-danger font-weight-bold" href="{% url 'finish_sponsorship_form' %}" aria-label="back to form">&#8592 Back to form</a>
                     </div>
                 </div>
             {% endif %}
