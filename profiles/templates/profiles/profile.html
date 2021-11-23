@@ -58,29 +58,32 @@
 
                         <!-- Order history card -->
                         <div class="col-12">
+                            {% if orders %}
+                                {% for order in orders %}
+                                    <div class="col-12 mt-5">
+                                        <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}" aria-label="Past order {{ order.order_number|truncatechars:6 }}">
+                                            <div class="row no-gutters">
+                                                    <!-- Order number -->
+                                                    <div class="col-4 my-auto">
+                                                        {{ order.order_number|truncatechars:6 }}
+                                                    </div>
 
-                            {% for order in orders %}
-                                <div class="col-12 mt-5">
-                                    <a href="{% url 'order_history' order.order_number %}" title="{{ order.order_number }}" aria-label="Past order {{ order.order_number|truncatechars:6 }}">
-                                        <div class="row no-gutters">
-                                                <!-- Order number -->
-                                                <div class="col-4 my-auto">
-                                                    {{ order.order_number|truncatechars:6 }}
-                                                </div>
+                                                    <!-- Order date -->
+                                                    <div class="col-4 my-auto">
+                                                        {{ order.date }}
+                                                    </div>
 
-                                                <!-- Order date -->
-                                                <div class="col-4 my-auto">
-                                                    {{ order.date }}
-                                                </div>
-
-                                                <!-- Order Grand total -->
-                                                <div class="col-4 my-auto">
-                                                    $ {{ order.grand_total }}
-                                                </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            {% endfor %}
+                                                    <!-- Order Grand total -->
+                                                    <div class="col-4 my-auto">
+                                                        $ {{ order.grand_total }}
+                                                    </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <h2 class="font-weight-bold text-center">No Orders</h2>
+                            {% endif %}
 
                         </div>
 
