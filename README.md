@@ -469,10 +469,9 @@ Back to the [Tables of Contents](#tables-of-contents)
 
 * *donate products as a guest.*
   * All visitors are able to donate products without an account.
-    ![feed page](app/static/images/readme/test/manual/feed_page.png)
 
 * *donate all products at once.*
-![feed page](app/static/images/readme/test/manual/search.png)
+![donate all](media/readme/donate_all_btn.PNG)
 
 * *sort products.*
 
