@@ -3,6 +3,7 @@ from django.test import TestCase
 from products.models import Product, Category, Parcel
 from django.contrib.auth.models import User
 from django.test.client import Client
+from django.contrib.messages import get_messages
 
 
 class testViews(TestCase):
@@ -10,6 +11,7 @@ class testViews(TestCase):
     Test home app views
 
     Methods:
+        *check_if_products_not_exist: Check if products table is empty;
         *test_get_all_products: Test all_products view get response;
         *test_get_all_products_sort_param: Test all_products view sort
                                            parameter in get response;
@@ -37,6 +39,23 @@ class testViews(TestCase):
                                                    get response;
         *test_get_add_product: Test add_product view;
     """
+    def check_if_products_not_exist(self):
+        """
+        Check if products table is empty
+        """
+        products_ex = Product.objects.all().exists()
+        self.assertFalse(products_ex)
+
+        response = self.client.get('/products/')
+        self.assertEqual(response.status_code, 302)
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'There are no products')
+
+        self.assertRedirects(response, reverse('home'),
+                             status_code=302,
+                             target_status_code=200)
 
     def test_get_all_products(self):
         """
@@ -49,6 +68,9 @@ class testViews(TestCase):
                                name='mock_product',
                                description='mock_product',
                                price=1.90)
+
+        all_products = Product.objects.all()
+        self.assertTrue(all_products)
 
         response = self.client.get('/products/')
         self.assertEqual(response.status_code, 200)

@@ -21,7 +21,7 @@ class testViews(TestCase):
         response = self.client.get('/cart/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'cart/cart.html')
-        self.assertContains(response, '<h1>Shopping Cart</h1>')
+        self.assertContains(response, '<h1>Donation Cart</h1>')
 
         url_name = self.client.get(reverse('view_cart'))
         self.assertEquals(url_name.status_code, 200)

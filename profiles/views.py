@@ -110,8 +110,6 @@ def redeem_subscription(request):
     Redeem any sponsorship created before the user creates
     an account
     """
-    if not request.user.is_authenticated:
-        return redirect('home')
 
     if request.method == 'POST':
         subs_id = request.POST['redeem_subs']

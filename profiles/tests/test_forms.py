@@ -1,8 +1,8 @@
 from django.test import TestCase
-from profiles.forms import RedeemForm
+from profiles.forms import RedeemForm, UserProfileForm
 
 
-class testRedeemForm(TestCase):
+class TestRedeemForm(TestCase):
     """
     Test RedeemForm
 
@@ -61,3 +61,47 @@ class testRedeemForm(TestCase):
         self.assertIn('last_digits', form.errors.keys())
         self.assertEqual(form.errors['last_digits'][0],
                          'Ensure this value is less than or equal to 4.')
+
+
+class TestUserProfileForm(TestCase):
+    """
+    Test UserProfileForm
+
+    Methods:
+        *test_country_is_not_valid: Test if country field is not valid;
+        *test_country_is_valid: Test if country field is valid;
+    """
+    def test_country_is_not_valid(self):
+        """
+        Test if country field is not valid
+        """
+
+        form = UserProfileForm({
+            'default_full_name': 'John Lennon',
+            'default_street_address1': 'Anywhere 1',
+            'default_street_address2': 'Anywhere 2',
+            'default_town_or_city': 'Anywhere city',
+            'default_country': 'Anywhere country'
+        })
+
+        self.assertFalse(form.is_valid())
+        self.assertIn('default_country', form.errors.keys())
+        msg1 = 'Select a valid choice. Anywhere country '
+        msg2 = 'is not one of the available choices.'
+        msg = f'{msg1}{msg2}'
+        self.assertEqual(form.errors['default_country'][0], msg)
+
+    def test_country_is_valid(self):
+        """
+        Test if country field is valid
+        """
+
+        form = UserProfileForm({
+            'default_full_name': 'John Lennon',
+            'default_street_address1': 'Anywhere 1',
+            'default_street_address2': 'Anywhere 2',
+            'default_town_or_city': 'Anywhere city',
+            'default_country': 'BR'
+        })
+
+        self.assertTrue(form.is_valid())
