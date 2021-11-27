@@ -259,7 +259,7 @@ Back to the [Tables of Contents](#tables-of-contents)
 
 ### Future Implementations
 
-  * Enhace automated tests.
+  * Increase unit test coverage.
 
   * Create a way of interaction between sponsor and sponsored.
 
