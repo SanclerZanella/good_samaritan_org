@@ -181,7 +181,7 @@
                                                     {% if product.image %}
                                                         <img class="my-auto" src="{{MEDIA_URL}}{{ product.image }}" alt="{{ product.name }}" loading="lazy">
                                                     {% elif not product.image and not product.image_url %}
-                                                        <img class="my-auto" src="{{MEDIA_URL}}/products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
+                                                        <img class="my-auto" src="{{MEDIA_URL}}products/items/no-image-50-3d8cc48bd078edcd544c8d60f929ed2d8800a3fc52e0f602e84b1767e392bfcd_360x.jpg" alt="{{ product.name }}" loading="lazy">
                                                     {% else %}
                                                         <img class="my-auto" src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
                                                     {% endif %}
