@@ -35,6 +35,7 @@ Find out more about this project and help:
   - [Front-End Technologies](#front-end-technologies)
   - [Back-End Technologies](#back-end-technologies)
 - [Testing](#testing)
+- [Known Issues](#known-issues)
 - [Accessibility](#accessibility)
 - [Deployment](#deployment)
   - [Local Deployment](#local-deployment)
@@ -569,21 +570,50 @@ I manually tested the website on the following web browsers, checking buttons, r
   * Mozilla Firefox
   * Microsoft Edge
 
-<!-- ### Known Issues
+### Known Issues
 
-  1. The Unfollow button in public profile page, when clicked all code related to remove user from the specific field in the database works well and the button UI turn to a Follow Button, but it does not behave as a Follow button unless the page is reloaded.
+  1. ~~When checking the sponsorship form page and the checkout page the HTML validator rise the following error:
+    * "Duplicate ID id_stripe_public_key."
+    I still trying to find what is causing it, because I can't find this id duplicated in the HTML document.~~ 
 
-  2. In case an user is logged with two pages opened in different tabs and one of theses pages is the profile page, if the user log out in the tab that isn't the profile and after try to reload the profile page, then he would see a KeyError error, because there is no longer any session called 'user'. This error was fixed adding a try/except statement in every page that needs a user logged to be used, if there is no longer session 'user', then redirect to feed page, which does not need the session 'user'.
+        * Fixed: The postloadjs block was being rendered inside the content block, the solution was put the postloadjs block outside the content block. Example:
 
-  3. If a user create a trip where the place name does not exists in the country, the google maps is not rendered.
+            * Before:
+              ```html
+                {% block content %}
+                  <section>
+                      <h1>Example</h1>
+                  </section>
 
-  4. Unfollow link in Following tab (profile page) and Remove Follower in the Followers tab (profile page), just work with a double click.
+                  {% block postloadjs %}
+                    {{ block.super }}
+                    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+                    {{ client_secret|json_script:"id_client_secret" }}
+                    <script src="{% static 'checkout/js/checkout.js' %}"></script>
+                  {% endblock %}
 
-  5. ~~Icons from google maps are not rendering.~~ Fixed adding 'data:' data scheme to content security policy.
+                {% endblock %}
+              ```
+        
 
-  6. ~~Pictures in preview photos in edit trip page are not redering~~ Fixed adding 'blob:' data scheme to content security policy
+            * After:
+              ```html
+                {% block content %}
+                  <section>
+                      <h1>Example</h1>
+                  </section>
+                {% endblock %}
 
-Back to the [Tables of Contents](#tables-of-contents) -->
+                {% block postloadjs %}
+                  {{ block.super }}
+                  {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+                  {{ client_secret|json_script:"id_client_secret" }}
+                  <script src="{% static 'checkout/js/checkout.js' %}"></script>
+                {% endblock %}
+              ```
+    
+
+Back to the [Tables of Contents](#tables-of-contents)
 
 ---
 
