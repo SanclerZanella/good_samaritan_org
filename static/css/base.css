@@ -345,4 +345,8 @@ footer .col-lg-2 a:hover {
         text-decoration: none;
         color: #fff;
     }
+
+    footer li a {
+        font-size: 1.2em;
+    }
 }
