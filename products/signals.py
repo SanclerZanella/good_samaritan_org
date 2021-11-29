@@ -3,6 +3,8 @@ from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 from .models import Product, Parcel
 from .utils import get_id_data
+if os.path.exists('env.py'):
+    import env
 
 
 @receiver(post_delete, sender=Product)
@@ -13,8 +15,11 @@ def update_on_delete(sender, instance, **kwargs):
     """
 
     if instance.image:
-        if os.path.isfile(instance.image.path):
-            os.remove(instance.image.path)
+        if 'dev' in os.environ:
+            if os.path.isfile(instance.image.path):
+                os.remove(instance.image.path)
+        else:
+            instance.image.delete(save=False)
 
 
 @receiver(pre_save, sender=Product)
@@ -36,8 +41,13 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 
     if not old_file == new_file:
         if old_file:
-            if os.path.isfile(old_file.path):
-                os.remove(old_file.path)
+            if 'dev' in os.environ:
+                if os.path.isfile(old_file.path):
+                    os.remove(old_file.path)
+            else:
+                old_file.delete(save=False)
+    else:
+        return False
 
 
 @receiver(post_delete, sender=Product)
