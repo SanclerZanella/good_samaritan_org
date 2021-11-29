@@ -15,7 +15,7 @@ def update_on_delete(sender, instance, **kwargs):
     """
 
     if instance.image:
-        if 'dev' in os.environ:
+        if 'DEVELOPMENT' in os.environ:
             if os.path.isfile(instance.image.path):
                 os.remove(instance.image.path)
         else:
@@ -41,7 +41,7 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 
     if not old_file == new_file:
         if old_file:
-            if 'dev' in os.environ:
+            if 'DEVELOPMENT' in os.environ:
                 if os.path.isfile(old_file.path):
                     os.remove(old_file.path)
             else:
